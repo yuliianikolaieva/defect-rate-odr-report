@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stores Defect Rate / ODR — Bolt Food UA · тижневий аналіз</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#eef1f7; --panel:#ffffff; --panel2:#f6f8fc; --line:#dfe5ee;
+    --text:#13203a; --muted:#5d6b85; --soft:#33425d;
+    --accent:#2563eb; --accent2:#0e7faa;
+    --good:#15a34a; --warn:#d1493f; --mid:#d98324; --info:#2563eb;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       background:radial-gradient(1200px 600px at 80% -10%,#ffffff 0%,var(--bg) 55%);color:var(--text);line-height:1.55}
+  a{color:var(--accent)}
+  nav.topnav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  nav.topnav .inner{max-width:1180px;margin:0 auto;padding:10px 20px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  nav.topnav .brand{font-weight:800;font-size:13px;color:var(--accent2);margin-right:8px;white-space:nowrap}
+  nav.topnav a{color:var(--muted);text-decoration:none;font-size:13px;padding:6px 11px;border-radius:8px;border:1px solid transparent;white-space:nowrap}
+  nav.topnav a:hover{background:#eef2f8;color:var(--text)}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 20px 80px}
+  section[id]{scroll-margin-top:64px}
+  header.hero{padding:34px 30px;border:1px solid var(--line);border-radius:18px;
+       background:linear-gradient(135deg,#ffffff 0%,#eef3fb 100%);position:relative;overflow:hidden;box-shadow:0 1px 3px rgba(20,40,80,.05)}
+  .hero h1{margin:0 0 6px;font-size:27px;letter-spacing:.2px}
+  .hero .sub{color:var(--soft);font-size:15px;max-width:900px}
+  .hero .tag{display:inline-block;margin-bottom:14px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--accent2);font-weight:700}
+  .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .meta .pill{background:#f1f5fb;border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:12.5px;color:var(--muted)}
+  h2.section{font-size:20px;margin:42px 0 6px;display:flex;align-items:center;gap:10px}
+  h2.section .bar{width:6px;height:22px;border-radius:3px;background:var(--accent)}
+  .section-desc{color:var(--muted);font-size:14px;margin:0 0 18px}
+  .grid{display:grid;gap:16px}
+  .kpis{grid-template-columns:repeat(4,1fr);margin-top:22px}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 1px 3px rgba(20,40,80,.05)}
+  .kpi .n{font-size:24px;font-weight:800}
+  .kpi .l{color:var(--muted);font-size:12px;margin-top:2px}
+  .kpi.warn .n{color:var(--warn)} .kpi.good .n{color:var(--good)} .kpi.mid .n{color:var(--mid)} .kpi.info .n{color:var(--info)}
+  .callout{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--warn);border-radius:12px;padding:16px 18px;margin-top:18px;box-shadow:0 1px 3px rgba(20,40,80,.05)}
+  .callout.i{border-left-color:var(--accent)}
+  .callout.g{border-left-color:var(--good)}
+  .callout h3{margin:0 0 8px;font-size:15px}
+  .callout p{margin:0 0 6px;color:var(--soft);font-size:14px}
+  .callout p:last-child{margin-bottom:0}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  table.matrix{border-collapse:collapse;width:100%;margin-top:12px;font-size:13px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  table.matrix th,table.matrix td{border:1px solid var(--line);padding:8px 10px;text-align:right}
+  table.matrix th{background:#eef2f8;color:var(--muted);font-weight:600;text-align:right}
+  table.matrix th:first-child,table.matrix td:first-child{text-align:left}
+  table.matrix td.axis{background:#f3f6fb;color:var(--soft);font-weight:700;text-align:left}
+  table.matrix tr.crit td{background:rgba(209,73,63,.08)}
+  table.matrix tr.high td{background:rgba(217,131,36,.08)}
+  table.matrix tr.good td{background:rgba(21,163,74,.07)}
+  table.wide td{text-align:left}
+  table.wide td:first-child{white-space:nowrap;font-weight:700}
+  .tablewrap{overflow:auto;border-radius:10px}
+  .up{color:var(--warn);font-weight:600} .down{color:var(--good);font-weight:600} .mut{color:var(--muted)}
+  .badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
+  .badge.crit{background:rgba(209,73,63,.12);color:#a5342c}
+  .badge.high{background:rgba(217,131,36,.14);color:#8a5312}
+  .badge.watch{background:rgba(37,99,235,.12);color:#1c4ed8}
+  .badge.good{background:rgba(21,163,74,.12);color:#0f7536}
+  .chartcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;margin-top:16px;padding:18px 20px;box-shadow:0 1px 3px rgba(20,40,80,.05)}
+  .chartcard h3{margin:0 0 2px;font-size:15px}
+  .chartcard .cap{color:var(--muted);font-size:12px;margin:0 0 10px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 1px 3px rgba(20,40,80,.05)}
+  .card h3{margin:0 0 8px;font-size:15px}
+  .card h3 .sm{font-size:12px;color:var(--muted);font-weight:500}
+  .card ul{margin:6px 0 0;padding-left:18px;color:var(--soft);font-size:13.5px}
+  .card ul li{margin-bottom:5px}
+  details.gl{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-top:12px}
+  details.gl summary{cursor:pointer;font-weight:700;font-size:14.5px}
+  details.gl p{color:var(--soft);font-size:13.5px;margin:10px 0 0}
+  details.gl p.fix{color:var(--text);background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+  footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+  @media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.two,.three{grid-template-columns:1fr}.hero h1{font-size:22px}}
+</style>
+</head>
+<body>
+
+<nav class="topnav"><div class="inner">
+  <span class="brand">DEFECT RATE / ODR · UA</span>
+  <a href="#summary">Висновки</a>
+  <a href="#components">Складові ODR</a>
+  <a href="#trend">Тренд</a>
+  <a href="#partners">Топ партнери</a>
+  <a href="#actions">Проблеми та дії</a>
+  <a href="#drill">Магазини та SKU</a>
+  <a href="#bench">Порівняння країн</a>
+  <a href="#plan">План</a>
+  <a href="#glossary">Глосарій</a>
+</div></nav>
+
+<div class="wrap">
+
+<header class="hero">
+  <span class="tag">Bolt Food UA · Stores</span>
+  <h1>Defect Rate / ODR — тижневий аналіз топ партнерів</h1>
+  <p class="sub">
+    Аналіз якості виконання замовлень у Stores: з чого складається Order Defect Rate, хто його драйвить,
+    де погіршення, де прогрес, та як Україна виглядає проти ТОП-3 країн Bolt за обсягом Stores.
+  </p>
+  <div class="meta">
+    <span class="pill">Період: 25 трав — 10 серп 2026 (12 повних тижнів)</span>
+    <span class="pill">Гранулярність: тиждень</span>
+    <span class="pill">Джерела: Looker dashboard 32227 + Databricks</span>
+    <span class="pill">Вертикаль: store_* (3P + 1P)</span>
+  </div>
+</header>
+
+<section id="summary">
+<h2 class="section"><span class="bar"></span>Головні висновки</h2>
+<p class="section-desc">ODR на рівні ринку виглядає помірно, але тренд негативний, і проблема сконцентрована у кількох grocery-партнерах.</p>
+
+<div class="grid kpis">
+  <div class="kpi mid"><div class="n">17.1%</div><div class="l">UA Stores ODR · середнє за 12 тижнів</div></div>
+  <div class="kpi warn"><div class="n">22.8%</div><div class="l">ODR останній тиждень (10 серп) · пік періоду</div></div>
+  <div class="kpi info"><div class="n">20.5%</div><div class="l">Order Replacement Rate · окрема метрика</div></div>
+  <div class="kpi warn"><div class="n">66.5%</div><div class="l">Частка quantity у всіх item defects</div></div>
+</div>
+
+<div class="callout">
+  <h3>1. Тренд погіршується, і це не сезонність окремого партнера</h3>
+  <p>ODR ринку зріс з <b>13.5%</b> (25 трав) до <b>22.8%</b> (10 серп) — це +9.3 п.п. за 12 тижнів. Зростання
+  почалося з кінця червня і йде синхронно з ростом обсягу замовлень (7.4k → 12.4k на тиждень), тобто
+  операційні процеси не масштабуються разом з попитом.</p>
+</div>
+
+<div class="callout">
+  <h3>2. Проблема = grocery, а не Stores у цілому</h3>
+  <p><b>VARUS</b> (46% всього item-обсягу) тримає ODR <b>48–52%</b> і сам по собі визначає ринковий рівень.
+  <b>KOPIYKA</b> (+13.7 п.п. за період) і <b>SANTIM</b> (+7.9 п.п.) деградують. Натомість <b>LOKO</b> та
+  <b>HOP HEY</b> тримають ODR &lt;7%, а алкогольні мережі (BEER MARKET, PYVNA BORODA, BEERLAND, REMESLO,
+  TOCHKA, SPRAGA) — <b>0%</b>. Тобто платформа й процеси дозволяють працювати без дефектів.</p>
+</div>
+
+<div class="callout g">
+  <h3>3. Є партнери з реальним прогресом — їх процеси треба тиражувати</h3>
+  <p><b>TAISTRA</b> −8.6 п.п. (23.8% → 15.2%), <b>RUKAVYCHKA</b> −5.2 п.п. (24.3% → 19.1%). Це доводить, що
+  ODR керований на рівні партнера без змін у продукті.</p>
+</div>
+
+<div class="callout i">
+  <h3>4. Частина «дефектів» — артефакт обліку, не клієнтський біль</h3>
+  <p>Категорія <b>Пакувальні матеріали</b> має 93.3% quantity defect rate: 3 SKU пакетів VARUS дають ~10.3k
+  quantity defects. Категорії <b>Роли</b> та <b>Комбо меню</b> — 100% replacement rate. Перед операційними
+  діями треба почистити ці випадки, інакше KPI показує не те, що болить клієнту.</p>
+</div>
+</section>
+
+<section id="components">
+<h2 class="section"><span class="bar"></span>З чого складається ODR</h2>
+<p class="section-desc">
+  Order Defect Rate = частка доставлених замовлень, де був хоча б один item defect із впливом на клієнта:
+  quantity, weight або price. Replacement рахується окремою метрикою.
+</p>
+
+<div class="three">
+  <div class="card">
+    <h3>Quantity defect <span class="badge crit">Головний драйвер</span></h3>
+    <p class="mut" style="font-size:13.5px;margin:0">
+      Зміна кількості з впливом на клієнта: товар видалили або зменшили кількість (типово — OOS).
+    </p>
+    <ul>
+      <li>66.5% усіх item defects в UA</li>
+      <li>UA order-level: 16.2%</li>
+      <li>Найгірші: VARUS 49.1%, KOPIYKA 33.4%</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Weight defect <span class="badge high">Вторинний</span></h3>
+    <p class="mut" style="font-size:13.5px;margin:0">
+      Вагові позиції: фактична вага відрізняється від замовленої з впливом на клієнта.
+    </p>
+    <ul>
+      <li>25.4% усіх item defects</li>
+      <li>UA order-level: 2.1%</li>
+      <li>Найгірші: RODYNNA KOVBASKA 5.9% (item), VARUS 5.8% (order)</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Price defect <span class="badge good">Не проблема в UA</span></h3>
+    <p class="mut" style="font-size:13.5px;margin:0">
+      Підвищення ціни позиції після оформлення замовлення.
+    </p>
+    <ul>
+      <li>8.1% item defects, order-level ≈ 0%</li>
+      <li>Пік останнього тижня (1.5k) варто перевірити на якість даних</li>
+      <li>Для порівняння: Румунія 15.3% (Carrefour)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="two">
+  <div class="chartcard">
+    <h3>Item defects за типом — тижневий обсяг</h3>
+    <p class="cap">Кількість дефектних позицій, шт. · джерело: Looker 32227</p>
+    <canvas id="chTypes" height="150"></canvas>
+  </div>
+  <div class="chartcard">
+    <h3>ODR vs Replacement Rate — рівень ринку UA</h3>
+    <p class="cap">% доставлених замовлень · джерело: Databricks (store_*, dish items)</p>
+    <canvas id="chMarket" height="150"></canvas>
+  </div>
+</div>
+</section>
+
+<section id="trend">
+<h2 class="section"><span class="bar"></span>Тижневий ODR по ключових брендах</h2>
+<p class="section-desc">
+  Три групи поведінки: стабільно високі (VARUS), ті що деградують (KOPIYKA, SANTIM), і ті що покращуються
+  (TAISTRA). LOKO та HOP HEY — референс низького ODR при великому обсязі.
+</p>
+<div class="chartcard">
+  <h3>Order Defect Rate по брендах, % замовлень</h3>
+  <p class="cap">12 тижнів · джерело: Looker weekly Order Defect Rate per brand</p>
+  <canvas id="chBrands" height="120"></canvas>
+</div>
+</section>
+
+<section id="partners">
+<h2 class="section"><span class="bar"></span>Топ партнери — всі метрики</h2>
+<p class="section-desc">
+  Дві таблиці, бо два джерела дають різну картину. Looker-дашборд відфільтрований по
+  <code>Item Adjustment Rate &gt; 0</code>, тому партнери з нульовими дефектами в нього не потрапляють —
+  для повного ТОП-15 нижче окремий зріз із Databricks.
+</p>
+
+<h3 style="font-size:15.5px;margin:24px 0 0">A. Партнери з дашборду (item-level метрики + тижневий ODR)</h3>
+<div class="tablewrap">
+<table class="matrix" id="tblLooker">
+  <thead><tr>
+    <th>Бренд</th><th>Items</th><th>ODR сер.</th><th>ODR посл.</th><th>Δ 12 тиж.</th>
+    <th>Qty %</th><th>Item repl %</th><th>Weight %</th><th>Order repl %</th><th style="text-align:left">Статус</th>
+  </tr></thead>
+  <tbody></tbody>
+</table>
+</div>
+<p class="section-desc" style="margin-top:8px">
+  Qty / Item repl / Weight — item-level (частка позицій). ODR та Order repl — order-level (частка замовлень).
+  Тому Order repl завжди вищий за Item repl.
+</p>
+
+<h3 style="font-size:15.5px;margin:28px 0 0">B. ТОП-15 партнерів UA Stores за обсягом замовлень (Databricks)</h3>
+<div class="tablewrap">
+<table class="matrix" id="tblDbx">
+  <thead><tr>
+    <th>Бренд</th><th>Orders 12 тиж.</th><th>ODR %</th><th>Qty %</th><th>Weight %</th><th>Price %</th><th>Replacement %</th>
+  </tr></thead>
+  <tbody></tbody>
+</table>
+</div>
+<p class="section-desc" style="margin-top:8px">
+  Єдине визначення ODR = qty ∪ weight ∪ price на рівні замовлення. 7 із 15 партнерів мають ODR 0% —
+  це переважно алкогольний / напої формат з вузьким асортиментом і високою наявністю.
+</p>
+</section>
+
+<section id="actions">
+<h2 class="section"><span class="bar"></span>Проблеми, прогрес і дії по партнерах</h2>
+<p class="section-desc">Пріоритезація за впливом на ринковий ODR: обсяг × рівень дефектів × напрям тренду.</p>
+<div class="tablewrap">
+<table class="matrix wide" id="tblActions">
+  <thead><tr><th style="width:150px">Партнер</th><th style="width:44%">Проблема</th><th>Що робити</th></tr></thead>
+  <tbody></tbody>
+</table>
+</div>
+</section>
+
+<section id="drill">
+<h2 class="section"><span class="bar"></span>Деталізація: магазини, категорії, SKU</h2>
+<p class="section-desc">
+  Де саме народжуються дефекти всередині VARUS та які категорії дають найбільший абсолютний вклад.
+</p>
+
+<div class="two">
+  <div class="card">
+    <h3>Найгірші магазини VARUS <span class="sm">за qty + replacement</span></h3>
+    <div class="tablewrap">
+    <table class="matrix" id="tblStores">
+      <thead><tr><th>Магазин</th><th>Items</th><th>Qty %</th><th>Repl %</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Категорії з найбільшим вкладом <span class="sm">абсолютна кількість дефектів</span></h3>
+    <div class="tablewrap">
+    <table class="matrix" id="tblCats">
+      <thead><tr><th>Категорія</th><th>Items</th><th>Qty %</th><th>Repl %</th><th>Qty + repl, шт.</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<div class="callout i">
+  <h3>Гарячі SKU — що чинити першим</h3>
+  <p><b>Пакети VARUS (3 SKU)</b> — ~10.3k quantity defects, до 40–80% qty defect rate. Це облік, не сервіс:
+  прибрати з KPI або перекласифікувати.</p>
+  <p><b>Coca-Cola / Pepsi / вода 1.25–1.75 л</b> — категорія «Солодка вода» 18.6% qty + 38.3% replacement.
+  Класичний OOS на high-velocity SKU: потрібен буфер запасу та daily availability sync.</p>
+  <p><b>Вагові готові страви</b> (окрошка 45.7%, самса 63.0%, борщ 38.8%, огірок 13.3% qty) — суміш
+  qty та weight дефектів: калібрування ваг + чіткі одиниці (100 г) в меню.</p>
+  <p><b>Роли, Комбо меню, Основні страви</b> — 86–100% replacement. Схоже на артефакт меню / модифікаторів,
+  а не реальні заміни. Потрібен catalog audit.</p>
+</div>
+</section>
+
+<section id="bench">
+<h2 class="section"><span class="bar"></span>Порівняння: ТОП-3 країни + Україна</h2>
+<p class="section-desc">
+  ТОП-3 країни за обсягом Stores-замовлень за ті самі 12 тижнів. ODR порахований однаковим способом
+  (qty ∪ weight ∪ price на рівні замовлення) для коректного порівняння. Для кожної країни — ТОП-5 партнерів
+  за обсягом і середній ODR по них.
+</p>
+
+<div class="chartcard">
+  <h3>ODR по країнах: ринок vs топ-партнери</h3>
+  <p class="cap">% замовлень · «excl Bolt Market» = без власного 1P, який має ODR ≈ 0 і занижує середнє</p>
+  <canvas id="chCountries" height="110"></canvas>
+</div>
+
+<div class="two" id="countryCards" style="margin-top:16px"></div>
+
+<div class="callout i">
+  <h3>Як це читати</h3>
+  <p>Україна (17.1%) виглядає краще за Румунію (35.6%) і Литву (25.0%), і близька до Естонії (12.7%).
+  Але два нюанси змінюють висновок.</p>
+  <p><b>Перший:</b> у Румунії, Естонії та Литві середнє «розбавляє» власний <b>Bolt Market</b> (1P) з ODR
+  0.2–0.8% і величезним обсягом. Без нього середній ODR топ-5 партнерів: Румунія 49.2%, Литва 25.6%,
+  Естонія 17.0% проти України 18.8%. В Україні 1P немає, тож порівнювати треба саме цей рядок.</p>
+  <p><b>Другий:</b> Україна має <b>найвищий replacement rate</b> серед четвірки — 20.5% проти 4.4–15.6%.
+  Тобто клієнт частіше отримує «щось інше», і цей досвід не потрапляє в ODR.</p>
+  <p><b>Підсумок:</b> VARUS (51.0%) стоїть в одному ряду з найгіршими європейськими мережами —
+  Kaufland RO 63.4%, Carrefour RO 58.6%, REWE LT 44.9%, Rimi LT 41.9%, Selver EE 38.0%. Це системна
+  проблема великого grocery-ритейлу, а не унікальна українська, і рішення можна брати з інших ринків.</p>
+</div>
+</section>
+
+<section id="plan">
+<h2 class="section"><span class="bar"></span>План дій та цілі</h2>
+<p class="section-desc">Послідовність важлива: спочатку почистити метрику, потім тиснути на операційку.</p>
+
+<div class="three">
+  <div class="card">
+    <h3>P0 · цей тиждень</h3>
+    <ul>
+      <li><b>VARUS:</b> прибрати пакети з quantity defect (перекласифікувати SKU / виключити з KPI) — це знімає ~10.3k «дефектів»</li>
+      <li><b>VARUS:</b> deep-dive по 5 найгірших магазинах (Будівельників 27а, Слобожанський 86, Соборна 97А, Паникахи 15, Калинова 9А)</li>
+      <li><b>KOPIYKA + SANTIM:</b> weekly ODR stand-up з AM — обидва деградують</li>
+      <li>Перевірити стрибок price defects останнього тижня (267 → 1503) на якість даних</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>P1 · 2–4 тижні</h3>
+    <ul>
+      <li><b>CAFE RYNOK:</b> audit категорій зі 100% replacement (Роли, Комбо меню) — ймовірно mapping</li>
+      <li><b>RODYNNA KOVBASKA:</b> калібрування ваг та unit rules (qty 19.5%, weight 5.9%)</li>
+      <li>Daily OOS sync для high-velocity напоїв у VARUS та KOPIYKA</li>
+      <li>Оформити процеси LOKO / TAISTRA як playbook і розкатати на grocery</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Цілі</h3>
+    <ul>
+      <li>UA Stores ODR: повернути <b>&lt;16%</b> (рівень початку червня)</li>
+      <li>VARUS ODR: <b>&lt;35%</b> за 8 тижнів</li>
+      <li>KOPIYKA та SANTIM: <b>&lt;28%</b></li>
+      <li>Order replacement rate ринку: <b>&lt;15%</b></li>
+      <li>Нові партнери не масштабуються, доки ODR &gt;20% протягом 4 тижнів</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<section id="glossary">
+<h2 class="section"><span class="bar"></span>Глосарій: що означає метрика і як її покращити</h2>
+<p class="section-desc">Розгорніть метрику, щоб побачити визначення, як вона рахується та які дії на неї впливають.</p>
+
+<details class="gl" open>
+  <summary>Order Defect Rate (ODR)</summary>
+  <p><b>Визначення.</b> Частка доставлених замовлень, у яких була хоча б одна позиція з дефектом, що вплинув
+  на клієнта: зміна кількості, зміна ваги або підвищення ціни. Технічні правки без впливу на клієнта
+  не рахуються.</p>
+  <p><b>Формула.</b> orders with (quantity defect ∪ weight defect ∪ price defect) ÷ delivered orders.</p>
+  <p class="fix"><b>Як покращити:</b> real-time наявність товарів (OOS sync), приховування недоступних SKU,
+  навчання пікерів, чистка каталогу від службових позицій (пакети, збори), буфер запасу на топ-SKU.</p>
+</details>
+
+<details class="gl">
+  <summary>Item Quantity Adjustment Defect Rate</summary>
+  <p><b>Визначення.</b> Частка активних позицій, де кількість змінили з впливом на клієнта — зазвичай товар
+  видалили або зменшили кількість через відсутність на полиці.</p>
+  <p><b>Чому важливо.</b> Це 66.5% усіх дефектів в UA, тобто головний важіль впливу на ODR.</p>
+  <p class="fix"><b>Як покращити:</b> інвентаризація високооборотних SKU, автоматичне приховування OOS,
+  пороги мінімального залишку, окремий контроль напоїв та свіжих категорій.</p>
+</details>
+
+<details class="gl">
+  <summary>Item Replacement Rate / Order Replacement Rate</summary>
+  <p><b>Визначення.</b> Item-level: частка позицій, замінених іншим SKU. Order-level: частка замовлень, де була
+  хоча б одна заміна. Order-рівень завжди вищий, бо одна заміна «маркує» все замовлення.</p>
+  <p><b>Особливість.</b> Replacement не входить в ODR. Партнер може мати низький ODR і високий replacement
+  (HOP HEY: ODR 5.1%, item repl 15.8%) — клієнт усе одно отримує не те, що замовив.</p>
+  <p class="fix"><b>Як покращити:</b> матриця допустимих замін з підтвердженням клієнта в апці,
+  перевірка чи «replacement» не є артефактом меню (комбо, модифікатори, вагові позиції).</p>
+</details>
+
+<details class="gl">
+  <summary>Item Weighted Adjustment Defect Rate</summary>
+  <p><b>Визначення.</b> Частка вагових позицій, де фактична вага відхилилася від замовленої з впливом на
+  клієнта — недоважування або переплата.</p>
+  <p class="fix"><b>Як покращити:</b> калібрування ваг у магазинах, зрозумілі одиниці в меню (100 г, 1 кг),
+  фото очікуваної порції, ліміт допустимого відхилення у системі.</p>
+</details>
+
+<details class="gl">
+  <summary>Item Price Adjustment Defect Rate</summary>
+  <p><b>Визначення.</b> Частка позицій, де ціна зросла після оформлення замовлення.</p>
+  <p><b>Стан в UA.</b> Практично 0% на рівні партнерів. У Румунії — 15.3% і головна складова ODR (Carrefour 58.6%).</p>
+  <p class="fix"><b>Як покращити:</b> синхронізація прайсу POS ↔ Bolt, заборона підвищення ціни після
+  checkout, алерти на розбіжність цін.</p>
+</details>
+
+<details class="gl">
+  <summary>Пороги статусів у цьому звіті</summary>
+  <p><b>Critical</b> — середній ODR ≥30% або суттєва деградація при значному обсязі.<br>
+  <b>High</b> — ODR 20–30% або нестабільна динаміка на малому обсязі.<br>
+  <b>Watch / improving</b> — тренд покращується або специфічний патерн (високий replacement при помірному ODR).<br>
+  <b>Good</b> — ODR &lt;10% на стабільному обсязі.</p>
+</details>
+
+<details class="gl">
+  <summary>Методологія та обмеження</summary>
+  <p><b>Період:</b> 12 повних тижнів, 25 травня — 10 серпня 2026.</p>
+  <p><b>Фільтри:</b> delivered orders, dish items, вертикаль <code>store_*</code>, країна за
+  <code>dim_provider_v2.country_code</code>.</p>
+  <p><b>Джерела:</b> Looker dashboard 32227 (експорт по Україні, брендові та item-level метрики) +
+  <code>main.ng_delivery.dim_basket_item_delivery</code> × <code>dim_provider_v2</code> для порівняння країн
+  і повного ТОП-15.</p>
+  <p><b>Обмеження.</b> Looker-дашборд відфільтрований по <code>Item Adjustment Rate &gt; 0</code>, тому
+  партнери з нульовими дефектами в ньому відсутні. «Середній ODR топ-5 партнерів» — просте середнє
+  (не зважене на обсяг), тому воно чутливе до малих партнерів. Останній тиждень показує стрибок по всіх
+  типах дефектів одночасно — до підтвердження варто трактувати обережно.</p>
+</details>
+</section>
+
+<footer>
+  Bolt Food UA · Stores Defect Rate / ODR · дані станом на 10 серпня 2026 (12 повних тижнів).<br>
+  Джерела: Looker dashboard 32227 · Databricks <code>ng_delivery.dim_basket_item_delivery</code> × <code>dim_provider_v2</code>.
+</footer>
+
+</div>
+
+<script>
+const WEEKS = ["25 трав","1 черв","8 черв","15 черв","22 черв","29 черв","6 лип","13 лип","20 лип","27 лип","3 серп","10 серп"];
+
+const DEFECT_TYPES = {
+  qty:   [1584,1714,1610,1643,1755,2336,2685,2362,2615,2855,3565,5101],
+  weight:[466,525,612,627,629,842,891,882,921,931,1189,2901],
+  price: [267,228,256,244,228,250,174,118,96,105,149,1503]
+};
+
+const MARKET = {
+  odr:  [13.5,14.5,13.3,13.7,14.5,16.7,18.8,16.8,18.5,18.9,19.6,22.8],
+  repl: [17.2,17.4,16.8,18.3,20.0,21.6,23.7,22.0,25.7,21.0,19.0,21.7]
+};
+
+const BRAND_ODR = {
+  "VARUS":       [48.1,47.4,41.2,36.0,44.8,49.0,53.2,50.9,50.4,52.3,52.6,51.5],
+  "KOPIYKA":     [26.2,34.1,36.7,40.1,29.7,37.4,34.9,34.8,32.1,32.5,28.5,39.9],
+  "SANTIM":      [30.7,29.3,29.3,37.6,34.9,40.7,25.3,29.7,32.8,24.2,37.9,38.6],
+  "RUKAVYCHKA":  [24.3,22.7,26.4,21.6,25.0,26.3,29.7,25.3,24.0,28.5,22.0,19.1],
+  "TAISTRA":     [23.8,24.8,23.0,20.2,22.9,27.3,20.7,20.4,18.3,23.6,16.4,15.2],
+  "KOPIYKA MINI":[25.2,19.7,18.4,18.3,20.6,20.5,19.0,14.3,28.2,14.8,18.0,29.4],
+  "CAFE RYNOK":  [10.7,10.9,8.3,12.0,13.9,17.1,13.7,13.1,8.1,13.5,13.0,13.8],
+  "LOKO":        [1.1,1.8,1.5,3.7,6.3,7.1,6.3,8.4,6.3,6.3,7.9,6.8],
+  "HOP HEY":     [3.9,4.7,4.9,4.6,5.5,6.3,6.3,4.0,6.1,4.6,6.3,4.3]
+};
+
+const BRAND_COLORS = {
+  "VARUS":"#d1493f","KOPIYKA":"#d98324","SANTIM":"#b45309","RUKAVYCHKA":"#7c3aed",
+  "TAISTRA":"#15a34a","KOPIYKA MINI":"#e879a0","CAFE RYNOK":"#0e7faa","LOKO":"#2563eb","HOP HEY":"#64748b"
+};
+
+// Looker export: item-level metrics + weekly ODR (14 активних брендів, без GROCERY TEST)
+const PARTNERS = [
+  {b:"VARUS",items:274376,avg:48.1,last:51.5,d:3.4,qty:13.2,repl:23.0,wt:1.0,orepl:35.3,st:"crit",
+   problem:"Визначає ринковий ODR: 46% item-обсягу, ODR 48–52% усі 12 тижнів. Quantity 13.2% + order replacement 35.3%. Пакети роздувають qty, напої дають OOS та заміни. Найгірші магазини мають qty+repl понад 45%.",
+   action:"1) Прибрати пакети з quantity defect. 2) Deep-dive 5 найгірших магазинів. 3) Daily OOS sync по Coca-Cola / Pepsi / воді. 4) Ціль ODR &lt;35% за 8 тижнів."},
+  {b:"LOKO",items:106902,avg:5.3,last:6.8,d:5.7,qty:0.7,repl:0.0,wt:0.3,orepl:0.0,st:"good",
+   problem:"Найкращий великий партнер: ODR ~5%, замін немає. Але ODR виріс з 1.1% до 6.8% — потрібен моніторинг, щоб не втратити бенчмарк.",
+   action:"Зафіксувати процеси наявності та picker flow як playbook для grocery. Тримати ODR &lt;7%."},
+  {b:"HOP HEY",items:77157,avg:5.1,last:4.3,d:0.4,qty:0.9,repl:15.8,wt:0.2,orepl:24.2,st:"watch",
+   problem:"ODR низький і стабільний (4–6%), але item replacement 15.8% та order replacement 24.2% — клієнт часто отримує заміну без формального дефекту.",
+   action:"Не чіпати ODR. Перевірити каталог і правила замін: чи це реальний OOS, чи артефакт меню."},
+  {b:"KOPIYKA",items:34498,avg:33.9,last:39.9,d:13.7,qty:7.8,repl:17.3,wt:0.9,orepl:27.2,st:"crit",
+   problem:"Найгірша динаміка серед великих: +13.7 п.п. за 12 тижнів, останній тиждень 39.9%. Quantity 7.8% плюс високий replacement 27.2%.",
+   action:"Weekly ops review з AM. Root-cause по OOS у напоях і снеках. Ціль — повернути ODR &lt;28% (рівень травня)."},
+  {b:"TAISTRA",items:27818,avg:21.4,last:15.2,d:-8.6,qty:4.5,repl:19.7,wt:0.1,orepl:27.1,st:"watch",
+   problem:"Найкращий прогрес: −8.6 п.п. (23.8% → 15.2%). Але order replacement усе ще 27.1%.",
+   action:"Закріпити прогрес і розібрати кейс як приклад. Наступний крок — знизити replacement через правила замін."},
+  {b:"CAFE RYNOK",items:23641,avg:12.3,last:13.8,d:3.1,qty:3.8,repl:70.7,wt:0.0,orepl:73.5,st:"watch",
+   problem:"ODR помірний (12–14%), але item replacement 70.7% і order replacement 73.5% — майже кожне коригування стає заміною. Категорії Роли та Комбо меню мають 100% replacement.",
+   action:"Catalog audit: перевірити чи replacement реальний, чи артефакт меню та модифікаторів. Це впливає на досвід сильніше за ODR."},
+  {b:"RUKAVYCHKA",items:15752,avg:24.6,last:19.1,d:-5.2,qty:5.0,repl:13.7,wt:0.6,orepl:16.7,st:"watch",
+   problem:"Прогрес −5.2 п.п. до 19.1%, але quantity 5.0% усе ще вище за LOKO та HOP HEY.",
+   action:"Продовжити дисциплину наявності. Порівняти процеси з TAISTRA — схожа позитивна траєкторія."},
+  {b:"SANTIM",items:10151,avg:32.6,last:38.6,d:7.9,qty:6.8,repl:13.9,wt:1.0,orepl:22.7,st:"crit",
+   problem:"Деградація +7.9 п.п., останній тиждень 38.6%. Quantity 6.8% і weight 1.0% — суміш OOS та вагових проблем.",
+   action:"Спільний review з KOPIYKA (схожий регіон і формат). Точність вагових позицій плюс OOS-контроль."},
+  {b:"KOPIYKA MINI",items:9950,avg:20.5,last:29.4,d:4.2,qty:4.9,repl:19.9,wt:0.2,orepl:28.2,st:"high",
+   problem:"Дуже волатильний ODR: 14.3% → 29.4% за місяць. Replacement 28.2%.",
+   action:"Стабілізувати наявність у mini-форматі, не дати підтягнутись до рівня KOPIYKA."},
+  {b:"RODYNNA KOVBASKA",items:2184,avg:45.1,last:44.9,d:-25.1,qty:19.5,repl:14.1,wt:5.9,orepl:27.9,st:"crit",
+   problem:"Найгірші item-метрики на платформі: quantity 19.5%, weight 5.9%. ODR ~45% і дуже волатильний (був 75%). Малий обсяг, але сигнал системний.",
+   action:"Пріоритет — вагові SKU: калібрування ваг, unit conversion, опис порцій. Не масштабувати, доки ODR &gt;30%."},
+  {b:"ANRI-PHARM",items:3826,avg:6.0,last:2.0,d:-1.6,qty:3.4,repl:0.0,wt:0.0,orepl:0.0,st:"good",
+   problem:"Аптечний формат: ODR 2–6%, замін немає. Quantity 3.4% — точкові OOS.",
+   action:"Тримати поточний рівень, окремих дій не потрібно."},
+  {b:"BRSM",items:2260,avg:6.6,last:11.6,d:5.3,qty:1.8,repl:17.4,wt:0.0,orepl:5.0,st:"good",
+   problem:"Малий обсяг, ODR зріс до 11.6% в останньому тижні. Дані лише за 6 тижнів.",
+   action:"Моніторинг. Якщо ODR стабільно &gt;10% — перевірка наявності на АЗС-форматі."},
+  {b:"NO TABOO",items:968,avg:10.6,last:9.3,d:-24.0,qty:5.1,repl:12.5,wt:0.0,orepl:9.7,st:"good",
+   problem:"Малий обсяг. ODR стабілізувався на 9–11% після раннього піку 33%.",
+   action:"Низький пріоритет, підтримувати рівень."},
+  {b:"O'NDE",items:446,avg:44.0,last:30.0,d:-38.8,qty:11.0,repl:4.8,wt:0.0,orepl:8.3,st:"high",
+   problem:"Дуже малий обсяг і лише 3 тижні даних. Quantity 11%, ODR стартував з 68.8%.",
+   action:"Не масштабувати без стабільного ODR &lt;20% протягом 4 тижнів."}
+];
+
+const ST_LABEL = {crit:"Critical",high:"High",watch:"Watch / прогрес",good:"Good"};
+const ST_ROW   = {crit:"crit",high:"high",watch:"",good:"good"};
+
+// Databricks: ТОП-15 UA Stores за обсягом, єдине визначення ODR
+const DBX15 = [
+  ["VARUS",26289,51.0,49.1,5.8,0.0,74.4],
+  ["LOKO",13293,5.5,3.9,1.8,0.0,0.0],
+  ["HOP HEY",9715,5.1,4.3,0.9,0.0,4.0],
+  ["BEER MARKET",7482,0.0,0.0,0.0,0.0,0.0],
+  ["CAFE RYNOK",4244,12.6,12.6,0.0,0.0,9.3],
+  ["KOPIYKA",3939,35.5,33.4,5.0,0.0,28.1],
+  ["PYVNA BORODA",3492,0.0,0.0,0.0,0.0,0.0],
+  ["BEERLAND",3199,0.0,0.0,0.0,0.0,0.0],
+  ["REMESLO BREWERY",2924,0.0,0.0,0.0,0.0,0.0],
+  ["LEPRUKON",2653,0.0,0.0,0.0,0.0,0.0],
+  ["TAISTRA",2353,22.9,22.3,0.9,0.0,5.9],
+  ["RUKAVYCHKA",2133,25.0,22.8,3.2,0.0,5.2],
+  ["TOCHKA",1623,0.0,0.0,0.0,0.0,0.0],
+  ["ANRI-PHARM",1541,6.6,6.6,0.0,0.0,0.0],
+  ["SPRAGA",1319,0.0,0.0,0.0,0.0,0.0]
+];
+
+const STORES = [
+  ["бул. Будівельників 27а",731,14.1,42.2],
+  ["пр. Слобожанський 86",3227,20.6,30.7],
+  ["вул. Соборна 97А",1794,16.1,33.6],
+  ["вул. Паникахи 15",5653,14.9,33.5],
+  ["вул. Калинова 9А",8771,15.8,30.9],
+  ["вул. Петра Сагайдачного 7",2545,17.2,28.6],
+  ["Проспект Червоної Калини 44A",7617,17.3,27.7],
+  ["вул. Робоча 67",6992,15.6,27.9]
+];
+
+const CATS = [
+  ["Без категорії",120638,2.3,14.9,20750],
+  ["Роли",20312,0.1,100.0,20332],
+  ["Пакувальні матеріали",10087,93.3,0.0,9411],
+  ["Солодка вода",11910,18.6,38.3,6777],
+  ["Супи",10149,0.2,52.9,5389],
+  ["Пиво",11072,13.3,31.0,4905],
+  ["Мінеральна вода",9043,13.2,38.6,4685],
+  ["Комбо меню",4259,0.1,100.0,4263],
+  ["Основні страви",4652,5.1,86.2,4247],
+  ["Піца",7340,9.7,34.2,3222]
+];
+
+const COUNTRIES = [
+  {rank:1,name:"Румунія",orders:246055,odr:35.6,qty:19.6,wt:2.3,price:15.3,repl:8.3,top5:39.4,top5x:49.2,
+   partners:[["BOLT MARKET (1P)",72485,0.3,0.0],["CARREFOUR",63627,58.6,0.0],["KAUFLAND",51493,63.4,33.9],["REWE",32135,28.8,4.4],["AUCHAN",17760,46.1,9.1]]},
+  {rank:2,name:"Естонія",orders:186744,odr:12.7,qty:12.5,wt:0.4,price:0.0,repl:4.4,top5:13.7,top5x:17.0,
+   partners:[["BOLT MARKET (1P)",79185,0.8,0.3],["SELVER",34533,38.0,15.6],["RIMI",32922,29.9,8.1],["ARAXES",25837,0.0,0.0],["ALDAR EESTI",3256,0.0,0.0]]},
+  {rank:3,name:"Литва",orders:144673,odr:25.0,qty:24.1,wt:2.1,price:0.0,repl:15.6,top5:20.5,top5x:25.6,
+   partners:[["RIMI",40664,41.9,24.7],["BOLT MARKET (1P)",37637,0.2,0.0],["REWE",36525,44.9,32.9],["GELSVA",13199,15.7,2.4],["UAB ALYNAS",4332,0.0,0.0]]},
+  {rank:4,name:"Україна",orders:108406,odr:17.1,qty:16.2,wt:2.1,price:0.0,repl:20.5,top5:18.8,top5x:18.8,
+   partners:[["VARUS",26289,51.0,74.4],["LOKO",13293,5.5,0.0],["HOP HEY",9715,5.1,4.0],["BEER MARKET",7482,0.0,0.0],["KOPIYKA",6319,32.3,25.0]]}
+];
+
+// ---------- рендер таблиць ----------
+const n = v => v.toLocaleString("uk-UA");
+const p = v => v.toFixed(1) + "%";
+const dpp = v => (v>0?"+":"") + v.toFixed(1) + " п.п.";
+
+document.querySelector("#tblLooker tbody").innerHTML = PARTNERS.map(x=>`
+  <tr class="${ST_ROW[x.st]}">
+    <td class="axis">${x.b}</td>
+    <td>${n(x.items)}</td>
+    <td><b>${p(x.avg)}</b></td>
+    <td>${p(x.last)}</td>
+    <td class="${x.d>0?'up':'down'}">${dpp(x.d)}</td>
+    <td>${p(x.qty)}</td>
+    <td>${p(x.repl)}</td>
+    <td>${p(x.wt)}</td>
+    <td>${x.orepl===null?'—':p(x.orepl)}</td>
+    <td style="text-align:left"><span class="badge ${x.st}">${ST_LABEL[x.st]}</span></td>
+  </tr>`).join("");
+
+document.querySelector("#tblDbx tbody").innerHTML = DBX15.map(r=>{
+  const cls = r[2]>=30 ? "crit" : r[2]>=20 ? "high" : r[2]<10 ? "good" : "";
+  return `<tr class="${cls}"><td class="axis">${r[0]}</td><td>${n(r[1])}</td><td><b>${p(r[2])}</b></td>
+  <td>${p(r[3])}</td><td>${p(r[4])}</td><td>${p(r[5])}</td><td>${p(r[6])}</td></tr>`;
+}).join("");
+
+document.querySelector("#tblActions tbody").innerHTML = PARTNERS.map(x=>`
+  <tr class="${ST_ROW[x.st]}">
+    <td class="axis">${x.b}<br><span class="badge ${x.st}">${ST_LABEL[x.st]}</span></td>
+    <td>${x.problem}</td>
+    <td>${x.action}</td>
+  </tr>`).join("");
+
+document.querySelector("#tblStores tbody").innerHTML = STORES.map(r=>
+  `<tr><td class="axis">${r[0]}</td><td>${n(r[1])}</td><td>${p(r[2])}</td><td>${p(r[3])}</td></tr>`).join("");
+
+document.querySelector("#tblCats tbody").innerHTML = CATS.map(r=>
+  `<tr><td class="axis">${r[0]}</td><td>${n(r[1])}</td><td>${p(r[2])}</td><td>${p(r[3])}</td><td><b>${n(r[4])}</b></td></tr>`).join("");
+
+document.getElementById("countryCards").innerHTML = COUNTRIES.map(c=>`
+  <div class="card">
+    <h3>#${c.rank} ${c.name} <span class="sm">· ринковий ODR ${p(c.odr)} · ${n(c.orders)} замовлень</span></h3>
+    <p class="mut" style="font-size:13px;margin:0 0 4px">
+      Quantity ${p(c.qty)} · Weight ${p(c.wt)} · Price ${p(c.price)} · Replacement ${p(c.repl)}<br>
+      Середній ODR топ-5: <b>${p(c.top5)}</b> · без 1P: <b>${p(c.top5x)}</b>
+    </p>
+    <div class="tablewrap">
+    <table class="matrix">
+      <thead><tr><th>Партнер</th><th>Orders</th><th>ODR</th><th>Repl</th></tr></thead>
+      <tbody>${c.partners.map(x=>{
+        const cls = x[2]>=40?"crit":x[2]>=20?"high":x[2]<5?"good":"";
+        return `<tr class="${cls}"><td class="axis">${x[0]}</td><td>${n(x[1])}</td><td><b>${p(x[2])}</b></td><td>${p(x[3])}</td></tr>`;
+      }).join("")}</tbody>
+    </table>
+    </div>
+  </div>`).join("");
+
+// ---------- графіки ----------
+Chart.defaults.font.family = '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif';
+Chart.defaults.font.size = 11.5;
+Chart.defaults.color = "#5d6b85";
+
+new Chart(document.getElementById("chTypes"), {
+  type:"bar",
+  data:{labels:WEEKS,datasets:[
+    {label:"Quantity",data:DEFECT_TYPES.qty,backgroundColor:"#d1493f"},
+    {label:"Weight",data:DEFECT_TYPES.weight,backgroundColor:"#d98324"},
+    {label:"Price",data:DEFECT_TYPES.price,backgroundColor:"#0e7faa"}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    scales:{x:{stacked:true,grid:{display:false},title:{display:true,text:"Тиждень"}},
+            y:{stacked:true,grid:{color:"#eef1f7"},title:{display:true,text:"Дефектних позицій, шт."}}},
+    plugins:{legend:{position:"bottom"}}}
+});
+
+new Chart(document.getElementById("chMarket"), {
+  type:"line",
+  data:{labels:WEEKS,datasets:[
+    {label:"ODR, %",data:MARKET.odr,borderColor:"#d1493f",backgroundColor:"rgba(209,73,63,.08)",fill:true,tension:.3,borderWidth:2.5,pointRadius:3},
+    {label:"Order replacement, %",data:MARKET.repl,borderColor:"#2563eb",backgroundColor:"transparent",tension:.3,borderWidth:2,borderDash:[5,4],pointRadius:3}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    scales:{x:{grid:{display:false},title:{display:true,text:"Тиждень"}},
+            y:{beginAtZero:true,grid:{color:"#eef1f7"},title:{display:true,text:"% замовлень"},ticks:{callback:v=>v+"%"}}},
+    plugins:{legend:{position:"bottom"}}}
+});
+
+new Chart(document.getElementById("chBrands"), {
+  type:"line",
+  data:{labels:WEEKS,datasets:Object.keys(BRAND_ODR).map(k=>({
+    label:k,data:BRAND_ODR[k],borderColor:BRAND_COLORS[k],backgroundColor:"transparent",
+    tension:.3,borderWidth:k==="VARUS"?3:1.8,pointRadius:2.5
+  }))},
+  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:"index",intersect:false},
+    scales:{x:{grid:{display:false},title:{display:true,text:"Тиждень"}},
+            y:{beginAtZero:true,grid:{color:"#eef1f7"},title:{display:true,text:"Order Defect Rate, %"},ticks:{callback:v=>v+"%"}}},
+    plugins:{legend:{position:"bottom"}}}
+});
+
+new Chart(document.getElementById("chCountries"), {
+  type:"bar",
+  data:{labels:COUNTRIES.map(c=>c.name),datasets:[
+    {label:"ODR ринку, %",data:COUNTRIES.map(c=>c.odr),backgroundColor:"#2563eb"},
+    {label:"Середній ODR топ-5 партнерів, %",data:COUNTRIES.map(c=>c.top5),backgroundColor:"#d98324"},
+    {label:"Те саме без Bolt Market (1P), %",data:COUNTRIES.map(c=>c.top5x),backgroundColor:"#d1493f"}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    scales:{x:{grid:{display:false},title:{display:true,text:"Країна (ранг за обсягом Stores)"}},
+            y:{beginAtZero:true,grid:{color:"#eef1f7"},title:{display:true,text:"% замовлень"},ticks:{callback:v=>v+"%"}}},
+    plugins:{legend:{position:"bottom"}}}
+});
+</script>
+</body>
+</html>
