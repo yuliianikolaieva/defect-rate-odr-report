@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stores Defect Rate / ODR — Bolt Food UA · weekly analysis</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#eef1f7; --panel:#ffffff; --panel2:#f6f8fc; --line:#dfe5ee;
+    --text:#13203a; --muted:#5d6b85; --soft:#33425d;
+    --accent:#2563eb; --accent2:#0e7faa;
+    --good:#15a34a; --warn:#d1493f; --mid:#d98324; --info:#2563eb;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       background:radial-gradient(1200px 600px at 80% -10%,#ffffff 0%,var(--bg) 55%);color:var(--text);line-height:1.55}
+  a{color:var(--accent)}
+
+  /* ---- layout with right-hand navigation ---- */
+  .shell{max-width:1280px;margin:0 auto;padding:28px 20px 80px;display:grid;
+         grid-template-columns:minmax(0,1fr) 244px;gap:30px;align-items:start}
+  aside.sidenav{position:sticky;top:20px}
+  aside.sidenav .navcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+         padding:14px 12px;box-shadow:0 1px 3px rgba(20,40,80,.05)}
+  aside.sidenav .brand{display:block;font-weight:800;font-size:11.5px;letter-spacing:1.2px;
+         text-transform:uppercase;color:var(--accent2);padding:0 10px 10px;border-bottom:1px solid var(--line);margin-bottom:8px}
+  aside.sidenav a.navlink{display:block;color:var(--muted);text-decoration:none;font-size:13px;
+         padding:7px 10px;border-radius:8px;border-left:3px solid transparent;margin-bottom:2px}
+  aside.sidenav a.navlink:hover{background:#eef2f8;color:var(--text)}
+  aside.sidenav a.navlink.active{background:#eef2fb;color:var(--accent);border-left-color:var(--accent);font-weight:600}
+  aside.sidenav a.navlink .num{display:inline-block;width:16px;color:#9aa7bd;font-size:11.5px;font-weight:600}
+  aside.sidenav a.navlink.active .num{color:var(--accent)}
+  .langbox{margin-top:12px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;
+         box-shadow:0 1px 3px rgba(20,40,80,.05)}
+  .langbox .lbl{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:8px}
+  .langbox .opts{display:flex;gap:6px}
+  .langbox a{flex:1;text-align:center;font-size:12.5px;font-weight:600;text-decoration:none;
+         padding:7px 0;border-radius:8px;border:1px solid var(--line);color:var(--muted)}
+  .langbox a.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  main{min-width:0}
+  section[id]{scroll-margin-top:24px}
+
+  header.hero{padding:34px 30px;border:1px solid var(--line);border-radius:18px;
+       background:linear-gradient(135deg,#ffffff 0%,#eef3fb 100%);position:relative;overflow:hidden;box-shadow:0 1px 3px rgba(20,40,80,.05)}
+  .hero h1{margin:0 0 6px;font-size:26px;letter-spacing:.2px}
+  .hero .sub{color:var(--soft);font-size:15px;max-width:900px}
+  .hero .tag{display:inline-block;margin-bottom:14px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--accent2);font-weight:700}
+  .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .meta .pill{background:#f1f5fb;border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:12.5px;color:var(--muted)}
+  h2.section{font-size:20px;margin:42px 0 6px;display:flex;align-items:center;gap:10px}
+  h2.section .bar{width:6px;height:22px;border-radius:3px;background:var(--accent)}
+  .section-desc{color:var(--muted);font-size:14px;margin:0 0 18px}
+  .grid{display:grid;gap:16px}
+  .kpis{grid-template-columns:repeat(4,1fr);margin-top:22px}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 1px 3px rgba(20,40,80,.05)}
+  .kpi .n{font-size:23px;font-weight:800}
+  .kpi .l{color:var(--muted);font-size:12px;margin-top:2px}
+  .kpi.warn .n{color:var(--warn)} .kpi.good .n{color:var(--good)} .kpi.mid .n{color:var(--mid)} .kpi.info .n{color:var(--info)}
+  .callout{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--warn);border-radius:12px;padding:16px 18px;margin-top:18px;box-shadow:0 1px 3px rgba(20,40,80,.05)}
+  .callout.i{border-left-color:var(--accent)}
+  .callout.g{border-left-color:var(--good)}
+  .callout h3{margin:0 0 8px;font-size:15px}
+  .callout p{margin:0 0 6px;color:var(--soft);font-size:14px}
+  .callout p:last-child{margin-bottom:0}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  table.matrix{border-collapse:collapse;width:100%;margin-top:12px;font-size:13px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  table.matrix th,table.matrix td{border:1px solid var(--line);padding:8px 10px;text-align:right}
+  table.matrix th{background:#eef2f8;color:var(--muted);font-weight:600;text-align:right}
+  table.matrix th:first-child,table.matrix td:first-child{text-align:left}
+  table.matrix td.axis{background:#f3f6fb;color:var(--soft);font-weight:700;text-align:left}
+  table.matrix tr.crit td{background:rgba(209,73,63,.08)}
+  table.matrix tr.high td{background:rgba(217,131,36,.08)}
+  table.matrix tr.good td{background:rgba(21,163,74,.07)}
+  table.wide td{text-align:left}
+  table.wide td:first-child{white-space:nowrap;font-weight:700}
+  .tablewrap{overflow:auto;border-radius:10px}
+  .up{color:var(--warn);font-weight:600} .down{color:var(--good);font-weight:600} .mut{color:var(--muted)}
+  .badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
+  .badge.crit{background:rgba(209,73,63,.12);color:#a5342c}
+  .badge.high{background:rgba(217,131,36,.14);color:#8a5312}
+  .badge.watch{background:rgba(37,99,235,.12);color:#1c4ed8}
+  .badge.good{background:rgba(21,163,74,.12);color:#0f7536}
+  .chartcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;margin-top:16px;padding:18px 20px;box-shadow:0 1px 3px rgba(20,40,80,.05)}
+  .chartcard h3{margin:0 0 2px;font-size:15px}
+  .chartcard .cap{color:var(--muted);font-size:12px;margin:0 0 10px}
+  .chartbox{position:relative;width:100%;height:300px}
+  .chartbox.tall{height:400px}
+  .chartbox canvas{position:absolute;inset:0}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 1px 3px rgba(20,40,80,.05)}
+  .card h3{margin:0 0 8px;font-size:15px}
+  .card h3 .sm{font-size:12px;color:var(--muted);font-weight:500}
+  .card ul{margin:6px 0 0;padding-left:18px;color:var(--soft);font-size:13.5px}
+  .card ul li{margin-bottom:5px}
+  details.gl{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-top:12px}
+  details.gl summary{cursor:pointer;font-weight:700;font-size:14.5px}
+  details.gl p{color:var(--soft);font-size:13.5px;margin:10px 0 0}
+  details.gl p.fix{color:var(--text);background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+  footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+
+  @media(max-width:1080px){
+    .shell{grid-template-columns:1fr}
+    aside.sidenav{position:static;order:-1}
+    aside.sidenav .navcard{display:flex;flex-wrap:wrap;gap:4px;padding:12px}
+    aside.sidenav .brand{width:100%;border-bottom:none;padding-bottom:4px;margin-bottom:2px}
+    aside.sidenav a.navlink{border-left:none;padding:6px 10px}
+    aside.sidenav a.navlink.active{border-left:none}
+    aside.sidenav a.navlink .num{display:none}
+    .langbox .opts{max-width:220px}
+  }
+  @media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.two,.three{grid-template-columns:1fr}.hero h1{font-size:21px}}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+<main>
+
+<header class="hero">
+  <span class="tag">Bolt Food UA · Stores</span>
+  <h1>Defect Rate / ODR — weekly analysis of top partners</h1>
+  <p class="sub">
+    Order fulfilment quality in Stores: what Order Defect Rate is made of, which partners drive it,
+    where it is deteriorating, where it is improving, and how Ukraine compares with Bolt's top-3
+    Stores countries by volume.
+  </p>
+  <div class="meta">
+    <span class="pill">Period: 25 May — 10 Aug 2026 (12 completed weeks)</span>
+    <span class="pill">Granularity: weekly</span>
+    <span class="pill">Sources: Looker dashboard 32227 + Databricks</span>
+    <span class="pill">Vertical: store_* (3P + 1P)</span>
+  </div>
+</header>
+
+<section id="summary">
+<h2 class="section"><span class="bar"></span>Key findings</h2>
+<p class="section-desc">Market-level ODR looks moderate, but the trend is negative and the problem sits with a handful of grocery partners.</p>
+
+<div class="grid kpis">
+  <div class="kpi mid"><div class="n">17.1%</div><div class="l">UA Stores ODR · 12-week average</div></div>
+  <div class="kpi warn"><div class="n">22.8%</div><div class="l">ODR latest week (10 Aug) · period peak</div></div>
+  <div class="kpi info"><div class="n">20.5%</div><div class="l">Order Replacement Rate · separate metric</div></div>
+  <div class="kpi warn"><div class="n">66.5%</div><div class="l">Quantity share of all item defects</div></div>
+</div>
+
+<div class="callout">
+  <h3>1. The trend is worsening, and it is not one partner's seasonality</h3>
+  <p>Market ODR grew from <b>13.5%</b> (25 May) to <b>22.8%</b> (10 Aug) — that is +9.3 pp over 12 weeks.
+  The rise started in late June and moves in step with order volume growth (7.4k → 12.4k per week),
+  meaning operational processes are not scaling with demand.</p>
+</div>
+
+<div class="callout">
+  <h3>2. The problem is grocery, not Stores as a whole</h3>
+  <p><b>VARUS</b> (46% of all item volume) holds ODR at <b>48–52%</b> and single-handedly sets the market level.
+  <b>KOPIYKA</b> (+13.7 pp over the period) and <b>SANTIM</b> (+7.9 pp) are degrading. Meanwhile <b>LOKO</b> and
+  <b>HOP HEY</b> stay below 7%, and the alcohol chains (BEER MARKET, PYVNA BORODA, BEERLAND, REMESLO,
+  TOCHKA, SPRAGA) sit at <b>0%</b>. So the platform and the processes do allow defect-free operation.</p>
+</div>
+
+<div class="callout g">
+  <h3>3. Some partners genuinely improved — their processes should be replicated</h3>
+  <p><b>TAISTRA</b> −8.6 pp (23.8% → 15.2%), <b>RUKAVYCHKA</b> −5.2 pp (24.3% → 19.1%). This proves ODR is
+  manageable at partner level without any product changes.</p>
+</div>
+
+<div class="callout i">
+  <h3>4. Part of the "defects" is an accounting artefact, not customer pain</h3>
+  <p>The <b>Packaging materials</b> category has a 93.3% quantity defect rate: three VARUS bag SKUs generate
+  ~10.3k quantity defects. The <b>Sushi rolls</b> and <b>Combo meals</b> categories show a 100% replacement rate.
+  These cases must be cleaned up before any operational action, otherwise the KPI is not measuring what
+  actually hurts the customer.</p>
+</div>
+</section>
+
+<section id="components">
+<h2 class="section"><span class="bar"></span>What ODR consists of</h2>
+<p class="section-desc">
+  Order Defect Rate = share of delivered orders with at least one item defect that impacted the customer:
+  quantity, weight or price. Replacement is tracked as a separate metric.
+</p>
+
+<div class="three">
+  <div class="card">
+    <h3>Quantity defect <span class="badge crit">Main driver</span></h3>
+    <p class="mut" style="font-size:13.5px;margin:0">
+      Quantity changed with customer impact: the item was removed or reduced (typically out-of-stock).
+    </p>
+    <ul>
+      <li>66.5% of all item defects in UA</li>
+      <li>UA order-level: 16.2%</li>
+      <li>Worst: VARUS 49.1%, KOPIYKA 33.4%</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Weight defect <span class="badge high">Secondary</span></h3>
+    <p class="mut" style="font-size:13.5px;margin:0">
+      Weighted items: actual weight differs from what was ordered, with customer impact.
+    </p>
+    <ul>
+      <li>25.4% of all item defects</li>
+      <li>UA order-level: 2.1%</li>
+      <li>Worst: RODYNNA KOVBASKA 5.9% (item), VARUS 5.8% (order)</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Price defect <span class="badge good">Not an issue in UA</span></h3>
+    <p class="mut" style="font-size:13.5px;margin:0">
+      Item price increased after the order was placed.
+    </p>
+    <ul>
+      <li>8.1% of item defects, order-level ≈ 0%</li>
+      <li>Last-week spike (1.5k) is worth a data-quality check</li>
+      <li>For contrast: Romania 15.3% (Carrefour)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="two">
+  <div class="chartcard">
+    <h3>Item defects by type — weekly volume</h3>
+    <p class="cap">Number of defective line items · source: Looker 32227</p>
+    <div class="chartbox"><canvas id="chTypes"></canvas></div>
+  </div>
+  <div class="chartcard">
+    <h3>ODR vs Replacement Rate — UA market level</h3>
+    <p class="cap">% of delivered orders · source: Databricks (store_*, dish items)</p>
+    <div class="chartbox"><canvas id="chMarket"></canvas></div>
+  </div>
+</div>
+</section>
+
+<section id="trend">
+<h2 class="section"><span class="bar"></span>Weekly ODR by key brand</h2>
+<p class="section-desc">
+  Three behaviour groups: persistently high (VARUS), degrading (KOPIYKA, SANTIM), and improving (TAISTRA).
+  LOKO and HOP HEY are the low-ODR reference at large volume.
+</p>
+<div class="chartcard">
+  <h3>Order Defect Rate by brand, % of orders</h3>
+  <p class="cap">12 weeks · source: Looker weekly Order Defect Rate per brand</p>
+  <div class="chartbox tall"><canvas id="chBrands"></canvas></div>
+</div>
+</section>
+
+<section id="partners">
+<h2 class="section"><span class="bar"></span>Top partners — all metrics</h2>
+<p class="section-desc">
+  Two tables, because the two sources tell different stories. The Looker dashboard is filtered by
+  <code>Item Adjustment Rate &gt; 0</code>, so partners with zero defects never appear in it — the full
+  top-15 from Databricks is below.
+</p>
+
+<h3 style="font-size:15.5px;margin:24px 0 0">A. Partners from the dashboard (item-level metrics + weekly ODR)</h3>
+<div class="tablewrap">
+<table class="matrix" id="tblLooker">
+  <thead><tr>
+    <th>Brand</th><th>Items</th><th>ODR avg</th><th>ODR last</th><th>Δ 12 weeks</th>
+    <th>Qty %</th><th>Item repl %</th><th>Weight %</th><th>Order repl %</th><th style="text-align:left">Status</th>
+  </tr></thead>
+  <tbody></tbody>
+</table>
+</div>
+<p class="section-desc" style="margin-top:8px">
+  Qty / Item repl / Weight are item-level (share of line items). ODR and Order repl are order-level
+  (share of orders). That is why Order repl is always higher than Item repl.
+</p>
+
+<h3 style="font-size:15.5px;margin:28px 0 0">B. Top-15 UA Stores partners by order volume (Databricks)</h3>
+<div class="tablewrap">
+<table class="matrix" id="tblDbx">
+  <thead><tr>
+    <th>Brand</th><th>Orders 12w</th><th>ODR %</th><th>Qty %</th><th>Weight %</th><th>Price %</th><th>Replacement %</th>
+  </tr></thead>
+  <tbody></tbody>
+</table>
+</div>
+<p class="section-desc" style="margin-top:8px">
+  Single ODR definition = qty ∪ weight ∪ price at order level. 7 of 15 partners sit at 0% ODR — mostly
+  alcohol and beverage formats with a narrow assortment and high availability.
+</p>
+</section>
+
+<section id="actions">
+<h2 class="section"><span class="bar"></span>Problems, progress and actions by partner</h2>
+<p class="section-desc">Prioritised by impact on market ODR: volume × defect level × trend direction.</p>
+<div class="tablewrap">
+<table class="matrix wide" id="tblActions">
+  <thead><tr><th style="width:150px">Partner</th><th style="width:44%">Problem</th><th>What to do</th></tr></thead>
+  <tbody></tbody>
+</table>
+</div>
+</section>
+
+<section id="drill">
+<h2 class="section"><span class="bar"></span>Drill-down: stores, categories, SKUs</h2>
+<p class="section-desc">
+  Where defects are actually created inside VARUS, and which categories contribute the most in absolute terms.
+</p>
+
+<div class="two">
+  <div class="card">
+    <h3>Worst VARUS stores <span class="sm">by qty + replacement</span></h3>
+    <div class="tablewrap">
+    <table class="matrix" id="tblStores">
+      <thead><tr><th>Store</th><th>Items</th><th>Qty %</th><th>Repl %</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Highest-contribution categories <span class="sm">absolute number of defects</span></h3>
+    <div class="tablewrap">
+    <table class="matrix" id="tblCats">
+      <thead><tr><th>Category</th><th>Items</th><th>Qty %</th><th>Repl %</th><th>Qty + repl, units</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<div class="callout i">
+  <h3>Hot SKUs — what to fix first</h3>
+  <p><b>VARUS bags (3 SKUs)</b> — ~10.3k quantity defects, with a 40–80% qty defect rate. This is accounting,
+  not service: exclude from the KPI or reclassify.</p>
+  <p><b>Coca-Cola / Pepsi / water 1.25–1.75 l</b> — the "Soft drinks" category shows 18.6% qty and 38.3%
+  replacement. Classic out-of-stock on high-velocity SKUs: needs a stock buffer and daily availability sync.</p>
+  <p><b>Weighted ready meals</b> (okroshka 45.7%, samsa 63.0%, borscht 38.8%, cucumber 13.3% qty) — a mix of
+  qty and weight defects: scale calibration plus clear units (100 g) in the menu.</p>
+  <p><b>Sushi rolls, Combo meals, Main dishes</b> — 86–100% replacement. This looks like a menu / modifier
+  artefact rather than real substitutions. Needs a catalog audit.</p>
+</div>
+</section>
+
+<section id="bench">
+<h2 class="section"><span class="bar"></span>Benchmark: top-3 countries + Ukraine</h2>
+<p class="section-desc">
+  The top-3 countries by Stores order volume over the same 12 weeks. ODR is computed identically
+  (qty ∪ weight ∪ price at order level) so the comparison is valid. For each country: top-5 partners by
+  volume and their average ODR.
+</p>
+
+<div class="chartcard">
+  <h3>ODR by country: market vs top partners</h3>
+  <p class="cap">% of orders · "excl Bolt Market" = without own 1P, which has ODR ≈ 0 and drags the average down</p>
+  <div class="chartbox"><canvas id="chCountries"></canvas></div>
+</div>
+
+<div class="two" id="countryCards" style="margin-top:16px"></div>
+
+<div class="callout i">
+  <h3>How to read this</h3>
+  <p>Ukraine (17.1%) looks better than Romania (35.6%) and Lithuania (25.0%), and close to Estonia (12.7%).
+  But two caveats change the conclusion.</p>
+  <p><b>First:</b> in Romania, Estonia and Lithuania the average is diluted by Bolt's own <b>Bolt Market</b> (1P)
+  with 0.2–0.8% ODR and huge volume. Excluding it, the top-5 partner average ODR is: Romania 49.2%,
+  Lithuania 25.6%, Estonia 17.0% versus Ukraine 18.8%. Ukraine has no 1P, so that is the row to compare.</p>
+  <p><b>Second:</b> Ukraine has the <b>highest replacement rate</b> of the four — 20.5% versus 4.4–15.6%.
+  Customers more often receive "something else", and that experience never shows up in ODR.</p>
+  <p><b>Bottom line:</b> VARUS (51.0%) sits alongside the worst European chains — Kaufland RO 63.4%,
+  Carrefour RO 58.6%, REWE LT 44.9%, Rimi LT 41.9%, Selver EE 38.0%. This is a systemic large-grocery
+  problem rather than a uniquely Ukrainian one, so solutions can be borrowed from other markets.</p>
+</div>
+</section>
+
+<section id="plan">
+<h2 class="section"><span class="bar"></span>Action plan and targets</h2>
+<p class="section-desc">Sequence matters: clean up the metric first, then push on operations.</p>
+
+<div class="three">
+  <div class="card">
+    <h3>P0 · this week</h3>
+    <ul>
+      <li><b>VARUS:</b> remove bags from quantity defect (reclassify the SKUs or exclude from the KPI) — this alone drops ~10.3k "defects"</li>
+      <li><b>VARUS:</b> deep-dive the 5 worst stores (Budivelnykiv 27a, Slobozhanskyi 86, Soborna 97A, Panykakhy 15, Kalynova 9A)</li>
+      <li><b>KOPIYKA + SANTIM:</b> weekly ODR stand-up with the AM — both are degrading</li>
+      <li>Verify the last-week price-defect spike (267 → 1503) for data quality</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>P1 · 2–4 weeks</h3>
+    <ul>
+      <li><b>CAFE RYNOK:</b> audit the 100%-replacement categories (Sushi rolls, Combo meals) — likely a mapping issue</li>
+      <li><b>RODYNNA KOVBASKA:</b> scale calibration and unit rules (qty 19.5%, weight 5.9%)</li>
+      <li>Daily out-of-stock sync for high-velocity beverages at VARUS and KOPIYKA</li>
+      <li>Document the LOKO / TAISTRA processes as a playbook and roll it out across grocery</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Targets</h3>
+    <ul>
+      <li>UA Stores ODR: back below <b>16%</b> (early-June level)</li>
+      <li>VARUS ODR: <b>&lt;35%</b> within 8 weeks</li>
+      <li>KOPIYKA and SANTIM: <b>&lt;28%</b></li>
+      <li>Market order replacement rate: <b>&lt;15%</b></li>
+      <li>No scaling of new partners while ODR stays above 20% for 4 weeks</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<section id="glossary">
+<h2 class="section"><span class="bar"></span>Glossary: what each metric means and how to improve it</h2>
+<p class="section-desc">Expand a metric to see its definition, how it is calculated, and which actions move it.</p>
+
+<details class="gl" open>
+  <summary>Order Defect Rate (ODR)</summary>
+  <p><b>Definition.</b> Share of delivered orders containing at least one line item with a defect that impacted
+  the customer: quantity change, weight change or price increase. Technical adjustments without customer
+  impact are excluded.</p>
+  <p><b>Formula.</b> orders with (quantity defect ∪ weight defect ∪ price defect) ÷ delivered orders.</p>
+  <p class="fix"><b>How to improve:</b> real-time stock availability (OOS sync), hiding unavailable SKUs,
+  picker training, cleaning service items out of the catalog (bags, fees), stock buffer on top SKUs.</p>
+</details>
+
+<details class="gl">
+  <summary>Item Quantity Adjustment Defect Rate</summary>
+  <p><b>Definition.</b> Share of active line items where quantity was changed with customer impact — usually
+  the item was removed or reduced because it was not on the shelf.</p>
+  <p><b>Why it matters.</b> It is 66.5% of all defects in UA, making it the main lever on ODR.</p>
+  <p class="fix"><b>How to improve:</b> inventory accuracy on high-turnover SKUs, automatic hiding of
+  out-of-stock items, minimum-stock thresholds, dedicated control over beverages and fresh categories.</p>
+</details>
+
+<details class="gl">
+  <summary>Item Replacement Rate / Order Replacement Rate</summary>
+  <p><b>Definition.</b> Item-level: share of line items replaced by a different SKU. Order-level: share of
+  orders with at least one replacement. The order-level figure is always higher, because a single
+  replacement flags the whole order.</p>
+  <p><b>Nuance.</b> Replacement is not part of ODR. A partner can have low ODR and high replacement
+  (HOP HEY: ODR 5.1%, item repl 15.8%) — the customer still receives something other than what was ordered.</p>
+  <p class="fix"><b>How to improve:</b> an approved substitution matrix with in-app customer confirmation,
+  and verifying that "replacement" is not a menu artefact (combos, modifiers, weighted items).</p>
+</details>
+
+<details class="gl">
+  <summary>Item Weighted Adjustment Defect Rate</summary>
+  <p><b>Definition.</b> Share of weighted line items where the actual weight deviated from the ordered weight
+  with customer impact — under-weighing or overcharging.</p>
+  <p class="fix"><b>How to improve:</b> in-store scale calibration, unambiguous units in the menu (100 g, 1 kg),
+  a photo of the expected portion, and a system cap on acceptable deviation.</p>
+</details>
+
+<details class="gl">
+  <summary>Item Price Adjustment Defect Rate</summary>
+  <p><b>Definition.</b> Share of line items whose price increased after the order was placed.</p>
+  <p><b>Status in UA.</b> Effectively 0% at partner level. In Romania it is 15.3% and the main ODR component
+  (Carrefour 58.6%).</p>
+  <p class="fix"><b>How to improve:</b> POS ↔ Bolt price synchronisation, blocking price increases after
+  checkout, alerts on price mismatches.</p>
+</details>
+
+<details class="gl">
+  <summary>Status thresholds used in this report</summary>
+  <p><b>Critical</b> — average ODR ≥30%, or material degradation at meaningful volume.<br>
+  <b>High</b> — ODR 20–30%, or unstable dynamics at low volume.<br>
+  <b>Watch / improving</b> — trend is improving, or a specific pattern (high replacement at moderate ODR).<br>
+  <b>Good</b> — ODR below 10% at stable volume.</p>
+</details>
+
+<details class="gl">
+  <summary>Methodology and limitations</summary>
+  <p><b>Period:</b> 12 completed weeks, 25 May — 10 August 2026.</p>
+  <p><b>Filters:</b> delivered orders, dish items, <code>store_*</code> vertical, country from
+  <code>dim_provider_v2.country_code</code>.</p>
+  <p><b>Sources:</b> Looker dashboard 32227 (Ukraine export — brand, store, category and SKU item-level
+  metrics plus weekly ODR) and <code>main.ng_delivery.dim_basket_item_delivery</code> ×
+  <code>dim_provider_v2</code> for the country benchmark and the full top-15.</p>
+  <p><b>Limitations.</b> The Looker dashboard is filtered by <code>Item Adjustment Rate &gt; 0</code>, so
+  zero-defect partners are absent from it. The "top-5 partner average ODR" is a simple average, not
+  volume-weighted, so it is sensitive to small partners. The last week shows a simultaneous spike across all
+  three defect types — treat it with caution until confirmed.</p>
+</details>
+</section>
+
+<footer>
+  Bolt Food UA · Stores Defect Rate / ODR · data as of 10 August 2026 (12 completed weeks).<br>
+  Sources: Looker dashboard 32227 · Databricks <code>ng_delivery.dim_basket_item_delivery</code> × <code>dim_provider_v2</code>.
+</footer>
+
+</main>
+
+<aside class="sidenav">
+  <div class="navcard">
+    <span class="brand">Defect Rate / ODR · UA</span>
+    <a class="navlink" href="#summary"><span class="num">1</span>Key findings</a>
+    <a class="navlink" href="#components"><span class="num">2</span>ODR components</a>
+    <a class="navlink" href="#trend"><span class="num">3</span>Weekly trend</a>
+    <a class="navlink" href="#partners"><span class="num">4</span>Top partners</a>
+    <a class="navlink" href="#actions"><span class="num">5</span>Problems &amp; actions</a>
+    <a class="navlink" href="#drill"><span class="num">6</span>Stores &amp; SKUs</a>
+    <a class="navlink" href="#bench"><span class="num">7</span>Country benchmark</a>
+    <a class="navlink" href="#plan"><span class="num">8</span>Action plan</a>
+    <a class="navlink" href="#glossary"><span class="num">9</span>Glossary</a>
+  </div>
+  <div class="langbox">
+    <div class="lbl">Language</div>
+    <div class="opts">
+      <a href="../">UA</a>
+      <a class="on" href="./">EN</a>
+    </div>
+  </div>
+</aside>
+
+</div>
+
+<script>
+const WEEKS = ["25 May","1 Jun","8 Jun","15 Jun","22 Jun","29 Jun","6 Jul","13 Jul","20 Jul","27 Jul","3 Aug","10 Aug"];
+
+const DEFECT_TYPES = {
+  qty:   [1584,1714,1610,1643,1755,2336,2685,2362,2615,2855,3565,5101],
+  weight:[466,525,612,627,629,842,891,882,921,931,1189,2901],
+  price: [267,228,256,244,228,250,174,118,96,105,149,1503]
+};
+
+const MARKET = {
+  odr:  [13.5,14.5,13.3,13.7,14.5,16.7,18.8,16.8,18.5,18.9,19.6,22.8],
+  repl: [17.2,17.4,16.8,18.3,20.0,21.6,23.7,22.0,25.7,21.0,19.0,21.7]
+};
+
+const BRAND_ODR = {
+  "VARUS":       [48.1,47.4,41.2,36.0,44.8,49.0,53.2,50.9,50.4,52.3,52.6,51.5],
+  "KOPIYKA":     [26.2,34.1,36.7,40.1,29.7,37.4,34.9,34.8,32.1,32.5,28.5,39.9],
+  "SANTIM":      [30.7,29.3,29.3,37.6,34.9,40.7,25.3,29.7,32.8,24.2,37.9,38.6],
+  "RUKAVYCHKA":  [24.3,22.7,26.4,21.6,25.0,26.3,29.7,25.3,24.0,28.5,22.0,19.1],
+  "TAISTRA":     [23.8,24.8,23.0,20.2,22.9,27.3,20.7,20.4,18.3,23.6,16.4,15.2],
+  "KOPIYKA MINI":[25.2,19.7,18.4,18.3,20.6,20.5,19.0,14.3,28.2,14.8,18.0,29.4],
+  "CAFE RYNOK":  [10.7,10.9,8.3,12.0,13.9,17.1,13.7,13.1,8.1,13.5,13.0,13.8],
+  "LOKO":        [1.1,1.8,1.5,3.7,6.3,7.1,6.3,8.4,6.3,6.3,7.9,6.8],
+  "HOP HEY":     [3.9,4.7,4.9,4.6,5.5,6.3,6.3,4.0,6.1,4.6,6.3,4.3]
+};
+
+const BRAND_COLORS = {
+  "VARUS":"#d1493f","KOPIYKA":"#d98324","SANTIM":"#b45309","RUKAVYCHKA":"#7c3aed",
+  "TAISTRA":"#15a34a","KOPIYKA MINI":"#e879a0","CAFE RYNOK":"#0e7faa","LOKO":"#2563eb","HOP HEY":"#64748b"
+};
+
+// Looker export: item-level metrics + weekly ODR (14 active brands, GROCERY TEST excluded)
+const PARTNERS = [
+  {b:"VARUS",items:274376,avg:48.1,last:51.5,d:3.4,qty:13.2,repl:23.0,wt:1.0,orepl:35.3,st:"crit",
+   problem:"Sets the market ODR: 46% of item volume, ODR 48–52% across all 12 weeks. Quantity 13.2% plus order replacement 35.3%. Bags inflate quantity, beverages drive out-of-stock and substitutions. The worst stores exceed 45% on qty + repl combined.",
+   action:"1) Remove bags from quantity defect. 2) Deep-dive the 5 worst stores. 3) Daily OOS sync on Coca-Cola / Pepsi / water. 4) Target ODR &lt;35% within 8 weeks."},
+  {b:"LOKO",items:106902,avg:5.3,last:6.8,d:5.7,qty:0.7,repl:0.0,wt:0.3,orepl:0.0,st:"good",
+   problem:"Best large partner: ODR around 5%, no replacements. However ODR climbed from 1.1% to 6.8%, so it needs monitoring to keep it as a benchmark.",
+   action:"Document the availability and picker-flow processes as a grocery playbook. Keep ODR below 7%."},
+  {b:"HOP HEY",items:77157,avg:5.1,last:4.3,d:0.4,qty:0.9,repl:15.8,wt:0.2,orepl:24.2,st:"watch",
+   problem:"ODR is low and stable (4–6%), but item replacement is 15.8% and order replacement 24.2% — customers frequently get a substitute without a formal defect.",
+   action:"Leave ODR alone. Review the catalog and substitution rules: is this genuine out-of-stock or a menu artefact?"},
+  {b:"KOPIYKA",items:34498,avg:33.9,last:39.9,d:13.7,qty:7.8,repl:17.3,wt:0.9,orepl:27.2,st:"crit",
+   problem:"Worst trajectory among the large partners: +13.7 pp over 12 weeks, 39.9% in the latest week. Quantity 7.8% combined with a high 27.2% replacement rate.",
+   action:"Weekly ops review with the AM. Root-cause the out-of-stock issues in beverages and snacks. Target: back below 28% (May level)."},
+  {b:"TAISTRA",items:27818,avg:21.4,last:15.2,d:-8.6,qty:4.5,repl:19.7,wt:0.1,orepl:27.1,st:"watch",
+   problem:"Best improvement on the platform: −8.6 pp (23.8% → 15.2%). Order replacement is still 27.1% though.",
+   action:"Lock in the progress and write up the case as a reference. Next step: reduce replacement via substitution rules."},
+  {b:"CAFE RYNOK",items:23641,avg:12.3,last:13.8,d:3.1,qty:3.8,repl:70.7,wt:0.0,orepl:73.5,st:"watch",
+   problem:"Moderate ODR (12–14%), but item replacement is 70.7% and order replacement 73.5% — nearly every adjustment turns into a substitution. The Sushi rolls and Combo meals categories show 100% replacement.",
+   action:"Catalog audit: confirm whether replacements are real or a menu / modifier artefact. This affects experience more than ODR does."},
+  {b:"RUKAVYCHKA",items:15752,avg:24.6,last:19.1,d:-5.2,qty:5.0,repl:13.7,wt:0.6,orepl:16.7,st:"watch",
+   problem:"Improved by 5.2 pp to 19.1%, but quantity at 5.0% is still above LOKO and HOP HEY.",
+   action:"Keep up the availability discipline. Compare processes with TAISTRA — a similar positive trajectory."},
+  {b:"SANTIM",items:10151,avg:32.6,last:38.6,d:7.9,qty:6.8,repl:13.9,wt:1.0,orepl:22.7,st:"crit",
+   problem:"Degrading by 7.9 pp, 38.6% in the latest week. Quantity 6.8% and weight 1.0% — a mix of out-of-stock and weighing problems.",
+   action:"Joint review with KOPIYKA (similar region and format). Weighted-item accuracy plus out-of-stock control."},
+  {b:"KOPIYKA MINI",items:9950,avg:20.5,last:29.4,d:4.2,qty:4.9,repl:19.9,wt:0.2,orepl:28.2,st:"high",
+   problem:"Highly volatile ODR: 14.3% → 29.4% within a month. Replacement 28.2%.",
+   action:"Stabilise availability in the mini format; do not let it drift up to KOPIYKA's level."},
+  {b:"RODYNNA KOVBASKA",items:2184,avg:45.1,last:44.9,d:-25.1,qty:19.5,repl:14.1,wt:5.9,orepl:27.9,st:"crit",
+   problem:"Worst item-level metrics on the platform: quantity 19.5%, weight 5.9%. ODR around 45% and very volatile (was 75%). Small volume, but the signal is systemic.",
+   action:"Priority is weighted SKUs: scale calibration, unit conversion, portion descriptions. Do not scale while ODR stays above 30%."},
+  {b:"ANRI-PHARM",items:3826,avg:6.0,last:2.0,d:-1.6,qty:3.4,repl:0.0,wt:0.0,orepl:0.0,st:"good",
+   problem:"Pharmacy format: ODR 2–6%, no replacements. Quantity 3.4% reflects isolated out-of-stock cases.",
+   action:"Hold the current level; no dedicated actions needed."},
+  {b:"BRSM",items:2260,avg:6.6,last:11.6,d:5.3,qty:1.8,repl:17.4,wt:0.0,orepl:5.0,st:"good",
+   problem:"Small volume, ODR rose to 11.6% in the latest week. Only 6 weeks of data available.",
+   action:"Monitor. If ODR stays consistently above 10%, run an availability check on the fuel-station format."},
+  {b:"NO TABOO",items:968,avg:10.6,last:9.3,d:-24.0,qty:5.1,repl:12.5,wt:0.0,orepl:9.7,st:"good",
+   problem:"Small volume. ODR settled at 9–11% after an early 33% peak.",
+   action:"Low priority; maintain the current level."},
+  {b:"O'NDE",items:446,avg:44.0,last:30.0,d:-38.8,qty:11.0,repl:4.8,wt:0.0,orepl:8.3,st:"high",
+   problem:"Very small volume and only 3 weeks of data. Quantity 11%, ODR started at 68.8%.",
+   action:"Do not scale without a stable ODR below 20% for 4 consecutive weeks."}
+];
+
+const ST_LABEL = {crit:"Critical",high:"High",watch:"Watch / improving",good:"Good"};
+const ST_ROW   = {crit:"crit",high:"high",watch:"",good:"good"};
+
+// Databricks: top-15 UA Stores by volume, single ODR definition
+const DBX15 = [
+  ["VARUS",26289,51.0,49.1,5.8,0.0,74.4],
+  ["LOKO",13293,5.5,3.9,1.8,0.0,0.0],
+  ["HOP HEY",9715,5.1,4.3,0.9,0.0,4.0],
+  ["BEER MARKET",7482,0.0,0.0,0.0,0.0,0.0],
+  ["CAFE RYNOK",4244,12.6,12.6,0.0,0.0,9.3],
+  ["KOPIYKA",3939,35.5,33.4,5.0,0.0,28.1],
+  ["PYVNA BORODA",3492,0.0,0.0,0.0,0.0,0.0],
+  ["BEERLAND",3199,0.0,0.0,0.0,0.0,0.0],
+  ["REMESLO BREWERY",2924,0.0,0.0,0.0,0.0,0.0],
+  ["LEPRUKON",2653,0.0,0.0,0.0,0.0,0.0],
+  ["TAISTRA",2353,22.9,22.3,0.9,0.0,5.9],
+  ["RUKAVYCHKA",2133,25.0,22.8,3.2,0.0,5.2],
+  ["TOCHKA",1623,0.0,0.0,0.0,0.0,0.0],
+  ["ANRI-PHARM",1541,6.6,6.6,0.0,0.0,0.0],
+  ["SPRAGA",1319,0.0,0.0,0.0,0.0,0.0]
+];
+
+const STORES = [
+  ["Budivelnykiv blvd 27a",731,14.1,42.2],
+  ["Slobozhanskyi ave 86",3227,20.6,30.7],
+  ["Soborna st 97A",1794,16.1,33.6],
+  ["Panykakhy st 15",5653,14.9,33.5],
+  ["Kalynova st 9A",8771,15.8,30.9],
+  ["Petra Sahaidachnoho st 7",2545,17.2,28.6],
+  ["Chervonoi Kalyny ave 44A",7617,17.3,27.7],
+  ["Robocha st 67",6992,15.6,27.9]
+];
+
+const CATS = [
+  ["Uncategorised",120638,2.3,14.9,20750],
+  ["Sushi rolls",20312,0.1,100.0,20332],
+  ["Packaging materials",10087,93.3,0.0,9411],
+  ["Soft drinks",11910,18.6,38.3,6777],
+  ["Soups",10149,0.2,52.9,5389],
+  ["Beer",11072,13.3,31.0,4905],
+  ["Mineral water",9043,13.2,38.6,4685],
+  ["Combo meals",4259,0.1,100.0,4263],
+  ["Main dishes",4652,5.1,86.2,4247],
+  ["Pizza",7340,9.7,34.2,3222]
+];
+
+const COUNTRIES = [
+  {rank:1,name:"Romania",orders:246055,odr:35.6,qty:19.6,wt:2.3,price:15.3,repl:8.3,top5:39.4,top5x:49.2,
+   partners:[["BOLT MARKET (1P)",72485,0.3,0.0],["CARREFOUR",63627,58.6,0.0],["KAUFLAND",51493,63.4,33.9],["REWE",32135,28.8,4.4],["AUCHAN",17760,46.1,9.1]]},
+  {rank:2,name:"Estonia",orders:186744,odr:12.7,qty:12.5,wt:0.4,price:0.0,repl:4.4,top5:13.7,top5x:17.0,
+   partners:[["BOLT MARKET (1P)",79185,0.8,0.3],["SELVER",34533,38.0,15.6],["RIMI",32922,29.9,8.1],["ARAXES",25837,0.0,0.0],["ALDAR EESTI",3256,0.0,0.0]]},
+  {rank:3,name:"Lithuania",orders:144673,odr:25.0,qty:24.1,wt:2.1,price:0.0,repl:15.6,top5:20.5,top5x:25.6,
+   partners:[["RIMI",40664,41.9,24.7],["BOLT MARKET (1P)",37637,0.2,0.0],["REWE",36525,44.9,32.9],["GELSVA",13199,15.7,2.4],["UAB ALYNAS",4332,0.0,0.0]]},
+  {rank:4,name:"Ukraine",orders:108406,odr:17.1,qty:16.2,wt:2.1,price:0.0,repl:20.5,top5:18.8,top5x:18.8,
+   partners:[["VARUS",26289,51.0,74.4],["LOKO",13293,5.5,0.0],["HOP HEY",9715,5.1,4.0],["BEER MARKET",7482,0.0,0.0],["KOPIYKA",6319,32.3,25.0]]}
+];
+
+// ---------- table rendering ----------
+const n = v => v.toLocaleString("en-US");
+const p = v => v.toFixed(1) + "%";
+const dpp = v => (v>0?"+":"") + v.toFixed(1) + " pp";
+
+document.querySelector("#tblLooker tbody").innerHTML = PARTNERS.map(x=>`
+  <tr class="${ST_ROW[x.st]}">
+    <td class="axis">${x.b}</td>
+    <td>${n(x.items)}</td>
+    <td><b>${p(x.avg)}</b></td>
+    <td>${p(x.last)}</td>
+    <td class="${x.d>0?'up':'down'}">${dpp(x.d)}</td>
+    <td>${p(x.qty)}</td>
+    <td>${p(x.repl)}</td>
+    <td>${p(x.wt)}</td>
+    <td>${x.orepl===null?'—':p(x.orepl)}</td>
+    <td style="text-align:left"><span class="badge ${x.st}">${ST_LABEL[x.st]}</span></td>
+  </tr>`).join("");
+
+document.querySelector("#tblDbx tbody").innerHTML = DBX15.map(r=>{
+  const cls = r[2]>=30 ? "crit" : r[2]>=20 ? "high" : r[2]<10 ? "good" : "";
+  return `<tr class="${cls}"><td class="axis">${r[0]}</td><td>${n(r[1])}</td><td><b>${p(r[2])}</b></td>
+  <td>${p(r[3])}</td><td>${p(r[4])}</td><td>${p(r[5])}</td><td>${p(r[6])}</td></tr>`;
+}).join("");
+
+document.querySelector("#tblActions tbody").innerHTML = PARTNERS.map(x=>`
+  <tr class="${ST_ROW[x.st]}">
+    <td class="axis">${x.b}<br><span class="badge ${x.st}">${ST_LABEL[x.st]}</span></td>
+    <td>${x.problem}</td>
+    <td>${x.action}</td>
+  </tr>`).join("");
+
+document.querySelector("#tblStores tbody").innerHTML = STORES.map(r=>
+  `<tr><td class="axis">${r[0]}</td><td>${n(r[1])}</td><td>${p(r[2])}</td><td>${p(r[3])}</td></tr>`).join("");
+
+document.querySelector("#tblCats tbody").innerHTML = CATS.map(r=>
+  `<tr><td class="axis">${r[0]}</td><td>${n(r[1])}</td><td>${p(r[2])}</td><td>${p(r[3])}</td><td><b>${n(r[4])}</b></td></tr>`).join("");
+
+document.getElementById("countryCards").innerHTML = COUNTRIES.map(c=>`
+  <div class="card">
+    <h3>#${c.rank} ${c.name} <span class="sm">· market ODR ${p(c.odr)} · ${n(c.orders)} orders</span></h3>
+    <p class="mut" style="font-size:13px;margin:0 0 4px">
+      Quantity ${p(c.qty)} · Weight ${p(c.wt)} · Price ${p(c.price)} · Replacement ${p(c.repl)}<br>
+      Top-5 average ODR: <b>${p(c.top5)}</b> · excluding 1P: <b>${p(c.top5x)}</b>
+    </p>
+    <div class="tablewrap">
+    <table class="matrix">
+      <thead><tr><th>Partner</th><th>Orders</th><th>ODR</th><th>Repl</th></tr></thead>
+      <tbody>${c.partners.map(x=>{
+        const cls = x[2]>=40?"crit":x[2]>=20?"high":x[2]<5?"good":"";
+        return `<tr class="${cls}"><td class="axis">${x[0]}</td><td>${n(x[1])}</td><td><b>${p(x[2])}</b></td><td>${p(x[3])}</td></tr>`;
+      }).join("")}</tbody>
+    </table>
+    </div>
+  </div>`).join("");
+
+// ---------- active section highlighting in the right-hand nav ----------
+(function(){
+  const links = Array.from(document.querySelectorAll("aside.sidenav a.navlink"));
+  const map = new Map(links.map(a=>[a.getAttribute("href").slice(1), a]));
+  const sections = links
+    .map(a=>document.getElementById(a.getAttribute("href").slice(1)))
+    .filter(Boolean);
+  if (!sections.length) return;
+
+  let current = null;
+  const setActive = id => {
+    if (id === current) return;
+    current = id;
+    links.forEach(a=>a.classList.remove("active"));
+    const a = map.get(id);
+    if (a) a.classList.add("active");
+  };
+
+  // the last section whose heading has passed this line counts as active
+  const LINE = 120;
+  const update = () => {
+    const bottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4;
+    if (bottom) return setActive(sections[sections.length-1].id);
+    let active = sections[0].id;
+    for (const s of sections) {
+      if (s.getBoundingClientRect().top <= LINE) active = s.id;
+      else break;
+    }
+    setActive(active);
+  };
+
+  let queued = false;
+  const onScroll = () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(()=>{ queued = false; update(); });
+  };
+  window.addEventListener("scroll", onScroll, {passive:true});
+  window.addEventListener("resize", onScroll);
+  update();
+})();
+
+// ---------- charts ----------
+if (typeof Chart === "undefined") {
+  document.querySelectorAll(".chartbox").forEach(box=>{
+    box.style.height = "auto";
+    box.innerHTML = '<p class="mut" style="font-size:13px;margin:0;padding:14px;background:var(--panel2);'+
+      'border:1px solid var(--line);border-radius:8px">The charting library could not be loaded '+
+      '(cdn.jsdelivr.net is blocked on this network). All figures are available in the tables below.</p>';
+  });
+} else {
+
+Chart.defaults.font.family = '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif';
+Chart.defaults.font.size = 11.5;
+Chart.defaults.color = "#5d6b85";
+
+new Chart(document.getElementById("chTypes"), {
+  type:"bar",
+  data:{labels:WEEKS,datasets:[
+    {label:"Quantity",data:DEFECT_TYPES.qty,backgroundColor:"#d1493f"},
+    {label:"Weight",data:DEFECT_TYPES.weight,backgroundColor:"#d98324"},
+    {label:"Price",data:DEFECT_TYPES.price,backgroundColor:"#0e7faa"}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    scales:{x:{stacked:true,grid:{display:false},title:{display:true,text:"Week"}},
+            y:{stacked:true,grid:{color:"#eef1f7"},title:{display:true,text:"Defective line items, units"}}},
+    plugins:{legend:{position:"bottom"}}}
+});
+
+new Chart(document.getElementById("chMarket"), {
+  type:"line",
+  data:{labels:WEEKS,datasets:[
+    {label:"ODR, %",data:MARKET.odr,borderColor:"#d1493f",backgroundColor:"rgba(209,73,63,.08)",fill:true,tension:.3,borderWidth:2.5,pointRadius:3},
+    {label:"Order replacement, %",data:MARKET.repl,borderColor:"#2563eb",backgroundColor:"transparent",tension:.3,borderWidth:2,borderDash:[5,4],pointRadius:3}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    scales:{x:{grid:{display:false},title:{display:true,text:"Week"}},
+            y:{beginAtZero:true,grid:{color:"#eef1f7"},title:{display:true,text:"% of orders"},ticks:{callback:v=>v+"%"}}},
+    plugins:{legend:{position:"bottom"}}}
+});
+
+new Chart(document.getElementById("chBrands"), {
+  type:"line",
+  data:{labels:WEEKS,datasets:Object.keys(BRAND_ODR).map(k=>({
+    label:k,data:BRAND_ODR[k],borderColor:BRAND_COLORS[k],backgroundColor:"transparent",
+    tension:.3,borderWidth:k==="VARUS"?3:1.8,pointRadius:2.5
+  }))},
+  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:"index",intersect:false},
+    scales:{x:{grid:{display:false},title:{display:true,text:"Week"}},
+            y:{beginAtZero:true,grid:{color:"#eef1f7"},title:{display:true,text:"Order Defect Rate, %"},ticks:{callback:v=>v+"%"}}},
+    plugins:{legend:{position:"bottom"}}}
+});
+
+new Chart(document.getElementById("chCountries"), {
+  type:"bar",
+  data:{labels:COUNTRIES.map(c=>c.name),datasets:[
+    {label:"Market ODR, %",data:COUNTRIES.map(c=>c.odr),backgroundColor:"#2563eb"},
+    {label:"Top-5 partner average ODR, %",data:COUNTRIES.map(c=>c.top5),backgroundColor:"#d98324"},
+    {label:"Same excluding Bolt Market (1P), %",data:COUNTRIES.map(c=>c.top5x),backgroundColor:"#d1493f"}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    scales:{x:{grid:{display:false},title:{display:true,text:"Country (rank by Stores volume)"}},
+            y:{beginAtZero:true,grid:{color:"#eef1f7"},title:{display:true,text:"% of orders"},ticks:{callback:v=>v+"%"}}},
+    plugins:{legend:{position:"bottom"}}}
+});
+
+}
+</script>
+</body>
+</html>

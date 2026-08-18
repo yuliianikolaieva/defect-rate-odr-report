@@ -3,7 +3,8 @@
 Тижневий аналіз якості виконання замовлень у Stores: складові Order Defect Rate, топ партнери,
 проблеми та дії, порівняння України з ТОП-3 країнами Bolt за обсягом Stores.
 
-**Живий звіт:** https://yuliianikolaieva.github.io/defect-rate-odr-report/
+**Живий звіт (UA):** https://yuliianikolaieva.github.io/defect-rate-odr-report/
+**Live report (EN, side navigation):** https://yuliianikolaieva.github.io/defect-rate-odr-report/en/
 
 ## Що всередині
 - Складові ODR: quantity / weight / price + окремо replacement
