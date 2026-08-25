@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stores Defect Rate / ODR — Bolt Food UA · weekly analysis</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="../data.js"></script>
 <style>
   :root{
     --bg:#eef1f7; --panel:#ffffff; --panel2:#f6f8fc; --line:#dfe5ee;
@@ -128,9 +129,9 @@
     Stores countries by volume.
   </p>
   <div class="meta">
-    <span class="pill">Period: 25 May — 10 Aug 2026 (12 completed weeks)</span>
+    <span class="pill" id="pill-period">Period: 12 completed weeks</span>
     <span class="pill">Granularity: weekly</span>
-    <span class="pill">Sources: Looker dashboard 32227 + Databricks</span>
+    <span class="pill">Source: Databricks (weekly refresh)</span>
     <span class="pill">Vertical: store_* (3P + 1P)</span>
   </div>
 </header>
@@ -140,39 +141,26 @@
 <p class="section-desc">Market-level ODR looks moderate, but the trend is negative and the problem sits with a handful of grocery partners.</p>
 
 <div class="grid kpis">
-  <div class="kpi mid"><div class="n">17.1%</div><div class="l">UA Stores ODR · 12-week average</div></div>
-  <div class="kpi warn"><div class="n">22.8%</div><div class="l">ODR latest week (10 Aug) · period peak</div></div>
-  <div class="kpi info"><div class="n">20.5%</div><div class="l">Order Replacement Rate · separate metric</div></div>
-  <div class="kpi warn"><div class="n">66.5%</div><div class="l">Quantity share of all item defects</div></div>
+  <div class="kpi mid"><div class="n" id="kpi-odr">—</div><div class="l">UA Stores ODR · 12-week average</div></div>
+  <div class="kpi warn"><div class="n" id="kpi-last">—</div><div class="l" id="kpi-last-label">ODR latest week</div></div>
+  <div class="kpi info"><div class="n" id="kpi-repl">—</div><div class="l">Order Replacement Rate · separate metric</div></div>
+  <div class="kpi warn"><div class="n" id="kpi-qty-share">—</div><div class="l">Quantity share of all item defects</div></div>
 </div>
-
 <div class="callout">
-  <h3>1. The trend is worsening, and it is not one partner's seasonality</h3>
-  <p>Market ODR grew from <b>13.5%</b> (25 May) to <b>22.8%</b> (10 Aug) — that is +9.3 pp over 12 weeks.
-  The rise started in late June and moves in step with order volume growth (7.4k → 12.4k per week),
-  meaning operational processes are not scaling with demand.</p>
+  <h3 id="f1h"></h3>
+  <p id="f1p"></p>
 </div>
-
 <div class="callout">
-  <h3>2. The problem is grocery, not Stores as a whole</h3>
-  <p><b>VARUS</b> (46% of all item volume) holds ODR at <b>48–52%</b> and single-handedly sets the market level.
-  <b>KOPIYKA</b> (+13.7 pp over the period) and <b>SANTIM</b> (+7.9 pp) are degrading. Meanwhile <b>LOKO</b> and
-  <b>HOP HEY</b> stay below 7%, and the alcohol chains (BEER MARKET, PYVNA BORODA, BEERLAND, REMESLO,
-  TOCHKA, SPRAGA) sit at <b>0%</b>. So the platform and the processes do allow defect-free operation.</p>
+  <h3 id="f2h"></h3>
+  <p id="f2p"></p>
 </div>
-
 <div class="callout g">
-  <h3>3. Some partners genuinely improved — their processes should be replicated</h3>
-  <p><b>TAISTRA</b> −8.6 pp (23.8% → 15.2%), <b>RUKAVYCHKA</b> −5.2 pp (24.3% → 19.1%). This proves ODR is
-  manageable at partner level without any product changes.</p>
+  <h3 id="f3h"></h3>
+  <p id="f3p"></p>
 </div>
-
 <div class="callout i">
-  <h3>4. Part of the "defects" is an accounting artefact, not customer pain</h3>
-  <p>The <b>Packaging materials</b> category has a 93.3% quantity defect rate: three VARUS bag SKUs generate
-  ~10.3k quantity defects. The <b>Sushi rolls</b> and <b>Combo meals</b> categories show a 100% replacement rate.
-  These cases must be cleaned up before any operational action, otherwise the KPI is not measuring what
-  actually hurts the customer.</p>
+  <h3 id="f4h"></h3>
+  <p id="f4p"></p>
 </div>
 </section>
 
@@ -190,9 +178,9 @@
       Quantity changed with customer impact: the item was removed or reduced (typically out-of-stock).
     </p>
     <ul>
-      <li>66.5% of all item defects in UA</li>
-      <li>UA order-level: 16.2%</li>
-      <li>Worst: VARUS 49.1%, KOPIYKA 33.4%</li>
+      <li id="qty-share-li"></li>
+      <li id="qty-order-li"></li>
+      <li id="qty-worst-li"></li>
     </ul>
   </div>
   <div class="card">
@@ -201,9 +189,9 @@
       Weighted items: actual weight differs from what was ordered, with customer impact.
     </p>
     <ul>
-      <li>25.4% of all item defects</li>
-      <li>UA order-level: 2.1%</li>
-      <li>Worst: RODYNNA KOVBASKA 5.9% (item), VARUS 5.8% (order)</li>
+      <li id="wt-share-li"></li>
+      <li id="wt-order-li"></li>
+      <li id="wt-worst-li"></li>
     </ul>
   </div>
   <div class="card">
@@ -212,9 +200,9 @@
       Item price increased after the order was placed.
     </p>
     <ul>
-      <li>8.1% of item defects, order-level ≈ 0%</li>
-      <li>Last-week spike (1.5k) is worth a data-quality check</li>
-      <li>For contrast: Romania 15.3% (Carrefour)</li>
+      <li id="price-share-li"></li>
+      <li id="price-note-li"></li>
+      <li id="price-ro-li"></li>
     </ul>
   </div>
 </div>
@@ -222,7 +210,7 @@
 <div class="two">
   <div class="chartcard">
     <h3>Item defects by type — weekly volume</h3>
-    <p class="cap">Number of defective line items · source: Looker 32227</p>
+    <p class="cap">Number of defective line items · source: Databricks (weekly refresh)</p>
     <div class="chartbox"><canvas id="chTypes"></canvas></div>
   </div>
   <div class="chartcard">
@@ -241,7 +229,7 @@
 </p>
 <div class="chartcard">
   <h3>Order Defect Rate by brand, % of orders</h3>
-  <p class="cap">12 weeks · source: Looker weekly Order Defect Rate per brand</p>
+  <p class="cap">12 weeks · source: Databricks weekly Order Defect Rate per brand</p>
   <div class="chartbox tall"><canvas id="chBrands"></canvas></div>
 </div>
 </section>
@@ -249,12 +237,11 @@
 <section id="partners">
 <h2 class="section"><span class="bar"></span>Top partners — all metrics</h2>
 <p class="section-desc">
-  Two tables, because the two sources tell different stories. The Looker dashboard is filtered by
-  <code>Item Adjustment Rate &gt; 0</code>, so partners with zero defects never appear in it — the full
-  top-15 from Databricks is below.
+  One Databricks methodology for both tables: item-level metrics (A) and the full top-15 by volume (B),
+  including partners with zero ODR.
 </p>
 
-<h3 style="font-size:15.5px;margin:24px 0 0">A. Partners from the dashboard (item-level metrics + weekly ODR)</h3>
+<h3 style="font-size:15.5px;margin:24px 0 0">A. Key partners (item-level metrics + weekly ODR)</h3>
 <div class="tablewrap">
 <table class="matrix" id="tblLooker">
   <thead><tr>
@@ -353,16 +340,10 @@
 
 <div class="callout i">
   <h3>How to read this</h3>
-  <p>Ukraine (17.1%) looks better than Romania (35.6%) and Lithuania (25.0%), and close to Estonia (12.7%).
-  But two caveats change the conclusion.</p>
-  <p><b>First:</b> in Romania, Estonia and Lithuania the average is diluted by Bolt's own <b>Bolt Market</b> (1P)
-  with 0.2–0.8% ODR and huge volume. Excluding it, the top-5 partner average ODR is: Romania 49.2%,
-  Lithuania 25.6%, Estonia 17.0% versus Ukraine 18.8%. Ukraine has no 1P, so that is the row to compare.</p>
-  <p><b>Second:</b> Ukraine has the <b>highest replacement rate</b> of the four — 20.5% versus 4.4–15.6%.
-  Customers more often receive "something else", and that experience never shows up in ODR.</p>
-  <p><b>Bottom line:</b> VARUS (51.0%) sits alongside the worst European chains — Kaufland RO 63.4%,
-  Carrefour RO 58.6%, REWE LT 44.9%, Rimi LT 41.9%, Selver EE 38.0%. This is a systemic large-grocery
-  problem rather than a uniquely Ukrainian one, so solutions can be borrowed from other markets.</p>
+  <p id="bench-p1"></p>
+  <p id="bench-p2"></p>
+  <p id="bench-p3"></p>
+  <p id="bench-p4"></p>
 </div>
 </section>
 
@@ -374,10 +355,10 @@
   <div class="card">
     <h3>P0 · this week</h3>
     <ul>
-      <li><b>VARUS:</b> remove bags from quantity defect (reclassify the SKUs or exclude from the KPI) — this alone drops ~10.3k "defects"</li>
-      <li><b>VARUS:</b> deep-dive the 5 worst stores (Budivelnykiv 27a, Slobozhanskyi 86, Soborna 97A, Panykakhy 15, Kalynova 9A)</li>
-      <li><b>KOPIYKA + SANTIM:</b> weekly ODR stand-up with the AM — both are degrading</li>
-      <li>Verify the last-week price-defect spike (267 → 1503) for data quality</li>
+      <li><b>VARUS:</b> remove bags from quantity defect (reclassify the SKUs or exclude from the KPI)</li>
+      <li><b>VARUS:</b> deep-dive the worst stores in the table below</li>
+      <li><b>KOPIYKA + SANTIM:</b> weekly ODR stand-up with the AM</li>
+      <li>Treat price/weight volume spikes on the chart as possible data-quality artefacts</li>
     </ul>
   </div>
   <div class="card">
@@ -463,22 +444,22 @@
 
 <details class="gl">
   <summary>Methodology and limitations</summary>
-  <p><b>Period:</b> 12 completed weeks, 25 May — 10 August 2026.</p>
+  <p id="method-period"><b>Period:</b> 12 completed weeks.</p>
   <p><b>Filters:</b> delivered orders, dish items, <code>store_*</code> vertical, country from
   <code>dim_provider_v2.country_code</code>.</p>
-  <p><b>Sources:</b> Looker dashboard 32227 (Ukraine export — brand, store, category and SKU item-level
-  metrics plus weekly ODR) and <code>main.ng_delivery.dim_basket_item_delivery</code> ×
-  <code>dim_provider_v2</code> for the country benchmark and the full top-15.</p>
-  <p><b>Limitations.</b> The Looker dashboard is filtered by <code>Item Adjustment Rate &gt; 0</code>, so
-  zero-defect partners are absent from it. The "top-5 partner average ODR" is a simple average, not
-  volume-weighted, so it is sensitive to small partners. The last week shows a simultaneous spike across all
-  three defect types — treat it with caution until confirmed.</p>
+  <p><b>Source:</b> Databricks <code>main.ng_delivery.dim_basket_item_delivery</code> ×
+  <code>dim_provider_v2</code>. The report refreshes every Monday at 10:30 Kyiv time.</p>
+  <p><b>Limitations.</b> The "top-5 partner average ODR" is a simple average, not volume-weighted.
+  Quantity item-rate uses all dish items with eater impact in the numerator and active items in the
+  denominator (Looker-style). Weight/price volumes on the chart use all matching adjustment flags, so
+  data-quality spikes are visible separately from ODR.</p>
 </details>
 </section>
 
 <footer>
-  Bolt Food UA · Stores Defect Rate / ODR · data as of 10 August 2026 (12 completed weeks).<br>
-  Sources: Looker dashboard 32227 · Databricks <code>ng_delivery.dim_basket_item_delivery</code> × <code>dim_provider_v2</code>.
+  Bolt Food UA · Stores Defect Rate / ODR · <span id="footer-period"></span><br>
+  Source: Databricks <code>ng_delivery.dim_basket_item_delivery</code> × <code>dim_provider_v2</code>.
+  Refresh: every Monday 10:30 Kyiv.
 </footer>
 
 </main>
@@ -508,138 +489,66 @@
 </div>
 
 <script>
-const WEEKS = ["25 May","1 Jun","8 Jun","15 Jun","22 Jun","29 Jun","6 Jul","13 Jul","20 Jul","27 Jul","3 Aug","10 Aug"];
-
-const DEFECT_TYPES = {
-  qty:   [1584,1714,1610,1643,1755,2336,2685,2362,2615,2855,3565,5101],
-  weight:[466,525,612,627,629,842,891,882,921,931,1189,2901],
-  price: [267,228,256,244,228,250,174,118,96,105,149,1503]
-};
-
-const MARKET = {
-  odr:  [13.5,14.5,13.3,13.7,14.5,16.7,18.8,16.8,18.5,18.9,19.6,22.8],
-  repl: [17.2,17.4,16.8,18.3,20.0,21.6,23.7,22.0,25.7,21.0,19.0,21.7]
-};
-
-const BRAND_ODR = {
-  "VARUS":       [48.1,47.4,41.2,36.0,44.8,49.0,53.2,50.9,50.4,52.3,52.6,51.5],
-  "KOPIYKA":     [26.2,34.1,36.7,40.1,29.7,37.4,34.9,34.8,32.1,32.5,28.5,39.9],
-  "SANTIM":      [30.7,29.3,29.3,37.6,34.9,40.7,25.3,29.7,32.8,24.2,37.9,38.6],
-  "RUKAVYCHKA":  [24.3,22.7,26.4,21.6,25.0,26.3,29.7,25.3,24.0,28.5,22.0,19.1],
-  "TAISTRA":     [23.8,24.8,23.0,20.2,22.9,27.3,20.7,20.4,18.3,23.6,16.4,15.2],
-  "KOPIYKA MINI":[25.2,19.7,18.4,18.3,20.6,20.5,19.0,14.3,28.2,14.8,18.0,29.4],
-  "CAFE RYNOK":  [10.7,10.9,8.3,12.0,13.9,17.1,13.7,13.1,8.1,13.5,13.0,13.8],
-  "LOKO":        [1.1,1.8,1.5,3.7,6.3,7.1,6.3,8.4,6.3,6.3,7.9,6.8],
-  "HOP HEY":     [3.9,4.7,4.9,4.6,5.5,6.3,6.3,4.0,6.1,4.6,6.3,4.3]
-};
-
+const LANG = "en";
+const D = window.ODR_DATA;
+if (!D) {
+  document.body.insertAdjacentHTML("afterbegin",
+    '<p style="padding:20px;color:#a5342c">Missing data.js — run generate_report.py</p>');
+}
+const WEEKS = D.weeks_en;
+const DEFECT_TYPES = D.defect_types;
+const MARKET = D.market;
+const BRAND_ODR = D.brand_odr;
 const BRAND_COLORS = {
   "VARUS":"#d1493f","KOPIYKA":"#d98324","SANTIM":"#b45309","RUKAVYCHKA":"#7c3aed",
   "TAISTRA":"#15a34a","KOPIYKA MINI":"#e879a0","CAFE RYNOK":"#0e7faa","LOKO":"#2563eb","HOP HEY":"#64748b"
 };
-
-// Looker export: item-level metrics + weekly ODR (14 active brands, GROCERY TEST excluded)
-const PARTNERS = [
-  {b:"VARUS",items:274376,avg:48.1,last:51.5,d:3.4,qty:13.2,repl:23.0,wt:1.0,orepl:35.3,st:"crit",
-   problem:"Sets the market ODR: 46% of item volume, ODR 48–52% across all 12 weeks. Quantity 13.2% plus order replacement 35.3%. Bags inflate quantity, beverages drive out-of-stock and substitutions. The worst stores exceed 45% on qty + repl combined.",
-   action:"1) Remove bags from quantity defect. 2) Deep-dive the 5 worst stores. 3) Daily OOS sync on Coca-Cola / Pepsi / water. 4) Target ODR &lt;35% within 8 weeks."},
-  {b:"LOKO",items:106902,avg:5.3,last:6.8,d:5.7,qty:0.7,repl:0.0,wt:0.3,orepl:0.0,st:"good",
-   problem:"Best large partner: ODR around 5%, no replacements. However ODR climbed from 1.1% to 6.8%, so it needs monitoring to keep it as a benchmark.",
-   action:"Document the availability and picker-flow processes as a grocery playbook. Keep ODR below 7%."},
-  {b:"HOP HEY",items:77157,avg:5.1,last:4.3,d:0.4,qty:0.9,repl:15.8,wt:0.2,orepl:24.2,st:"watch",
-   problem:"ODR is low and stable (4–6%), but item replacement is 15.8% and order replacement 24.2% — customers frequently get a substitute without a formal defect.",
-   action:"Leave ODR alone. Review the catalog and substitution rules: is this genuine out-of-stock or a menu artefact?"},
-  {b:"KOPIYKA",items:34498,avg:33.9,last:39.9,d:13.7,qty:7.8,repl:17.3,wt:0.9,orepl:27.2,st:"crit",
-   problem:"Worst trajectory among the large partners: +13.7 pp over 12 weeks, 39.9% in the latest week. Quantity 7.8% combined with a high 27.2% replacement rate.",
-   action:"Weekly ops review with the AM. Root-cause the out-of-stock issues in beverages and snacks. Target: back below 28% (May level)."},
-  {b:"TAISTRA",items:27818,avg:21.4,last:15.2,d:-8.6,qty:4.5,repl:19.7,wt:0.1,orepl:27.1,st:"watch",
-   problem:"Best improvement on the platform: −8.6 pp (23.8% → 15.2%). Order replacement is still 27.1% though.",
-   action:"Lock in the progress and write up the case as a reference. Next step: reduce replacement via substitution rules."},
-  {b:"CAFE RYNOK",items:23641,avg:12.3,last:13.8,d:3.1,qty:3.8,repl:70.7,wt:0.0,orepl:73.5,st:"watch",
-   problem:"Moderate ODR (12–14%), but item replacement is 70.7% and order replacement 73.5% — nearly every adjustment turns into a substitution. The Sushi rolls and Combo meals categories show 100% replacement.",
-   action:"Catalog audit: confirm whether replacements are real or a menu / modifier artefact. This affects experience more than ODR does."},
-  {b:"RUKAVYCHKA",items:15752,avg:24.6,last:19.1,d:-5.2,qty:5.0,repl:13.7,wt:0.6,orepl:16.7,st:"watch",
-   problem:"Improved by 5.2 pp to 19.1%, but quantity at 5.0% is still above LOKO and HOP HEY.",
-   action:"Keep up the availability discipline. Compare processes with TAISTRA — a similar positive trajectory."},
-  {b:"SANTIM",items:10151,avg:32.6,last:38.6,d:7.9,qty:6.8,repl:13.9,wt:1.0,orepl:22.7,st:"crit",
-   problem:"Degrading by 7.9 pp, 38.6% in the latest week. Quantity 6.8% and weight 1.0% — a mix of out-of-stock and weighing problems.",
-   action:"Joint review with KOPIYKA (similar region and format). Weighted-item accuracy plus out-of-stock control."},
-  {b:"KOPIYKA MINI",items:9950,avg:20.5,last:29.4,d:4.2,qty:4.9,repl:19.9,wt:0.2,orepl:28.2,st:"high",
-   problem:"Highly volatile ODR: 14.3% → 29.4% within a month. Replacement 28.2%.",
-   action:"Stabilise availability in the mini format; do not let it drift up to KOPIYKA's level."},
-  {b:"RODYNNA KOVBASKA",items:2184,avg:45.1,last:44.9,d:-25.1,qty:19.5,repl:14.1,wt:5.9,orepl:27.9,st:"crit",
-   problem:"Worst item-level metrics on the platform: quantity 19.5%, weight 5.9%. ODR around 45% and very volatile (was 75%). Small volume, but the signal is systemic.",
-   action:"Priority is weighted SKUs: scale calibration, unit conversion, portion descriptions. Do not scale while ODR stays above 30%."},
-  {b:"ANRI-PHARM",items:3826,avg:6.0,last:2.0,d:-1.6,qty:3.4,repl:0.0,wt:0.0,orepl:0.0,st:"good",
-   problem:"Pharmacy format: ODR 2–6%, no replacements. Quantity 3.4% reflects isolated out-of-stock cases.",
-   action:"Hold the current level; no dedicated actions needed."},
-  {b:"BRSM",items:2260,avg:6.6,last:11.6,d:5.3,qty:1.8,repl:17.4,wt:0.0,orepl:5.0,st:"good",
-   problem:"Small volume, ODR rose to 11.6% in the latest week. Only 6 weeks of data available.",
-   action:"Monitor. If ODR stays consistently above 10%, run an availability check on the fuel-station format."},
-  {b:"NO TABOO",items:968,avg:10.6,last:9.3,d:-24.0,qty:5.1,repl:12.5,wt:0.0,orepl:9.7,st:"good",
-   problem:"Small volume. ODR settled at 9–11% after an early 33% peak.",
-   action:"Low priority; maintain the current level."},
-  {b:"O'NDE",items:446,avg:44.0,last:30.0,d:-38.8,qty:11.0,repl:4.8,wt:0.0,orepl:8.3,st:"high",
-   problem:"Very small volume and only 3 weeks of data. Quantity 11%, ODR started at 68.8%.",
-   action:"Do not scale without a stable ODR below 20% for 4 consecutive weeks."}
-];
-
+const PARTNERS = D.partners.map(x => Object.assign({}, x, {problem: x.problem_en, action: x.action_en}));
 const ST_LABEL = {crit:"Critical",high:"High",watch:"Watch / improving",good:"Good"};
 const ST_ROW   = {crit:"crit",high:"high",watch:"",good:"good"};
+const DBX15 = D.dbx15;
+const STORES = D.stores;
+const CATS = D.cats;
+const COUNTRIES = D.countries.map(c => Object.assign({}, c, {name: c.name_en}));
 
-// Databricks: top-15 UA Stores by volume, single ODR definition
-const DBX15 = [
-  ["VARUS",26289,51.0,49.1,5.8,0.0,74.4],
-  ["LOKO",13293,5.5,3.9,1.8,0.0,0.0],
-  ["HOP HEY",9715,5.1,4.3,0.9,0.0,4.0],
-  ["BEER MARKET",7482,0.0,0.0,0.0,0.0,0.0],
-  ["CAFE RYNOK",4244,12.6,12.6,0.0,0.0,9.3],
-  ["KOPIYKA",3939,35.5,33.4,5.0,0.0,28.1],
-  ["PYVNA BORODA",3492,0.0,0.0,0.0,0.0,0.0],
-  ["BEERLAND",3199,0.0,0.0,0.0,0.0,0.0],
-  ["REMESLO BREWERY",2924,0.0,0.0,0.0,0.0,0.0],
-  ["LEPRUKON",2653,0.0,0.0,0.0,0.0,0.0],
-  ["TAISTRA",2353,22.9,22.3,0.9,0.0,5.9],
-  ["RUKAVYCHKA",2133,25.0,22.8,3.2,0.0,5.2],
-  ["TOCHKA",1623,0.0,0.0,0.0,0.0,0.0],
-  ["ANRI-PHARM",1541,6.6,6.6,0.0,0.0,0.0],
-  ["SPRAGA",1319,0.0,0.0,0.0,0.0,0.0]
-];
-
-const STORES = [
-  ["Budivelnykiv blvd 27a",731,14.1,42.2],
-  ["Slobozhanskyi ave 86",3227,20.6,30.7],
-  ["Soborna st 97A",1794,16.1,33.6],
-  ["Panykakhy st 15",5653,14.9,33.5],
-  ["Kalynova st 9A",8771,15.8,30.9],
-  ["Petra Sahaidachnoho st 7",2545,17.2,28.6],
-  ["Chervonoi Kalyny ave 44A",7617,17.3,27.7],
-  ["Robocha st 67",6992,15.6,27.9]
-];
-
-const CATS = [
-  ["Uncategorised",120638,2.3,14.9,20750],
-  ["Sushi rolls",20312,0.1,100.0,20332],
-  ["Packaging materials",10087,93.3,0.0,9411],
-  ["Soft drinks",11910,18.6,38.3,6777],
-  ["Soups",10149,0.2,52.9,5389],
-  ["Beer",11072,13.3,31.0,4905],
-  ["Mineral water",9043,13.2,38.6,4685],
-  ["Combo meals",4259,0.1,100.0,4263],
-  ["Main dishes",4652,5.1,86.2,4247],
-  ["Pizza",7340,9.7,34.2,3222]
-];
-
-const COUNTRIES = [
-  {rank:1,name:"Romania",orders:246055,odr:35.6,qty:19.6,wt:2.3,price:15.3,repl:8.3,top5:39.4,top5x:49.2,
-   partners:[["BOLT MARKET (1P)",72485,0.3,0.0],["CARREFOUR",63627,58.6,0.0],["KAUFLAND",51493,63.4,33.9],["REWE",32135,28.8,4.4],["AUCHAN",17760,46.1,9.1]]},
-  {rank:2,name:"Estonia",orders:186744,odr:12.7,qty:12.5,wt:0.4,price:0.0,repl:4.4,top5:13.7,top5x:17.0,
-   partners:[["BOLT MARKET (1P)",79185,0.8,0.3],["SELVER",34533,38.0,15.6],["RIMI",32922,29.9,8.1],["ARAXES",25837,0.0,0.0],["ALDAR EESTI",3256,0.0,0.0]]},
-  {rank:3,name:"Lithuania",orders:144673,odr:25.0,qty:24.1,wt:2.1,price:0.0,repl:15.6,top5:20.5,top5x:25.6,
-   partners:[["RIMI",40664,41.9,24.7],["BOLT MARKET (1P)",37637,0.2,0.0],["REWE",36525,44.9,32.9],["GELSVA",13199,15.7,2.4],["UAB ALYNAS",4332,0.0,0.0]]},
-  {rank:4,name:"Ukraine",orders:108406,odr:17.1,qty:16.2,wt:2.1,price:0.0,repl:20.5,top5:18.8,top5x:18.8,
-   partners:[["VARUS",26289,51.0,74.4],["LOKO",13293,5.5,0.0],["HOP HEY",9715,5.1,4.0],["BEER MARKET",7482,0.0,0.0],["KOPIYKA",6319,32.3,25.0]]}
-];
+(function applyCopy(){
+  const pct = v => (v==null ? "—" : Number(v).toFixed(1) + "%");
+  document.getElementById("pill-period").textContent = "Period: " + D.period.label_en;
+  document.getElementById("kpi-odr").textContent = pct(D.kpis.odr_avg);
+  document.getElementById("kpi-last").textContent = pct(D.kpis.odr_last);
+  document.getElementById("kpi-last-label").textContent =
+    "ODR latest week (" + D.period.last_week_en + ")" + (D.kpis.last_is_peak ? " · period peak" : "");
+  document.getElementById("kpi-repl").textContent = pct(D.kpis.repl);
+  document.getElementById("kpi-qty-share").textContent = pct(D.kpis.qty_share);
+  D.findings.en.forEach((f,i)=>{
+    document.getElementById("f"+(i+1)+"h").textContent = f.h;
+    document.getElementById("f"+(i+1)+"p").innerHTML = f.p;
+  });
+  document.getElementById("qty-share-li").textContent = D.shares.qty.toFixed(1) + "% of all item defects in UA";
+  document.getElementById("qty-order-li").textContent = "UA order-level: " + pct(D.order_level.ua_qty);
+  document.getElementById("qty-worst-li").textContent =
+    "Worst: VARUS " + pct(D.order_level.varus_qty) + ", KOPIYKA " + pct(D.order_level.kop_qty);
+  document.getElementById("wt-share-li").textContent = D.shares.weight.toFixed(1) + "% of all item defects";
+  document.getElementById("wt-order-li").textContent = "UA order-level: " + pct(D.order_level.ua_wt);
+  document.getElementById("wt-worst-li").textContent =
+    "Worst: " + D.order_level.worst_wt_brand + " " + pct(D.order_level.worst_wt) + " (item)";
+  document.getElementById("price-share-li").textContent = D.shares.price.toFixed(1) + "% of item defects, order-level ≈ " + pct(D.order_level.ua_price);
+  document.getElementById("price-note-li").textContent = "Price-volume spikes on the chart should be checked for data quality";
+  document.getElementById("price-ro-li").textContent = "For contrast: Romania " + pct(D.order_level.ro_price) + " (market price ODR)";
+  document.getElementById("footer-period").textContent = D.period.footer_en;
+  document.getElementById("method-period").innerHTML = "<b>Period:</b> " + D.period.label_en + ".";
+  const by = Object.fromEntries(D.countries.map(c=>[c.code,c]));
+  const ua=by.ua, ro=by.ro, ee=by.ee, lt=by.lt;
+  const varus = D.dbx15.find(x=>x[0]==="VARUS");
+  document.getElementById("bench-p1").innerHTML =
+    `Ukraine (${pct(ua.odr)}) looks better than Romania (${pct(ro.odr)}) and Lithuania (${pct(lt.odr)}), and close to Estonia (${pct(ee.odr)}). Two caveats change the conclusion.`;
+  document.getElementById("bench-p2").innerHTML =
+    `<b>First:</b> in Romania, Estonia and Lithuania the average is diluted by <b>Bolt Market</b> (1P). Excluding it, top-5 partner average ODR is Romania ${pct(ro.top5x)}, Lithuania ${pct(lt.top5x)}, Estonia ${pct(ee.top5x)} versus Ukraine ${pct(ua.top5x)}. Ukraine has no 1P, so that is the row to compare.`;
+  document.getElementById("bench-p3").innerHTML =
+    `<b>Second:</b> Ukraine has the <b>highest replacement rate</b> of the four — ${pct(ua.repl)} versus ${pct(ro.repl)} / ${pct(ee.repl)} / ${pct(lt.repl)}.`;
+  document.getElementById("bench-p4").innerHTML =
+    `<b>Bottom line:</b> VARUS (${pct(varus[2])}) sits alongside large European grocery chains. This is a format problem, not a uniquely Ukrainian one.`;
+})();
 
 // ---------- table rendering ----------
 const n = v => v.toLocaleString("en-US");
