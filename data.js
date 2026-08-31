@@ -1,24 +1,23 @@
 window.ODR_DATA = {
-  "generated": "2026-08-25",
+  "generated": "2026-08-31",
   "period": {
-    "start": "2026-06-01",
-    "end": "2026-08-17",
-    "label_ua": "1 черв — 17 серп 2026 (12 повних тижнів)",
-    "label_en": "1 Jun — 17 Aug 2026 (12 completed weeks)",
-    "footer_ua": "дані станом на 23 серпня 2026 (12 повних тижнів)",
-    "footer_en": "data as of 23 August 2026 (12 completed weeks)",
-    "last_week_ua": "17 серп",
-    "last_week_en": "17 Aug"
+    "start": "2026-06-08",
+    "end": "2026-08-24",
+    "label_ua": "8 черв — 24 серп 2026 (12 повних тижнів)",
+    "label_en": "8 Jun — 24 Aug 2026 (12 completed weeks)",
+    "footer_ua": "дані станом на 30 серпня 2026 (12 повних тижнів)",
+    "footer_en": "data as of 30 August 2026 (12 completed weeks)",
+    "last_week_ua": "24 серп",
+    "last_week_en": "24 Aug"
   },
   "kpis": {
-    "odr_avg": 17.9,
-    "odr_last": 22.5,
-    "repl": 20.8,
-    "qty_share": 62.8,
+    "odr_avg": 18.5,
+    "odr_last": 21.9,
+    "repl": 20.9,
+    "qty_share": 63.9,
     "last_is_peak": false
   },
   "weeks_ua": [
-    "1 черв",
     "8 черв",
     "15 черв",
     "22 черв",
@@ -29,10 +28,10 @@ window.ODR_DATA = {
     "27 лип",
     "3 серп",
     "10 серп",
-    "17 серп"
+    "17 серп",
+    "24 серп"
   ],
   "weeks_en": [
-    "1 Jun",
     "8 Jun",
     "15 Jun",
     "22 Jun",
@@ -43,11 +42,11 @@ window.ODR_DATA = {
     "27 Jul",
     "3 Aug",
     "10 Aug",
-    "17 Aug"
+    "17 Aug",
+    "24 Aug"
   ],
   "defect_types": {
     "qty": [
-      1637,
       1569,
       1618,
       1723,
@@ -58,10 +57,10 @@ window.ODR_DATA = {
       2811,
       3464,
       4984,
-      4270
+      4270,
+      4373
     ],
     "weight": [
-      517,
       606,
       614,
       625,
@@ -72,10 +71,10 @@ window.ODR_DATA = {
       927,
       1168,
       2844,
-      1286
+      1286,
+      1256
     ],
     "price": [
-      356,
       486,
       348,
       337,
@@ -86,31 +85,31 @@ window.ODR_DATA = {
       134,
       197,
       3721,
-      362
+      362,
+      263
     ]
   },
   "shares": {
-    "qty": 62.8,
-    "weight": 23.8,
-    "price": 13.4
+    "qty": 63.9,
+    "weight": 23.7,
+    "price": 12.4
   },
   "order_level": {
-    "qty": 21.6,
-    "qty_avg": 16.6,
-    "weight": 2.1,
+    "qty": 21.2,
+    "qty_avg": 17.2,
+    "weight": 2.0,
     "price": 0.0,
-    "ua_qty": 16.9,
+    "ua_qty": 17.6,
     "ua_wt": 2.1,
     "ua_price": 0,
-    "varus_qty": 50.2,
-    "kop_qty": 30.7,
+    "varus_qty": 51.5,
+    "kop_qty": 30.0,
     "worst_wt_brand": "RODYNNA KOVBASKA",
-    "worst_wt": 5.6,
-    "ro_price": 15.6
+    "worst_wt": 5.0,
+    "ro_price": 16.0
   },
   "market": {
     "odr": [
-      14.5,
       13.3,
       13.7,
       14.5,
@@ -121,10 +120,10 @@ window.ODR_DATA = {
       18.9,
       19.6,
       22.7,
-      22.5
+      22.5,
+      21.9
     ],
     "repl": [
-      17.4,
       16.8,
       18.3,
       20.0,
@@ -135,10 +134,10 @@ window.ODR_DATA = {
       21.0,
       19.0,
       21.5,
-      21.6
+      21.6,
+      20.1
     ],
     "orders": [
-      7891,
       8536,
       8473,
       8428,
@@ -149,12 +148,12 @@ window.ODR_DATA = {
       9187,
       10448,
       12535,
-      10884
+      10884,
+      10788
     ]
   },
   "brand_odr": {
     "VARUS": [
-      48.8,
       43.3,
       38.0,
       46.1,
@@ -165,10 +164,10 @@ window.ODR_DATA = {
       54.2,
       55.4,
       55.6,
-      58.9
+      58.9,
+      61.3
     ],
     "KOPIYKA": [
-      35.2,
       38.3,
       41.3,
       30.9,
@@ -179,10 +178,10 @@ window.ODR_DATA = {
       32.9,
       29.6,
       41.6,
-      36.2
+      36.2,
+      26.2
     ],
     "SANTIM": [
-      29.9,
       30.5,
       38.1,
       34.9,
@@ -193,10 +192,10 @@ window.ODR_DATA = {
       24.5,
       38.2,
       39.2,
-      28.3
+      28.3,
+      34.5
     ],
     "RUKAVYCHKA": [
-      22.9,
       27.5,
       22.4,
       25.5,
@@ -207,10 +206,10 @@ window.ODR_DATA = {
       29.0,
       22.2,
       20.4,
-      21.4
+      21.4,
+      20.0
     ],
     "TAISTRA": [
-      25.7,
       26.5,
       22.9,
       24.3,
@@ -221,10 +220,10 @@ window.ODR_DATA = {
       25.3,
       16.9,
       16.6,
-      20.7
+      20.7,
+      13.0
     ],
     "KOPIYKA MINI": [
-      20.4,
       18.8,
       18.9,
       22.0,
@@ -235,10 +234,10 @@ window.ODR_DATA = {
       15.3,
       19.5,
       29.1,
-      32.4
+      32.4,
+      19.0
     ],
     "CAFE RYNOK": [
-      10.9,
       8.4,
       11.9,
       13.9,
@@ -249,10 +248,10 @@ window.ODR_DATA = {
       13.7,
       13.1,
       13.9,
-      15.0
+      15.0,
+      10.7
     ],
     "LOKO": [
-      1.9,
       1.5,
       3.7,
       6.3,
@@ -263,10 +262,10 @@ window.ODR_DATA = {
       6.1,
       8.0,
       6.6,
-      5.2
+      5.2,
+      5.5
     ],
     "HOP HEY": [
-      4.7,
       4.8,
       4.7,
       5.7,
@@ -277,250 +276,251 @@ window.ODR_DATA = {
       4.6,
       6.2,
       4.4,
-      4.8
+      4.8,
+      4.4
     ]
   },
   "partners": [
     {
       "b": "VARUS",
-      "items": 183811,
-      "avg": 52.0,
-      "last": 58.9,
-      "d": 10.1,
-      "qty": 13.9,
-      "repl": 16.0,
-      "wt": 1.0,
-      "orepl": 72.9,
+      "items": 198819,
+      "avg": 53.2,
+      "last": 61.3,
+      "d": 18.0,
+      "qty": 14.2,
+      "repl": 15.8,
+      "wt": 0.9,
+      "orepl": 71.5,
       "st": "crit",
-      "problem_ua": "Визначає ринковий ODR: найбільший grocery-обсяг, середній ODR 52.0%, останній тиждень 58.9% (+10.1 п.п. за 12 тижнів). Quantity 13.9% + order replacement 72.9%.",
+      "problem_ua": "Визначає ринковий ODR: найбільший grocery-обсяг, середній ODR 53.2%, останній тиждень 61.3% (+18.0 п.п. за 12 тижнів). Quantity 14.2% + order replacement 71.5%.",
       "action_ua": "1) Прибрати пакети з quantity defect. 2) Deep-dive найгірших магазинів. 3) Daily OOS sync по напоях. 4) Ціль ODR <35% за 8 тижнів.",
-      "problem_en": "Sets market ODR: largest grocery volume, average ODR 52.0%, latest week 58.9% (+10.1 pp over 12 weeks). Quantity 13.9% plus order replacement 72.9%.",
+      "problem_en": "Sets market ODR: largest grocery volume, average ODR 53.2%, latest week 61.3% (+18.0 pp over 12 weeks). Quantity 14.2% plus order replacement 71.5%.",
       "action_en": "1) Remove bags from quantity defect. 2) Deep-dive the worst stores. 3) Daily OOS sync on beverages. 4) Target ODR <35% within 8 weeks."
     },
     {
       "b": "LOKO",
-      "items": 75438,
-      "avg": 5.7,
-      "last": 5.2,
-      "d": 3.3,
+      "items": 76241,
+      "avg": 6.0,
+      "last": 5.5,
+      "d": 4.0,
       "qty": 0.9,
       "repl": 0,
       "wt": 0.3,
       "orepl": 0,
       "st": "good",
-      "problem_ua": "Найкращий великий партнер: середній ODR 5.7%, замін немає. Останній тиждень 5.2% (+3.3 п.п.).",
+      "problem_ua": "Найкращий великий партнер: середній ODR 6.0%, замін немає. Останній тиждень 5.5% (+4.0 п.п.).",
       "action_ua": "Зафіксувати процеси наявності як playbook для grocery. Тримати ODR <7%.",
-      "problem_en": "Best large partner: average ODR 5.7%, no replacements. Latest week 5.2% (+3.3 pp).",
+      "problem_en": "Best large partner: average ODR 6.0%, no replacements. Latest week 5.5% (+4.0 pp).",
       "action_en": "Document availability processes as a grocery playbook. Keep ODR below 7%."
     },
     {
       "b": "HOP HEY",
-      "items": 32870,
+      "items": 33137,
       "avg": 5.2,
-      "last": 4.8,
-      "d": 0.1,
+      "last": 4.4,
+      "d": -0.4,
       "qty": 1.4,
-      "repl": 1.8,
+      "repl": 1.7,
       "wt": 0.3,
-      "orepl": 4.0,
+      "orepl": 3.9,
       "st": "good",
-      "problem_ua": "ODR низький і стабільний (сер. 5.2%, ост. 4.8%), але order replacement 4.0%.",
+      "problem_ua": "ODR низький і стабільний (сер. 5.2%, ост. 4.4%), але order replacement 3.9%.",
       "action_ua": "Не чіпати ODR. Перевірити каталог і правила замін.",
-      "problem_en": "ODR is low and stable (avg 5.2%, last 4.8%), but order replacement is 4.0%.",
+      "problem_en": "ODR is low and stable (avg 5.2%, last 4.4%), but order replacement is 3.9%.",
       "action_en": "Leave ODR alone. Review the catalog and substitution rules."
     },
     {
       "b": "KOPIYKA",
-      "items": 24508,
-      "avg": 36.2,
-      "last": 36.2,
-      "d": 1.0,
-      "qty": 8.4,
-      "repl": 6.4,
+      "items": 26146,
+      "avg": 35.0,
+      "last": 26.2,
+      "d": -12.1,
+      "qty": 7.9,
+      "repl": 6.0,
       "wt": 1.1,
-      "orepl": 27.1,
+      "orepl": 26.1,
       "st": "crit",
-      "problem_ua": "Високий grocery ODR: сер. 36.2%, останній тиждень 36.2% (+1.0 п.п.). Quantity 8.4%, order replacement 27.1%.",
+      "problem_ua": "Високий grocery ODR: сер. 35.0%, останній тиждень 26.2% (-12.1 п.п.). Quantity 7.9%, order replacement 26.1%.",
       "action_ua": "Weekly ops review з AM. Root-cause по OOS у напоях і снеках. Ціль <28%.",
-      "problem_en": "High grocery ODR: avg 36.2%, latest week 36.2% (+1.0 pp). Quantity 8.4%, order replacement 27.1%.",
+      "problem_en": "High grocery ODR: avg 35.0%, latest week 26.2% (-12.1 pp). Quantity 7.9%, order replacement 26.1%.",
       "action_en": "Weekly ops review with the AM. Root-cause OOS in beverages and snacks. Target <28%."
     },
     {
       "b": "TAISTRA",
-      "items": 14313,
-      "avg": 22.9,
-      "last": 20.7,
-      "d": -5.0,
-      "qty": 5.0,
-      "repl": 1.1,
+      "items": 13790,
+      "avg": 21.8,
+      "last": 13.0,
+      "d": -13.5,
+      "qty": 4.8,
+      "repl": 1.2,
       "wt": 0.1,
-      "orepl": 6.4,
+      "orepl": 6.8,
       "st": "high",
-      "problem_ua": "Прогрес -5.0 п.п. (перший тиждень → 20.7%). Quantity 5.0%.",
+      "problem_ua": "Прогрес -13.5 п.п. (перший тиждень → 13.0%). Quantity 4.8%.",
       "action_ua": "Закріпити прогрес і розібрати кейс як приклад для grocery.",
-      "problem_en": "Improvement -5.0 pp (first week → 20.7%). Quantity 5.0%.",
+      "problem_en": "Improvement -13.5 pp (first week → 13.0%). Quantity 4.8%.",
       "action_en": "Lock in the progress and use the case as a grocery reference."
     },
     {
       "b": "CAFE RYNOK",
-      "items": 20003,
-      "avg": 13.0,
-      "last": 15.0,
-      "d": 4.1,
+      "items": 20107,
+      "avg": 12.9,
+      "last": 10.7,
+      "d": 2.3,
       "qty": 3.2,
       "repl": 2.2,
       "wt": 0,
       "orepl": 9.4,
       "st": "watch",
-      "problem_ua": "Помірний ODR (сер. 13.0%, ост. 15.0%). Item replacement 2.2%, order replacement 9.4%.",
+      "problem_ua": "Помірний ODR (сер. 12.9%, ост. 10.7%). Item replacement 2.2%, order replacement 9.4%.",
       "action_ua": "Catalog audit: чи replacement реальний, чи артефакт меню.",
-      "problem_en": "Moderate ODR (avg 13.0%, last 15.0%). Item replacement 2.2%, order replacement 9.4%.",
+      "problem_en": "Moderate ODR (avg 12.9%, last 10.7%). Item replacement 2.2%, order replacement 9.4%.",
       "action_en": "Catalog audit: confirm whether replacements are real or a menu artefact."
     },
     {
       "b": "RUKAVYCHKA",
-      "items": 11372,
-      "avg": 24.9,
-      "last": 21.4,
-      "d": -1.5,
+      "items": 10910,
+      "avg": 24.7,
+      "last": 20.0,
+      "d": -7.5,
       "qty": 5.3,
       "repl": 1.1,
       "wt": 0.6,
-      "orepl": 5.2,
+      "orepl": 5.1,
       "st": "high",
-      "problem_ua": "ODR сер. 24.9%, останній тиждень 21.4% (-1.5 п.п.). Quantity 5.3%.",
+      "problem_ua": "ODR сер. 24.7%, останній тиждень 20.0% (-7.5 п.п.). Quantity 5.3%.",
       "action_ua": "Продовжити дисципліну наявності. Порівняти процеси з TAISTRA.",
-      "problem_en": "ODR avg 24.9%, latest week 21.4% (-1.5 pp). Quantity 5.3%.",
+      "problem_en": "ODR avg 24.7%, latest week 20.0% (-7.5 pp). Quantity 5.3%.",
       "action_en": "Keep availability discipline. Compare processes with TAISTRA."
     },
     {
       "b": "SANTIM",
-      "items": 6765,
-      "avg": 33.0,
-      "last": 28.3,
-      "d": -1.6,
-      "qty": 6.5,
+      "items": 6651,
+      "avg": 33.4,
+      "last": 34.5,
+      "d": 4.0,
+      "qty": 6.8,
       "repl": 4.1,
       "wt": 1.1,
-      "orepl": 19.7,
+      "orepl": 19.6,
       "st": "crit",
-      "problem_ua": "Високий ODR: сер. 33.0%, останній тиждень 28.3% (-1.6 п.п.). Quantity 6.5%, weight 1.1%.",
+      "problem_ua": "Високий ODR: сер. 33.4%, останній тиждень 34.5% (+4.0 п.п.). Quantity 6.8%, weight 1.1%.",
       "action_ua": "Спільний review з KOPIYKA. Точність вагових позицій плюс OOS-контроль.",
-      "problem_en": "High ODR: avg 33.0%, latest week 28.3% (-1.6 pp). Quantity 6.5%, weight 1.1%.",
+      "problem_en": "High ODR: avg 33.4%, latest week 34.5% (+4.0 pp). Quantity 6.8%, weight 1.1%.",
       "action_en": "Joint review with KOPIYKA. Weighted-item accuracy plus OOS control."
     },
     {
       "b": "KOPIYKA MINI",
-      "items": 6436,
+      "items": 6233,
       "avg": 22.0,
-      "last": 32.4,
-      "d": 12.0,
+      "last": 19.0,
+      "d": 0.2,
       "qty": 5.5,
-      "repl": 4.1,
+      "repl": 4.0,
       "wt": 0.3,
-      "orepl": 17.3,
+      "orepl": 16.7,
       "st": "high",
-      "problem_ua": "Волатильний mini-формат: сер. 22.0%, останній тиждень 32.4% (+12.0 п.п.).",
+      "problem_ua": "Волатильний mini-формат: сер. 22.0%, останній тиждень 19.0% (+0.2 п.п.).",
       "action_ua": "Стабілізувати наявність у mini-форматі, не дати підтягнутись до KOPIYKA.",
-      "problem_en": "Volatile mini format: avg 22.0%, latest week 32.4% (+12.0 pp).",
+      "problem_en": "Volatile mini format: avg 22.0%, latest week 19.0% (+0.2 pp).",
       "action_en": "Stabilise mini-format availability; do not let it drift to KOPIYKA's level."
     },
     {
       "b": "RODYNNA KOVBASKA",
-      "items": 780,
-      "avg": 53.5,
-      "last": 58.3,
-      "d": 2.7,
-      "qty": 21.9,
-      "repl": 5.1,
-      "wt": 5.6,
-      "orepl": 14.1,
+      "items": 865,
+      "avg": 54.8,
+      "last": 65.4,
+      "d": 10.9,
+      "qty": 22.8,
+      "repl": 4.9,
+      "wt": 5.0,
+      "orepl": 13.5,
       "st": "crit",
-      "problem_ua": "Найгірші item-метрики: quantity 21.9%, weight 5.6%, ODR сер. 53.5%.",
+      "problem_ua": "Найгірші item-метрики: quantity 22.8%, weight 5.0%, ODR сер. 54.8%.",
       "action_ua": "Пріоритет — вагові SKU. Не масштабувати, доки ODR >30%.",
-      "problem_en": "Worst item-level metrics: quantity 21.9%, weight 5.6%, ODR avg 53.5%.",
+      "problem_en": "Worst item-level metrics: quantity 22.8%, weight 5.0%, ODR avg 54.8%.",
       "action_en": "Priority is weighted SKUs. Do not scale while ODR stays above 30%."
     },
     {
       "b": "ANRI-PHARM",
-      "items": 2857,
-      "avg": 6.2,
-      "last": 0.8,
-      "d": -10.2,
-      "qty": 3.9,
+      "items": 2910,
+      "avg": 5.4,
+      "last": 1.4,
+      "d": -18.2,
+      "qty": 3.3,
       "repl": 0,
       "wt": 0,
       "orepl": 0,
       "st": "good",
-      "problem_ua": "Аптечний формат: ODR сер. 6.2%, останній тиждень 0.8%.",
+      "problem_ua": "Аптечний формат: ODR сер. 5.4%, останній тиждень 1.4%.",
       "action_ua": "Тримати поточний рівень, окремих дій не потрібно.",
-      "problem_en": "Pharmacy format: ODR avg 6.2%, latest week 0.8%.",
+      "problem_en": "Pharmacy format: ODR avg 5.4%, latest week 1.4%.",
       "action_en": "Hold the current level; no dedicated actions needed."
     },
     {
       "b": "BRSM",
-      "items": 1188,
-      "avg": 5.7,
-      "last": 6.7,
-      "d": 6.7,
-      "qty": 2.4,
-      "repl": 0.6,
+      "items": 1414,
+      "avg": 6.5,
+      "last": 10.7,
+      "d": 10.7,
+      "qty": 2.7,
+      "repl": 0.7,
       "wt": 0,
-      "orepl": 1.3,
+      "orepl": 1.5,
       "st": "good",
-      "problem_ua": "Малий обсяг, ODR сер. 5.7%, останній тиждень 6.7% (+6.7 п.п.).",
+      "problem_ua": "Малий обсяг, ODR сер. 6.5%, останній тиждень 10.7% (+10.7 п.п.).",
       "action_ua": "Моніторинг. Якщо ODR стабільно >10% — перевірка наявності на АЗС-форматі.",
-      "problem_en": "Small volume, ODR avg 5.7%, latest week 6.7% (+6.7 pp).",
+      "problem_en": "Small volume, ODR avg 6.5%, latest week 10.7% (+10.7 pp).",
       "action_en": "Monitor. If ODR stays above 10%, run an availability check on the fuel-station format."
     },
     {
       "b": "NO TABOO",
-      "items": 603,
-      "avg": 7.8,
-      "last": 0,
-      "d": -11.8,
-      "qty": 5.0,
-      "repl": 0.7,
+      "items": 637,
+      "avg": 7.1,
+      "last": 3.3,
+      "d": 3.3,
+      "qty": 4.6,
+      "repl": 0.8,
       "wt": 0,
-      "orepl": 1.3,
+      "orepl": 1.6,
       "st": "good",
-      "problem_ua": "Малий обсяг. ODR сер. 7.8%, останній тиждень 0.0% (-11.8 п.п.).",
+      "problem_ua": "Малий обсяг. ODR сер. 7.1%, останній тиждень 3.3% (+3.3 п.п.).",
       "action_ua": "Низький пріоритет, підтримувати рівень.",
-      "problem_en": "Small volume. ODR avg 7.8%, latest week 0.0% (-11.8 pp).",
+      "problem_en": "Small volume. ODR avg 7.1%, latest week 3.3% (+3.3 pp).",
       "action_en": "Low priority; maintain the current level."
     }
   ],
   "dbx15": [
     [
       "VARUS",
-      28269,
-      52.0,
-      50.2,
-      5.5,
+      29904,
+      53.2,
+      51.5,
+      5.4,
       0,
-      72.9
+      71.5
     ],
     [
       "LOKO",
-      13593,
-      5.7,
-      4.1,
-      1.7,
+      13640,
+      6.0,
+      4.5,
+      1.6,
       0,
       0
     ],
     [
       "HOP HEY",
-      9840,
+      9955,
       5.2,
-      4.3,
+      4.2,
       1.0,
       0,
-      4.0
+      3.9
     ],
     [
       "BEER MARKET",
-      7307,
+      7197,
       0,
       0,
       0,
@@ -529,25 +529,25 @@ window.ODR_DATA = {
     ],
     [
       "KOPIYKA",
-      6534,
-      32.9,
-      30.7,
-      4.7,
+      6733,
+      32.4,
+      30.0,
+      4.9,
       0,
-      23.9
+      23.3
     ],
     [
       "CAFE RYNOK",
-      4246,
-      13.0,
-      13.0,
+      4264,
+      12.9,
+      12.9,
       0,
       0,
       9.4
     ],
     [
       "PYVNA BORODA",
-      3544,
+      3611,
       0,
       0,
       0,
@@ -556,7 +556,7 @@ window.ODR_DATA = {
     ],
     [
       "BEERLAND K",
-      3299,
+      3321,
       0,
       0,
       0,
@@ -565,7 +565,7 @@ window.ODR_DATA = {
     ],
     [
       "REMESLO BREWERY",
-      2935,
+      2941,
       0,
       0,
       0,
@@ -574,7 +574,7 @@ window.ODR_DATA = {
     ],
     [
       "LEPRUKON",
-      2799,
+      2906,
       0,
       0,
       0,
@@ -583,43 +583,43 @@ window.ODR_DATA = {
     ],
     [
       "TAISTRA",
-      2340,
-      22.9,
-      22.4,
+      2249,
+      21.8,
+      21.3,
       0.7,
       0,
-      6.4
+      6.8
     ],
     [
       "RUKAVYCHKA",
-      2060,
-      24.9,
+      1992,
+      24.7,
       22.8,
-      3.1,
+      3.0,
       0,
-      5.2
+      5.1
     ],
     [
-      "TOCHKA",
-      1621,
-      0,
-      0,
+      "ANRI-PHARM",
+      1605,
+      5.4,
+      5.4,
       0,
       0,
       0
     ],
     [
-      "ANRI-PHARM",
-      1586,
-      6.2,
-      6.2,
+      "TOCHKA",
+      1602,
+      0,
+      0,
       0,
       0,
       0
     ],
     [
       "SPRAGA",
-      1317,
+      1270,
       0,
       0,
       0,
@@ -629,124 +629,124 @@ window.ODR_DATA = {
   ],
   "stores": [
     [
-      "м. Київ, вул. Маршала Малиновського, 12А",
-      3457,
-      20.3,
-      19.2
+      "м. Київ (Софіївська Борщагівка), вул. Лесі Українки 30",
+      508,
+      32.5,
+      22.2
     ],
     [
-      "VARUS, Проспект Червоної Калини 44A",
-      4532,
-      18.8,
-      20.2
+      "м. Київ, вул. Маршала Малиновського, 12А",
+      3777,
+      21.0,
+      19.3
     ],
     [
       "м. Київ, ул.Васильковская,34",
-      7084,
-      18.8,
-      20.0
+      7203,
+      18.6,
+      20.3
+    ],
+    [
+      "VARUS, Проспект Червоної Калини 44A",
+      4893,
+      18.7,
+      19.8
     ],
     [
       "м. Дніпро, ул.Паникахи, 15",
-      3207,
-      15.4,
-      21.8
-    ],
-    [
-      "м. Дніпро, проспект Слобожанський 86",
-      2225,
-      20.2,
-      16.8
-    ],
-    [
-      "м. Одеса, вул.Французький бульвар, 22",
-      1273,
-      22.0,
-      14.4
-    ],
-    [
-      "м. Дніпро, вул Березинская, 23а",
-      2579,
-      16.9,
-      19.0
+      2973,
+      14.9,
+      22.0
     ],
     [
       "м. Запоріжжя, вул.Петра Сагайдачного, 7",
-      1974,
-      17.6,
-      18.1
+      2157,
+      18.1,
+      18.7
+    ],
+    [
+      "м. Дніпро, проспект Слобожанський 86",
+      2618,
+      19.7,
+      16.6
+    ],
+    [
+      "м. Одеса, вул.Французький бульвар, 22",
+      1401,
+      22.2,
+      13.9
     ]
   ],
   "cats": [
     [
       "Grocery Food",
-      368887386,
-      6.5,
-      11.7,
-      67090908
+      389238936,
+      6.7,
+      11.9,
+      72301374
     ],
     [
       "Various, mixed",
-      280996842,
-      9.2,
-      4.9,
-      39621594
+      288020766,
+      9.7,
+      5.0,
+      42448524
     ],
     [
       "Non-Food",
-      41066730,
-      4.6,
-      18.3,
-      9407460
+      42664356,
+      4.8,
+      18.0,
+      9717132
     ],
     [
       "Shashlik",
-      32564826,
-      14.4,
-      8.9,
-      7565850
-    ],
-    [
-      "Cola",
-      24541506,
-      11.4,
-      5.9,
-      4250952
+      33493842,
+      15.0,
+      8.4,
+      7837986
     ],
     [
       "Still water",
-      30957816,
-      9.3,
-      4.4,
-      4250952
+      32775966,
+      9.9,
+      4.9,
+      4879680
+    ],
+    [
+      "Cola",
+      26298660,
+      11.7,
+      6.4,
+      4762380
     ],
     [
       "Chips & Crackers",
-      24677574,
-      9.7,
-      4.4,
-      3481464
+      25397796,
+      10.1,
+      4.8,
+      3786444
     ],
     [
       "Snacks",
-      59112162,
-      2.3,
-      1.3,
-      2132514
-    ],
-    [
-      "Mayonnaise",
-      4006968,
-      10.8,
-      21.1,
-      1278570
+      57221286,
+      2.6,
+      1.4,
+      2252160
     ],
     [
       "Wheat Beer",
-      56287578,
-      1.4,
-      0.8,
-      1233996
+      53158014,
+      1.5,
+      0.9,
+      1257456
+    ],
+    [
+      "Vodka",
+      11859030,
+      6.4,
+      3.9,
+      1231650
     ]
   ],
   "countries": [
@@ -755,44 +755,44 @@ window.ODR_DATA = {
       "code": "ro",
       "name_ua": "Румунія",
       "name_en": "Romania",
-      "orders": 247534,
-      "odr": 36.3,
-      "qty": 19.9,
-      "wt": 2.3,
-      "price": 15.6,
-      "repl": 8.5,
-      "top5": 39.7,
-      "top5x": 49.6,
+      "orders": 247791,
+      "odr": 36.9,
+      "qty": 20.1,
+      "wt": 2.5,
+      "price": 16.0,
+      "repl": 8.6,
+      "top5": 39.9,
+      "top5x": 49.9,
       "partners": [
         [
           "BOLT MARKET (1P)",
-          70765,
-          0.3,
+          69113,
+          0.2,
           0
         ],
         [
           "CARREFOUR",
-          64985,
-          59.0,
+          66249,
+          59.5,
           0
         ],
         [
           "KAUFLAND",
-          52028,
-          63.8,
-          34.0
+          52087,
+          64.3,
+          33.9
         ],
         [
           "REWE",
-          33150,
-          29.2,
-          4.6
+          33715,
+          29.3,
+          4.8
         ],
         [
           "AUCHAN",
-          18028,
+          18099,
           46.4,
-          10.0
+          10.9
         ]
       ]
     },
@@ -801,42 +801,42 @@ window.ODR_DATA = {
       "code": "ee",
       "name_ua": "Естонія",
       "name_en": "Estonia",
-      "orders": 187234,
-      "odr": 12.8,
-      "qty": 12.6,
+      "orders": 185801,
+      "odr": 13.0,
+      "qty": 12.8,
       "wt": 0.4,
       "price": 0,
-      "repl": 4.5,
-      "top5": 13.7,
+      "repl": 4.6,
+      "top5": 13.8,
       "top5x": 17.0,
       "partners": [
         [
           "BOLT MARKET (1P)",
-          78654,
+          77324,
           0.8,
           0.3
         ],
         [
-          "SELVER",
-          34247,
-          38.0,
-          15.7
-        ],
-        [
           "RIMI",
-          34022,
-          29.9,
+          34454,
+          29.7,
           8.1
         ],
         [
+          "SELVER",
+          34289,
+          38.3,
+          15.8
+        ],
+        [
           "ARAXES",
-          26029,
+          25555,
           0,
           0
         ],
         [
           "ALDAR EESTI",
-          3318,
+          3391,
           0,
           0
         ]
@@ -847,42 +847,42 @@ window.ODR_DATA = {
       "code": "lt",
       "name_ua": "Литва",
       "name_en": "Lithuania",
-      "orders": 145862,
+      "orders": 146726,
       "odr": 25.1,
       "qty": 24.2,
       "wt": 2.1,
       "price": 0,
-      "repl": 15.6,
+      "repl": 15.7,
       "top5": 20.5,
       "top5x": 25.6,
       "partners": [
         [
           "RIMI",
-          40768,
-          41.9,
-          24.4
+          40510,
+          41.7,
+          24.2
         ],
         [
           "BOLT MARKET (1P)",
-          37976,
+          38132,
           0.2,
           0
         ],
         [
           "REWE",
-          37126,
-          45.1,
-          33.1
+          37913,
+          45.3,
+          33.3
         ],
         [
           "GELSVA",
-          13535,
-          15.5,
-          2.5
+          13812,
+          15.2,
+          2.6
         ],
         [
           "UAB ALYNAS",
-          4345,
+          4389,
           0,
           0
         ]
@@ -893,44 +893,44 @@ window.ODR_DATA = {
       "code": "ua",
       "name_ua": "Україна",
       "name_en": "Ukraine",
-      "orders": 111941,
-      "odr": 17.9,
-      "qty": 16.9,
+      "orders": 114838,
+      "odr": 18.5,
+      "qty": 17.6,
       "wt": 2.1,
       "price": 0,
-      "repl": 20.8,
-      "top5": 19.2,
-      "top5x": 19.2,
+      "repl": 20.9,
+      "top5": 19.4,
+      "top5x": 19.4,
       "partners": [
         [
           "VARUS",
-          28269,
-          52.0,
-          72.9
+          29904,
+          53.2,
+          71.5
         ],
         [
           "LOKO",
-          13593,
-          5.7,
+          13640,
+          6.0,
           0
         ],
         [
           "HOP HEY",
-          9840,
+          9955,
           5.2,
-          4.0
+          3.9
         ],
         [
           "BEER MARKET",
-          7307,
+          7197,
           0,
           0
         ],
         [
           "KOPIYKA",
-          6534,
-          32.9,
-          23.9
+          6733,
+          32.4,
+          23.3
         ]
       ]
     }
@@ -938,38 +938,38 @@ window.ODR_DATA = {
   "findings": {
     "ua": [
       {
-        "h": "1. Тренд за 12 тижнів негативний, минулий тиждень — стабілізація на піку",
-        "p": "ODR ринку зріс з <b>14.5%</b> (1 черв) до <b>22.5%</b> (17 серп) — це +8.0 п.п. за 12 тижнів. Минулий тиждень: 22.5% проти 22.7% тижнем раніше, обсяг 10.9k замовлень (було 12.5k)."
+        "h": "1. Минулий тиждень трохи кращий, але рівень лишається високим",
+        "p": "ODR ринку зріс з <b>13.3%</b> (8 черв) до <b>21.9%</b> (24 серп) — це +8.6 п.п. за 12 тижнів. Минулий тиждень: 21.9% проти 22.5% тижнем раніше, обсяг 10.8k замовлень (було 10.9k)."
       },
       {
         "h": "2. Проблема = grocery, а не Stores у цілому",
-        "p": "<b>VARUS</b> тримає ODR <b>52.0%</b> (ост. тиждень 58.9%) і сам по собі визначає ринковий рівень. <b>KOPIYKA</b> 36.2% (+1.0 п.п.), <b>SANTIM</b> 28.3% (-1.6 п.п.), <b>KOPIYKA MINI</b> 32.4% (+12.0 п.п.). Алкогольні мережі в ТОП-15 лишаються на <b>0%</b>."
+        "p": "<b>VARUS</b> тримає ODR <b>53.2%</b> (ост. тиждень 61.3%) і сам по собі визначає ринковий рівень. <b>KOPIYKA</b> 26.2% (-12.1 п.п.), <b>SANTIM</b> 34.5% (+4.0 п.п.), <b>KOPIYKA MINI</b> 19.0% (+0.2 п.п.). Алкогольні мережі в ТОП-15 лишаються на <b>0%</b>."
       },
       {
         "h": "3. Є партнери з реальним прогресом — їх процеси треба тиражувати",
-        "p": "<b>TAISTRA</b> -5.0 п.п. (ост. 20.7%), <b>RUKAVYCHKA</b> -1.5 п.п. (ост. 21.4%). ODR керований на рівні партнера без змін у продукті."
+        "p": "<b>TAISTRA</b> -13.5 п.п. (ост. 13.0%), <b>RUKAVYCHKA</b> -7.5 п.п. (ост. 20.0%). ODR керований на рівні партнера без змін у продукті."
       },
       {
         "h": "4. Стрибок price defect 10 серпня виглядає як артефакт, не клієнтський біль",
-        "p": "На тижні 10 серп price-дефектів було 3721 шт., минулого тижня — 362 шт. Quantity лишається головним драйвером (62.8% усіх item defects). Пакети та OOS на напоях треба чистити окремо від KPI."
+        "p": "На тижні 10 серп price-дефектів було 3721 шт., минулого тижня — 263 шт. Quantity лишається головним драйвером (63.9% усіх item defects). Пакети та OOS на напоях треба чистити окремо від KPI."
       }
     ],
     "en": [
       {
-        "h": "1. The 12-week trend is still up; last week stabilised near the peak",
-        "p": "Market ODR grew from <b>14.5%</b> (1 Jun) to <b>22.5%</b> (17 Aug) — +8.0 pp over 12 weeks. Last week: 22.5% vs 22.7% the week before, on 10.9k orders (previously 12.5k)."
+        "h": "1. Last week improved slightly, but the level stays high",
+        "p": "Market ODR grew from <b>13.3%</b> (8 Jun) to <b>21.9%</b> (24 Aug) — +8.6 pp over 12 weeks. Last week: 21.9% vs 22.5% the week before, on 10.8k orders (previously 10.9k)."
       },
       {
         "h": "2. The problem is grocery, not Stores as a whole",
-        "p": "<b>VARUS</b> holds ODR at <b>52.0%</b> (latest week 58.9%) and sets the market level. <b>KOPIYKA</b> 36.2% (+1.0 pp), <b>SANTIM</b> 28.3% (-1.6 pp), <b>KOPIYKA MINI</b> 32.4% (+12.0 pp). Alcohol chains in the top-15 stay at <b>0%</b>."
+        "p": "<b>VARUS</b> holds ODR at <b>53.2%</b> (latest week 61.3%) and sets the market level. <b>KOPIYKA</b> 26.2% (-12.1 pp), <b>SANTIM</b> 34.5% (+4.0 pp), <b>KOPIYKA MINI</b> 19.0% (+0.2 pp). Alcohol chains in the top-15 stay at <b>0%</b>."
       },
       {
         "h": "3. Some partners genuinely improved — their processes should be replicated",
-        "p": "<b>TAISTRA</b> -5.0 pp (latest 20.7%), <b>RUKAVYCHKA</b> -1.5 pp (latest 21.4%). ODR is manageable at partner level without product changes."
+        "p": "<b>TAISTRA</b> -13.5 pp (latest 13.0%), <b>RUKAVYCHKA</b> -7.5 pp (latest 20.0%). ODR is manageable at partner level without product changes."
       },
       {
         "h": "4. The 10 Aug price-defect spike looks like an accounting artefact",
-        "p": "Price defects peaked at 3721 items in the week of 10 Aug and were 362 last week. Quantity remains the main driver (62.8% of item defects). Bags and beverage OOS should be cleaned up separately from the KPI."
+        "p": "Price defects peaked at 3721 items in the week of 10 Aug and were 263 last week. Quantity remains the main driver (63.9% of item defects). Bags and beverage OOS should be cleaned up separately from the KPI."
       }
     ]
   },
