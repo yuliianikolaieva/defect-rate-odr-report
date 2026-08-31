@@ -97,7 +97,7 @@ window.ODR_DATA = {
   "order_level": {
     "qty": 21.2,
     "qty_avg": 17.2,
-    "weight": 2.0,
+    "weight": 2.1,
     "price": 0.0,
     "ua_qty": 17.6,
     "ua_wt": 2.1,
@@ -149,7 +149,7 @@ window.ODR_DATA = {
       10448,
       12535,
       10884,
-      10788
+      10791
     ]
   },
   "brand_odr": {
@@ -299,7 +299,7 @@ window.ODR_DATA = {
     },
     {
       "b": "LOKO",
-      "items": 76241,
+      "items": 76251,
       "avg": 6.0,
       "last": 5.5,
       "d": 4.0,
@@ -315,7 +315,7 @@ window.ODR_DATA = {
     },
     {
       "b": "HOP HEY",
-      "items": 33137,
+      "items": 33140,
       "avg": 5.2,
       "last": 4.4,
       "d": -0.4,
@@ -502,7 +502,7 @@ window.ODR_DATA = {
     ],
     [
       "LOKO",
-      13640,
+      13642,
       6.0,
       4.5,
       1.6,
@@ -511,7 +511,7 @@ window.ODR_DATA = {
     ],
     [
       "HOP HEY",
-      9955,
+      9956,
       5.2,
       4.2,
       1.0,
@@ -680,14 +680,14 @@ window.ODR_DATA = {
   "cats": [
     [
       "Grocery Food",
-      389238936,
+      389253012,
       6.7,
       11.9,
       72301374
     ],
     [
       "Various, mixed",
-      288020766,
+      288027804,
       9.7,
       5.0,
       42448524
@@ -715,7 +715,7 @@ window.ODR_DATA = {
     ],
     [
       "Cola",
-      26298660,
+      26301006,
       11.7,
       6.4,
       4762380
@@ -729,7 +729,7 @@ window.ODR_DATA = {
     ],
     [
       "Snacks",
-      57221286,
+      57223632,
       2.6,
       1.4,
       2252160
@@ -755,7 +755,7 @@ window.ODR_DATA = {
       "code": "ro",
       "name_ua": "Румунія",
       "name_en": "Romania",
-      "orders": 247791,
+      "orders": 247795,
       "odr": 36.9,
       "qty": 20.1,
       "wt": 2.5,
@@ -766,7 +766,7 @@ window.ODR_DATA = {
       "partners": [
         [
           "BOLT MARKET (1P)",
-          69113,
+          69114,
           0.2,
           0
         ],
@@ -801,7 +801,7 @@ window.ODR_DATA = {
       "code": "ee",
       "name_ua": "Естонія",
       "name_en": "Estonia",
-      "orders": 185801,
+      "orders": 185805,
       "odr": 13.0,
       "qty": 12.8,
       "wt": 0.4,
@@ -812,7 +812,7 @@ window.ODR_DATA = {
       "partners": [
         [
           "BOLT MARKET (1P)",
-          77324,
+          77326,
           0.8,
           0.3
         ],
@@ -824,7 +824,7 @@ window.ODR_DATA = {
         ],
         [
           "SELVER",
-          34289,
+          34291,
           38.3,
           15.8
         ],
@@ -847,7 +847,7 @@ window.ODR_DATA = {
       "code": "lt",
       "name_ua": "Литва",
       "name_en": "Lithuania",
-      "orders": 146726,
+      "orders": 146729,
       "odr": 25.1,
       "qty": 24.2,
       "wt": 2.1,
@@ -864,7 +864,7 @@ window.ODR_DATA = {
         ],
         [
           "BOLT MARKET (1P)",
-          38132,
+          38133,
           0.2,
           0
         ],
@@ -893,7 +893,7 @@ window.ODR_DATA = {
       "code": "ua",
       "name_ua": "Україна",
       "name_en": "Ukraine",
-      "orders": 114838,
+      "orders": 114841,
       "odr": 18.5,
       "qty": 17.6,
       "wt": 2.1,
@@ -910,13 +910,13 @@ window.ODR_DATA = {
         ],
         [
           "LOKO",
-          13640,
+          13642,
           6.0,
           0
         ],
         [
           "HOP HEY",
-          9955,
+          9956,
           5.2,
           3.9
         ],
