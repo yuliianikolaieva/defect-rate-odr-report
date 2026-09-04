@@ -498,6 +498,36 @@ def fetch():
       LIMIT 10
     """)
 
+    print("Fetching MWB excl. VARUS (LOKO + RUKAVYCHKA)…")
+    mwb_weeks = run(f"""
+      SELECT CAST(DATE_TRUNC('week', b.order_created_date) AS DATE) AS week,
+        COUNT(DISTINCT b.order_id) AS orders,
+        ROUND(COUNT(DISTINCT CASE WHEN b.has_item_quantity_adjustment_with_eater_impact
+          OR b.has_item_weighted_adjustment_with_eater_impact
+          OR b.has_item_price_adjustment_with_price_increase THEN b.order_id END)
+          * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS odr,
+        ROUND(COUNT(DISTINCT CASE WHEN b.is_item_replacement THEN b.order_id END)
+          * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS repl
+      FROM main.ng_delivery.dim_basket_item_delivery b
+      JOIN main.ng_delivery.dim_provider_v2 p ON b.provider_id = p.provider_id
+      WHERE p.country_code = 'ua' AND {WINDOW}
+        AND {GROUP} IN ('LOKO', 'RUKAVYCHKA')
+      GROUP BY 1 ORDER BY 1
+    """)
+    mwb_tot = run(f"""
+      SELECT COUNT(DISTINCT b.order_id) AS orders,
+        ROUND(COUNT(DISTINCT CASE WHEN b.has_item_quantity_adjustment_with_eater_impact
+          OR b.has_item_weighted_adjustment_with_eater_impact
+          OR b.has_item_price_adjustment_with_price_increase THEN b.order_id END)
+          * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS odr,
+        ROUND(COUNT(DISTINCT CASE WHEN b.is_item_replacement THEN b.order_id END)
+          * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS repl
+      FROM main.ng_delivery.dim_basket_item_delivery b
+      JOIN main.ng_delivery.dim_provider_v2 p ON b.provider_id = p.provider_id
+      WHERE p.country_code = 'ua' AND {WINDOW}
+        AND {GROUP} IN ('LOKO', 'RUKAVYCHKA')
+    """)[0]
+
     print("Fetching period totals…")
     totals = run(f"""
       SELECT COUNT(DISTINCT b.order_id) AS orders,
@@ -516,6 +546,7 @@ def fetch():
         "market": market, "volumes": volumes, "brand_weeks": brand_weeks,
         "partners": partners, "top15": top15, "countries": countries,
         "country_top": country_top, "stores": stores, "cats": cats, "totals": totals,
+        "mwb_weeks": mwb_weeks, "mwb_tot": mwb_tot,
     }
 
 
@@ -620,6 +651,7 @@ def build(raw):
         ])
 
     varus = next((p for p in partners if p["b"] == "VARUS"), None)
+    loko = next((p for p in partners if p["b"] == "LOKO"), None)
     kop = next((p for p in partners if p["b"] == "KOPIYKA"), None)
     santim = next((p for p in partners if p["b"] == "SANTIM"), None)
     taistra = next((p for p in partners if p["b"] == "TAISTRA"), None)
@@ -627,6 +659,7 @@ def build(raw):
     mini = next((p for p in partners if p["b"] == "KOPIYKA MINI"), None)
     varus_dbx = next((x for x in dbx15 if x[0] == "VARUS"), None)
     ua = next(c for c in countries if c["code"] == "ua")
+    mwb_by_week = {as_date(r["week"]): r for r in raw.get("mwb_weeks") or []}
     peak_odr = max(fnum(r["odr"]) or 0 for r in market)
     last_is_peak = abs(last_odr - peak_odr) < 0.05
     price_peak_i = max(range(len(price_vol)), key=lambda i: price_vol[i])
@@ -775,6 +808,22 @@ def build(raw):
         "countries": countries,
         "findings": findings,
         "zero_odr": sum(1 for x in dbx15 if x[2] == 0),
+        "mwb": {
+            "odr_avg": fnum(raw["mwb_tot"]["odr"]),
+            "odr_last": fnum(mwb_by_week[last]["odr"]) if last in mwb_by_week else None,
+            "odr_first": fnum(mwb_by_week[first]["odr"]) if first in mwb_by_week else None,
+            "d": round(
+                (fnum(mwb_by_week[last]["odr"]) or 0) - (fnum(mwb_by_week[first]["odr"]) or 0), 1
+            ) if first in mwb_by_week and last in mwb_by_week else None,
+            "repl": fnum(raw["mwb_tot"]["repl"]),
+            "orders": fint(raw["mwb_tot"]["orders"]),
+            "orders_last": fint(mwb_by_week[last]["orders"]) if last in mwb_by_week else 0,
+            "weekly": [fnum(mwb_by_week[w]["odr"]) if w in mwb_by_week else None for w in weeks],
+            "loko_avg": loko["avg"] if loko else None,
+            "loko_last": loko["last"] if loko else None,
+            "ruk_avg": ruk["avg"] if ruk else None,
+            "ruk_last": ruk["last"] if ruk else None,
+        },
     }
 
 

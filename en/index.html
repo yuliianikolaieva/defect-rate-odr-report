@@ -55,6 +55,7 @@
   .section-desc{color:var(--muted);font-size:14px;margin:0 0 18px}
   .grid{display:grid;gap:16px}
   .kpis{grid-template-columns:repeat(4,1fr);margin-top:22px}
+  .kpis.three{grid-template-columns:repeat(3,1fr)}
   .kpi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 1px 3px rgba(20,40,80,.05)}
   .kpi .n{font-size:23px;font-weight:800}
   .kpi .l{color:var(--muted);font-size:12px;margin-top:2px}
@@ -161,6 +162,25 @@
 <div class="callout i">
   <h3 id="f4h"></h3>
   <p id="f4p"></p>
+</div>
+</section>
+
+<section id="mwb">
+<h2 class="section"><span class="bar"></span>MWB excl. VARUS — LOKO + Rukavychka</h2>
+<p class="section-desc">
+  Volume-weighted Order Defect Rate of the two live MWB chains excluding VARUS. This is not a simple
+  average of the two brands — it is the share of defective orders across LOKO and Rukavychka combined.
+</p>
+<div class="grid kpis three">
+  <div class="kpi good"><div class="n" id="kpi-mwb-avg">—</div><div class="l">MWB excl. VARUS · 12-week average ODR</div></div>
+  <div class="kpi info"><div class="n" id="kpi-mwb-last">—</div><div class="l" id="kpi-mwb-last-label">MWB excl. VARUS · latest week</div></div>
+  <div class="kpi mid"><div class="n" id="kpi-mwb-vs">—</div><div class="l" id="kpi-mwb-vs-label">Gap vs UA market, latest week</div></div>
+</div>
+<p class="section-desc" id="mwb-note" style="margin-top:12px"></p>
+<div class="chartcard">
+  <h3>Weekly ODR: MWB excl. VARUS vs market and brands</h3>
+  <p class="cap">% of orders · LOKO + Rukavychka weighted · source: Databricks</p>
+  <div class="chartbox"><canvas id="chMwb"></canvas></div>
 </div>
 </section>
 
@@ -468,14 +488,15 @@
   <div class="navcard">
     <span class="brand">Defect Rate / ODR · UA</span>
     <a class="navlink" href="#summary"><span class="num">1</span>Key findings</a>
-    <a class="navlink" href="#components"><span class="num">2</span>ODR components</a>
-    <a class="navlink" href="#trend"><span class="num">3</span>Weekly trend</a>
-    <a class="navlink" href="#partners"><span class="num">4</span>Top partners</a>
-    <a class="navlink" href="#actions"><span class="num">5</span>Problems &amp; actions</a>
-    <a class="navlink" href="#drill"><span class="num">6</span>Stores &amp; SKUs</a>
-    <a class="navlink" href="#bench"><span class="num">7</span>Country benchmark</a>
-    <a class="navlink" href="#plan"><span class="num">8</span>Action plan</a>
-    <a class="navlink" href="#glossary"><span class="num">9</span>Glossary</a>
+    <a class="navlink" href="#mwb"><span class="num">2</span>MWB excl. VARUS</a>
+    <a class="navlink" href="#components"><span class="num">3</span>ODR components</a>
+    <a class="navlink" href="#trend"><span class="num">4</span>Weekly trend</a>
+    <a class="navlink" href="#partners"><span class="num">5</span>Top partners</a>
+    <a class="navlink" href="#actions"><span class="num">6</span>Problems &amp; actions</a>
+    <a class="navlink" href="#drill"><span class="num">7</span>Stores &amp; SKUs</a>
+    <a class="navlink" href="#bench"><span class="num">8</span>Country benchmark</a>
+    <a class="navlink" href="#plan"><span class="num">9</span>Action plan</a>
+    <a class="navlink" href="#glossary"><span class="num">10</span>Glossary</a>
   </div>
   <div class="langbox">
     <div class="lbl">Language</div>
@@ -520,6 +541,20 @@ const COUNTRIES = D.countries.map(c => Object.assign({}, c, {name: c.name_en}));
     "ODR latest week (" + D.period.last_week_en + ")" + (D.kpis.last_is_peak ? " · period peak" : "");
   document.getElementById("kpi-repl").textContent = pct(D.kpis.repl);
   document.getElementById("kpi-qty-share").textContent = pct(D.kpis.qty_share);
+  if (D.mwb) {
+    const vs = (D.mwb.odr_last ?? 0) - (D.kpis.odr_last ?? 0);
+    document.getElementById("kpi-mwb-avg").textContent = pct(D.mwb.odr_avg);
+    document.getElementById("kpi-mwb-last").textContent = pct(D.mwb.odr_last);
+    document.getElementById("kpi-mwb-last-label").textContent =
+      "MWB excl. VARUS · latest week (" + D.period.last_week_en + ")";
+    document.getElementById("kpi-mwb-vs").textContent = (vs>0?"+":"") + vs.toFixed(1) + " pp";
+    document.getElementById("kpi-mwb-vs").style.color = vs < 0 ? "var(--good)" : "var(--warn)";
+    document.getElementById("mwb-note").innerHTML =
+      `LOKO last week <b>${pct(D.mwb.loko_last)}</b> (avg ${pct(D.mwb.loko_avg)}), ` +
+      `Rukavychka <b>${pct(D.mwb.ruk_last)}</b> (avg ${pct(D.mwb.ruk_avg)}). ` +
+      `Together ${Number(D.mwb.orders).toLocaleString("en-US")} orders over 12 weeks` +
+      (D.mwb.d==null?"":`, MWB trend ${D.mwb.d>0?"+":""}${D.mwb.d.toFixed(1)} pp`);
+  }
   D.findings.en.forEach((f,i)=>{
     document.getElementById("f"+(i+1)+"h").textContent = f.h;
     document.getElementById("f"+(i+1)+"p").innerHTML = f.p;
@@ -686,6 +721,22 @@ new Chart(document.getElementById("chMarket"), {
             y:{beginAtZero:true,grid:{color:"#eef1f7"},title:{display:true,text:"% of orders"},ticks:{callback:v=>v+"%"}}},
     plugins:{legend:{position:"bottom"}}}
 });
+
+if (D.mwb) {
+new Chart(document.getElementById("chMwb"), {
+  type:"line",
+  data:{labels:WEEKS,datasets:[
+    {label:"MWB excl. VARUS",data:D.mwb.weekly,borderColor:"#0e7faa",backgroundColor:"rgba(14,127,170,.08)",fill:true,tension:.3,borderWidth:3,pointRadius:3.5},
+    {label:"LOKO",data:BRAND_ODR["LOKO"],borderColor:"#2563eb",backgroundColor:"transparent",tension:.3,borderWidth:1.8,pointRadius:2.5},
+    {label:"Rukavychka",data:BRAND_ODR["RUKAVYCHKA"],borderColor:"#7c3aed",backgroundColor:"transparent",tension:.3,borderWidth:1.8,pointRadius:2.5},
+    {label:"UA market",data:MARKET.odr,borderColor:"#d1493f",backgroundColor:"transparent",tension:.3,borderWidth:1.6,borderDash:[5,4],pointRadius:2}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:"index",intersect:false},
+    scales:{x:{grid:{display:false},title:{display:true,text:"Week"}},
+            y:{beginAtZero:true,grid:{color:"#eef1f7"},title:{display:true,text:"Order Defect Rate, %"},ticks:{callback:v=>v+"%"}}},
+    plugins:{legend:{position:"bottom"}}}
+});
+}
 
 new Chart(document.getElementById("chBrands"), {
   type:"line",
