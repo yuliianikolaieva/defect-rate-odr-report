@@ -96,6 +96,14 @@
   .card h3 .sm{font-size:12px;color:var(--muted);font-weight:500}
   .card ul{margin:6px 0 0;padding-left:18px;color:var(--soft);font-size:13.5px}
   .card ul li{margin-bottom:5px}
+  .filters{display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin:0 0 16px}
+  .filter{display:flex;flex-direction:column;gap:5px;min-width:220px}
+  .filter label{font-size:12px;font-weight:700;color:var(--muted)}
+  .filter select{appearance:none;background:var(--panel);border:1px solid var(--line);border-radius:9px;
+    padding:9px 34px 9px 11px;color:var(--text);font:inherit;font-size:13px}
+  .sku-name{min-width:260px;max-width:390px}
+  .sku-code{display:block;color:var(--muted);font-size:11px;font-weight:400;margin-top:2px;word-break:break-all}
+  .metric-note{font-size:12px;color:var(--muted);margin:8px 0 0}
   details.gl{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-top:12px}
   details.gl summary{cursor:pointer;font-weight:700;font-size:14.5px}
   details.gl p{color:var(--soft);font-size:13.5px;margin:10px 0 0}
@@ -302,13 +310,57 @@
 </div>
 </section>
 
-<section id="drill">
-<h2 class="section"><span class="bar"></span>Drill-down: stores, categories, SKUs</h2>
+<section id="partner-drill">
+<h2 class="section"><span class="bar"></span>Where the problem is: partner → category → SKU</h2>
 <p class="section-desc">
-  Where defects are actually created inside VARUS, and which categories contribute the most in absolute terms.
+  Interactive drill-down for the 8 partners with the largest impact. Select a partner and category
+  to identify specific SKUs and the dominant signal.
+</p>
+<div class="filters">
+  <div class="filter">
+    <label for="drillPartner">Partner</label>
+    <select id="drillPartner"></select>
+  </div>
+  <div class="filter">
+    <label for="drillCategory">Category</label>
+    <select id="drillCategory"></select>
+  </div>
+</div>
+<div class="grid kpis" style="margin-top:0">
+  <div class="kpi warn"><div class="n" id="drillOdr">—</div><div class="l">Partner ODR · order-level</div></div>
+  <div class="kpi mid"><div class="n" id="drillQty">—</div><div class="l">Quantity / OOS signal · orders</div></div>
+  <div class="kpi info"><div class="n" id="drillRepl">—</div><div class="l">Replacement · orders, separate from ODR</div></div>
+  <div class="kpi"><div class="n" id="drillAffected">—</div><div class="l">Orders with an ODR defect</div></div>
+</div>
+<div class="card" style="margin-top:16px">
+  <h3>Categories <span class="sm">contribution = share of all partner orders with an ODR defect from this category</span></h3>
+  <div class="tablewrap">
+    <table class="matrix" id="tblDrillCats">
+      <thead><tr><th>Category</th><th>Orders</th><th>ODR contribution</th><th>Qty %</th><th>Repl %</th><th>Weight %</th><th>Price %</th><th>Signal</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+<div class="card" style="margin-top:16px">
+  <h3>Problem SKUs <span class="sm">up to 30 SKUs with the most affected orders</span></h3>
+  <div class="tablewrap">
+    <table class="matrix" id="tblDrillSkus">
+      <thead><tr><th>SKU / item</th><th>Category</th><th>Items</th><th>Affected orders</th><th>Qty %</th><th>Repl %</th><th>Weight %</th><th>Price %</th><th>Signal</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="metric-note"><b>OOS signal</b> is an analytical proxy, not a confirmed inventory status:
+    quantity adjustment with eater impact and/or replacement. SKU rates use active items as denominator.</p>
+</div>
+</section>
+
+<section id="drill">
+<h2 class="section"><span class="bar"></span>VARUS store drill-down</h2>
+<p class="section-desc">
+  Stores with the highest combined quantity-adjustment and replacement rates.
 </p>
 
-<div class="two">
+<div>
   <div class="card">
     <h3>Worst VARUS stores <span class="sm">by qty + replacement</span></h3>
     <div class="tablewrap">
@@ -318,27 +370,6 @@
     </table>
     </div>
   </div>
-  <div class="card">
-    <h3>Highest-contribution categories <span class="sm">absolute number of defects</span></h3>
-    <div class="tablewrap">
-    <table class="matrix" id="tblCats">
-      <thead><tr><th>Category</th><th>Items</th><th>Qty %</th><th>Repl %</th><th>Qty + repl, units</th></tr></thead>
-      <tbody></tbody>
-    </table>
-    </div>
-  </div>
-</div>
-
-<div class="callout i">
-  <h3>Hot SKUs — what to fix first</h3>
-  <p><b>VARUS bags (3 SKUs)</b> — ~10.3k quantity defects, with a 40–80% qty defect rate. This is accounting,
-  not service: exclude from the KPI or reclassify.</p>
-  <p><b>Coca-Cola / Pepsi / water 1.25–1.75 l</b> — the "Soft drinks" category shows 18.6% qty and 38.3%
-  replacement. Classic out-of-stock on high-velocity SKUs: needs a stock buffer and daily availability sync.</p>
-  <p><b>Weighted ready meals</b> (okroshka 45.7%, samsa 63.0%, borscht 38.8%, cucumber 13.3% qty) — a mix of
-  qty and weight defects: scale calibration plus clear units (100 g) in the menu.</p>
-  <p><b>Sushi rolls, Combo meals, Main dishes</b> — 86–100% replacement. This looks like a menu / modifier
-  artefact rather than real substitutions. Needs a catalog audit.</p>
 </div>
 </section>
 
@@ -493,10 +524,11 @@
     <a class="navlink" href="#trend"><span class="num">4</span>Weekly trend</a>
     <a class="navlink" href="#partners"><span class="num">5</span>Top partners</a>
     <a class="navlink" href="#actions"><span class="num">6</span>Problems &amp; actions</a>
-    <a class="navlink" href="#drill"><span class="num">7</span>Stores &amp; SKUs</a>
-    <a class="navlink" href="#bench"><span class="num">8</span>Country benchmark</a>
-    <a class="navlink" href="#plan"><span class="num">9</span>Action plan</a>
-    <a class="navlink" href="#glossary"><span class="num">10</span>Glossary</a>
+    <a class="navlink" href="#partner-drill"><span class="num">7</span>Categories &amp; SKUs</a>
+    <a class="navlink" href="#drill"><span class="num">8</span>VARUS stores</a>
+    <a class="navlink" href="#bench"><span class="num">9</span>Country benchmark</a>
+    <a class="navlink" href="#plan"><span class="num">10</span>Action plan</a>
+    <a class="navlink" href="#glossary"><span class="num">11</span>Glossary</a>
   </div>
   <div class="langbox">
     <div class="lbl">Language</div>
@@ -529,7 +561,7 @@ const ST_LABEL = {crit:"Critical",high:"High",watch:"Watch / improving",good:"Go
 const ST_ROW   = {crit:"crit",high:"high",watch:"",good:"good"};
 const DBX15 = D.dbx15;
 const STORES = D.stores;
-const CATS = D.cats;
+const DRILL = D.partner_drill;
 const COUNTRIES = D.countries.map(c => Object.assign({}, c, {name: c.name_en}));
 
 (function applyCopy(){
@@ -620,8 +652,53 @@ document.querySelector("#tblActions tbody").innerHTML = PARTNERS.map(x=>`
 document.querySelector("#tblStores tbody").innerHTML = STORES.map(r=>
   `<tr><td class="axis">${r[0]}</td><td>${n(r[1])}</td><td>${p(r[2])}</td><td>${p(r[3])}</td></tr>`).join("");
 
-document.querySelector("#tblCats tbody").innerHTML = CATS.map(r=>
-  `<tr><td class="axis">${r[0]}</td><td>${n(r[1])}</td><td>${p(r[2])}</td><td>${p(r[3])}</td><td><b>${n(r[4])}</b></td></tr>`).join("");
+const esc = value => String(value ?? "").replace(/[&<>"']/g, c =>
+  ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const driver = row => {
+  const metrics = [
+    ["OOS signal", Math.max(row.qty || 0, row.repl || 0)],
+    ["Weight", row.weight || 0],
+    ["Price", row.price || 0]
+  ].sort((a,b)=>b[1]-a[1]);
+  return metrics[0][1] ? metrics[0][0] : "Low";
+};
+const drillPartner = document.getElementById("drillPartner");
+const drillCategory = document.getElementById("drillCategory");
+drillPartner.innerHTML = DRILL.partners.map(x=>`<option value="${esc(x.name)}">${esc(x.name)}</option>`).join("");
+
+function renderDrill(){
+  const partner = drillPartner.value;
+  const summary = DRILL.partners.find(x=>x.name===partner);
+  const cats = DRILL.categories[partner] || [];
+  const selected = drillCategory.value || "all";
+  document.getElementById("drillOdr").textContent = p(summary.odr);
+  document.getElementById("drillQty").textContent = p(summary.qty);
+  document.getElementById("drillRepl").textContent = p(summary.repl);
+  document.getElementById("drillAffected").textContent = n(summary.defect_orders);
+  document.querySelector("#tblDrillCats tbody").innerHTML = cats.map(r=>`
+    <tr class="${r.contribution>=10?'crit':r.contribution>=5?'high':''}">
+      <td class="axis">${esc(r.category)}</td><td>${n(r.orders)}</td><td><b>${p(r.contribution)}</b></td>
+      <td>${p(r.qty)}</td><td>${p(r.repl)}</td><td>${p(r.weight)}</td><td>${p(r.price)}</td>
+      <td><span class="badge ${driver(r)==='OOS signal'?'high':'watch'}">${driver(r)}</span></td>
+    </tr>`).join("");
+  const skus = (DRILL.skus[partner] || []).filter(r=>selected==="all" || r.category===selected);
+  document.querySelector("#tblDrillSkus tbody").innerHTML = skus.map(r=>`
+    <tr class="${r.affected_orders>=20?'crit':r.affected_orders>=10?'high':''}">
+      <td class="axis sku-name">${esc(r.name)}<span class="sku-code">${esc(r.sku)}</span></td>
+      <td>${esc(r.category)}</td><td>${n(r.items)}</td><td><b>${n(r.affected_orders)}</b></td>
+      <td>${p(r.qty)}</td><td>${p(r.repl)}</td><td>${p(r.weight)}</td><td>${p(r.price)}</td>
+      <td><span class="badge ${driver(r)==='OOS signal'?'high':'watch'}">${driver(r)}</span></td>
+    </tr>`).join("") || '<tr><td colspan="9" class="mut" style="text-align:left">No SKUs meet the threshold (≥10 active items and ≥3 signals).</td></tr>';
+}
+function resetDrillCategories(){
+  const partner = drillPartner.value;
+  drillCategory.innerHTML = '<option value="all">All categories</option>' +
+    (DRILL.categories[partner] || []).map(x=>`<option value="${esc(x.category)}">${esc(x.category)}</option>`).join("");
+  renderDrill();
+}
+drillPartner.addEventListener("change", resetDrillCategories);
+drillCategory.addEventListener("change", renderDrill);
+resetDrillCategories();
 
 document.getElementById("countryCards").innerHTML = COUNTRIES.map(c=>`
   <div class="card">

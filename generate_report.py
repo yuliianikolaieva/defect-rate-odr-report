@@ -491,11 +491,143 @@ def fetch():
           + SUM(CASE WHEN b.is_item_replacement THEN 1 ELSE 0 END) AS defects
       FROM main.ng_delivery.dim_basket_item_delivery b
       JOIN main.ng_delivery.dim_provider_v2 p ON b.provider_id = p.provider_id
-      LEFT JOIN main.ng_delivery.etl_delivery_sct_category c ON b.sct_category_id = c.id
+      LEFT JOIN (
+        SELECT id, MAX(name) AS name
+        FROM main.ng_delivery.etl_delivery_sct_category
+        GROUP BY id
+      ) c ON b.sct_category_id = c.id
       WHERE p.country_code = 'ua' AND {WINDOW}
       GROUP BY 1
       ORDER BY defects DESC
       LIMIT 10
+    """)
+
+    print("Fetching partner category drill-down…")
+    drill_categories = run(f"""
+      WITH base AS (
+        SELECT {BRAND} AS partner, COALESCE(c.name, 'Uncategorised') AS category,
+          b.order_id, b.basket_item_state,
+          b.has_item_quantity_adjustment_with_eater_impact AS qty_d,
+          b.has_item_weighted_adjustment_with_eater_impact AS wt_d,
+          b.has_item_price_adjustment_with_price_increase AS price_d,
+          b.is_item_replacement AS repl_d
+        FROM main.ng_delivery.dim_basket_item_delivery b
+        JOIN main.ng_delivery.dim_provider_v2 p ON b.provider_id = p.provider_id
+        LEFT JOIN (
+          SELECT id, MAX(name) AS name
+          FROM main.ng_delivery.etl_delivery_sct_category
+          GROUP BY id
+        ) c ON b.sct_category_id = c.id
+        WHERE p.country_code = 'ua' AND {WINDOW}
+      ), partner_totals AS (
+        SELECT partner, COUNT(DISTINCT order_id) AS partner_orders,
+          COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) AS defect_orders,
+          COUNT(DISTINCT CASE WHEN repl_d THEN order_id END) AS repl_orders,
+          COUNT(DISTINCT CASE WHEN qty_d THEN order_id END) AS qty_orders,
+          ROW_NUMBER() OVER (
+            ORDER BY COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) DESC
+          ) AS partner_rank
+        FROM base
+        GROUP BY partner
+        HAVING COUNT(DISTINCT order_id) >= 200
+          AND (
+            COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) * 100.0
+              / NULLIF(COUNT(DISTINCT order_id), 0) >= 10
+            OR COUNT(DISTINCT CASE WHEN repl_d THEN order_id END) * 100.0
+              / NULLIF(COUNT(DISTINCT order_id), 0) >= 10
+          )
+      ), category_agg AS (
+        SELECT b.partner, b.category, p.partner_orders, p.defect_orders, p.repl_orders, p.qty_orders,
+          COUNT(DISTINCT b.order_id) AS category_orders,
+          SUM(CASE WHEN b.basket_item_state = 'active' THEN 1 ELSE 0 END) AS items,
+          COUNT(DISTINCT CASE WHEN b.qty_d OR b.wt_d OR b.price_d THEN b.order_id END) AS affected_orders,
+          SUM(CASE WHEN b.qty_d THEN 1 ELSE 0 END) AS qty_n,
+          SUM(CASE WHEN b.repl_d THEN 1 ELSE 0 END) AS repl_n,
+          SUM(CASE WHEN b.wt_d THEN 1 ELSE 0 END) AS wt_n,
+          SUM(CASE WHEN b.price_d THEN 1 ELSE 0 END) AS price_n
+        FROM base b
+        JOIN partner_totals p ON b.partner = p.partner AND p.partner_rank <= 8
+        GROUP BY b.partner, b.category, p.partner_orders, p.defect_orders, p.repl_orders, p.qty_orders
+      ), ranked AS (
+        SELECT *,
+          ROW_NUMBER() OVER (PARTITION BY partner ORDER BY affected_orders DESC, repl_n DESC) AS category_rank
+        FROM category_agg
+      )
+      SELECT partner, category, partner_orders, defect_orders, repl_orders, qty_orders,
+        category_orders, items, affected_orders,
+        ROUND(affected_orders * 100.0 / NULLIF(partner_orders, 0), 1) AS contribution,
+        ROUND(qty_n * 100.0 / NULLIF(items, 0), 1) AS qty,
+        ROUND(repl_n * 100.0 / NULLIF(items, 0), 1) AS repl,
+        ROUND(wt_n * 100.0 / NULLIF(items, 0), 1) AS weight,
+        ROUND(price_n * 100.0 / NULLIF(items, 0), 1) AS price
+      FROM ranked
+      WHERE category_rank <= 10
+      ORDER BY defect_orders DESC, partner, category_rank
+    """)
+
+    print("Fetching partner SKU drill-down…")
+    drill_skus = run(f"""
+      WITH base AS (
+        SELECT {BRAND} AS partner, COALESCE(c.name, 'Uncategorised') AS category,
+          COALESCE(NULLIF(TRIM(b.basket_item_name), ''), NULLIF(TRIM(b.basket_item_name_translation), ''),
+            NULLIF(TRIM(b.sku), ''), 'Unknown item') AS item_name,
+          COALESCE(NULLIF(TRIM(b.sku), ''), NULLIF(TRIM(b.product_id), ''),
+            CAST(b.external_menu_item_id AS STRING), 'unknown') AS sku,
+          b.order_id, b.basket_item_state,
+          b.has_item_quantity_adjustment_with_eater_impact AS qty_d,
+          b.has_item_weighted_adjustment_with_eater_impact AS wt_d,
+          b.has_item_price_adjustment_with_price_increase AS price_d,
+          b.is_item_replacement AS repl_d
+        FROM main.ng_delivery.dim_basket_item_delivery b
+        JOIN main.ng_delivery.dim_provider_v2 p ON b.provider_id = p.provider_id
+        LEFT JOIN (
+          SELECT id, MAX(name) AS name
+          FROM main.ng_delivery.etl_delivery_sct_category
+          GROUP BY id
+        ) c ON b.sct_category_id = c.id
+        WHERE p.country_code = 'ua' AND {WINDOW}
+      ), problem_partners AS (
+        SELECT partner
+        FROM base
+        GROUP BY partner
+        HAVING COUNT(DISTINCT order_id) >= 200
+          AND (
+            COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) * 100.0
+              / NULLIF(COUNT(DISTINCT order_id), 0) >= 10
+            OR COUNT(DISTINCT CASE WHEN repl_d THEN order_id END) * 100.0
+              / NULLIF(COUNT(DISTINCT order_id), 0) >= 10
+          )
+        ORDER BY COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) DESC
+        LIMIT 8
+      ), sku_agg AS (
+        SELECT b.partner, b.category, b.sku, b.item_name,
+          COUNT(DISTINCT b.order_id) AS orders,
+          SUM(CASE WHEN b.basket_item_state = 'active' THEN 1 ELSE 0 END) AS items,
+          COUNT(DISTINCT CASE WHEN b.qty_d OR b.wt_d OR b.price_d THEN b.order_id END) AS affected_orders,
+          SUM(CASE WHEN b.qty_d THEN 1 ELSE 0 END) AS qty_n,
+          SUM(CASE WHEN b.repl_d THEN 1 ELSE 0 END) AS repl_n,
+          SUM(CASE WHEN b.wt_d THEN 1 ELSE 0 END) AS wt_n,
+          SUM(CASE WHEN b.price_d THEN 1 ELSE 0 END) AS price_n
+        FROM base b
+        JOIN problem_partners p ON b.partner = p.partner
+        GROUP BY b.partner, b.category, b.sku, b.item_name
+      ), ranked AS (
+        SELECT *,
+          ROW_NUMBER() OVER (
+            PARTITION BY partner
+            ORDER BY affected_orders DESC, (qty_n + repl_n + wt_n + price_n) DESC
+          ) AS sku_rank
+        FROM sku_agg
+        WHERE items >= 10 AND (qty_n + repl_n + wt_n + price_n) >= 3
+      )
+      SELECT partner, category, sku, item_name, orders, items, affected_orders,
+        ROUND(qty_n * 100.0 / NULLIF(items, 0), 1) AS qty,
+        ROUND(repl_n * 100.0 / NULLIF(items, 0), 1) AS repl,
+        ROUND(wt_n * 100.0 / NULLIF(items, 0), 1) AS weight,
+        ROUND(price_n * 100.0 / NULLIF(items, 0), 1) AS price
+      FROM ranked
+      WHERE sku_rank <= 30
+      ORDER BY partner, sku_rank
     """)
 
     print("Fetching MWB excl. VARUS (LOKO + RUKAVYCHKA)…")
@@ -546,6 +678,7 @@ def fetch():
         "market": market, "volumes": volumes, "brand_weeks": brand_weeks,
         "partners": partners, "top15": top15, "countries": countries,
         "country_top": country_top, "stores": stores, "cats": cats, "totals": totals,
+        "drill_categories": drill_categories, "drill_skus": drill_skus,
         "mwb_weeks": mwb_weeks, "mwb_tot": mwb_tot,
     }
 
@@ -669,6 +802,47 @@ def build(raw):
     odr_avg = fnum(raw["totals"]["odr"])
     repl_avg = fnum(raw["totals"]["repl"])
     dpp_market = round(last_odr - first_odr, 1)
+
+    drill = {"partners": [], "categories": defaultdict(list), "skus": defaultdict(list)}
+    seen_drill_partners = set()
+    for r in raw.get("drill_categories") or []:
+        partner = r["partner"]
+        if partner not in seen_drill_partners:
+            drill["partners"].append({
+                "name": partner,
+                "orders": fint(r["partner_orders"]),
+                "defect_orders": fint(r["defect_orders"]),
+                "odr": round(fint(r["defect_orders"]) * 100 / max(fint(r["partner_orders"]), 1), 1),
+                "repl_orders": fint(r["repl_orders"]),
+                "repl": round(fint(r["repl_orders"]) * 100 / max(fint(r["partner_orders"]), 1), 1),
+                "qty_orders": fint(r["qty_orders"]),
+                "qty": round(fint(r["qty_orders"]) * 100 / max(fint(r["partner_orders"]), 1), 1),
+            })
+            seen_drill_partners.add(partner)
+        drill["categories"][partner].append({
+            "category": r["category"],
+            "orders": fint(r["category_orders"]),
+            "items": fint(r["items"]),
+            "affected_orders": fint(r["affected_orders"]),
+            "contribution": fnum(r["contribution"]) or 0,
+            "qty": fnum(r["qty"]) or 0,
+            "repl": fnum(r["repl"]) or 0,
+            "weight": fnum(r["weight"]) or 0,
+            "price": fnum(r["price"]) or 0,
+        })
+    for r in raw.get("drill_skus") or []:
+        drill["skus"][r["partner"]].append({
+            "category": r["category"],
+            "sku": r["sku"],
+            "name": r["item_name"],
+            "orders": fint(r["orders"]),
+            "items": fint(r["items"]),
+            "affected_orders": fint(r["affected_orders"]),
+            "qty": fnum(r["qty"]) or 0,
+            "repl": fnum(r["repl"]) or 0,
+            "weight": fnum(r["weight"]) or 0,
+            "price": fnum(r["price"]) or 0,
+        })
 
     def kfmt(n):
         return f"{n / 1000:.1f}k"
@@ -805,6 +979,11 @@ def build(raw):
         "dbx15": dbx15,
         "stores": stores,
         "cats": cats,
+        "partner_drill": {
+            "partners": drill["partners"],
+            "categories": dict(drill["categories"]),
+            "skus": dict(drill["skus"]),
+        },
         "countries": countries,
         "findings": findings,
         "zero_odr": sum(1 for x in dbx15 if x[2] == 0),

@@ -80,6 +80,14 @@
   .card h3 .sm{font-size:12px;color:var(--muted);font-weight:500}
   .card ul{margin:6px 0 0;padding-left:18px;color:var(--soft);font-size:13.5px}
   .card ul li{margin-bottom:5px}
+  .filters{display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin:0 0 16px}
+  .filter{display:flex;flex-direction:column;gap:5px;min-width:220px}
+  .filter label{font-size:12px;font-weight:700;color:var(--muted)}
+  .filter select{appearance:none;background:var(--panel);border:1px solid var(--line);border-radius:9px;
+    padding:9px 34px 9px 11px;color:var(--text);font:inherit;font-size:13px}
+  .sku-name{min-width:260px;max-width:390px}
+  .sku-code{display:block;color:var(--muted);font-size:11px;font-weight:400;margin-top:2px;word-break:break-all}
+  .metric-note{font-size:12px;color:var(--muted);margin:8px 0 0}
   details.gl{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-top:12px}
   details.gl summary{cursor:pointer;font-weight:700;font-size:14.5px}
   details.gl p{color:var(--soft);font-size:13.5px;margin:10px 0 0}
@@ -98,7 +106,8 @@
   <a href="#trend">Тренд</a>
   <a href="#partners">Топ партнери</a>
   <a href="#actions">Проблеми та дії</a>
-  <a href="#drill">Магазини та SKU</a>
+  <a href="#partner-drill">Категорії та SKU</a>
+  <a href="#drill">Магазини</a>
   <a href="#bench">Порівняння країн</a>
   <a href="#plan">План</a>
   <a href="#glossary">Глосарій</a>
@@ -288,13 +297,57 @@
 </div>
 </section>
 
-<section id="drill">
-<h2 class="section"><span class="bar"></span>Деталізація: магазини, категорії, SKU</h2>
+<section id="partner-drill">
+<h2 class="section"><span class="bar"></span>Де саме проблема: партнер → категорія → SKU</h2>
 <p class="section-desc">
-  Де саме народжуються дефекти всередині VARUS та які категорії дають найбільший абсолютний вклад.
+  Інтерактивний drill-down для 8 партнерів із найбільшим впливом. Оберіть партнера й категорію,
+  щоб побачити конкретні SKU та тип сигналу.
+</p>
+<div class="filters">
+  <div class="filter">
+    <label for="drillPartner">Партнер</label>
+    <select id="drillPartner"></select>
+  </div>
+  <div class="filter">
+    <label for="drillCategory">Категорія</label>
+    <select id="drillCategory"></select>
+  </div>
+</div>
+<div class="grid kpis" style="margin-top:0">
+  <div class="kpi warn"><div class="n" id="drillOdr">—</div><div class="l">ODR партнера · order-level</div></div>
+  <div class="kpi mid"><div class="n" id="drillQty">—</div><div class="l">Quantity / OOS-сигнал · orders</div></div>
+  <div class="kpi info"><div class="n" id="drillRepl">—</div><div class="l">Replacement · orders, окремо від ODR</div></div>
+  <div class="kpi"><div class="n" id="drillAffected">—</div><div class="l">Замовлень з ODR-дефектом</div></div>
+</div>
+<div class="card" style="margin-top:16px">
+  <h3>Категорії <span class="sm">внесок = частка всіх замовлень партнера з ODR-дефектом цієї категорії</span></h3>
+  <div class="tablewrap">
+    <table class="matrix" id="tblDrillCats">
+      <thead><tr><th>Категорія</th><th>Orders</th><th>Внесок в ODR</th><th>Qty %</th><th>Repl %</th><th>Weight %</th><th>Price %</th><th>Сигнал</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+<div class="card" style="margin-top:16px">
+  <h3>Проблемні SKU <span class="sm">до 30 SKU з найбільшим числом affected orders</span></h3>
+  <div class="tablewrap">
+    <table class="matrix" id="tblDrillSkus">
+      <thead><tr><th>SKU / товар</th><th>Категорія</th><th>Items</th><th>Affected orders</th><th>Qty %</th><th>Repl %</th><th>Weight %</th><th>Price %</th><th>Сигнал</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="metric-note"><b>OOS-сигнал</b> — аналітичний proxy, а не підтверджений статус запасу:
+    quantity adjustment з eater impact та/або replacement. Відсотки SKU розраховані від active items.</p>
+</div>
+</section>
+
+<section id="drill">
+<h2 class="section"><span class="bar"></span>Деталізація магазинів VARUS</h2>
+<p class="section-desc">
+  Магазини з найвищим сумарним рівнем quantity adjustment та replacement.
 </p>
 
-<div class="two">
+<div>
   <div class="card">
     <h3>Найгірші магазини VARUS <span class="sm">за qty + replacement</span></h3>
     <div class="tablewrap">
@@ -304,27 +357,6 @@
     </table>
     </div>
   </div>
-  <div class="card">
-    <h3>Категорії з найбільшим вкладом <span class="sm">абсолютна кількість дефектів</span></h3>
-    <div class="tablewrap">
-    <table class="matrix" id="tblCats">
-      <thead><tr><th>Категорія</th><th>Items</th><th>Qty %</th><th>Repl %</th><th>Qty + repl, шт.</th></tr></thead>
-      <tbody></tbody>
-    </table>
-    </div>
-  </div>
-</div>
-
-<div class="callout i">
-  <h3>Гарячі SKU — що чинити першим</h3>
-  <p><b>Пакети VARUS (3 SKU)</b> — ~10.3k quantity defects, до 40–80% qty defect rate. Це облік, не сервіс:
-  прибрати з KPI або перекласифікувати.</p>
-  <p><b>Coca-Cola / Pepsi / вода 1.25–1.75 л</b> — категорія «Солодка вода» 18.6% qty + 38.3% replacement.
-  Класичний OOS на high-velocity SKU: потрібен буфер запасу та daily availability sync.</p>
-  <p><b>Вагові готові страви</b> (окрошка 45.7%, самса 63.0%, борщ 38.8%, огірок 13.3% qty) — суміш
-  qty та weight дефектів: калібрування ваг + чіткі одиниці (100 г) в меню.</p>
-  <p><b>Роли, Комбо меню, Основні страви</b> — 86–100% replacement. Схоже на артефакт меню / модифікаторів,
-  а не реальні заміни. Потрібен catalog audit.</p>
 </div>
 </section>
 
@@ -488,7 +520,7 @@ const ST_LABEL = {crit:"Critical",high:"High",watch:"Watch / прогрес",goo
 const ST_ROW   = {crit:"crit",high:"high",watch:"",good:"good"};
 const DBX15 = D.dbx15;
 const STORES = D.stores;
-const CATS = D.cats;
+const DRILL = D.partner_drill;
 const COUNTRIES = D.countries.map(c => Object.assign({}, c, {name: c.name_ua}));
 
 (function applyCopy(){
@@ -579,8 +611,53 @@ document.querySelector("#tblActions tbody").innerHTML = PARTNERS.map(x=>`
 document.querySelector("#tblStores tbody").innerHTML = STORES.map(r=>
   `<tr><td class="axis">${r[0]}</td><td>${n(r[1])}</td><td>${p(r[2])}</td><td>${p(r[3])}</td></tr>`).join("");
 
-document.querySelector("#tblCats tbody").innerHTML = CATS.map(r=>
-  `<tr><td class="axis">${r[0]}</td><td>${n(r[1])}</td><td>${p(r[2])}</td><td>${p(r[3])}</td><td><b>${n(r[4])}</b></td></tr>`).join("");
+const esc = value => String(value ?? "").replace(/[&<>"']/g, c =>
+  ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const driver = row => {
+  const metrics = [
+    ["OOS-сигнал", Math.max(row.qty || 0, row.repl || 0)],
+    ["Weight", row.weight || 0],
+    ["Price", row.price || 0]
+  ].sort((a,b)=>b[1]-a[1]);
+  return metrics[0][1] ? metrics[0][0] : "Низький";
+};
+const drillPartner = document.getElementById("drillPartner");
+const drillCategory = document.getElementById("drillCategory");
+drillPartner.innerHTML = DRILL.partners.map(x=>`<option value="${esc(x.name)}">${esc(x.name)}</option>`).join("");
+
+function renderDrill(){
+  const partner = drillPartner.value;
+  const summary = DRILL.partners.find(x=>x.name===partner);
+  const cats = DRILL.categories[partner] || [];
+  const selected = drillCategory.value || "all";
+  document.getElementById("drillOdr").textContent = p(summary.odr);
+  document.getElementById("drillQty").textContent = p(summary.qty);
+  document.getElementById("drillRepl").textContent = p(summary.repl);
+  document.getElementById("drillAffected").textContent = n(summary.defect_orders);
+  document.querySelector("#tblDrillCats tbody").innerHTML = cats.map(r=>`
+    <tr class="${r.contribution>=10?'crit':r.contribution>=5?'high':''}">
+      <td class="axis">${esc(r.category)}</td><td>${n(r.orders)}</td><td><b>${p(r.contribution)}</b></td>
+      <td>${p(r.qty)}</td><td>${p(r.repl)}</td><td>${p(r.weight)}</td><td>${p(r.price)}</td>
+      <td><span class="badge ${driver(r)==='OOS-сигнал'?'high':'watch'}">${driver(r)}</span></td>
+    </tr>`).join("");
+  const skus = (DRILL.skus[partner] || []).filter(r=>selected==="all" || r.category===selected);
+  document.querySelector("#tblDrillSkus tbody").innerHTML = skus.map(r=>`
+    <tr class="${r.affected_orders>=20?'crit':r.affected_orders>=10?'high':''}">
+      <td class="axis sku-name">${esc(r.name)}<span class="sku-code">${esc(r.sku)}</span></td>
+      <td>${esc(r.category)}</td><td>${n(r.items)}</td><td><b>${n(r.affected_orders)}</b></td>
+      <td>${p(r.qty)}</td><td>${p(r.repl)}</td><td>${p(r.weight)}</td><td>${p(r.price)}</td>
+      <td><span class="badge ${driver(r)==='OOS-сигнал'?'high':'watch'}">${driver(r)}</span></td>
+    </tr>`).join("") || '<tr><td colspan="9" class="mut" style="text-align:left">Немає SKU, що проходять поріг (≥10 active items і ≥3 сигнали).</td></tr>';
+}
+function resetDrillCategories(){
+  const partner = drillPartner.value;
+  drillCategory.innerHTML = '<option value="all">Усі категорії</option>' +
+    (DRILL.categories[partner] || []).map(x=>`<option value="${esc(x.category)}">${esc(x.category)}</option>`).join("");
+  renderDrill();
+}
+drillPartner.addEventListener("change", resetDrillCategories);
+drillCategory.addEventListener("change", renderDrill);
+resetDrillCategories();
 
 document.getElementById("countryCards").innerHTML = COUNTRIES.map(c=>`
   <div class="card">
