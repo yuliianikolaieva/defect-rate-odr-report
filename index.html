@@ -376,6 +376,21 @@
 
 <div class="two" id="countryCards" style="margin-top:16px"></div>
 
+<div class="card" style="margin-top:16px">
+  <h3>UA Order Replacement Rate за сегментами <span class="sm">ENT / MM / SMB · country-level reconciliation</span></h3>
+  <p class="section-desc" style="margin-bottom:8px">
+    Частка delivered Stores-замовлень хоча б з одним replacement. TOTAL є зваженим результатом усіх сегментів,
+    а не показником Enterprise.
+  </p>
+  <div class="tablewrap">
+    <table class="matrix" id="tblSegmentRepl">
+      <thead><tr><th>Сегмент</th><th>Orders</th><th>Частка UA Stores</th><th>Orders з replacement</th><th>Order Replacement Rate</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="metric-note" id="segmentReplNote"></p>
+</div>
+
 <div class="callout i">
   <h3>Як це читати</h3>
   <p id="bench-p1"></p>
@@ -521,6 +536,7 @@ const ST_ROW   = {crit:"crit",high:"high",watch:"",good:"good"};
 const DBX15 = D.dbx15;
 const STORES = D.stores;
 const DRILL = D.partner_drill;
+const SEGMENT_REPL = D.segment_replacement;
 const COUNTRIES = D.countries.map(c => Object.assign({}, c, {name: c.name_ua}));
 
 (function applyCopy(){
@@ -676,6 +692,17 @@ document.getElementById("countryCards").innerHTML = COUNTRIES.map(c=>`
     </table>
     </div>
   </div>`).join("");
+
+const SEGMENT_LABEL_UA = {TOTAL:"Усі UA Stores",ENT:"Enterprise",MM:"Mid-market",SMB:"SMB"};
+document.querySelector("#tblSegmentRepl tbody").innerHTML = SEGMENT_REPL.rows.map((r,i)=>`
+  <tr class="${i===0?'high':''}">
+    <td class="axis">${SEGMENT_LABEL_UA[r.segment]}</td>
+    <td>${n(r.orders)}</td><td>${p(r.share)}</td><td>${n(r.replacement_orders)}</td>
+    <td><b>${r.rate==null?'—':p(r.rate)}</b></td>
+  </tr>`).join("");
+document.getElementById("segmentReplNote").textContent = SEGMENT_REPL.unclassified_orders
+  ? `${n(SEGMENT_REPL.unclassified_orders)} unclassified orders включені в TOTAL, але не показані окремим сегментом.`
+  : "Усі замовлення розподілені між ENT / MM / SMB.";
 
 // ---------- графіки ----------
 if (typeof Chart === "undefined") {

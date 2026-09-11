@@ -437,6 +437,25 @@ def fetch():
       GROUP BY 1 ORDER BY orders DESC
     """)
 
+    print("Fetching UA replacement rate by segment…")
+    segment_replacement = run(f"""
+      SELECT CASE
+          WHEN p.business_segment_v2 = 'Enterprise (AM Segment)' THEN 'ENT'
+          WHEN p.business_segment_v2 = 'Mid-market (AM Segment)' THEN 'MM'
+          WHEN p.business_segment_v2 = 'SMB (AM Segment)' THEN 'SMB'
+          ELSE 'Unclassified'
+        END AS segment,
+        COUNT(DISTINCT b.order_id) AS orders,
+        COUNT(DISTINCT CASE WHEN b.is_item_replacement THEN b.order_id END) AS replacement_orders,
+        ROUND(COUNT(DISTINCT CASE WHEN b.is_item_replacement THEN b.order_id END) * 100.0
+          / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS replacement_rate
+      FROM main.ng_delivery.dim_basket_item_delivery b
+      JOIN main.ng_delivery.dim_provider_v2 p ON b.provider_id = p.provider_id
+      WHERE p.country_code = 'ua' AND {WINDOW}
+      GROUP BY 1
+      ORDER BY CASE segment WHEN 'ENT' THEN 1 WHEN 'MM' THEN 2 WHEN 'SMB' THEN 3 ELSE 4 END
+    """)
+
     print("Fetching country top-5…")
     country_top = run(f"""
       WITH base AS (
@@ -677,7 +696,8 @@ def fetch():
     return {
         "market": market, "volumes": volumes, "brand_weeks": brand_weeks,
         "partners": partners, "top15": top15, "countries": countries,
-        "country_top": country_top, "stores": stores, "cats": cats, "totals": totals,
+        "country_top": country_top, "segment_replacement": segment_replacement,
+        "stores": stores, "cats": cats, "totals": totals,
         "drill_categories": drill_categories, "drill_skus": drill_skus,
         "mwb_weeks": mwb_weeks, "mwb_tot": mwb_tot,
     }
@@ -802,6 +822,29 @@ def build(raw):
     odr_avg = fnum(raw["totals"]["odr"])
     repl_avg = fnum(raw["totals"]["repl"])
     dpp_market = round(last_odr - first_odr, 1)
+
+    segment_raw = {r["segment"]: r for r in raw.get("segment_replacement") or []}
+    segment_total_orders = sum(fint(r["orders"]) for r in segment_raw.values())
+    segment_total_replacements = sum(fint(r["replacement_orders"]) for r in segment_raw.values())
+    segment_replacement = [{
+        "segment": "TOTAL",
+        "orders": segment_total_orders,
+        "share": 100.0,
+        "replacement_orders": segment_total_replacements,
+        "rate": round(segment_total_replacements * 100 / max(segment_total_orders, 1), 1),
+    }]
+    for segment in ("ENT", "MM", "SMB"):
+        row = segment_raw.get(segment, {})
+        orders = fint(row.get("orders"))
+        replacements = fint(row.get("replacement_orders"))
+        segment_replacement.append({
+            "segment": segment,
+            "orders": orders,
+            "share": round(orders * 100 / max(segment_total_orders, 1), 1),
+            "replacement_orders": replacements,
+            "rate": fnum(row.get("replacement_rate")) if orders else None,
+        })
+    unclassified = segment_raw.get("Unclassified", {})
 
     drill = {"partners": [], "categories": defaultdict(list), "skus": defaultdict(list)}
     seen_drill_partners = set()
@@ -985,6 +1028,11 @@ def build(raw):
             "skus": dict(drill["skus"]),
         },
         "countries": countries,
+        "segment_replacement": {
+            "rows": segment_replacement,
+            "unclassified_orders": fint(unclassified.get("orders")),
+            "unclassified_replacement_orders": fint(unclassified.get("replacement_orders")),
+        },
         "findings": findings,
         "zero_odr": sum(1 for x in dbx15 if x[2] == 0),
         "mwb": {

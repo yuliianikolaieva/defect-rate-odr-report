@@ -389,6 +389,21 @@
 
 <div class="two" id="countryCards" style="margin-top:16px"></div>
 
+<div class="card" style="margin-top:16px">
+  <h3>UA Order Replacement Rate by segment <span class="sm">ENT / MM / SMB · country-level reconciliation</span></h3>
+  <p class="section-desc" style="margin-bottom:8px">
+    Share of delivered Stores orders with at least one replacement. TOTAL is the volume-weighted result
+    across all segments, not the Enterprise rate.
+  </p>
+  <div class="tablewrap">
+    <table class="matrix" id="tblSegmentRepl">
+      <thead><tr><th>Segment</th><th>Orders</th><th>Share of UA Stores</th><th>Orders with replacement</th><th>Order Replacement Rate</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="metric-note" id="segmentReplNote"></p>
+</div>
+
 <div class="callout i">
   <h3>How to read this</h3>
   <p id="bench-p1"></p>
@@ -562,6 +577,7 @@ const ST_ROW   = {crit:"crit",high:"high",watch:"",good:"good"};
 const DBX15 = D.dbx15;
 const STORES = D.stores;
 const DRILL = D.partner_drill;
+const SEGMENT_REPL = D.segment_replacement;
 const COUNTRIES = D.countries.map(c => Object.assign({}, c, {name: c.name_en}));
 
 (function applyCopy(){
@@ -717,6 +733,17 @@ document.getElementById("countryCards").innerHTML = COUNTRIES.map(c=>`
     </table>
     </div>
   </div>`).join("");
+
+const SEGMENT_LABEL_EN = {TOTAL:"All UA Stores",ENT:"Enterprise",MM:"Mid-market",SMB:"SMB"};
+document.querySelector("#tblSegmentRepl tbody").innerHTML = SEGMENT_REPL.rows.map((r,i)=>`
+  <tr class="${i===0?'high':''}">
+    <td class="axis">${SEGMENT_LABEL_EN[r.segment]}</td>
+    <td>${n(r.orders)}</td><td>${p(r.share)}</td><td>${n(r.replacement_orders)}</td>
+    <td><b>${r.rate==null?'—':p(r.rate)}</b></td>
+  </tr>`).join("");
+document.getElementById("segmentReplNote").textContent = SEGMENT_REPL.unclassified_orders
+  ? `${n(SEGMENT_REPL.unclassified_orders)} unclassified orders are included in TOTAL but not shown as a separate segment.`
+  : "All orders are classified as ENT / MM / SMB.";
 
 // ---------- active section highlighting in the right-hand nav ----------
 (function(){
