@@ -149,12 +149,13 @@
 <h2 class="section"><span class="bar"></span>Key findings</h2>
 <p class="section-desc">Market-level ODR looks moderate, but the trend is negative and the problem sits with a handful of grocery partners.</p>
 
-<div class="grid kpis">
+<div class="grid kpis three">
   <div class="kpi mid"><div class="n" id="kpi-odr">—</div><div class="l">UA Stores ODR · 12-week average</div></div>
   <div class="kpi warn"><div class="n" id="kpi-last">—</div><div class="l" id="kpi-last-label">ODR latest week</div></div>
-  <div class="kpi info"><div class="n" id="kpi-repl">—</div><div class="l">Order Replacement Rate · share of orders with a replacement</div></div>
-  <div class="kpi info"><div class="n" id="kpi-repl-looker">—</div><div class="l" id="kpi-repl-looker-label">Replacements per 100 orders · Looker definition</div></div>
   <div class="kpi warn"><div class="n" id="kpi-qty-share">—</div><div class="l">Quantity share of all item defects</div></div>
+  <div class="kpi info"><div class="n" id="kpi-repl">—</div><div class="l">Order Replacement Rate · share of orders with a replacement</div></div>
+  <div class="kpi info"><div class="n" id="kpi-repl-item">—</div><div class="l" id="kpi-repl-item-label">Item Replacement Rate · share of replaced items</div></div>
+  <div class="kpi info"><div class="n" id="kpi-repl-looker">—</div><div class="l" id="kpi-repl-looker-label">Replacements per 100 orders · Looker definition</div></div>
 </div>
 <p class="metric-note" id="replNote"></p>
 <div class="callout">
@@ -245,7 +246,7 @@
   </div>
   <div class="chartcard">
     <h3>ODR vs Replacement Rate — UA market level</h3>
-    <p class="cap">% of delivered orders · source: Databricks (store_*, dish items)</p>
+    <p class="cap">ODR and order repl are % of orders; item repl is % of items; Looker is replacements per 100 orders</p>
     <div class="chartbox"><canvas id="chMarket"></canvas></div>
   </div>
 </div>
@@ -399,12 +400,12 @@
 <div class="card" style="margin-top:16px">
   <h3>UA Order Replacement Rate by segment <span class="sm">ENT / MM / SMB · country-level reconciliation</span></h3>
   <p class="section-desc" style="margin-bottom:8px">
-    Share of delivered Stores orders with at least one replacement. TOTAL is the volume-weighted result
-    across all segments, not the Enterprise rate.
+    Share of delivered Stores orders with at least one replacement, Item Replacement Rate, and the Looker
+    definition. TOTAL is the volume-weighted result across all segments, not the Enterprise rate.
   </p>
   <div class="tablewrap">
     <table class="matrix" id="tblSegmentRepl">
-      <thead><tr><th>Segment</th><th>Orders</th><th>Share of UA Stores</th><th>Orders with replacement</th><th>Order Replacement Rate</th><th>Replacements per 100 orders (Looker)</th></tr></thead>
+      <thead><tr><th>Segment</th><th>Orders</th><th>Share of UA Stores</th><th>Orders with replacement</th><th>Order Replacement Rate</th><th>Item Replacement Rate</th><th>Replacements per 100 orders (Looker)</th></tr></thead>
       <tbody></tbody>
     </table>
   </div>
@@ -481,14 +482,13 @@
 
 <details class="gl">
   <summary>Item Replacement Rate / Order Replacement Rate</summary>
-  <p><b>Definition.</b> Item-level: share of line items replaced by a different SKU. Order-level: share of
-  orders with at least one replacement. The order-level figure is always higher, because a single
-  replacement flags the whole order.</p>
-  <p><b>Difference vs Looker.</b> In Looker, "Order replacement rate %" is computed as
-  <i>replaced items ÷ orders</i>, i.e. how many replacements occur per 100 orders. This report shows both
-  numbers side by side: the share of orders with a replacement and the Looker definition. The latter is
-  roughly 1.5× higher, because one order often contains several replacements, and it can in theory
-  exceed 100%.</p>
+  <p><b>Definition.</b> Item Replacement Rate: share of all ordered dish items that were replaced by a
+  different SKU (replaced items ÷ all items). Order Replacement Rate: share of orders with at least one
+  replacement. The order-level figure is always higher, because a single replacement flags the whole order.</p>
+  <p><b>Difference vs Looker.</b> In Looker, "Order replacement rate %" is replaced items ÷ orders
+  (replacements per 100 orders). This report shows three numbers: the share of orders, Item Replacement Rate,
+  and the Looker definition. Looker is higher than order-level because one order often contains several
+  replacements, and it can exceed 100%. Item-level is always lower than order-level.</p>
   <p><b>Nuance.</b> Replacement is not part of ODR. A partner can have low ODR and high replacement
   (HOP HEY: ODR 5.1%, item repl 15.8%) — the customer still receives something other than what was ordered.</p>
   <p class="fix"><b>How to improve:</b> an approved substitution matrix with in-app customer confirmation,
@@ -600,14 +600,16 @@ const COUNTRIES = D.countries.map(c => Object.assign({}, c, {name: c.name_en}));
   document.getElementById("kpi-last-label").textContent =
     "ODR latest week (" + D.period.last_week_en + ")" + (D.kpis.last_is_peak ? " · period peak" : "");
   document.getElementById("kpi-repl").textContent = pct(D.kpis.repl);
+  document.getElementById("kpi-repl-item").textContent = pct(D.kpis.repl_item);
+  document.getElementById("kpi-repl-item-label").textContent =
+    "Item Replacement Rate · share of replaced items (latest week " + pct(D.kpis.repl_item_last) + ")";
   document.getElementById("kpi-repl-looker").textContent = pct(D.kpis.repl_per_order);
   document.getElementById("kpi-repl-looker-label").textContent =
     "Replacements per 100 orders · Looker definition (latest week " + pct(D.kpis.repl_per_order_last) + ")";
   document.getElementById("replNote").innerHTML =
-    `Two different replacement definitions. <b>${pct(D.kpis.repl)}</b> is the share of orders with at least ` +
-    `one replacement (how many customers were affected). <b>${pct(D.kpis.repl_per_order)}</b> is the number of ` +
-    `replaced items per 100 orders, which is how Looker computes Order replacement rate %, so its figure is ` +
-    `higher: an affected order carries ` +
+    `Three replacement definitions. <b>${pct(D.kpis.repl)}</b> is the share of orders with at least one replacement. ` +
+    `<b>${pct(D.kpis.repl_item)}</b> is Item Replacement Rate: replaced items ÷ all ordered dish items. ` +
+    `<b>${pct(D.kpis.repl_per_order)}</b> is Looker (replacements ÷ orders): an affected order carries ` +
     `${(D.kpis.repl_per_order / Math.max(D.kpis.repl, 0.1)).toFixed(1)} replacements on average.`;
   document.getElementById("kpi-qty-share").textContent = pct(D.kpis.qty_share);
   if (D.mwb) {
@@ -790,12 +792,13 @@ document.querySelector("#tblSegmentRepl tbody").innerHTML = SEGMENT_REPL.rows.ma
     <td class="axis">${SEGMENT_LABEL_EN[r.segment]}</td>
     <td>${n(r.orders)}</td><td>${p(r.share)}</td><td>${n(r.replacement_orders)}</td>
     <td><b>${r.rate==null?'—':p(r.rate)}</b></td>
+    <td>${r.item_rate==null?'—':p(r.item_rate)}</td>
     <td>${r.per_order==null?'—':p(r.per_order)}</td>
   </tr>`).join("");
 document.getElementById("segmentReplNote").textContent = (SEGMENT_REPL.unclassified_orders
   ? `${n(SEGMENT_REPL.unclassified_orders)} unclassified orders are included in TOTAL but not shown as a separate segment. `
   : "All orders are classified as ENT / MM / SMB. ")
-  + "The last column is the Looker definition: replaced items ÷ orders, which is higher than the share of orders.";
+  + "Item Replacement Rate = replaced items ÷ all dish items. Looker = replaced items ÷ orders.";
 
 // ---------- active section highlighting in the right-hand nav ----------
 (function(){
@@ -871,11 +874,12 @@ new Chart(document.getElementById("chMarket"), {
   data:{labels:WEEKS,datasets:[
     {label:"ODR, %",data:MARKET.odr,borderColor:"#d1493f",backgroundColor:"rgba(209,73,63,.08)",fill:true,tension:.3,borderWidth:2.5,pointRadius:3},
     {label:"Order replacement, % of orders",data:MARKET.repl,borderColor:"#2563eb",backgroundColor:"transparent",tension:.3,borderWidth:2,borderDash:[5,4],pointRadius:3},
+    {label:"Item replacement, % of items",data:MARKET.repl_item,borderColor:"#0e7faa",backgroundColor:"transparent",tension:.3,borderWidth:2,pointRadius:3},
     {label:"Replacements per 100 orders (Looker)",data:MARKET.repl_per_order,borderColor:"#7c3aed",backgroundColor:"transparent",tension:.3,borderWidth:2,borderDash:[2,3],pointRadius:3}
   ]},
   options:{responsive:true,maintainAspectRatio:false,
     scales:{x:{grid:{display:false},title:{display:true,text:"Week"}},
-            y:{beginAtZero:true,grid:{color:"#eef1f7"},title:{display:true,text:"% of orders"},ticks:{callback:v=>v+"%"}}},
+            y:{beginAtZero:true,grid:{color:"#eef1f7"},title:{display:true,text:"%"},ticks:{callback:v=>v+"%"}}},
     plugins:{legend:{position:"bottom"}}}
 });
 
