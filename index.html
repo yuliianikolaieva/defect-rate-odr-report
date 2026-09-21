@@ -341,7 +341,8 @@
     </table>
   </div>
   <p class="metric-note"><b>OOS-сигнал</b> — аналітичний proxy, а не підтверджений статус запасу:
-    quantity adjustment з eater impact та/або replacement. Відсотки SKU розраховані від active items.</p>
+    quantity adjustment з eater impact та/або replacement. Відсотки категорій і SKU розраховані від усіх
+    позицій замовлення (включно зі знятими), тому не перевищують 100%.</p>
 </div>
 </section>
 
@@ -688,7 +689,7 @@ function renderDrill(){
       <td>${esc(r.category)}</td><td>${n(r.items)}</td><td><b>${n(r.affected_orders)}</b></td>
       <td>${p(r.qty)}</td><td>${p(r.repl)}</td><td>${p(r.weight)}</td><td>${p(r.price)}</td>
       <td><span class="badge ${driver(r)==='OOS-сигнал'?'high':'watch'}">${driver(r)}</span></td>
-    </tr>`).join("") || `<tr><td colspan="9" class="mut" style="text-align:left">Немає SKU, що проходять поріг (${weekly ? "≥5 active items і ≥2 сигнали за тиждень" : "≥10 active items і ≥3 сигнали"}).</td></tr>`;
+    </tr>`).join("") || `<tr><td colspan="9" class="mut" style="text-align:left">Немає SKU, що проходять поріг (${weekly ? "≥5 позицій і ≥2 сигнали за тиждень" : "≥10 позицій і ≥3 сигнали"}).</td></tr>`;
 }
 function resetDrillCategories(){
   const partner = drillPartner.value;

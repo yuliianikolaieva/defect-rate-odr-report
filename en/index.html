@@ -354,7 +354,8 @@
     </table>
   </div>
   <p class="metric-note"><b>OOS signal</b> is an analytical proxy, not a confirmed inventory status:
-    quantity adjustment with eater impact and/or replacement. SKU rates use active items as denominator.</p>
+    quantity adjustment with eater impact and/or replacement. Category and SKU rates use all ordered
+    items (including removed ones) as denominator, so they never exceed 100%.</p>
 </div>
 </section>
 
@@ -729,7 +730,7 @@ function renderDrill(){
       <td>${esc(r.category)}</td><td>${n(r.items)}</td><td><b>${n(r.affected_orders)}</b></td>
       <td>${p(r.qty)}</td><td>${p(r.repl)}</td><td>${p(r.weight)}</td><td>${p(r.price)}</td>
       <td><span class="badge ${driver(r)==='OOS signal'?'high':'watch'}">${driver(r)}</span></td>
-    </tr>`).join("") || `<tr><td colspan="9" class="mut" style="text-align:left">No SKUs meet the threshold (${weekly ? "≥5 active items and ≥2 signals in the week" : "≥10 active items and ≥3 signals"}).</td></tr>`;
+    </tr>`).join("") || `<tr><td colspan="9" class="mut" style="text-align:left">No SKUs meet the threshold (${weekly ? "≥5 items and ≥2 signals in the week" : "≥10 items and ≥3 signals"}).</td></tr>`;
 }
 function resetDrillCategories(){
   const partner = drillPartner.value;

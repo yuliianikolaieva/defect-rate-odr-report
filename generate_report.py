@@ -525,7 +525,7 @@ def fetch():
     drill_categories = run(f"""
       WITH base AS (
         SELECT {BRAND} AS partner, COALESCE(c.name, 'Uncategorised') AS category,
-          b.order_id, b.basket_item_state,
+          b.order_id,
           b.has_item_quantity_adjustment_with_eater_impact AS qty_d,
           b.has_item_weighted_adjustment_with_eater_impact AS wt_d,
           b.has_item_price_adjustment_with_price_increase AS price_d,
@@ -558,7 +558,7 @@ def fetch():
       ), category_agg AS (
         SELECT b.partner, b.category, p.partner_orders, p.defect_orders, p.repl_orders, p.qty_orders,
           COUNT(DISTINCT b.order_id) AS category_orders,
-          SUM(CASE WHEN b.basket_item_state = 'active' THEN 1 ELSE 0 END) AS items,
+          COUNT(*) AS items,
           COUNT(DISTINCT CASE WHEN b.qty_d OR b.wt_d OR b.price_d THEN b.order_id END) AS affected_orders,
           SUM(CASE WHEN b.qty_d THEN 1 ELSE 0 END) AS qty_n,
           SUM(CASE WHEN b.repl_d THEN 1 ELSE 0 END) AS repl_n,
@@ -592,7 +592,7 @@ def fetch():
             NULLIF(TRIM(b.sku), ''), 'Unknown item') AS item_name,
           COALESCE(NULLIF(TRIM(b.sku), ''), NULLIF(TRIM(b.product_id), ''),
             CAST(b.external_menu_item_id AS STRING), 'unknown') AS sku,
-          b.order_id, b.basket_item_state,
+          b.order_id,
           b.has_item_quantity_adjustment_with_eater_impact AS qty_d,
           b.has_item_weighted_adjustment_with_eater_impact AS wt_d,
           b.has_item_price_adjustment_with_price_increase AS price_d,
@@ -621,7 +621,7 @@ def fetch():
       ), sku_agg AS (
         SELECT b.partner, b.category, b.sku, b.item_name,
           COUNT(DISTINCT b.order_id) AS orders,
-          SUM(CASE WHEN b.basket_item_state = 'active' THEN 1 ELSE 0 END) AS items,
+          COUNT(*) AS items,
           COUNT(DISTINCT CASE WHEN b.qty_d OR b.wt_d OR b.price_d THEN b.order_id END) AS affected_orders,
           SUM(CASE WHEN b.qty_d THEN 1 ELSE 0 END) AS qty_n,
           SUM(CASE WHEN b.repl_d THEN 1 ELSE 0 END) AS repl_n,
@@ -654,7 +654,7 @@ def fetch():
       WITH base AS (
         SELECT {BRAND} AS partner, COALESCE(c.name, 'Uncategorised') AS category,
           CAST(DATE_TRUNC('week', b.order_created_date) AS DATE) AS week,
-          b.order_id, b.basket_item_state,
+          b.order_id,
           b.has_item_quantity_adjustment_with_eater_impact AS qty_d,
           b.has_item_weighted_adjustment_with_eater_impact AS wt_d,
           b.has_item_price_adjustment_with_price_increase AS price_d,
@@ -692,7 +692,7 @@ def fetch():
       ), category_agg AS (
         SELECT b.partner, b.week, b.category,
           COUNT(DISTINCT b.order_id) AS category_orders,
-          SUM(CASE WHEN b.basket_item_state = 'active' THEN 1 ELSE 0 END) AS items,
+          COUNT(*) AS items,
           COUNT(DISTINCT CASE WHEN b.qty_d OR b.wt_d OR b.price_d THEN b.order_id END) AS affected_orders,
           SUM(CASE WHEN b.qty_d THEN 1 ELSE 0 END) AS qty_n,
           SUM(CASE WHEN b.repl_d THEN 1 ELSE 0 END) AS repl_n,
@@ -730,7 +730,7 @@ def fetch():
             NULLIF(TRIM(b.sku), ''), 'Unknown item') AS item_name,
           COALESCE(NULLIF(TRIM(b.sku), ''), NULLIF(TRIM(b.product_id), ''),
             CAST(b.external_menu_item_id AS STRING), 'unknown') AS sku,
-          b.order_id, b.basket_item_state,
+          b.order_id,
           b.has_item_quantity_adjustment_with_eater_impact AS qty_d,
           b.has_item_weighted_adjustment_with_eater_impact AS wt_d,
           b.has_item_price_adjustment_with_price_increase AS price_d,
@@ -759,7 +759,7 @@ def fetch():
       ), sku_agg AS (
         SELECT b.partner, b.week, b.category, b.sku, b.item_name,
           COUNT(DISTINCT b.order_id) AS orders,
-          SUM(CASE WHEN b.basket_item_state = 'active' THEN 1 ELSE 0 END) AS items,
+          COUNT(*) AS items,
           COUNT(DISTINCT CASE WHEN b.qty_d OR b.wt_d OR b.price_d THEN b.order_id END) AS affected_orders,
           SUM(CASE WHEN b.qty_d THEN 1 ELSE 0 END) AS qty_n,
           SUM(CASE WHEN b.repl_d THEN 1 ELSE 0 END) AS repl_n,
