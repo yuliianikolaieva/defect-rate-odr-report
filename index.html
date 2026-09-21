@@ -138,9 +138,11 @@
 <div class="grid kpis">
   <div class="kpi mid"><div class="n" id="kpi-odr">—</div><div class="l">UA Stores ODR · середнє за 12 тижнів</div></div>
   <div class="kpi warn"><div class="n" id="kpi-last">—</div><div class="l" id="kpi-last-label">ODR останній тиждень</div></div>
-  <div class="kpi info"><div class="n" id="kpi-repl">—</div><div class="l">Order Replacement Rate · окрема метрика</div></div>
+  <div class="kpi info"><div class="n" id="kpi-repl">—</div><div class="l">Order Replacement Rate · частка замовлень із заміною</div></div>
+  <div class="kpi info"><div class="n" id="kpi-repl-looker">—</div><div class="l" id="kpi-repl-looker-label">Замін на 100 замовлень · визначення Looker</div></div>
   <div class="kpi warn"><div class="n" id="kpi-qty-share">—</div><div class="l">Частка quantity у всіх item defects</div></div>
 </div>
+<p class="metric-note" id="replNote"></p>
 
 <div class="callout">
   <h3 id="f1h"></h3>
@@ -389,7 +391,7 @@
   </p>
   <div class="tablewrap">
     <table class="matrix" id="tblSegmentRepl">
-      <thead><tr><th>Сегмент</th><th>Orders</th><th>Частка UA Stores</th><th>Orders з replacement</th><th>Order Replacement Rate</th></tr></thead>
+      <thead><tr><th>Сегмент</th><th>Orders</th><th>Частка UA Stores</th><th>Orders з replacement</th><th>Order Replacement Rate</th><th>Замін на 100 замовлень (Looker)</th></tr></thead>
       <tbody></tbody>
     </table>
   </div>
@@ -468,6 +470,11 @@
   <summary>Item Replacement Rate / Order Replacement Rate</summary>
   <p><b>Визначення.</b> Item-level: частка позицій, замінених іншим SKU. Order-level: частка замовлень, де була
   хоча б одна заміна. Order-рівень завжди вищий, бо одна заміна «маркує» все замовлення.</p>
+  <p><b>Різниця з Looker.</b> У Looker метрика «Order replacement rate %» рахується як
+  <i>кількість замінених позицій ÷ кількість замовлень</i>, тобто скільки замін припадає на 100 замовлень.
+  У цьому звіті поруч показані обидва числа: частка замовлень із заміною та Looker-визначення.
+  Друге приблизно в 1.5 раза вище, бо в одному замовленні часто кілька замін, і воно теоретично
+  може перевищувати 100%.</p>
   <p><b>Особливість.</b> Replacement не входить в ODR. Партнер може мати низький ODR і високий replacement
   (HOP HEY: ODR 5.1%, item repl 15.8%) — клієнт усе одно отримує не те, що замовив.</p>
   <p class="fix"><b>Як покращити:</b> матриця допустимих замін з підтвердженням клієнта в апці,
@@ -552,6 +559,15 @@ const COUNTRIES = D.countries.map(c => Object.assign({}, c, {name: c.name_ua}));
   document.getElementById("kpi-last-label").textContent =
     "ODR останній тиждень (" + D.period.last_week_ua + ")" + (D.kpis.last_is_peak ? " · пік періоду" : "");
   document.getElementById("kpi-repl").textContent = pct(D.kpis.repl);
+  document.getElementById("kpi-repl-looker").textContent = pct(D.kpis.repl_per_order);
+  document.getElementById("kpi-repl-looker-label").textContent =
+    "Замін на 100 замовлень · визначення Looker (ост. тиждень " + pct(D.kpis.repl_per_order_last) + ")";
+  document.getElementById("replNote").innerHTML =
+    `Два різні визначення replacement. <b>${pct(D.kpis.repl)}</b> — частка замовлень, де була хоча б одна ` +
+    `заміна (скільки клієнтів зіткнулись із проблемою). <b>${pct(D.kpis.repl_per_order)}</b> — кількість ` +
+    `замінених позицій на 100 замовлень; саме так рахує Looker (Order replacement rate %), тому там цифра вища: ` +
+    `на одне зачеплене замовлення припадає в середньому ` +
+    `${(D.kpis.repl_per_order / Math.max(D.kpis.repl, 0.1)).toFixed(1)} заміни.`;
   document.getElementById("kpi-qty-share").textContent = pct(D.kpis.qty_share);
   if (D.mwb) {
     const vs = (D.mwb.odr_last ?? 0) - (D.kpis.odr_last ?? 0);
@@ -733,10 +749,12 @@ document.querySelector("#tblSegmentRepl tbody").innerHTML = SEGMENT_REPL.rows.ma
     <td class="axis">${SEGMENT_LABEL_UA[r.segment]}</td>
     <td>${n(r.orders)}</td><td>${p(r.share)}</td><td>${n(r.replacement_orders)}</td>
     <td><b>${r.rate==null?'—':p(r.rate)}</b></td>
+    <td>${r.per_order==null?'—':p(r.per_order)}</td>
   </tr>`).join("");
-document.getElementById("segmentReplNote").textContent = SEGMENT_REPL.unclassified_orders
-  ? `${n(SEGMENT_REPL.unclassified_orders)} unclassified orders включені в TOTAL, але не показані окремим сегментом.`
-  : "Усі замовлення розподілені між ENT / MM / SMB.";
+document.getElementById("segmentReplNote").textContent = (SEGMENT_REPL.unclassified_orders
+  ? `${n(SEGMENT_REPL.unclassified_orders)} unclassified orders включені в TOTAL, але не показані окремим сегментом. `
+  : "Усі замовлення розподілені між ENT / MM / SMB. ")
+  + "Остання колонка — визначення Looker: замінені позиції ÷ замовлення, тому вона вища за частку замовлень.";
 
 // ---------- графіки ----------
 if (typeof Chart === "undefined") {
@@ -769,7 +787,8 @@ new Chart(document.getElementById("chMarket"), {
   type:"line",
   data:{labels:WEEKS,datasets:[
     {label:"ODR, %",data:MARKET.odr,borderColor:"#d1493f",backgroundColor:"rgba(209,73,63,.08)",fill:true,tension:.3,borderWidth:2.5,pointRadius:3},
-    {label:"Order replacement, %",data:MARKET.repl,borderColor:"#2563eb",backgroundColor:"transparent",tension:.3,borderWidth:2,borderDash:[5,4],pointRadius:3}
+    {label:"Order replacement, % замовлень",data:MARKET.repl,borderColor:"#2563eb",backgroundColor:"transparent",tension:.3,borderWidth:2,borderDash:[5,4],pointRadius:3},
+    {label:"Замін на 100 замовлень (Looker)",data:MARKET.repl_per_order,borderColor:"#7c3aed",backgroundColor:"transparent",tension:.3,borderWidth:2,borderDash:[2,3],pointRadius:3}
   ]},
   options:{responsive:true,maintainAspectRatio:false,
     scales:{x:{grid:{display:false},title:{display:true,text:"Тиждень"}},

@@ -320,6 +320,8 @@ def fetch():
           * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS odr,
         ROUND(COUNT(DISTINCT CASE WHEN b.is_item_replacement THEN b.order_id END)
           * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS repl,
+        ROUND(SUM(CASE WHEN b.is_item_replacement THEN 1 ELSE 0 END)
+          * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS repl_per_order,
         ROUND(COUNT(DISTINCT CASE WHEN b.has_item_quantity_adjustment_with_eater_impact THEN b.order_id END)
           * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS qty,
         ROUND(COUNT(DISTINCT CASE WHEN b.has_item_weighted_adjustment_with_eater_impact THEN b.order_id END)
@@ -448,7 +450,10 @@ def fetch():
         COUNT(DISTINCT b.order_id) AS orders,
         COUNT(DISTINCT CASE WHEN b.is_item_replacement THEN b.order_id END) AS replacement_orders,
         ROUND(COUNT(DISTINCT CASE WHEN b.is_item_replacement THEN b.order_id END) * 100.0
-          / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS replacement_rate
+          / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS replacement_rate,
+        SUM(CASE WHEN b.is_item_replacement THEN 1 ELSE 0 END) AS replacement_items,
+        ROUND(SUM(CASE WHEN b.is_item_replacement THEN 1 ELSE 0 END) * 100.0
+          / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS replacement_per_order
       FROM main.ng_delivery.dim_basket_item_delivery b
       JOIN main.ng_delivery.dim_provider_v2 p ON b.provider_id = p.provider_id
       WHERE p.country_code = 'ua' AND {WINDOW}
@@ -825,7 +830,9 @@ def fetch():
           OR b.has_item_price_adjustment_with_price_increase THEN b.order_id END)
           * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS odr,
         ROUND(COUNT(DISTINCT CASE WHEN b.is_item_replacement THEN b.order_id END)
-          * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS repl
+          * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS repl,
+        ROUND(SUM(CASE WHEN b.is_item_replacement THEN 1 ELSE 0 END)
+          * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS repl_per_order
       FROM main.ng_delivery.dim_basket_item_delivery b
       JOIN main.ng_delivery.dim_provider_v2 p ON b.provider_id = p.provider_id
       WHERE p.country_code = 'ua' AND {WINDOW}
@@ -961,17 +968,21 @@ def build(raw):
 
     odr_avg = fnum(raw["totals"]["odr"])
     repl_avg = fnum(raw["totals"]["repl"])
+    repl_per_order_avg = fnum(raw["totals"]["repl_per_order"])
+    repl_per_order_last = fnum(market[-1]["repl_per_order"])
     dpp_market = round(last_odr - first_odr, 1)
 
     segment_raw = {r["segment"]: r for r in raw.get("segment_replacement") or []}
     segment_total_orders = sum(fint(r["orders"]) for r in segment_raw.values())
     segment_total_replacements = sum(fint(r["replacement_orders"]) for r in segment_raw.values())
+    segment_total_items = sum(fint(r["replacement_items"]) for r in segment_raw.values())
     segment_replacement = [{
         "segment": "TOTAL",
         "orders": segment_total_orders,
         "share": 100.0,
         "replacement_orders": segment_total_replacements,
         "rate": round(segment_total_replacements * 100 / max(segment_total_orders, 1), 1),
+        "per_order": round(segment_total_items * 100 / max(segment_total_orders, 1), 1),
     }]
     for segment in ("ENT", "MM", "SMB"):
         row = segment_raw.get(segment, {})
@@ -983,6 +994,7 @@ def build(raw):
             "share": round(orders * 100 / max(segment_total_orders, 1), 1),
             "replacement_orders": replacements,
             "rate": fnum(row.get("replacement_rate")) if orders else None,
+            "per_order": fnum(row.get("replacement_per_order")) if orders else None,
         })
     unclassified = segment_raw.get("Unclassified", {})
 
@@ -1198,6 +1210,8 @@ def build(raw):
             "odr_avg": odr_avg,
             "odr_last": last_odr,
             "repl": repl_avg,
+            "repl_per_order": repl_per_order_avg,
+            "repl_per_order_last": repl_per_order_last,
             "qty_share": qty_share,
             "last_is_peak": last_is_peak,
         },
@@ -1222,6 +1236,7 @@ def build(raw):
         "market": {
             "odr": [fnum(r["odr"]) for r in market],
             "repl": [fnum(r["repl"]) for r in market],
+            "repl_per_order": [fnum(r["repl_per_order"]) for r in market],
             "orders": [fint(r["orders"]) for r in market],
         },
         "brand_odr": brand_odr,
