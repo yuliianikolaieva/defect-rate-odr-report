@@ -649,6 +649,144 @@ def fetch():
       ORDER BY partner, sku_rank
     """)
 
+    print("Fetching partner category drill-down by week…")
+    drill_categories_weekly = run(f"""
+      WITH base AS (
+        SELECT {BRAND} AS partner, COALESCE(c.name, 'Uncategorised') AS category,
+          CAST(DATE_TRUNC('week', b.order_created_date) AS DATE) AS week,
+          b.order_id, b.basket_item_state,
+          b.has_item_quantity_adjustment_with_eater_impact AS qty_d,
+          b.has_item_weighted_adjustment_with_eater_impact AS wt_d,
+          b.has_item_price_adjustment_with_price_increase AS price_d,
+          b.is_item_replacement AS repl_d
+        FROM main.ng_delivery.dim_basket_item_delivery b
+        JOIN main.ng_delivery.dim_provider_v2 p ON b.provider_id = p.provider_id
+        LEFT JOIN (
+          SELECT id, MAX(name) AS name
+          FROM main.ng_delivery.etl_delivery_sct_category
+          GROUP BY id
+        ) c ON b.sct_category_id = c.id
+        WHERE p.country_code = 'ua' AND {WINDOW}
+      ), problem_partners AS (
+        SELECT partner
+        FROM base
+        GROUP BY partner
+        HAVING COUNT(DISTINCT order_id) >= 200
+          AND (
+            COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) * 100.0
+              / NULLIF(COUNT(DISTINCT order_id), 0) >= 10
+            OR COUNT(DISTINCT CASE WHEN repl_d THEN order_id END) * 100.0
+              / NULLIF(COUNT(DISTINCT order_id), 0) >= 10
+          )
+        ORDER BY COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) DESC
+        LIMIT 8
+      ), partner_week AS (
+        SELECT b.partner, b.week,
+          COUNT(DISTINCT b.order_id) AS partner_orders,
+          COUNT(DISTINCT CASE WHEN b.qty_d OR b.wt_d OR b.price_d THEN b.order_id END) AS defect_orders,
+          COUNT(DISTINCT CASE WHEN b.repl_d THEN b.order_id END) AS repl_orders,
+          COUNT(DISTINCT CASE WHEN b.qty_d THEN b.order_id END) AS qty_orders
+        FROM base b
+        JOIN problem_partners pp ON b.partner = pp.partner
+        GROUP BY b.partner, b.week
+      ), category_agg AS (
+        SELECT b.partner, b.week, b.category,
+          COUNT(DISTINCT b.order_id) AS category_orders,
+          SUM(CASE WHEN b.basket_item_state = 'active' THEN 1 ELSE 0 END) AS items,
+          COUNT(DISTINCT CASE WHEN b.qty_d OR b.wt_d OR b.price_d THEN b.order_id END) AS affected_orders,
+          SUM(CASE WHEN b.qty_d THEN 1 ELSE 0 END) AS qty_n,
+          SUM(CASE WHEN b.repl_d THEN 1 ELSE 0 END) AS repl_n,
+          SUM(CASE WHEN b.wt_d THEN 1 ELSE 0 END) AS wt_n,
+          SUM(CASE WHEN b.price_d THEN 1 ELSE 0 END) AS price_n
+        FROM base b
+        JOIN problem_partners pp ON b.partner = pp.partner
+        GROUP BY b.partner, b.week, b.category
+      ), ranked AS (
+        SELECT a.*, w.partner_orders, w.defect_orders, w.repl_orders, w.qty_orders,
+          ROW_NUMBER() OVER (
+            PARTITION BY a.partner, a.week ORDER BY a.affected_orders DESC, a.repl_n DESC
+          ) AS category_rank
+        FROM category_agg a
+        JOIN partner_week w ON a.partner = w.partner AND a.week = w.week
+      )
+      SELECT partner, week, category, partner_orders, defect_orders, repl_orders, qty_orders,
+        category_orders, items, affected_orders,
+        ROUND(affected_orders * 100.0 / NULLIF(partner_orders, 0), 1) AS contribution,
+        ROUND(qty_n * 100.0 / NULLIF(items, 0), 1) AS qty,
+        ROUND(repl_n * 100.0 / NULLIF(items, 0), 1) AS repl,
+        ROUND(wt_n * 100.0 / NULLIF(items, 0), 1) AS weight,
+        ROUND(price_n * 100.0 / NULLIF(items, 0), 1) AS price
+      FROM ranked
+      WHERE category_rank <= 10
+      ORDER BY partner, week, category_rank
+    """)
+
+    print("Fetching partner SKU drill-down by week…")
+    drill_skus_weekly = run(f"""
+      WITH base AS (
+        SELECT {BRAND} AS partner, COALESCE(c.name, 'Uncategorised') AS category,
+          CAST(DATE_TRUNC('week', b.order_created_date) AS DATE) AS week,
+          COALESCE(NULLIF(TRIM(b.basket_item_name), ''), NULLIF(TRIM(b.basket_item_name_translation), ''),
+            NULLIF(TRIM(b.sku), ''), 'Unknown item') AS item_name,
+          COALESCE(NULLIF(TRIM(b.sku), ''), NULLIF(TRIM(b.product_id), ''),
+            CAST(b.external_menu_item_id AS STRING), 'unknown') AS sku,
+          b.order_id, b.basket_item_state,
+          b.has_item_quantity_adjustment_with_eater_impact AS qty_d,
+          b.has_item_weighted_adjustment_with_eater_impact AS wt_d,
+          b.has_item_price_adjustment_with_price_increase AS price_d,
+          b.is_item_replacement AS repl_d
+        FROM main.ng_delivery.dim_basket_item_delivery b
+        JOIN main.ng_delivery.dim_provider_v2 p ON b.provider_id = p.provider_id
+        LEFT JOIN (
+          SELECT id, MAX(name) AS name
+          FROM main.ng_delivery.etl_delivery_sct_category
+          GROUP BY id
+        ) c ON b.sct_category_id = c.id
+        WHERE p.country_code = 'ua' AND {WINDOW}
+      ), problem_partners AS (
+        SELECT partner
+        FROM base
+        GROUP BY partner
+        HAVING COUNT(DISTINCT order_id) >= 200
+          AND (
+            COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) * 100.0
+              / NULLIF(COUNT(DISTINCT order_id), 0) >= 10
+            OR COUNT(DISTINCT CASE WHEN repl_d THEN order_id END) * 100.0
+              / NULLIF(COUNT(DISTINCT order_id), 0) >= 10
+          )
+        ORDER BY COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) DESC
+        LIMIT 8
+      ), sku_agg AS (
+        SELECT b.partner, b.week, b.category, b.sku, b.item_name,
+          COUNT(DISTINCT b.order_id) AS orders,
+          SUM(CASE WHEN b.basket_item_state = 'active' THEN 1 ELSE 0 END) AS items,
+          COUNT(DISTINCT CASE WHEN b.qty_d OR b.wt_d OR b.price_d THEN b.order_id END) AS affected_orders,
+          SUM(CASE WHEN b.qty_d THEN 1 ELSE 0 END) AS qty_n,
+          SUM(CASE WHEN b.repl_d THEN 1 ELSE 0 END) AS repl_n,
+          SUM(CASE WHEN b.wt_d THEN 1 ELSE 0 END) AS wt_n,
+          SUM(CASE WHEN b.price_d THEN 1 ELSE 0 END) AS price_n
+        FROM base b
+        JOIN problem_partners pp ON b.partner = pp.partner
+        GROUP BY b.partner, b.week, b.category, b.sku, b.item_name
+      ), ranked AS (
+        SELECT *,
+          ROW_NUMBER() OVER (
+            PARTITION BY partner, week
+            ORDER BY affected_orders DESC, (qty_n + repl_n + wt_n + price_n) DESC
+          ) AS sku_rank
+        FROM sku_agg
+        WHERE items >= 5 AND (qty_n + repl_n + wt_n + price_n) >= 2
+      )
+      SELECT partner, week, category, sku, item_name, orders, items, affected_orders,
+        ROUND(qty_n * 100.0 / NULLIF(items, 0), 1) AS qty,
+        ROUND(repl_n * 100.0 / NULLIF(items, 0), 1) AS repl,
+        ROUND(wt_n * 100.0 / NULLIF(items, 0), 1) AS weight,
+        ROUND(price_n * 100.0 / NULLIF(items, 0), 1) AS price
+      FROM ranked
+      WHERE sku_rank <= 20
+      ORDER BY partner, week, sku_rank
+    """)
+
     print("Fetching MWB excl. VARUS (LOKO + RUKAVYCHKA)…")
     mwb_weeks = run(f"""
       SELECT CAST(DATE_TRUNC('week', b.order_created_date) AS DATE) AS week,
@@ -699,6 +837,8 @@ def fetch():
         "country_top": country_top, "segment_replacement": segment_replacement,
         "stores": stores, "cats": cats, "totals": totals,
         "drill_categories": drill_categories, "drill_skus": drill_skus,
+        "drill_categories_weekly": drill_categories_weekly,
+        "drill_skus_weekly": drill_skus_weekly,
         "mwb_weeks": mwb_weeks, "mwb_tot": mwb_tot,
     }
 
@@ -887,6 +1027,73 @@ def build(raw):
             "price": fnum(r["price"]) or 0,
         })
 
+    drill_by_week = {}
+
+    def week_bucket(key):
+        if key not in drill_by_week:
+            drill_by_week[key] = {
+                "partners": [],
+                "categories": defaultdict(list),
+                "skus": defaultdict(list),
+            }
+        return drill_by_week[key]
+
+    seen_week_partners = set()
+    for r in raw.get("drill_categories_weekly") or []:
+        week_key = as_date(r["week"]).isoformat()
+        partner = r["partner"]
+        bucket = week_bucket(week_key)
+        if (week_key, partner) not in seen_week_partners:
+            bucket["partners"].append({
+                "name": partner,
+                "orders": fint(r["partner_orders"]),
+                "defect_orders": fint(r["defect_orders"]),
+                "odr": round(fint(r["defect_orders"]) * 100 / max(fint(r["partner_orders"]), 1), 1),
+                "repl_orders": fint(r["repl_orders"]),
+                "repl": round(fint(r["repl_orders"]) * 100 / max(fint(r["partner_orders"]), 1), 1),
+                "qty_orders": fint(r["qty_orders"]),
+                "qty": round(fint(r["qty_orders"]) * 100 / max(fint(r["partner_orders"]), 1), 1),
+            })
+            seen_week_partners.add((week_key, partner))
+        bucket["categories"][partner].append({
+            "category": r["category"],
+            "orders": fint(r["category_orders"]),
+            "items": fint(r["items"]),
+            "affected_orders": fint(r["affected_orders"]),
+            "contribution": fnum(r["contribution"]) or 0,
+            "qty": fnum(r["qty"]) or 0,
+            "repl": fnum(r["repl"]) or 0,
+            "weight": fnum(r["weight"]) or 0,
+            "price": fnum(r["price"]) or 0,
+        })
+    for r in raw.get("drill_skus_weekly") or []:
+        week_key = as_date(r["week"]).isoformat()
+        week_bucket(week_key)["skus"][r["partner"]].append({
+            "category": r["category"],
+            "sku": r["sku"],
+            "name": r["item_name"],
+            "orders": fint(r["orders"]),
+            "items": fint(r["items"]),
+            "affected_orders": fint(r["affected_orders"]),
+            "qty": fnum(r["qty"]) or 0,
+            "repl": fnum(r["repl"]) or 0,
+            "weight": fnum(r["weight"]) or 0,
+            "price": fnum(r["price"]) or 0,
+        })
+    drill_weeks = [
+        {"key": w.isoformat(), "label_ua": week_label(w, "ua"), "label_en": week_label(w, "en")}
+        for w in sorted(weeks, reverse=True)
+        if w.isoformat() in drill_by_week
+    ]
+    drill_by_week = {
+        key: {
+            "partners": value["partners"],
+            "categories": dict(value["categories"]),
+            "skus": dict(value["skus"]),
+        }
+        for key, value in drill_by_week.items()
+    }
+
     def kfmt(n):
         return f"{n / 1000:.1f}k"
 
@@ -1026,6 +1233,8 @@ def build(raw):
             "partners": drill["partners"],
             "categories": dict(drill["categories"]),
             "skus": dict(drill["skus"]),
+            "weeks": drill_weeks,
+            "by_week": drill_by_week,
         },
         "countries": countries,
         "segment_replacement": {

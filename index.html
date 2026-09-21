@@ -300,10 +300,14 @@
 <section id="partner-drill">
 <h2 class="section"><span class="bar"></span>Де саме проблема: партнер → категорія → SKU</h2>
 <p class="section-desc">
-  Інтерактивний drill-down для 8 партнерів із найбільшим впливом. Оберіть партнера й категорію,
-  щоб побачити конкретні SKU та тип сигналу.
+  Інтерактивний drill-down для 8 партнерів із найбільшим впливом. Оберіть тиждень, партнера
+  й категорію, щоб побачити конкретні SKU та тип сигналу.
 </p>
 <div class="filters">
+  <div class="filter">
+    <label for="drillWeek">Тиждень</label>
+    <select id="drillWeek"></select>
+  </div>
   <div class="filter">
     <label for="drillPartner">Партнер</label>
     <select id="drillPartner"></select>
@@ -637,41 +641,70 @@ const driver = row => {
   ].sort((a,b)=>b[1]-a[1]);
   return metrics[0][1] ? metrics[0][0] : "Низький";
 };
+const skuName = value => {
+  const text = String(value ?? "");
+  if (!text.startsWith("{")) return text;
+  try {
+    const parsed = JSON.parse(text);
+    return parsed["uk-UA"] || parsed["en-US"] || Object.values(parsed)[0] || text;
+  } catch (e) { return text; }
+};
 const drillPartner = document.getElementById("drillPartner");
 const drillCategory = document.getElementById("drillCategory");
+const drillWeek = document.getElementById("drillWeek");
+const DRILL_WEEKS = DRILL.weeks || [];
+const EMPTY_DRILL = {partners:[], categories:{}, skus:{}};
 drillPartner.innerHTML = DRILL.partners.map(x=>`<option value="${esc(x.name)}">${esc(x.name)}</option>`).join("");
+drillWeek.innerHTML = '<option value="all">Усі 12 тижнів</option>' +
+  DRILL_WEEKS.map(w=>`<option value="${esc(w.key)}">Тиждень ${esc(w.label_ua)}</option>`).join("");
+
+function drillSource(){
+  const week = drillWeek.value || "all";
+  if (week === "all") return DRILL;
+  return (DRILL.by_week && DRILL.by_week[week]) || EMPTY_DRILL;
+}
 
 function renderDrill(){
+  const src = drillSource();
+  const weekly = (drillWeek.value || "all") !== "all";
   const partner = drillPartner.value;
-  const summary = DRILL.partners.find(x=>x.name===partner);
-  const cats = DRILL.categories[partner] || [];
+  const summary = src.partners.find(x=>x.name===partner);
+  const cats = src.categories[partner] || [];
   const selected = drillCategory.value || "all";
-  document.getElementById("drillOdr").textContent = p(summary.odr);
-  document.getElementById("drillQty").textContent = p(summary.qty);
-  document.getElementById("drillRepl").textContent = p(summary.repl);
-  document.getElementById("drillAffected").textContent = n(summary.defect_orders);
+  document.getElementById("drillOdr").textContent = summary ? p(summary.odr) : "—";
+  document.getElementById("drillQty").textContent = summary ? p(summary.qty) : "—";
+  document.getElementById("drillRepl").textContent = summary ? p(summary.repl) : "—";
+  document.getElementById("drillAffected").textContent = summary ? n(summary.defect_orders) : "—";
   document.querySelector("#tblDrillCats tbody").innerHTML = cats.map(r=>`
     <tr class="${r.contribution>=10?'crit':r.contribution>=5?'high':''}">
       <td class="axis">${esc(r.category)}</td><td>${n(r.orders)}</td><td><b>${p(r.contribution)}</b></td>
       <td>${p(r.qty)}</td><td>${p(r.repl)}</td><td>${p(r.weight)}</td><td>${p(r.price)}</td>
       <td><span class="badge ${driver(r)==='OOS-сигнал'?'high':'watch'}">${driver(r)}</span></td>
-    </tr>`).join("");
-  const skus = (DRILL.skus[partner] || []).filter(r=>selected==="all" || r.category===selected);
+    </tr>`).join("") || '<tr><td colspan="8" class="mut" style="text-align:left">Немає даних для цього тижня.</td></tr>';
+  const skus = (src.skus[partner] || []).filter(r=>selected==="all" || r.category===selected);
   document.querySelector("#tblDrillSkus tbody").innerHTML = skus.map(r=>`
     <tr class="${r.affected_orders>=20?'crit':r.affected_orders>=10?'high':''}">
-      <td class="axis sku-name">${esc(r.name)}<span class="sku-code">${esc(r.sku)}</span></td>
+      <td class="axis sku-name">${esc(skuName(r.name))}<span class="sku-code">${esc(r.sku)}</span></td>
       <td>${esc(r.category)}</td><td>${n(r.items)}</td><td><b>${n(r.affected_orders)}</b></td>
       <td>${p(r.qty)}</td><td>${p(r.repl)}</td><td>${p(r.weight)}</td><td>${p(r.price)}</td>
       <td><span class="badge ${driver(r)==='OOS-сигнал'?'high':'watch'}">${driver(r)}</span></td>
-    </tr>`).join("") || '<tr><td colspan="9" class="mut" style="text-align:left">Немає SKU, що проходять поріг (≥10 active items і ≥3 сигнали).</td></tr>';
+    </tr>`).join("") || `<tr><td colspan="9" class="mut" style="text-align:left">Немає SKU, що проходять поріг (${weekly ? "≥5 active items і ≥2 сигнали за тиждень" : "≥10 active items і ≥3 сигнали"}).</td></tr>`;
 }
 function resetDrillCategories(){
   const partner = drillPartner.value;
+  const previous = drillCategory.value;
+  const src = drillSource();
+  const names = [...new Set(
+    (src.categories[partner] || []).map(x=>x.category)
+      .concat((src.skus[partner] || []).map(x=>x.category))
+  )];
   drillCategory.innerHTML = '<option value="all">Усі категорії</option>' +
-    (DRILL.categories[partner] || []).map(x=>`<option value="${esc(x.category)}">${esc(x.category)}</option>`).join("");
+    names.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
+  if (previous && names.includes(previous)) drillCategory.value = previous;
   renderDrill();
 }
 drillPartner.addEventListener("change", resetDrillCategories);
+drillWeek.addEventListener("change", resetDrillCategories);
 drillCategory.addEventListener("change", renderDrill);
 resetDrillCategories();
 
