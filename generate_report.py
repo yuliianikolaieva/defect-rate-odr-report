@@ -175,8 +175,8 @@ def status_of(avg, last, delta):
 
 
 def partner_copy(row):
-    b, avg, last, delta, qty, repl, wt, orepl = (
-        row["b"], row["avg"], row["last"], row["d"], row["qty"], row["repl"], row["wt"], row["orepl"]
+    b, avg, last, delta, qty, wt, orepl = (
+        row["b"], row["avg"], row["last"], row["d"], row["qty"], row["wt"], row["orepl"]
     )
     dtxt = f"{delta:+.1f}"
     ua_problem, ua_action, en_problem, en_action = "", "", "", ""
@@ -239,13 +239,13 @@ def partner_copy(row):
         en_action = "Lock in the progress and use the case as a grocery reference."
     elif b == "CAFE RYNOK":
         ua_problem = (
-            f"Помірний ODR (сер. {avg:.1f}%, ост. {last:.1f}%). Item replacement {repl:.1f}%, "
-            f"order replacement {orepl:.1f}%."
+            f"Помірний ODR (сер. {avg:.1f}%, ост. {last:.1f}%). "
+            f"Order replacement rate {orepl:.1f}%."
         )
         ua_action = "Catalog audit: чи replacement реальний, чи артефакт меню."
         en_problem = (
-            f"Moderate ODR (avg {avg:.1f}%, last {last:.1f}%). Item replacement {repl:.1f}%, "
-            f"order replacement {orepl:.1f}%."
+            f"Moderate ODR (avg {avg:.1f}%, last {last:.1f}%). "
+            f"Order replacement rate {orepl:.1f}%."
         )
         en_action = "Catalog audit: confirm whether replacements are real or a menu artefact."
     elif b == "RUKAVYCHKA":
@@ -318,12 +318,8 @@ def fetch():
           OR b.has_item_weighted_adjustment_with_eater_impact
           OR b.has_item_price_adjustment_with_price_increase THEN b.order_id END)
           * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS odr,
-        ROUND(COUNT(DISTINCT CASE WHEN b.is_item_replacement THEN b.order_id END)
+        ROUND(SUM(CASE WHEN b.is_item_replacement THEN 1 ELSE 0 END)
           * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS repl,
-        ROUND(SUM(CASE WHEN b.is_item_replacement THEN 1 ELSE 0 END)
-          * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS repl_per_order,
-        ROUND(SUM(CASE WHEN b.is_item_replacement THEN 1 ELSE 0 END)
-          * 100.0 / NULLIF(COUNT(*), 0), 1) AS repl_item,
         ROUND(COUNT(DISTINCT CASE WHEN b.has_item_quantity_adjustment_with_eater_impact THEN b.order_id END)
           * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS qty,
         ROUND(COUNT(DISTINCT CASE WHEN b.has_item_weighted_adjustment_with_eater_impact THEN b.order_id END)
@@ -380,8 +376,6 @@ def fetch():
         SUM(CASE WHEN basket_item_state = 'active' THEN 1 ELSE 0 END) AS items,
         ROUND(SUM(CASE WHEN qty_d THEN 1 ELSE 0 END) * 100.0
           / NULLIF(SUM(CASE WHEN basket_item_state = 'active' THEN 1 ELSE 0 END), 0), 1) AS qty_item,
-        ROUND(SUM(CASE WHEN repl_d THEN 1 ELSE 0 END) * 100.0
-          / NULLIF(SUM(CASE WHEN basket_item_state = 'active' THEN 1 ELSE 0 END), 0), 1) AS repl_item,
         ROUND(SUM(CASE WHEN wt_d THEN 1 ELSE 0 END) * 100.0
           / NULLIF(SUM(CASE WHEN basket_item_state = 'active' THEN 1 ELSE 0 END), 0), 1) AS wt_item,
         ROUND(COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) * 100.0
@@ -394,7 +388,7 @@ def fetch():
           AND (qty_d OR wt_d OR price_d) THEN order_id END) * 100.0
           / NULLIF(COUNT(DISTINCT CASE WHEN week = DATE_ADD(DATE_TRUNC('week', CURRENT_DATE()), -84)
           THEN order_id END), 0), 1) AS odr_first,
-        ROUND(COUNT(DISTINCT CASE WHEN repl_d THEN order_id END) * 100.0
+        ROUND(SUM(CASE WHEN repl_d THEN 1 ELSE 0 END) * 100.0
           / NULLIF(COUNT(DISTINCT order_id), 0), 1) AS orepl
       FROM x GROUP BY 1
     """)
@@ -412,7 +406,7 @@ def fetch():
           * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS weight,
         ROUND(COUNT(DISTINCT CASE WHEN b.has_item_price_adjustment_with_price_increase THEN b.order_id END)
           * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS price,
-        ROUND(COUNT(DISTINCT CASE WHEN b.is_item_replacement THEN b.order_id END)
+        ROUND(SUM(CASE WHEN b.is_item_replacement THEN 1 ELSE 0 END)
           * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS repl
       FROM main.ng_delivery.dim_basket_item_delivery b
       JOIN main.ng_delivery.dim_provider_v2 p ON b.provider_id = p.provider_id
@@ -433,7 +427,7 @@ def fetch():
           * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS weight,
         ROUND(COUNT(DISTINCT CASE WHEN b.has_item_price_adjustment_with_price_increase THEN b.order_id END)
           * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS price,
-        ROUND(COUNT(DISTINCT CASE WHEN b.is_item_replacement THEN b.order_id END)
+        ROUND(SUM(CASE WHEN b.is_item_replacement THEN 1 ELSE 0 END)
           * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS repl
       FROM main.ng_delivery.dim_basket_item_delivery b
       JOIN main.ng_delivery.dim_provider_v2 p ON b.provider_id = p.provider_id
@@ -450,15 +444,9 @@ def fetch():
           ELSE 'Unclassified'
         END AS segment,
         COUNT(DISTINCT b.order_id) AS orders,
-        COUNT(DISTINCT CASE WHEN b.is_item_replacement THEN b.order_id END) AS replacement_orders,
-        ROUND(COUNT(DISTINCT CASE WHEN b.is_item_replacement THEN b.order_id END) * 100.0
-          / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS replacement_rate,
-        COUNT(*) AS items,
         SUM(CASE WHEN b.is_item_replacement THEN 1 ELSE 0 END) AS replacement_items,
         ROUND(SUM(CASE WHEN b.is_item_replacement THEN 1 ELSE 0 END) * 100.0
-          / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS replacement_per_order,
-        ROUND(SUM(CASE WHEN b.is_item_replacement THEN 1 ELSE 0 END) * 100.0
-          / NULLIF(COUNT(*), 0), 1) AS item_replacement_rate
+          / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS replacement_rate
       FROM main.ng_delivery.dim_basket_item_delivery b
       JOIN main.ng_delivery.dim_provider_v2 p ON b.provider_id = p.provider_id
       WHERE p.country_code = 'ua' AND {WINDOW}
@@ -481,7 +469,7 @@ def fetch():
         SELECT country_code, brand, COUNT(DISTINCT order_id) AS orders,
           ROUND(COUNT(DISTINCT CASE WHEN defect THEN order_id END) * 100.0
             / NULLIF(COUNT(DISTINCT order_id), 0), 1) AS odr,
-          ROUND(COUNT(DISTINCT CASE WHEN repl THEN order_id END) * 100.0
+          ROUND(SUM(CASE WHEN repl THEN 1 ELSE 0 END) * 100.0
             / NULLIF(COUNT(DISTINCT order_id), 0), 1) AS repl,
           ROW_NUMBER() OVER (PARTITION BY country_code ORDER BY COUNT(DISTINCT order_id) DESC) AS rn
         FROM base GROUP BY 1, 2
@@ -551,7 +539,7 @@ def fetch():
       ), partner_totals AS (
         SELECT partner, COUNT(DISTINCT order_id) AS partner_orders,
           COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) AS defect_orders,
-          COUNT(DISTINCT CASE WHEN repl_d THEN order_id END) AS repl_orders,
+          SUM(CASE WHEN repl_d THEN 1 ELSE 0 END) AS repl_items,
           COUNT(DISTINCT CASE WHEN qty_d THEN order_id END) AS qty_orders,
           ROW_NUMBER() OVER (
             ORDER BY COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) DESC
@@ -566,7 +554,7 @@ def fetch():
               / NULLIF(COUNT(DISTINCT order_id), 0) >= 10
           )
       ), category_agg AS (
-        SELECT b.partner, b.category, p.partner_orders, p.defect_orders, p.repl_orders, p.qty_orders,
+        SELECT b.partner, b.category, p.partner_orders, p.defect_orders, p.repl_items, p.qty_orders,
           COUNT(DISTINCT b.order_id) AS category_orders,
           COUNT(*) AS items,
           COUNT(DISTINCT CASE WHEN b.qty_d OR b.wt_d OR b.price_d THEN b.order_id END) AS affected_orders,
@@ -576,13 +564,13 @@ def fetch():
           SUM(CASE WHEN b.price_d THEN 1 ELSE 0 END) AS price_n
         FROM base b
         JOIN partner_totals p ON b.partner = p.partner AND p.partner_rank <= 8
-        GROUP BY b.partner, b.category, p.partner_orders, p.defect_orders, p.repl_orders, p.qty_orders
+        GROUP BY b.partner, b.category, p.partner_orders, p.defect_orders, p.repl_items, p.qty_orders
       ), ranked AS (
         SELECT *,
           ROW_NUMBER() OVER (PARTITION BY partner ORDER BY affected_orders DESC, repl_n DESC) AS category_rank
         FROM category_agg
       )
-      SELECT partner, category, partner_orders, defect_orders, repl_orders, qty_orders,
+      SELECT partner, category, partner_orders, defect_orders, repl_items, qty_orders,
         category_orders, items, affected_orders,
         ROUND(affected_orders * 100.0 / NULLIF(partner_orders, 0), 1) AS contribution,
         ROUND(qty_n * 100.0 / NULLIF(items, 0), 1) AS qty,
@@ -694,7 +682,7 @@ def fetch():
         SELECT b.partner, b.week,
           COUNT(DISTINCT b.order_id) AS partner_orders,
           COUNT(DISTINCT CASE WHEN b.qty_d OR b.wt_d OR b.price_d THEN b.order_id END) AS defect_orders,
-          COUNT(DISTINCT CASE WHEN b.repl_d THEN b.order_id END) AS repl_orders,
+          SUM(CASE WHEN b.repl_d THEN 1 ELSE 0 END) AS repl_items,
           COUNT(DISTINCT CASE WHEN b.qty_d THEN b.order_id END) AS qty_orders
         FROM base b
         JOIN problem_partners pp ON b.partner = pp.partner
@@ -712,14 +700,14 @@ def fetch():
         JOIN problem_partners pp ON b.partner = pp.partner
         GROUP BY b.partner, b.week, b.category
       ), ranked AS (
-        SELECT a.*, w.partner_orders, w.defect_orders, w.repl_orders, w.qty_orders,
+        SELECT a.*, w.partner_orders, w.defect_orders, w.repl_items, w.qty_orders,
           ROW_NUMBER() OVER (
             PARTITION BY a.partner, a.week ORDER BY a.affected_orders DESC, a.repl_n DESC
           ) AS category_rank
         FROM category_agg a
         JOIN partner_week w ON a.partner = w.partner AND a.week = w.week
       )
-      SELECT partner, week, category, partner_orders, defect_orders, repl_orders, qty_orders,
+      SELECT partner, week, category, partner_orders, defect_orders, repl_items, qty_orders,
         category_orders, items, affected_orders,
         ROUND(affected_orders * 100.0 / NULLIF(partner_orders, 0), 1) AS contribution,
         ROUND(qty_n * 100.0 / NULLIF(items, 0), 1) AS qty,
@@ -805,7 +793,7 @@ def fetch():
           OR b.has_item_weighted_adjustment_with_eater_impact
           OR b.has_item_price_adjustment_with_price_increase THEN b.order_id END)
           * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS odr,
-        ROUND(COUNT(DISTINCT CASE WHEN b.is_item_replacement THEN b.order_id END)
+        ROUND(SUM(CASE WHEN b.is_item_replacement THEN 1 ELSE 0 END)
           * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS repl
       FROM main.ng_delivery.dim_basket_item_delivery b
       JOIN main.ng_delivery.dim_provider_v2 p ON b.provider_id = p.provider_id
@@ -819,7 +807,7 @@ def fetch():
           OR b.has_item_weighted_adjustment_with_eater_impact
           OR b.has_item_price_adjustment_with_price_increase THEN b.order_id END)
           * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS odr,
-        ROUND(COUNT(DISTINCT CASE WHEN b.is_item_replacement THEN b.order_id END)
+        ROUND(SUM(CASE WHEN b.is_item_replacement THEN 1 ELSE 0 END)
           * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS repl
       FROM main.ng_delivery.dim_basket_item_delivery b
       JOIN main.ng_delivery.dim_provider_v2 p ON b.provider_id = p.provider_id
@@ -834,12 +822,8 @@ def fetch():
           OR b.has_item_weighted_adjustment_with_eater_impact
           OR b.has_item_price_adjustment_with_price_increase THEN b.order_id END)
           * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS odr,
-        ROUND(COUNT(DISTINCT CASE WHEN b.is_item_replacement THEN b.order_id END)
-          * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS repl,
         ROUND(SUM(CASE WHEN b.is_item_replacement THEN 1 ELSE 0 END)
-          * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS repl_per_order,
-        ROUND(SUM(CASE WHEN b.is_item_replacement THEN 1 ELSE 0 END)
-          * 100.0 / NULLIF(COUNT(*), 0), 1) AS repl_item
+          * 100.0 / NULLIF(COUNT(DISTINCT b.order_id), 0), 1) AS repl
       FROM main.ng_delivery.dim_basket_item_delivery b
       JOIN main.ng_delivery.dim_provider_v2 p ON b.provider_id = p.provider_id
       WHERE p.country_code = 'ua' AND {WINDOW}
@@ -901,7 +885,6 @@ def build(raw):
             "last": last_v or 0,
             "d": delta,
             "qty": fnum(r["qty_item"]) or 0,
-            "repl": fnum(r["repl_item"]) or 0,
             "wt": fnum(r["wt_item"]) or 0,
             "orepl": fnum(r["orepl"]) or 0,
             "st": status_of(avg, last_v, delta),
@@ -975,38 +958,25 @@ def build(raw):
 
     odr_avg = fnum(raw["totals"]["odr"])
     repl_avg = fnum(raw["totals"]["repl"])
-    repl_per_order_avg = fnum(raw["totals"]["repl_per_order"])
-    repl_per_order_last = fnum(market[-1]["repl_per_order"])
-    repl_item_avg = fnum(raw["totals"]["repl_item"])
-    repl_item_last = fnum(market[-1]["repl_item"])
     dpp_market = round(last_odr - first_odr, 1)
 
     segment_raw = {r["segment"]: r for r in raw.get("segment_replacement") or []}
     segment_total_orders = sum(fint(r["orders"]) for r in segment_raw.values())
-    segment_total_replacements = sum(fint(r["replacement_orders"]) for r in segment_raw.values())
     segment_total_repl_items = sum(fint(r["replacement_items"]) for r in segment_raw.values())
-    segment_total_line_items = sum(fint(r["items"]) for r in segment_raw.values())
     segment_replacement = [{
         "segment": "TOTAL",
         "orders": segment_total_orders,
         "share": 100.0,
-        "replacement_orders": segment_total_replacements,
-        "rate": round(segment_total_replacements * 100 / max(segment_total_orders, 1), 1),
-        "per_order": round(segment_total_repl_items * 100 / max(segment_total_orders, 1), 1),
-        "item_rate": round(segment_total_repl_items * 100 / max(segment_total_line_items, 1), 1),
+        "rate": round(segment_total_repl_items * 100 / max(segment_total_orders, 1), 1),
     }]
     for segment in ("ENT", "MM", "SMB"):
         row = segment_raw.get(segment, {})
         orders = fint(row.get("orders"))
-        replacements = fint(row.get("replacement_orders"))
         segment_replacement.append({
             "segment": segment,
             "orders": orders,
             "share": round(orders * 100 / max(segment_total_orders, 1), 1),
-            "replacement_orders": replacements,
             "rate": fnum(row.get("replacement_rate")) if orders else None,
-            "per_order": fnum(row.get("replacement_per_order")) if orders else None,
-            "item_rate": fnum(row.get("item_replacement_rate")) if orders else None,
         })
     unclassified = segment_raw.get("Unclassified", {})
 
@@ -1020,8 +990,8 @@ def build(raw):
                 "orders": fint(r["partner_orders"]),
                 "defect_orders": fint(r["defect_orders"]),
                 "odr": round(fint(r["defect_orders"]) * 100 / max(fint(r["partner_orders"]), 1), 1),
-                "repl_orders": fint(r["repl_orders"]),
-                "repl": round(fint(r["repl_orders"]) * 100 / max(fint(r["partner_orders"]), 1), 1),
+                "repl_orders": fint(r["repl_items"]),
+                "repl": round(fint(r["repl_items"]) * 100 / max(fint(r["partner_orders"]), 1), 1),
                 "qty_orders": fint(r["qty_orders"]),
                 "qty": round(fint(r["qty_orders"]) * 100 / max(fint(r["partner_orders"]), 1), 1),
             })
@@ -1073,8 +1043,8 @@ def build(raw):
                 "orders": fint(r["partner_orders"]),
                 "defect_orders": fint(r["defect_orders"]),
                 "odr": round(fint(r["defect_orders"]) * 100 / max(fint(r["partner_orders"]), 1), 1),
-                "repl_orders": fint(r["repl_orders"]),
-                "repl": round(fint(r["repl_orders"]) * 100 / max(fint(r["partner_orders"]), 1), 1),
+                "repl_orders": fint(r["repl_items"]),
+                "repl": round(fint(r["repl_items"]) * 100 / max(fint(r["partner_orders"]), 1), 1),
                 "qty_orders": fint(r["qty_orders"]),
                 "qty": round(fint(r["qty_orders"]) * 100 / max(fint(r["partner_orders"]), 1), 1),
             })
@@ -1222,10 +1192,6 @@ def build(raw):
             "odr_avg": odr_avg,
             "odr_last": last_odr,
             "repl": repl_avg,
-            "repl_per_order": repl_per_order_avg,
-            "repl_per_order_last": repl_per_order_last,
-            "repl_item": repl_item_avg,
-            "repl_item_last": repl_item_last,
             "qty_share": qty_share,
             "last_is_peak": last_is_peak,
         },
@@ -1250,8 +1216,6 @@ def build(raw):
         "market": {
             "odr": [fnum(r["odr"]) for r in market],
             "repl": [fnum(r["repl"]) for r in market],
-            "repl_per_order": [fnum(r["repl_per_order"]) for r in market],
-            "repl_item": [fnum(r["repl_item"]) for r in market],
             "orders": [fint(r["orders"]) for r in market],
         },
         "brand_odr": brand_odr,
@@ -1270,7 +1234,7 @@ def build(raw):
         "segment_replacement": {
             "rows": segment_replacement,
             "unclassified_orders": fint(unclassified.get("orders")),
-            "unclassified_replacement_orders": fint(unclassified.get("replacement_orders")),
+            "unclassified_replacement_orders": fint(unclassified.get("replacement_items")),
         },
         "findings": findings,
         "zero_odr": sum(1 for x in dbx15 if x[2] == 0),

@@ -135,13 +135,11 @@
 <h2 class="section"><span class="bar"></span>Головні висновки</h2>
 <p class="section-desc">ODR на рівні ринку виглядає помірно, але тренд негативний, і проблема сконцентрована у кількох grocery-партнерах.</p>
 
-<div class="grid kpis three">
+<div class="grid kpis">
   <div class="kpi mid"><div class="n" id="kpi-odr">—</div><div class="l">UA Stores ODR · середнє за 12 тижнів</div></div>
   <div class="kpi warn"><div class="n" id="kpi-last">—</div><div class="l" id="kpi-last-label">ODR останній тиждень</div></div>
+  <div class="kpi info"><div class="n" id="kpi-repl">—</div><div class="l" id="kpi-repl-label">Order Replacement Rate % · Looker</div></div>
   <div class="kpi warn"><div class="n" id="kpi-qty-share">—</div><div class="l">Частка quantity у всіх item defects</div></div>
-  <div class="kpi info"><div class="n" id="kpi-repl">—</div><div class="l">Order Replacement Rate · частка замовлень із заміною</div></div>
-  <div class="kpi info"><div class="n" id="kpi-repl-item">—</div><div class="l" id="kpi-repl-item-label">Item Replacement Rate · частка замінених позицій</div></div>
-  <div class="kpi info"><div class="n" id="kpi-repl-looker">—</div><div class="l" id="kpi-repl-looker-label">Замін на 100 замовлень · визначення Looker</div></div>
 </div>
 <p class="metric-note" id="replNote"></p>
 
@@ -233,7 +231,7 @@
   </div>
   <div class="chartcard">
     <h3>ODR vs Replacement Rate — рівень ринку UA</h3>
-    <p class="cap">ODR і order repl — % замовлень; item repl — % позицій; Looker — замін на 100 замовлень</p>
+    <p class="cap">ODR — % замовлень; Order replacement rate — визначення Looker (заміни ÷ замовлення)</p>
     <div class="chartbox"><canvas id="chMarket"></canvas></div>
   </div>
 </div>
@@ -264,14 +262,14 @@
 <table class="matrix" id="tblLooker">
   <thead><tr>
     <th>Бренд</th><th>Items</th><th>ODR сер.</th><th>ODR посл.</th><th>Δ 12 тиж.</th>
-    <th>Qty %</th><th>Item repl %</th><th>Weight %</th><th>Order repl %</th><th style="text-align:left">Статус</th>
+    <th>Qty %</th><th>Weight %</th><th>Order repl % · Looker</th><th style="text-align:left">Статус</th>
   </tr></thead>
   <tbody></tbody>
 </table>
 </div>
 <p class="section-desc" style="margin-top:8px">
-  Qty / Item repl / Weight — item-level (частка позицій). ODR та Order repl — order-level (частка замовлень).
-  Тому Order repl завжди вищий за Item repl.
+  Qty / Weight — item-level (частка позицій). ODR — частка замовлень. Order repl % — визначення Looker:
+  замінені позиції ÷ замовлення.
 </p>
 
 <h3 style="font-size:15.5px;margin:28px 0 0">B. ТОП-15 партнерів UA Stores за обсягом замовлень (Databricks)</h3>
@@ -323,7 +321,7 @@
 <div class="grid kpis" style="margin-top:0">
   <div class="kpi warn"><div class="n" id="drillOdr">—</div><div class="l">ODR партнера · order-level</div></div>
   <div class="kpi mid"><div class="n" id="drillQty">—</div><div class="l">Quantity / OOS-сигнал · orders</div></div>
-  <div class="kpi info"><div class="n" id="drillRepl">—</div><div class="l">Replacement · orders, окремо від ODR</div></div>
+  <div class="kpi info"><div class="n" id="drillRepl">—</div><div class="l">Order Replacement Rate % · Looker</div></div>
   <div class="kpi"><div class="n" id="drillAffected">—</div><div class="l">Замовлень з ODR-дефектом</div></div>
 </div>
 <div class="card" style="margin-top:16px">
@@ -387,12 +385,12 @@
 <div class="card" style="margin-top:16px">
   <h3>UA Order Replacement Rate за сегментами <span class="sm">ENT / MM / SMB · country-level reconciliation</span></h3>
   <p class="section-desc" style="margin-bottom:8px">
-    Частка delivered Stores-замовлень хоча б з одним replacement, Item Replacement Rate і визначення Looker.
-    TOTAL є зваженим результатом усіх сегментів, а не показником Enterprise.
+    Order replacement rate % як у Looker: замінені позиції ÷ delivered Stores-замовлення. TOTAL —
+    зважений результат усіх сегментів, а не показник Enterprise.
   </p>
   <div class="tablewrap">
     <table class="matrix" id="tblSegmentRepl">
-      <thead><tr><th>Сегмент</th><th>Orders</th><th>Частка UA Stores</th><th>Orders з replacement</th><th>Order Replacement Rate</th><th>Item Replacement Rate</th><th>Замін на 100 замовлень (Looker)</th></tr></thead>
+      <thead><tr><th>Сегмент</th><th>Orders</th><th>Частка UA Stores</th><th>Order Replacement Rate % · Looker</th></tr></thead>
       <tbody></tbody>
     </table>
   </div>
@@ -468,16 +466,10 @@
 </details>
 
 <details class="gl">
-  <summary>Item Replacement Rate / Order Replacement Rate</summary>
-  <p><b>Визначення.</b> Item Replacement Rate: частка всіх замовлених dish items, які були замінені іншим SKU
-  (замінені позиції ÷ усі позиції). Order Replacement Rate: частка замовлень хоча б з однією заміною.
-  Order-рівень завжди вищий, бо одна заміна «маркує» все замовлення.</p>
-  <p><b>Різниця з Looker.</b> У Looker «Order replacement rate %» = замінені позиції ÷ замовлення
-  (скільки замін на 100 замовлень). У звіті поруч три числа: частка замовлень, Item Replacement Rate
-  і Looker. Looker вищий за order-level, бо в одному замовленні часто кілька замін, і може перевищувати 100%.
-  Item-level завжди нижчий за order-level.</p>
-  <p><b>Особливість.</b> Replacement не входить в ODR. Партнер може мати низький ODR і високий replacement
-  (HOP HEY: ODR 5.1%, item repl 15.8%) — клієнт усе одно отримує не те, що замовив.</p>
+  <summary>Order Replacement Rate %</summary>
+  <p><b>Визначення.</b> Як у Looker: кількість замінених позицій ÷ кількість delivered замовлень.
+  Показує, скільки замін припадає на 100 замовлень. Може перевищувати 100%, якщо в одному замовленні
+  кілька замін. Replacement не входить в ODR.</p>
   <p class="fix"><b>Як покращити:</b> матриця допустимих замін з підтвердженням клієнта в апці,
   перевірка чи «replacement» не є артефактом меню (комбо, модифікатори, вагові позиції).</p>
 </details>
@@ -560,17 +552,12 @@ const COUNTRIES = D.countries.map(c => Object.assign({}, c, {name: c.name_ua}));
   document.getElementById("kpi-last-label").textContent =
     "ODR останній тиждень (" + D.period.last_week_ua + ")" + (D.kpis.last_is_peak ? " · пік періоду" : "");
   document.getElementById("kpi-repl").textContent = pct(D.kpis.repl);
-  document.getElementById("kpi-repl-item").textContent = pct(D.kpis.repl_item);
-  document.getElementById("kpi-repl-item-label").textContent =
-    "Item Replacement Rate · частка замінених позицій (ост. тиждень " + pct(D.kpis.repl_item_last) + ")";
-  document.getElementById("kpi-repl-looker").textContent = pct(D.kpis.repl_per_order);
-  document.getElementById("kpi-repl-looker-label").textContent =
-    "Замін на 100 замовлень · визначення Looker (ост. тиждень " + pct(D.kpis.repl_per_order_last) + ")";
+  document.getElementById("kpi-repl-label").textContent =
+    "Order Replacement Rate % · Looker (замінені позиції ÷ замовлення)";
   document.getElementById("replNote").innerHTML =
-    `Три визначення replacement. <b>${pct(D.kpis.repl)}</b> — частка замовлень хоча б з однією заміною. ` +
-    `<b>${pct(D.kpis.repl_item)}</b> — Item Replacement Rate: замінені позиції ÷ усі замовлені dish items. ` +
-    `<b>${pct(D.kpis.repl_per_order)}</b> — Looker (заміни ÷ замовлення): на одне зачеплене замовлення ` +
-    `припадає в середньому ${(D.kpis.repl_per_order / Math.max(D.kpis.repl, 0.1)).toFixed(1)} заміни.`;
+    `Єдина метрика replacement у звіті — <b>Order replacement rate %</b> з Looker: ` +
+    `замінені позиції ÷ delivered замовлення. За період це <b>${pct(D.kpis.repl)}</b>. ` +
+    `Метрика може перевищувати 100%, якщо в одному замовленні кілька замін.`;
   document.getElementById("kpi-qty-share").textContent = pct(D.kpis.qty_share);
   if (D.mwb) {
     const vs = (D.mwb.odr_last ?? 0) - (D.kpis.odr_last ?? 0);
@@ -629,7 +616,6 @@ document.querySelector("#tblLooker tbody").innerHTML = PARTNERS.map(x=>`
     <td>${p(x.last)}</td>
     <td class="${x.d>0?'up':'down'}">${dpp(x.d)}</td>
     <td>${p(x.qty)}</td>
-    <td>${p(x.repl)}</td>
     <td>${p(x.wt)}</td>
     <td>${x.orepl===null?'—':p(x.orepl)}</td>
     <td style="text-align:left"><span class="badge ${x.st}">${ST_LABEL[x.st]}</span></td>
@@ -750,15 +736,13 @@ const SEGMENT_LABEL_UA = {TOTAL:"Усі UA Stores",ENT:"Enterprise",MM:"Mid-mark
 document.querySelector("#tblSegmentRepl tbody").innerHTML = SEGMENT_REPL.rows.map((r,i)=>`
   <tr class="${i===0?'high':''}">
     <td class="axis">${SEGMENT_LABEL_UA[r.segment]}</td>
-    <td>${n(r.orders)}</td><td>${p(r.share)}</td><td>${n(r.replacement_orders)}</td>
+    <td>${n(r.orders)}</td><td>${p(r.share)}</td>
     <td><b>${r.rate==null?'—':p(r.rate)}</b></td>
-    <td>${r.item_rate==null?'—':p(r.item_rate)}</td>
-    <td>${r.per_order==null?'—':p(r.per_order)}</td>
   </tr>`).join("");
 document.getElementById("segmentReplNote").textContent = (SEGMENT_REPL.unclassified_orders
   ? `${n(SEGMENT_REPL.unclassified_orders)} unclassified orders включені в TOTAL, але не показані окремим сегментом. `
   : "Усі замовлення розподілені між ENT / MM / SMB. ")
-  + "Item Replacement Rate = замінені позиції ÷ усі dish items. Looker = замінені позиції ÷ замовлення.";
+  + "Order Replacement Rate % = замінені позиції ÷ замовлення (Looker).";
 
 // ---------- графіки ----------
 if (typeof Chart === "undefined") {
@@ -791,9 +775,7 @@ new Chart(document.getElementById("chMarket"), {
   type:"line",
   data:{labels:WEEKS,datasets:[
     {label:"ODR, %",data:MARKET.odr,borderColor:"#d1493f",backgroundColor:"rgba(209,73,63,.08)",fill:true,tension:.3,borderWidth:2.5,pointRadius:3},
-    {label:"Order replacement, % замовлень",data:MARKET.repl,borderColor:"#2563eb",backgroundColor:"transparent",tension:.3,borderWidth:2,borderDash:[5,4],pointRadius:3},
-    {label:"Item replacement, % позицій",data:MARKET.repl_item,borderColor:"#0e7faa",backgroundColor:"transparent",tension:.3,borderWidth:2,pointRadius:3},
-    {label:"Замін на 100 замовлень (Looker)",data:MARKET.repl_per_order,borderColor:"#7c3aed",backgroundColor:"transparent",tension:.3,borderWidth:2,borderDash:[2,3],pointRadius:3}
+    {label:"Order replacement rate % (Looker)",data:MARKET.repl,borderColor:"#2563eb",backgroundColor:"transparent",tension:.3,borderWidth:2,borderDash:[5,4],pointRadius:3}
   ]},
   options:{responsive:true,maintainAspectRatio:false,
     scales:{x:{grid:{display:false},title:{display:true,text:"Тиждень"}},

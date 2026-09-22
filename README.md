@@ -13,7 +13,7 @@
 |---|---|
 | UA Stores ODR (сер. 12 тижнів) | 20.1% |
 | ODR останній тиждень (14 вер) | 20.4% |
-| Order replacement rate | 20.7% |
+| Order replacement rate % (Looker) | 31.1% |
 | Частка quantity у дефектах | 66.2% |
 | VARUS ODR | 57.9% (останній тиждень 66.0%) |
 
