@@ -627,12 +627,15 @@ const COUNTRIES = D.countries.map(c => Object.assign({}, c, {name: c.name_en}));
     "Worst: " + D.order_level.worst_wt_brand + " " + pct(D.order_level.worst_wt) + " (item)";
   document.getElementById("price-share-li").textContent = D.shares.price.toFixed(1) + "% of item defects, order-level ≈ " + pct(D.order_level.ua_price);
   document.getElementById("price-note-li").textContent = "Price-volume spikes on the chart should be checked for data quality";
-  document.getElementById("price-ro-li").textContent = "For contrast: Romania " + pct(D.order_level.ro_price) + " (market price ODR)";
+  const priceRo = document.getElementById("price-ro-li");
+  if (D.order_level.ro_price == null) priceRo.style.display = "none";
+  else priceRo.textContent = "For contrast: Romania " + pct(D.order_level.ro_price) + " (market price ODR)";
   document.getElementById("footer-period").textContent = D.period.footer_en;
   document.getElementById("method-period").innerHTML = "<b>Period:</b> " + D.period.label_en + ".";
   const by = Object.fromEntries(D.countries.map(c=>[c.code,c]));
   const ua=by.ua, ro=by.ro, ee=by.ee, lt=by.lt;
   const varus = D.dbx15.find(x=>x[0]==="VARUS");
+  if (ua && ro && ee && lt) {
   document.getElementById("bench-p1").innerHTML =
     `Ukraine (${pct(ua.odr)}) looks better than Romania (${pct(ro.odr)}) and Lithuania (${pct(lt.odr)}), and close to Estonia (${pct(ee.odr)}). Two caveats change the conclusion.`;
   document.getElementById("bench-p2").innerHTML =
@@ -641,6 +644,10 @@ const COUNTRIES = D.countries.map(c => Object.assign({}, c, {name: c.name_en}));
     `<b>Second:</b> Ukraine has the <b>highest replacement rate</b> of the four — ${pct(ua.repl)} versus ${pct(ro.repl)} / ${pct(ee.repl)} / ${pct(lt.repl)}.`;
   document.getElementById("bench-p4").innerHTML =
     `<b>Bottom line:</b> VARUS (${pct(varus[2])}) sits alongside large European grocery chains. This is a format problem, not a uniquely Ukrainian one.`;
+  } else {
+    document.getElementById("bench-p1").textContent = "The Romania, Estonia and Lithuania comparison is unavailable for this window: the source only has Ukraine for these 12 weeks.";
+    ["bench-p2","bench-p3","bench-p4"].forEach(id => { document.getElementById(id).textContent = ""; });
+  }
 })();
 
 // ---------- table rendering ----------

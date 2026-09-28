@@ -1187,7 +1187,7 @@ def build(raw):
         ],
     }
 
-    ro = next(c for c in countries if c["code"] == "ro")
+    ro = next((c for c in countries if c["code"] == "ro"), None)
     worst_qty = max(dbx15, key=lambda x: x[3])
     worst_wt = max(partners, key=lambda x: x["wt"])
 
@@ -1226,7 +1226,7 @@ def build(raw):
             "kop_qty": next((x[3] for x in dbx15 if x[0] == "KOPIYKA"), None),
             "worst_wt_brand": worst_wt["b"],
             "worst_wt": worst_wt["wt"],
-            "ro_price": ro["price"],
+            "ro_price": ro["price"] if ro else None,
         },
         "market": {
             "odr": [fnum(r["odr"]) for r in market],

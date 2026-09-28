@@ -587,12 +587,15 @@ const COUNTRIES = D.countries.map(c => Object.assign({}, c, {name: c.name_ua}));
     "Найгірші: " + D.order_level.worst_wt_brand + " " + pct(D.order_level.worst_wt) + " (item)";
   document.getElementById("price-share-li").textContent = D.shares.price.toFixed(1) + "% item defects, order-level ≈ " + pct(D.order_level.ua_price);
   document.getElementById("price-note-li").textContent = "Стрибки price-volume на графіку варто звіряти з якістю даних";
-  document.getElementById("price-ro-li").textContent = "Для порівняння: Румунія " + pct(D.order_level.ro_price) + " (ринковий price ODR)";
+  const priceRo = document.getElementById("price-ro-li");
+  if (D.order_level.ro_price == null) priceRo.style.display = "none";
+  else priceRo.textContent = "Для порівняння: Румунія " + pct(D.order_level.ro_price) + " (ринковий price ODR)";
   document.getElementById("footer-period").textContent = D.period.footer_ua;
   document.getElementById("method-period").innerHTML = "<b>Період:</b> " + D.period.label_ua + ".";
   const by = Object.fromEntries(D.countries.map(c=>[c.code,c]));
   const ua=by.ua, ro=by.ro, ee=by.ee, lt=by.lt;
   const varus = D.dbx15.find(x=>x[0]==="VARUS");
+  if (ua && ro && ee && lt) {
   document.getElementById("bench-p1").innerHTML =
     `Україна (${pct(ua.odr)}) виглядає краще за Румунію (${pct(ro.odr)}) і Литву (${pct(lt.odr)}), і близька до Естонії (${pct(ee.odr)}). Але два нюанси змінюють висновок.`;
   document.getElementById("bench-p2").innerHTML =
@@ -601,6 +604,10 @@ const COUNTRIES = D.countries.map(c => Object.assign({}, c, {name: c.name_ua}));
     `<b>Другий:</b> Україна має <b>найвищий replacement rate</b> серед четвірки — ${pct(ua.repl)} проти ${pct(ro.repl)} / ${pct(ee.repl)} / ${pct(lt.repl)}.`;
   document.getElementById("bench-p4").innerHTML =
     `<b>Підсумок:</b> VARUS (${pct(varus[2])}) стоїть в одному ряду з великими grocery-мережами ЄС. Це системна проблема формату, не унікальна українська.`;
+  } else {
+    document.getElementById("bench-p1").textContent = "Порівняння з Румунією, Естонією та Литвою цього вікна немає: у джерелі за 12 тижнів є лише Україна.";
+    ["bench-p2","bench-p3","bench-p4"].forEach(id => { document.getElementById(id).textContent = ""; });
+  }
 })();
 
 // ---------- рендер таблиць ----------
