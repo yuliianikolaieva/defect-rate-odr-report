@@ -605,17 +605,22 @@ def fetch():
         WHERE p.country_code = 'ua' AND {WINDOW}
       ), problem_partners AS (
         SELECT partner
-        FROM base
-        GROUP BY partner
-        HAVING COUNT(DISTINCT order_id) >= 200
-          AND (
-            COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) * 100.0
-              / NULLIF(COUNT(DISTINCT order_id), 0) >= 10
-            OR COUNT(DISTINCT CASE WHEN repl_d THEN order_id END) * 100.0
-              / NULLIF(COUNT(DISTINCT order_id), 0) >= 10
-          )
-        ORDER BY COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) DESC
-        LIMIT 8
+        FROM (
+          SELECT partner,
+            ROW_NUMBER() OVER (
+              ORDER BY COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) DESC
+            ) AS partner_rank
+          FROM base
+          GROUP BY partner
+          HAVING COUNT(DISTINCT order_id) >= 200
+            AND (
+              COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) * 100.0
+                / NULLIF(COUNT(DISTINCT order_id), 0) >= 10
+              OR COUNT(DISTINCT CASE WHEN repl_d THEN order_id END) * 100.0
+                / NULLIF(COUNT(DISTINCT order_id), 0) >= 10
+            )
+        ) ranked_partners
+        WHERE partner_rank <= 8
       ), sku_agg AS (
         SELECT b.partner, b.category, b.sku, b.item_name,
           COUNT(DISTINCT b.order_id) AS orders,
@@ -667,17 +672,22 @@ def fetch():
         WHERE p.country_code = 'ua' AND {WINDOW}
       ), problem_partners AS (
         SELECT partner
-        FROM base
-        GROUP BY partner
-        HAVING COUNT(DISTINCT order_id) >= 200
-          AND (
-            COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) * 100.0
-              / NULLIF(COUNT(DISTINCT order_id), 0) >= 10
-            OR COUNT(DISTINCT CASE WHEN repl_d THEN order_id END) * 100.0
-              / NULLIF(COUNT(DISTINCT order_id), 0) >= 10
-          )
-        ORDER BY COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) DESC
-        LIMIT 8
+        FROM (
+          SELECT partner,
+            ROW_NUMBER() OVER (
+              ORDER BY COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) DESC
+            ) AS partner_rank
+          FROM base
+          GROUP BY partner
+          HAVING COUNT(DISTINCT order_id) >= 200
+            AND (
+              COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) * 100.0
+                / NULLIF(COUNT(DISTINCT order_id), 0) >= 10
+              OR COUNT(DISTINCT CASE WHEN repl_d THEN order_id END) * 100.0
+                / NULLIF(COUNT(DISTINCT order_id), 0) >= 10
+            )
+        ) ranked_partners
+        WHERE partner_rank <= 8
       ), partner_week AS (
         SELECT b.partner, b.week,
           COUNT(DISTINCT b.order_id) AS partner_orders,
@@ -743,17 +753,22 @@ def fetch():
         WHERE p.country_code = 'ua' AND {WINDOW}
       ), problem_partners AS (
         SELECT partner
-        FROM base
-        GROUP BY partner
-        HAVING COUNT(DISTINCT order_id) >= 200
-          AND (
-            COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) * 100.0
-              / NULLIF(COUNT(DISTINCT order_id), 0) >= 10
-            OR COUNT(DISTINCT CASE WHEN repl_d THEN order_id END) * 100.0
-              / NULLIF(COUNT(DISTINCT order_id), 0) >= 10
-          )
-        ORDER BY COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) DESC
-        LIMIT 8
+        FROM (
+          SELECT partner,
+            ROW_NUMBER() OVER (
+              ORDER BY COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) DESC
+            ) AS partner_rank
+          FROM base
+          GROUP BY partner
+          HAVING COUNT(DISTINCT order_id) >= 200
+            AND (
+              COUNT(DISTINCT CASE WHEN qty_d OR wt_d OR price_d THEN order_id END) * 100.0
+                / NULLIF(COUNT(DISTINCT order_id), 0) >= 10
+              OR COUNT(DISTINCT CASE WHEN repl_d THEN order_id END) * 100.0
+                / NULLIF(COUNT(DISTINCT order_id), 0) >= 10
+            )
+        ) ranked_partners
+        WHERE partner_rank <= 8
       ), sku_agg AS (
         SELECT b.partner, b.week, b.category, b.sku, b.item_name,
           COUNT(DISTINCT b.order_id) AS orders,
