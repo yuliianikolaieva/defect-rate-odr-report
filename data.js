@@ -149,7 +149,7 @@ window.ODR_DATA = {
       10913,
       11279,
       10693,
-      10864
+      10866
     ]
   },
   "brand_odr": {
@@ -298,7 +298,7 @@ window.ODR_DATA = {
     },
     {
       "b": "LOKO",
-      "items": 84340,
+      "items": 84350,
       "avg": 6.6,
       "last": 7.9,
       "d": 1.6,
@@ -489,7 +489,7 @@ window.ODR_DATA = {
     ],
     [
       "LOKO",
-      14448,
+      14450,
       6.6,
       5.2,
       1.5,
@@ -667,14 +667,14 @@ window.ODR_DATA = {
   "cats": [
     [
       "Grocery Food",
-      195042,
+      195045,
       7.4,
       11.5,
       36941
     ],
     [
       "Various, mixed",
-      130781,
+      130782,
       11.8,
       5.2,
       22204
@@ -702,7 +702,7 @@ window.ODR_DATA = {
     ],
     [
       "Still water",
-      16080,
+      16081,
       10.6,
       5.3,
       2566
@@ -723,7 +723,7 @@ window.ODR_DATA = {
     ],
     [
       "Wheat Beer",
-      18920,
+      18921,
       2.0,
       1.1,
       584
@@ -1997,30 +1997,6 @@ window.ODR_DATA = {
         },
         {
           "category": "Various, mixed",
-          "sku": "000010460",
-          "name": "Рис з яйцем тамаго та куркою 330г",
-          "orders": 181,
-          "items": 183,
-          "affected_orders": 5,
-          "qty": 2.7,
-          "repl": 1.1,
-          "weight": 0,
-          "price": 0
-        },
-        {
-          "category": "Various, mixed",
-          "sku": "000010917",
-          "name": "Drip Coffee 3 Champs Roastery в асорт. 10г",
-          "orders": 22,
-          "items": 23,
-          "affected_orders": 5,
-          "qty": 21.7,
-          "repl": 8.7,
-          "weight": 0,
-          "price": 0
-        },
-        {
-          "category": "Various, mixed",
           "sku": "000018214",
           "name": "Гречка з тунцем і яйцем 290г",
           "orders": 70,
@@ -2045,6 +2021,18 @@ window.ODR_DATA = {
         },
         {
           "category": "Various, mixed",
+          "sku": "000010917",
+          "name": "Drip Coffee 3 Champs Roastery в асорт. 10г",
+          "orders": 22,
+          "items": 23,
+          "affected_orders": 5,
+          "qty": 21.7,
+          "repl": 8.7,
+          "weight": 0,
+          "price": 0
+        },
+        {
+          "category": "Various, mixed",
           "sku": "000020030",
           "name": "Локшина з креветкою та овочами 420г",
           "orders": 143,
@@ -2052,6 +2040,18 @@ window.ODR_DATA = {
           "affected_orders": 5,
           "qty": 3.4,
           "repl": 1.4,
+          "weight": 0,
+          "price": 0
+        },
+        {
+          "category": "Various, mixed",
+          "sku": "000010460",
+          "name": "Рис з яйцем тамаго та куркою 330г",
+          "orders": 181,
+          "items": 183,
+          "affected_orders": 5,
+          "qty": 2.7,
+          "repl": 1.1,
           "weight": 0,
           "price": 0
         },
@@ -2154,18 +2154,6 @@ window.ODR_DATA = {
           "price": 0
         },
         {
-          "category": "Grocery Food",
-          "sku": "86528",
-          "name": "Огірок короткоплідний Україна (за 300 г.)",
-          "orders": 234,
-          "items": 238,
-          "affected_orders": 14,
-          "qty": 2.9,
-          "repl": 0,
-          "weight": 2.9,
-          "price": 0
-        },
-        {
           "category": "Various, mixed",
           "sku": "206674",
           "name": "Піца  130г 4 мяса куточок",
@@ -2179,6 +2167,18 @@ window.ODR_DATA = {
         },
         {
           "category": "Grocery Food",
+          "sku": "86528",
+          "name": "Огірок короткоплідний Україна (за 300 г.)",
+          "orders": 234,
+          "items": 238,
+          "affected_orders": 14,
+          "qty": 2.9,
+          "repl": 0,
+          "weight": 2.9,
+          "price": 0
+        },
+        {
+          "category": "Grocery Food",
           "sku": "50525",
           "name": "Цибуля молода (за 300 г.)",
           "orders": 135,
@@ -2187,18 +2187,6 @@ window.ODR_DATA = {
           "qty": 0,
           "repl": 1.5,
           "weight": 9.5,
-          "price": 0
-        },
-        {
-          "category": "Cola",
-          "sku": "212577",
-          "name": "Вода Пепсі-кола 1.75л",
-          "orders": 129,
-          "items": 129,
-          "affected_orders": 13,
-          "qty": 10.1,
-          "repl": 0,
-          "weight": 0,
           "price": 0
         },
         {
@@ -2221,6 +2209,18 @@ window.ODR_DATA = {
           "items": 15,
           "affected_orders": 13,
           "qty": 86.7,
+          "repl": 0,
+          "weight": 0,
+          "price": 0
+        },
+        {
+          "category": "Cola",
+          "sku": "212577",
+          "name": "Вода Пепсі-кола 1.75л",
+          "orders": 129,
+          "items": 129,
+          "affected_orders": 13,
+          "qty": 10.1,
           "repl": 0,
           "weight": 0,
           "price": 0
@@ -2310,18 +2310,6 @@ window.ODR_DATA = {
           "price": 0
         },
         {
-          "category": "Snacks",
-          "sku": "25891",
-          "name": "Сосиски Kolbaso зі скоринкою ц.о 1г к.уп (за 200 г.)",
-          "orders": 21,
-          "items": 21,
-          "affected_orders": 8,
-          "qty": 9.5,
-          "repl": 0,
-          "weight": 28.6,
-          "price": 0
-        },
-        {
           "category": "Grocery Food",
           "sku": "196222",
           "name": "Молоко Яготинське 900мл 2.6% т.ф",
@@ -2331,6 +2319,18 @@ window.ODR_DATA = {
           "qty": 34.8,
           "repl": 0,
           "weight": 0,
+          "price": 0
+        },
+        {
+          "category": "Snacks",
+          "sku": "25891",
+          "name": "Сосиски Kolbaso зі скоринкою ц.о 1г к.уп (за 200 г.)",
+          "orders": 21,
+          "items": 21,
+          "affected_orders": 8,
+          "qty": 9.5,
+          "repl": 0,
+          "weight": 28.6,
           "price": 0
         },
         {
@@ -2370,6 +2370,18 @@ window.ODR_DATA = {
           "price": 0
         },
         {
+          "category": "Cola",
+          "sku": "215567",
+          "name": "Напій Coca Cola 1.25л vanilla",
+          "orders": 24,
+          "items": 25,
+          "affected_orders": 7,
+          "qty": 28.0,
+          "repl": 4.0,
+          "weight": 0,
+          "price": 0
+        },
+        {
           "category": "Grocery Food",
           "sku": "5688",
           "name": "Картопля молода рожева (за 100 г.)",
@@ -2390,18 +2402,6 @@ window.ODR_DATA = {
           "affected_orders": 7,
           "qty": 19.4,
           "repl": 2.8,
-          "weight": 0,
-          "price": 0
-        },
-        {
-          "category": "Cola",
-          "sku": "215567",
-          "name": "Напій Coca Cola 1.25л vanilla",
-          "orders": 24,
-          "items": 25,
-          "affected_orders": 7,
-          "qty": 28.0,
-          "repl": 4.0,
           "weight": 0,
           "price": 0
         },
@@ -2614,18 +2614,6 @@ window.ODR_DATA = {
           "price": 0
         },
         {
-          "category": "Various, mixed",
-          "sku": "53062",
-          "name": "{\"uk-UA\":\"Яйце куряче 10шт.\"}",
-          "orders": 17,
-          "items": 17,
-          "affected_orders": 5,
-          "qty": 29.4,
-          "repl": 0,
-          "weight": 0,
-          "price": 0
-        },
-        {
           "category": "Shashlik",
           "sku": "55154",
           "name": "{\"uk-UA\":\"Курка-гриль (за 1100 г)\"}",
@@ -2638,15 +2626,15 @@ window.ODR_DATA = {
           "price": 0
         },
         {
-          "category": "Ribs",
-          "sku": "20223",
-          "name": "{\"uk-UA\":\"Реберця свинячі по-львівськи (за 800 г)\"}",
-          "orders": 12,
-          "items": 12,
-          "affected_orders": 4,
-          "qty": 16.7,
-          "repl": 8.3,
-          "weight": 16.7,
+          "category": "Various, mixed",
+          "sku": "53062",
+          "name": "{\"uk-UA\":\"Яйце куряче 10шт.\"}",
+          "orders": 17,
+          "items": 17,
+          "affected_orders": 5,
+          "qty": 29.4,
+          "repl": 0,
+          "weight": 0,
           "price": 0
         },
         {
@@ -2659,6 +2647,18 @@ window.ODR_DATA = {
           "qty": 40.0,
           "repl": 10.0,
           "weight": 0,
+          "price": 0
+        },
+        {
+          "category": "Ribs",
+          "sku": "20223",
+          "name": "{\"uk-UA\":\"Реберця свинячі по-львівськи (за 800 г)\"}",
+          "orders": 12,
+          "items": 12,
+          "affected_orders": 4,
+          "qty": 16.7,
+          "repl": 8.3,
+          "weight": 16.7,
           "price": 0
         },
         {
@@ -2686,18 +2686,6 @@ window.ODR_DATA = {
           "price": 0
         },
         {
-          "category": "Shashlik",
-          "sku": "53215",
-          "name": "{\"uk-UA\":\"Голубці українські (за 500 г)\"}",
-          "orders": 11,
-          "items": 11,
-          "affected_orders": 3,
-          "qty": 27.3,
-          "repl": 0,
-          "weight": 0,
-          "price": 0
-        },
-        {
           "category": "Various, mixed",
           "sku": "53229",
           "name": "{\"uk-UA\":\"Салат \\\"Олів'є\\\" (за 400 г)\"}",
@@ -2705,6 +2693,18 @@ window.ODR_DATA = {
           "items": 19,
           "affected_orders": 3,
           "qty": 15.8,
+          "repl": 0,
+          "weight": 0,
+          "price": 0
+        },
+        {
+          "category": "Shashlik",
+          "sku": "53215",
+          "name": "{\"uk-UA\":\"Голубці українські (за 500 г)\"}",
+          "orders": 11,
+          "items": 11,
+          "affected_orders": 3,
+          "qty": 27.3,
           "repl": 0,
           "weight": 0,
           "price": 0
@@ -2735,18 +2735,6 @@ window.ODR_DATA = {
         },
         {
           "category": "Various, mixed",
-          "sku": "53678",
-          "name": "{\"uk-UA\":\"Салат \\\"Оселедець під шубою\\\" (за 450 г)\"}",
-          "orders": 16,
-          "items": 16,
-          "affected_orders": 2,
-          "qty": 12.5,
-          "repl": 6.3,
-          "weight": 0,
-          "price": 0
-        },
-        {
-          "category": "Various, mixed",
           "sku": "29442",
           "name": "{\"uk-UA\":\"Гомілка куряча (за 500 г)\"}",
           "orders": 10,
@@ -2755,6 +2743,18 @@ window.ODR_DATA = {
           "qty": 10.0,
           "repl": 10.0,
           "weight": 10.0,
+          "price": 0
+        },
+        {
+          "category": "Various, mixed",
+          "sku": "53678",
+          "name": "{\"uk-UA\":\"Салат \\\"Оселедець під шубою\\\" (за 450 г)\"}",
+          "orders": 16,
+          "items": 16,
+          "affected_orders": 2,
+          "qty": 12.5,
+          "repl": 6.3,
+          "weight": 0,
           "price": 0
         },
         {
@@ -2820,18 +2820,6 @@ window.ODR_DATA = {
           "price": 0
         },
         {
-          "category": "Cola",
-          "sku": "0204030380",
-          "name": "Напій Сил/Газ 1.75Л Кока-Кола",
-          "orders": 165,
-          "items": 166,
-          "affected_orders": 10,
-          "qty": 6.0,
-          "repl": 0,
-          "weight": 0,
-          "price": 0
-        },
-        {
           "category": "Grocery Food",
           "sku": "1101010049",
           "name": "ДИНЯ ВАГ (за 100г)",
@@ -2839,6 +2827,18 @@ window.ODR_DATA = {
           "items": 24,
           "affected_orders": 10,
           "qty": 41.7,
+          "repl": 0,
+          "weight": 0,
+          "price": 0
+        },
+        {
+          "category": "Cola",
+          "sku": "0204030380",
+          "name": "Напій Сил/Газ 1.75Л Кока-Кола",
+          "orders": 165,
+          "items": 166,
+          "affected_orders": 10,
+          "qty": 6.0,
           "repl": 0,
           "weight": 0,
           "price": 0
@@ -2929,6 +2929,42 @@ window.ODR_DATA = {
         },
         {
           "category": "Various, mixed",
+          "sku": "0307020483",
+          "name": "БУЛКА З СОСИСКОЮ 80Г КУХАРОЧКА",
+          "orders": 27,
+          "items": 27,
+          "affected_orders": 5,
+          "qty": 18.5,
+          "repl": 0,
+          "weight": 0,
+          "price": 0
+        },
+        {
+          "category": "Grocery Food",
+          "sku": "0512020307",
+          "name": "Бат Kinder Bueno Біл Шок T2x30 39Г Ферреро",
+          "orders": 23,
+          "items": 23,
+          "affected_orders": 5,
+          "qty": 21.7,
+          "repl": 0,
+          "weight": 0,
+          "price": 0
+        },
+        {
+          "category": "Napoleon Cake",
+          "sku": "0308010268",
+          "name": "Пиріг Наполеон 1Кг Традиція (за 100г)",
+          "orders": 11,
+          "items": 11,
+          "affected_orders": 5,
+          "qty": 27.3,
+          "repl": 0,
+          "weight": 18.2,
+          "price": 0
+        },
+        {
+          "category": "Various, mixed",
           "sku": "0207000107",
           "name": "Енерг Напiй Boost Ж/Б 0.5Л Non Stop",
           "orders": 15,
@@ -2949,6 +2985,18 @@ window.ODR_DATA = {
           "qty": 15.6,
           "repl": 0,
           "weight": 0,
+          "price": 0
+        },
+        {
+          "category": "Grocery Food",
+          "sku": "1101020434",
+          "name": "МОРКВА МИТА ВАГ (за 100г)",
+          "orders": 23,
+          "items": 24,
+          "affected_orders": 5,
+          "qty": 8.3,
+          "repl": 0,
+          "weight": 12.5,
           "price": 0
         },
         {
@@ -2976,54 +3024,6 @@ window.ODR_DATA = {
           "price": 0
         },
         {
-          "category": "Napoleon Cake",
-          "sku": "0308010268",
-          "name": "Пиріг Наполеон 1Кг Традиція (за 100г)",
-          "orders": 11,
-          "items": 11,
-          "affected_orders": 5,
-          "qty": 27.3,
-          "repl": 0,
-          "weight": 18.2,
-          "price": 0
-        },
-        {
-          "category": "Various, mixed",
-          "sku": "0307020483",
-          "name": "БУЛКА З СОСИСКОЮ 80Г КУХАРОЧКА",
-          "orders": 27,
-          "items": 27,
-          "affected_orders": 5,
-          "qty": 18.5,
-          "repl": 0,
-          "weight": 0,
-          "price": 0
-        },
-        {
-          "category": "Grocery Food",
-          "sku": "0512020307",
-          "name": "Бат Kinder Bueno Біл Шок T2x30 39Г Ферреро",
-          "orders": 23,
-          "items": 23,
-          "affected_orders": 5,
-          "qty": 21.7,
-          "repl": 0,
-          "weight": 0,
-          "price": 0
-        },
-        {
-          "category": "Grocery Food",
-          "sku": "1101020434",
-          "name": "МОРКВА МИТА ВАГ (за 100г)",
-          "orders": 23,
-          "items": 24,
-          "affected_orders": 5,
-          "qty": 8.3,
-          "repl": 0,
-          "weight": 12.5,
-          "price": 0
-        },
-        {
           "category": "Grocery Food",
           "sku": "2301010264",
           "name": "Сиг Парламент Сільвер Блю 1Пач Філіп Моріс",
@@ -3036,6 +3036,42 @@ window.ODR_DATA = {
           "price": 0
         },
         {
+          "category": "Rosé Wine",
+          "sku": "1101010081",
+          "name": "ВИНОГРАД РОЖЕВИЙ ВАГ (за 100г)",
+          "orders": 33,
+          "items": 34,
+          "affected_orders": 4,
+          "qty": 11.8,
+          "repl": 0,
+          "weight": 0,
+          "price": 0
+        },
+        {
+          "category": "Beef burger",
+          "sku": "0312000051",
+          "name": "ГАМБУРГЕР З  КОТЛЕТОЮ 230Г TO GO",
+          "orders": 45,
+          "items": 48,
+          "affected_orders": 4,
+          "qty": 8.3,
+          "repl": 0,
+          "weight": 0,
+          "price": 0
+        },
+        {
+          "category": "Grocery Food",
+          "sku": "1801010692",
+          "name": "Корм Д/Котiв Курка В Желе 85Г Віскас",
+          "orders": 13,
+          "items": 13,
+          "affected_orders": 4,
+          "qty": 30.8,
+          "repl": 0,
+          "weight": 0,
+          "price": 0
+        },
+        {
           "category": "Non-Food",
           "sku": "2301011392",
           "name": "Вир Тют Д/Ел Наг Purple Wave 1Пач Terea",
@@ -3043,6 +3079,30 @@ window.ODR_DATA = {
           "items": 39,
           "affected_orders": 4,
           "qty": 10.3,
+          "repl": 0,
+          "weight": 0,
+          "price": 0
+        },
+        {
+          "category": "Various, mixed",
+          "sku": "0302070010",
+          "name": "ПЕЧIНКА КУРЯЧА ОХОЛОДЖЕНА 1КГ (за 100г)",
+          "orders": 14,
+          "items": 14,
+          "affected_orders": 4,
+          "qty": 14.3,
+          "repl": 0,
+          "weight": 14.3,
+          "price": 0
+        },
+        {
+          "category": "Non-Food",
+          "sku": "2301011390",
+          "name": "Вир Тют Д/Ел Наг Sun Pearl 1Пач Terea",
+          "orders": 45,
+          "items": 45,
+          "affected_orders": 4,
+          "qty": 8.9,
           "repl": 0,
           "weight": 0,
           "price": 0
@@ -3067,66 +3127,6 @@ window.ODR_DATA = {
           "items": 10,
           "affected_orders": 4,
           "qty": 40.0,
-          "repl": 0,
-          "weight": 0,
-          "price": 0
-        },
-        {
-          "category": "Wheat Beer",
-          "sku": "0104010231",
-          "name": "Пиво Світл Koryfei Expor 4.2% Ж/Б 0.5Л Опілля",
-          "orders": 16,
-          "items": 16,
-          "affected_orders": 4,
-          "qty": 25.0,
-          "repl": 0,
-          "weight": 0,
-          "price": 0
-        },
-        {
-          "category": "Shashlik",
-          "sku": "0302060053",
-          "name": "ФАРШ КУРЯЧИЙ ОСОБЛИВИЙ ОХОЛОДЖЕНИЙ 1КГ (за 100г)",
-          "orders": 38,
-          "items": 39,
-          "affected_orders": 4,
-          "qty": 10.3,
-          "repl": 0,
-          "weight": 0,
-          "price": 0
-        },
-        {
-          "category": "Grocery Food",
-          "sku": "2301010269",
-          "name": "Сиг Parliament Aqua Blue 1Пач Філіп Моріс",
-          "orders": 29,
-          "items": 31,
-          "affected_orders": 4,
-          "qty": 12.9,
-          "repl": 0,
-          "weight": 0,
-          "price": 0
-        },
-        {
-          "category": "Various, mixed",
-          "sku": "0302070012",
-          "name": "СЕРЦЕ КУРЯЧЕ 1КГ (за 100г)",
-          "orders": 10,
-          "items": 10,
-          "affected_orders": 4,
-          "qty": 20.0,
-          "repl": 0,
-          "weight": 20.0,
-          "price": 0
-        },
-        {
-          "category": "Grocery Food",
-          "sku": "1801010692",
-          "name": "Корм Д/Котiв Курка В Желе 85Г Віскас",
-          "orders": 13,
-          "items": 13,
-          "affected_orders": 4,
-          "qty": 30.8,
           "repl": 0,
           "weight": 0,
           "price": 0
@@ -3194,6 +3194,18 @@ window.ODR_DATA = {
           "price": 0
         },
         {
+          "category": "Shashlik",
+          "sku": "1404",
+          "name": "Філе стегна Супер Філео н.ф фас сес курки охолодже (за 300 г.)",
+          "orders": 28,
+          "items": 29,
+          "affected_orders": 4,
+          "qty": 6.9,
+          "repl": 0,
+          "weight": 6.9,
+          "price": 0
+        },
+        {
           "category": "Various, mixed",
           "sku": "154567",
           "name": "Напій енергетичний Red bull 0.25л summer edition",
@@ -3218,18 +3230,6 @@ window.ODR_DATA = {
           "price": 0
         },
         {
-          "category": "Shashlik",
-          "sku": "1404",
-          "name": "Філе стегна Супер Філео н.ф фас сес курки охолодже (за 300 г.)",
-          "orders": 28,
-          "items": 29,
-          "affected_orders": 4,
-          "qty": 6.9,
-          "repl": 0,
-          "weight": 6.9,
-          "price": 0
-        },
-        {
           "category": "Grocery Food",
           "sku": "212292",
           "name": "Молоко ММЗ 850г 2.6 бут",
@@ -3238,6 +3238,18 @@ window.ODR_DATA = {
           "affected_orders": 3,
           "qty": 18.8,
           "repl": 6.3,
+          "weight": 0,
+          "price": 0
+        },
+        {
+          "category": "Snacks",
+          "sku": "180885",
+          "name": "Сосиска під соусом в тісті  145г власне вир-во",
+          "orders": 10,
+          "items": 10,
+          "affected_orders": 3,
+          "qty": 30.0,
+          "repl": 0,
           "weight": 0,
           "price": 0
         },
@@ -3261,18 +3273,6 @@ window.ODR_DATA = {
           "items": 22,
           "affected_orders": 3,
           "qty": 13.6,
-          "repl": 0,
-          "weight": 0,
-          "price": 0
-        },
-        {
-          "category": "Snacks",
-          "sku": "180885",
-          "name": "Сосиска під соусом в тісті  145г власне вир-во",
-          "orders": 10,
-          "items": 10,
-          "affected_orders": 3,
-          "qty": 30.0,
           "repl": 0,
           "weight": 0,
           "price": 0
@@ -3328,18 +3328,6 @@ window.ODR_DATA = {
       ],
       "TAISTRA": [
         {
-          "category": "Grocery Food",
-          "sku": "24377",
-          "name": "Банан . (за 100 г)",
-          "orders": 174,
-          "items": 179,
-          "affected_orders": 10,
-          "qty": 5.0,
-          "repl": 0,
-          "weight": 0.6,
-          "price": 0
-        },
-        {
           "category": "Various, mixed",
           "sku": "23270",
           "name": "Яйце КВОЧКА куряче С1 фасовані 10шт",
@@ -3349,6 +3337,18 @@ window.ODR_DATA = {
           "qty": 8.8,
           "repl": 0,
           "weight": 0,
+          "price": 0
+        },
+        {
+          "category": "Grocery Food",
+          "sku": "24377",
+          "name": "Банан . (за 100 г)",
+          "orders": 174,
+          "items": 179,
+          "affected_orders": 10,
+          "qty": 5.0,
+          "repl": 0,
+          "weight": 0.6,
           "price": 0
         },
         {
@@ -3413,24 +3413,24 @@ window.ODR_DATA = {
         },
         {
           "category": "Grocery Food",
-          "sku": "24496",
-          "name": "Гриби Печериці (за 100 г)",
-          "orders": 25,
-          "items": 25,
-          "affected_orders": 5,
-          "qty": 20.0,
-          "repl": 0,
-          "weight": 0,
-          "price": 0
-        },
-        {
-          "category": "Grocery Food",
           "sku": "24407",
           "name": "Капуста молода (за 100 г)",
           "orders": 21,
           "items": 21,
           "affected_orders": 5,
           "qty": 23.8,
+          "repl": 0,
+          "weight": 0,
+          "price": 0
+        },
+        {
+          "category": "Grocery Food",
+          "sku": "24496",
+          "name": "Гриби Печериці (за 100 г)",
+          "orders": 25,
+          "items": 25,
+          "affected_orders": 5,
+          "qty": 20.0,
           "repl": 0,
           "weight": 0,
           "price": 0
@@ -3472,30 +3472,6 @@ window.ODR_DATA = {
           "price": 0
         },
         {
-          "category": "Shashlik",
-          "sku": "59525",
-          "name": "Шинка ГЛОБИНО фует в/с, в/п нар.серв. 105 г",
-          "orders": 72,
-          "items": 74,
-          "affected_orders": 4,
-          "qty": 5.4,
-          "repl": 0,
-          "weight": 0,
-          "price": 0
-        },
-        {
-          "category": "Cola",
-          "sku": "54934",
-          "name": "Напій КОКА-КОЛА 1,75л",
-          "orders": 233,
-          "items": 235,
-          "affected_orders": 4,
-          "qty": 1.7,
-          "repl": 0,
-          "weight": 0,
-          "price": 0
-        },
-        {
           "category": "Cola",
           "sku": "21707",
           "name": "Напій КОКА-КОЛА Зеро 1,25л",
@@ -3520,6 +3496,18 @@ window.ODR_DATA = {
           "price": 0
         },
         {
+          "category": "Shashlik",
+          "sku": "59525",
+          "name": "Шинка ГЛОБИНО фует в/с, в/п нар.серв. 105 г",
+          "orders": 72,
+          "items": 74,
+          "affected_orders": 4,
+          "qty": 5.4,
+          "repl": 0,
+          "weight": 0,
+          "price": 0
+        },
+        {
           "category": "Various, mixed",
           "sku": "4768",
           "name": "Хліб РУМЯНЕЦЬ пшеничний 700г",
@@ -3527,6 +3515,18 @@ window.ODR_DATA = {
           "items": 18,
           "affected_orders": 4,
           "qty": 22.2,
+          "repl": 0,
+          "weight": 0,
+          "price": 0
+        },
+        {
+          "category": "Cola",
+          "sku": "54934",
+          "name": "Напій КОКА-КОЛА 1,75л",
+          "orders": 233,
+          "items": 235,
+          "affected_orders": 4,
+          "qty": 1.7,
           "repl": 0,
           "weight": 0,
           "price": 0
@@ -3540,6 +3540,18 @@ window.ODR_DATA = {
           "affected_orders": 3,
           "qty": 14.3,
           "repl": 9.5,
+          "weight": 0,
+          "price": 0
+        },
+        {
+          "category": "Cola",
+          "sku": "21702",
+          "name": "Напій КОКА-КОЛА 1,25л",
+          "orders": 63,
+          "items": 63,
+          "affected_orders": 3,
+          "qty": 4.8,
+          "repl": 1.6,
           "weight": 0,
           "price": 0
         },
@@ -3580,14 +3592,62 @@ window.ODR_DATA = {
           "price": 0
         },
         {
-          "category": "Cola",
-          "sku": "21702",
-          "name": "Напій КОКА-КОЛА 1,25л",
-          "orders": 63,
-          "items": 63,
+          "category": "Grocery Food",
+          "sku": "24397",
+          "name": "Диня .. (за 100 г)",
+          "orders": 13,
+          "items": 14,
           "affected_orders": 3,
-          "qty": 4.8,
-          "repl": 1.6,
+          "qty": 21.4,
+          "repl": 0,
+          "weight": 0,
+          "price": 0
+        },
+        {
+          "category": "Grocery Food",
+          "sku": "64976",
+          "name": "Персик Імпорт (за 100 г)",
+          "orders": 15,
+          "items": 15,
+          "affected_orders": 3,
+          "qty": 20.0,
+          "repl": 0,
+          "weight": 0,
+          "price": 0
+        },
+        {
+          "category": "Various, mixed",
+          "sku": "103478",
+          "name": "Завиванчик РУМЯНЕЦЬ з маком 100г уп",
+          "orders": 14,
+          "items": 14,
+          "affected_orders": 3,
+          "qty": 21.4,
+          "repl": 0,
+          "weight": 0,
+          "price": 0
+        },
+        {
+          "category": "Grocery Food",
+          "sku": "30833",
+          "name": "Батон ЦАР ХЛІБ ІФ звичайний наріз. 500г п/ет.",
+          "orders": 11,
+          "items": 11,
+          "affected_orders": 3,
+          "qty": 27.3,
+          "repl": 0,
+          "weight": 0,
+          "price": 0
+        },
+        {
+          "category": "Various, mixed",
+          "sku": "24432",
+          "name": "Лимон . (за 100 г)",
+          "orders": 27,
+          "items": 27,
+          "affected_orders": 3,
+          "qty": 11.1,
+          "repl": 0,
           "weight": 0,
           "price": 0
         },
@@ -3623,66 +3683,6 @@ window.ODR_DATA = {
           "items": 16,
           "affected_orders": 3,
           "qty": 18.8,
-          "repl": 0,
-          "weight": 0,
-          "price": 0
-        },
-        {
-          "category": "Various, mixed",
-          "sku": "103478",
-          "name": "Завиванчик РУМЯНЕЦЬ з маком 100г уп",
-          "orders": 14,
-          "items": 14,
-          "affected_orders": 3,
-          "qty": 21.4,
-          "repl": 0,
-          "weight": 0,
-          "price": 0
-        },
-        {
-          "category": "Various, mixed",
-          "sku": "24432",
-          "name": "Лимон . (за 100 г)",
-          "orders": 27,
-          "items": 27,
-          "affected_orders": 3,
-          "qty": 11.1,
-          "repl": 0,
-          "weight": 0,
-          "price": 0
-        },
-        {
-          "category": "Grocery Food",
-          "sku": "30833",
-          "name": "Батон ЦАР ХЛІБ ІФ звичайний наріз. 500г п/ет.",
-          "orders": 11,
-          "items": 11,
-          "affected_orders": 3,
-          "qty": 27.3,
-          "repl": 0,
-          "weight": 0,
-          "price": 0
-        },
-        {
-          "category": "Grocery Food",
-          "sku": "24397",
-          "name": "Диня .. (за 100 г)",
-          "orders": 13,
-          "items": 14,
-          "affected_orders": 3,
-          "qty": 21.4,
-          "repl": 0,
-          "weight": 0,
-          "price": 0
-        },
-        {
-          "category": "Grocery Food",
-          "sku": "64976",
-          "name": "Персик Імпорт (за 100 г)",
-          "orders": 15,
-          "items": 15,
-          "affected_orders": 3,
-          "qty": 20.0,
           "repl": 0,
           "weight": 0,
           "price": 0
@@ -4299,12 +4299,12 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Non-Food",
-              "orders": 3,
-              "items": 3,
+              "category": "Cupcake",
+              "orders": 4,
+              "items": 4,
               "affected_orders": 1,
               "contribution": 0.3,
-              "qty": 33.3,
+              "qty": 25.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -4389,17 +4389,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Mayonnaise",
-              "orders": 11,
-              "items": 16,
-              "affected_orders": 2,
-              "contribution": 0.6,
-              "qty": 12.5,
-              "repl": 12.5,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Lavash",
               "orders": 5,
               "items": 7,
@@ -4407,6 +4396,17 @@ window.ODR_DATA = {
               "contribution": 0.6,
               "qty": 28.6,
               "repl": 28.6,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Mayonnaise",
+              "orders": 11,
+              "items": 16,
+              "affected_orders": 2,
+              "contribution": 0.6,
+              "qty": 12.5,
+              "repl": 12.5,
               "weight": 0,
               "price": 0
             },
@@ -4479,23 +4479,23 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Beef burger",
-              "orders": 1,
-              "items": 3,
-              "affected_orders": 1,
-              "contribution": 1.1,
-              "qty": 33.3,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Candies",
               "orders": 4,
               "items": 6,
               "affected_orders": 1,
               "contribution": 1.1,
               "qty": 16.7,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Beef burger",
+              "orders": 1,
+              "items": 3,
+              "affected_orders": 1,
+              "contribution": 1.1,
+              "qty": 33.3,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -4536,17 +4536,6 @@ window.ODR_DATA = {
           ],
           "RODYNNA KOVBASKA": [
             {
-              "category": "Shashlik",
-              "orders": 9,
-              "items": 17,
-              "affected_orders": 3,
-              "contribution": 33.3,
-              "qty": 5.9,
-              "repl": 5.9,
-              "weight": 11.8,
-              "price": 0
-            },
-            {
               "category": "Various, mixed",
               "orders": 5,
               "items": 8,
@@ -4555,6 +4544,17 @@ window.ODR_DATA = {
               "qty": 37.5,
               "repl": 12.5,
               "weight": 12.5,
+              "price": 0
+            },
+            {
+              "category": "Shashlik",
+              "orders": 9,
+              "items": 17,
+              "affected_orders": 3,
+              "contribution": 33.3,
+              "qty": 5.9,
+              "repl": 5.9,
+              "weight": 11.8,
               "price": 0
             },
             {
@@ -4580,7 +4580,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Ketchup",
+              "category": "Lavash",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -4591,7 +4591,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Chicken Wings",
+              "category": "BBQ Sauce",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -4613,7 +4613,18 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Honey Cake",
+              "category": "Ketchup",
+              "orders": 1,
+              "items": 1,
+              "affected_orders": 0,
+              "contribution": 0,
+              "qty": 0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Cupcake",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -4627,17 +4638,6 @@ window.ODR_DATA = {
               "category": "Mayonnaise",
               "orders": 2,
               "items": 2,
-              "affected_orders": 0,
-              "contribution": 0,
-              "qty": 0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Lavash",
-              "orders": 1,
-              "items": 1,
               "affected_orders": 0,
               "contribution": 0,
               "qty": 0,
@@ -4804,17 +4804,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Hawaiian Pizza",
-              "orders": 1,
-              "items": 1,
-              "affected_orders": 1,
-              "contribution": 1.2,
-              "qty": 100.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Toast",
               "orders": 1,
               "items": 1,
@@ -4832,6 +4821,17 @@ window.ODR_DATA = {
               "affected_orders": 1,
               "contribution": 1.2,
               "qty": 5.3,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Hawaiian Pizza",
+              "orders": 1,
+              "items": 1,
+              "affected_orders": 1,
+              "contribution": 1.2,
+              "qty": 100.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -4859,7 +4859,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Sparkling Wine",
+              "category": "Liqueurs",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -4927,34 +4927,23 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Red Wine",
-              "orders": 3,
-              "items": 3,
-              "affected_orders": 1,
-              "contribution": 0.6,
-              "qty": 33.3,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Lavash",
-              "orders": 3,
-              "items": 3,
-              "affected_orders": 1,
-              "contribution": 0.6,
-              "qty": 33.3,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "White Wine",
               "orders": 5,
               "items": 9,
               "affected_orders": 1,
               "contribution": 0.6,
               "qty": 11.1,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Red Wine",
+              "orders": 3,
+              "items": 3,
+              "affected_orders": 1,
+              "contribution": 0.6,
+              "qty": 33.3,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -4977,6 +4966,17 @@ window.ODR_DATA = {
               "affected_orders": 1,
               "contribution": 0.6,
               "qty": 10.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "White Bread",
+              "orders": 1,
+              "items": 1,
+              "affected_orders": 1,
+              "contribution": 0.6,
+              "qty": 100.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -5122,18 +5122,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Shashlik",
-              "sku": "000020023",
-              "name": "Котлета по-Київськи з картоплею та зеленню 270г",
-              "orders": 27,
-              "items": 27,
-              "affected_orders": 2,
-              "qty": 7.4,
-              "repl": 3.7,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Caesar Salad",
               "sku": "000017414",
               "name": "Салат Цезар з куркою кріспі +соус Цезар + крутони 215/40/5г",
@@ -5158,6 +5146,18 @@ window.ODR_DATA = {
               "price": 0
             },
             {
+              "category": "Shashlik",
+              "sku": "000020023",
+              "name": "Котлета по-Київськи з картоплею та зеленню 270г",
+              "orders": 27,
+              "items": 27,
+              "affected_orders": 2,
+              "qty": 7.4,
+              "repl": 3.7,
+              "weight": 0,
+              "price": 0
+            },
+            {
               "category": "Various, mixed",
               "sku": "000018214",
               "name": "Гречка з тунцем і яйцем 290г",
@@ -5170,18 +5170,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Various, mixed",
-              "sku": "000019819",
-              "name": "Боул з рваною куркою і гречкою + соус клаб 280/30г",
-              "orders": 17,
-              "items": 17,
-              "affected_orders": 1,
-              "qty": 5.9,
-              "repl": 11.8,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Shashlik",
               "sku": "000020437",
               "name": "Рибні котлетки з картопляним пюре та томатною сальсою 270г",
@@ -5190,6 +5178,18 @@ window.ODR_DATA = {
               "affected_orders": 1,
               "qty": 5.6,
               "repl": 11.1,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Various, mixed",
+              "sku": "000019819",
+              "name": "Боул з рваною куркою і гречкою + соус клаб 280/30г",
+              "orders": 17,
+              "items": 17,
+              "affected_orders": 1,
+              "qty": 5.9,
+              "repl": 11.8,
               "weight": 0,
               "price": 0
             },
@@ -5256,27 +5256,15 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Still water",
-              "sku": "1195",
-              "name": "Вода Поляна квасова 1.5л мінеральна",
-              "orders": 10,
-              "items": 10,
+              "category": "Grocery Food",
+              "sku": "86528",
+              "name": "Огірок короткоплідний Україна (за 300 г.)",
+              "orders": 17,
+              "items": 17,
               "affected_orders": 2,
-              "qty": 20.0,
+              "qty": 5.9,
               "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Various, mixed",
-              "sku": "205203",
-              "name": "Пиво Старопрамен 0.48л х 4 з.б пак",
-              "orders": 9,
-              "items": 9,
-              "affected_orders": 2,
-              "qty": 22.2,
-              "repl": 0,
-              "weight": 0,
+              "weight": 5.9,
               "price": 0
             },
             {
@@ -5292,15 +5280,27 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Grocery Food",
-              "sku": "86528",
-              "name": "Огірок короткоплідний Україна (за 300 г.)",
-              "orders": 17,
-              "items": 17,
+              "category": "Various, mixed",
+              "sku": "205203",
+              "name": "Пиво Старопрамен 0.48л х 4 з.б пак",
+              "orders": 9,
+              "items": 9,
               "affected_orders": 2,
-              "qty": 5.9,
+              "qty": 22.2,
               "repl": 0,
-              "weight": 5.9,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Still water",
+              "sku": "1195",
+              "name": "Вода Поляна квасова 1.5л мінеральна",
+              "orders": 10,
+              "items": 10,
+              "affected_orders": 2,
+              "qty": 20.0,
+              "repl": 0,
+              "weight": 0,
               "price": 0
             },
             {
@@ -5418,18 +5418,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Various, mixed",
-              "sku": "177794",
-              "name": "{\"uk-UA\":\"Окрошка з куркою, вагова 100г\"}",
-              "orders": 25,
-              "items": 25,
-              "affected_orders": 13,
-              "qty": 40.0,
-              "repl": 0,
-              "weight": 12.0,
-              "price": 0
-            },
-            {
               "category": "Grocery Food",
               "sku": "2636115",
               "name": "{\"uk-UA\":\"Кавун Бостон ваговий 2000г\"}",
@@ -5439,6 +5427,18 @@ window.ODR_DATA = {
               "qty": 28.9,
               "repl": 0,
               "weight": 5.3,
+              "price": 0
+            },
+            {
+              "category": "Various, mixed",
+              "sku": "177794",
+              "name": "{\"uk-UA\":\"Окрошка з куркою, вагова 100г\"}",
+              "orders": 25,
+              "items": 25,
+              "affected_orders": 13,
+              "qty": 40.0,
+              "repl": 0,
+              "weight": 12.0,
               "price": 0
             },
             {
@@ -5562,18 +5562,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Various, mixed",
-              "sku": "2607202",
-              "name": "{\"uk-UA\":\"Піца з мисливськими ковбасками 500г\"}",
-              "orders": 55,
-              "items": 56,
-              "affected_orders": 8,
-              "qty": 14.3,
-              "repl": 3.6,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Grocery Food",
               "sku": "2539105",
               "name": "{\"uk-UA\":\"Яйця Ясенсвіт Справжні велетні C0 10 шт\"}",
@@ -5582,6 +5570,18 @@ window.ODR_DATA = {
               "affected_orders": 8,
               "qty": 20.0,
               "repl": 5.0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Various, mixed",
+              "sku": "2607202",
+              "name": "{\"uk-UA\":\"Піца з мисливськими ковбасками 500г\"}",
+              "orders": 55,
+              "items": 56,
+              "affected_orders": 8,
+              "qty": 14.3,
+              "repl": 3.6,
               "weight": 0,
               "price": 0
             },
@@ -5598,9 +5598,9 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Grocery Food",
-              "sku": "2633663",
-              "name": "{\"uk-UA\":\"Чипси Lay's картопляні зі смаком паприки 120 г\"}",
+              "category": "Mushroom Pizza",
+              "sku": "2642104",
+              "name": "{\"uk-UA\":\"Піца з шинкою і грибами вагова 100г\"}",
               "orders": 14,
               "items": 14,
               "affected_orders": 8,
@@ -5610,9 +5610,9 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Mushroom Pizza",
-              "sku": "2642104",
-              "name": "{\"uk-UA\":\"Піца з шинкою і грибами вагова 100г\"}",
+              "category": "Grocery Food",
+              "sku": "2633663",
+              "name": "{\"uk-UA\":\"Чипси Lay's картопляні зі смаком паприки 120 г\"}",
               "orders": 14,
               "items": 14,
               "affected_orders": 8,
@@ -5776,6 +5776,17 @@ window.ODR_DATA = {
               "price": 0
             },
             {
+              "category": "Snacks",
+              "orders": 4,
+              "items": 7,
+              "affected_orders": 1,
+              "contribution": 0.3,
+              "qty": 14.3,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
               "category": "Fruit Smoothie",
               "orders": 3,
               "items": 3,
@@ -5800,17 +5811,6 @@ window.ODR_DATA = {
             {
               "category": "Non-Food",
               "orders": 7,
-              "items": 7,
-              "affected_orders": 1,
-              "contribution": 0.3,
-              "qty": 14.3,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Snacks",
-              "orders": 4,
               "items": 7,
               "affected_orders": 1,
               "contribution": 0.3,
@@ -5989,7 +5989,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Black tea",
+              "category": "Beef burger",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -6000,7 +6000,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Tomato Juice",
+              "category": "Red Wine",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -6011,7 +6011,18 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Honey Cake",
+              "category": "Lemon-Lime",
+              "orders": 1,
+              "items": 1,
+              "affected_orders": 0,
+              "contribution": 0,
+              "qty": 0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Sparkling Water",
               "orders": 2,
               "items": 2,
               "affected_orders": 0,
@@ -6022,20 +6033,9 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Chicken Wings",
-              "orders": 2,
-              "items": 2,
-              "affected_orders": 0,
-              "contribution": 0,
-              "qty": 0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Ketchup",
-              "orders": 1,
-              "items": 1,
+              "category": "Shashlik",
+              "orders": 11,
+              "items": 12,
               "affected_orders": 0,
               "contribution": 0,
               "qty": 0,
@@ -6057,20 +6057,9 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "BBQ Sauce",
-              "orders": 1,
-              "items": 1,
-              "affected_orders": 0,
-              "contribution": 0,
-              "qty": 0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Soy Sauce",
-              "orders": 1,
-              "items": 1,
+              "category": "Grocery Food",
+              "orders": 3,
+              "items": 4,
               "affected_orders": 0,
               "contribution": 0,
               "qty": 0,
@@ -6101,9 +6090,20 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Grocery Food",
-              "orders": 3,
-              "items": 4,
+              "category": "BBQ Sauce",
+              "orders": 1,
+              "items": 1,
+              "affected_orders": 0,
+              "contribution": 0,
+              "qty": 0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Soy Sauce",
+              "orders": 1,
+              "items": 1,
               "affected_orders": 0,
               "contribution": 0,
               "qty": 0,
@@ -6235,7 +6235,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Mozarella Salad",
+              "category": "Rum",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -6314,17 +6314,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Grilled Fish",
-              "orders": 1,
-              "items": 1,
-              "affected_orders": 1,
-              "contribution": 1.0,
-              "qty": 0,
-              "repl": 0,
-              "weight": 100.0,
-              "price": 0
-            },
-            {
               "category": "Hawaiian Pizza",
               "orders": 1,
               "items": 1,
@@ -6336,23 +6325,34 @@ window.ODR_DATA = {
               "price": 0
             },
             {
+              "category": "Danish Pastry",
+              "orders": 1,
+              "items": 1,
+              "affected_orders": 1,
+              "contribution": 1.0,
+              "qty": 100.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Grilled Fish",
+              "orders": 1,
+              "items": 1,
+              "affected_orders": 1,
+              "contribution": 1.0,
+              "qty": 0,
+              "repl": 0,
+              "weight": 100.0,
+              "price": 0
+            },
+            {
               "category": "Protein Smoothie",
               "orders": 4,
               "items": 5,
               "affected_orders": 1,
               "contribution": 1.0,
               "qty": 20.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Still water",
-              "orders": 26,
-              "items": 30,
-              "affected_orders": 1,
-              "contribution": 1.0,
-              "qty": 3.3,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -6610,9 +6610,33 @@ window.ODR_DATA = {
               "price": 0
             },
             {
+              "category": "Various, mixed",
+              "sku": "000005721",
+              "name": "Салат Олівє з копченою куркою 250г",
+              "orders": 21,
+              "items": 22,
+              "affected_orders": 2,
+              "qty": 9.1,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
               "category": "Grocery Food",
               "sku": "000015785",
               "name": "Рол Чіз соус сирний 350г",
+              "orders": 8,
+              "items": 8,
+              "affected_orders": 2,
+              "qty": 25.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Various, mixed",
+              "sku": "000020627",
+              "name": "Млинці з кокосовим кремом та персиком 310г",
               "orders": 8,
               "items": 8,
               "affected_orders": 2,
@@ -6629,30 +6653,6 @@ window.ODR_DATA = {
               "items": 6,
               "affected_orders": 2,
               "qty": 33.3,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Various, mixed",
-              "sku": "000005721",
-              "name": "Салат Олівє з копченою куркою 250г",
-              "orders": 21,
-              "items": 22,
-              "affected_orders": 2,
-              "qty": 9.1,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Various, mixed",
-              "sku": "000020627",
-              "name": "Млинці з кокосовим кремом та персиком 310г",
-              "orders": 8,
-              "items": 8,
-              "affected_orders": 2,
-              "qty": 25.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -6721,18 +6721,6 @@ window.ODR_DATA = {
             },
             {
               "category": "Various, mixed",
-              "sku": "197021",
-              "name": "Пиво ППБ 0.5л чайка чорноморська з.б",
-              "orders": 5,
-              "items": 5,
-              "affected_orders": 3,
-              "qty": 60.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Various, mixed",
               "sku": "12607",
               "name": "Гомiлка куряча 4кг охол. (за 500 г.)",
               "orders": 6,
@@ -6741,6 +6729,18 @@ window.ODR_DATA = {
               "qty": 0,
               "repl": 0,
               "weight": 50.0,
+              "price": 0
+            },
+            {
+              "category": "Various, mixed",
+              "sku": "197021",
+              "name": "Пиво ППБ 0.5л чайка чорноморська з.б",
+              "orders": 5,
+              "items": 5,
+              "affected_orders": 3,
+              "qty": 60.0,
+              "repl": 0,
+              "weight": 0,
               "price": 0
             },
             {
@@ -6870,18 +6870,6 @@ window.ODR_DATA = {
           ],
           "TAISTRA": [
             {
-              "category": "Shashlik",
-              "sku": "59525",
-              "name": "Шинка ГЛОБИНО фует в/с, в/п нар.серв. 105 г",
-              "orders": 7,
-              "items": 8,
-              "affected_orders": 2,
-              "qty": 25.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Grocery Food",
               "sku": "23575",
               "name": "Морозиво РУДЬ 100% 500г",
@@ -6901,6 +6889,18 @@ window.ODR_DATA = {
               "items": 17,
               "affected_orders": 2,
               "qty": 11.8,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Shashlik",
+              "sku": "59525",
+              "name": "Шинка ГЛОБИНО фует в/с, в/п нар.серв. 105 г",
+              "orders": 7,
+              "items": 8,
+              "affected_orders": 2,
+              "qty": 25.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -7052,18 +7052,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Chips & Crackers",
-              "sku": "2566693",
-              "name": "{\"uk-UA\":\"Чипси Lay's Strong Чилі та Лайм 95 г\"}",
-              "orders": 29,
-              "items": 30,
-              "affected_orders": 9,
-              "qty": 30.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Shashlik",
               "sku": "2618168",
               "name": "{\"uk-UA\":\"Борщ по-домашньому з м'ясом ваговий 100г\"}",
@@ -7071,6 +7059,18 @@ window.ODR_DATA = {
               "items": 25,
               "affected_orders": 9,
               "qty": 36.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Chips & Crackers",
+              "sku": "2566693",
+              "name": "{\"uk-UA\":\"Чипси Lay's Strong Чилі та Лайм 95 г\"}",
+              "orders": 29,
+              "items": 30,
+              "affected_orders": 9,
+              "qty": 30.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -7447,12 +7447,12 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Fried Chicken",
-              "orders": 2,
-              "items": 2,
+              "category": "Taco",
+              "orders": 1,
+              "items": 1,
               "affected_orders": 1,
               "contribution": 0.4,
-              "qty": 50.0,
+              "qty": 100.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -7493,23 +7493,23 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Beef burger",
-              "orders": 3,
-              "items": 3,
-              "affected_orders": 2,
-              "contribution": 1.9,
-              "qty": 66.7,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Shashlik",
               "orders": 5,
               "items": 5,
               "affected_orders": 2,
               "contribution": 1.9,
               "qty": 40.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Beef burger",
+              "orders": 3,
+              "items": 3,
+              "affected_orders": 2,
+              "contribution": 1.9,
+              "qty": 66.7,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -7548,7 +7548,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Sparkling Water",
+              "category": "Cupcake",
               "orders": 2,
               "items": 2,
               "affected_orders": 1,
@@ -7559,7 +7559,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Cupcake",
+              "category": "Sparkling Water",
               "orders": 2,
               "items": 2,
               "affected_orders": 1,
@@ -7671,7 +7671,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "White Bread",
+              "category": "Still water",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -7739,6 +7739,17 @@ window.ODR_DATA = {
               "price": 0
             },
             {
+              "category": "Mushroom Pizza",
+              "orders": 2,
+              "items": 2,
+              "affected_orders": 1,
+              "contribution": 0.9,
+              "qty": 50.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
               "category": "Non-Food",
               "orders": 31,
               "items": 36,
@@ -7781,17 +7792,6 @@ window.ODR_DATA = {
               "repl": 0,
               "weight": 0,
               "price": 0
-            },
-            {
-              "category": "Sparkling Water",
-              "orders": 25,
-              "items": 30,
-              "affected_orders": 1,
-              "contribution": 0.9,
-              "qty": 3.3,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
             }
           ],
           "SANTIM": [
@@ -7829,14 +7829,14 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Tomato Juice",
-              "orders": 5,
-              "items": 6,
+              "category": "Croissant",
+              "orders": 2,
+              "items": 2,
               "affected_orders": 1,
               "contribution": 1.5,
-              "qty": 0,
+              "qty": 50.0,
               "repl": 0,
-              "weight": 16.7,
+              "weight": 0,
               "price": 0
             },
             {
@@ -7873,17 +7873,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Croissant",
-              "orders": 2,
-              "items": 2,
-              "affected_orders": 1,
-              "contribution": 1.5,
-              "qty": 50.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Orange",
               "orders": 1,
               "items": 1,
@@ -7892,6 +7881,17 @@ window.ODR_DATA = {
               "qty": 100.0,
               "repl": 0,
               "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Tomato Juice",
+              "orders": 5,
+              "items": 6,
+              "affected_orders": 1,
+              "contribution": 1.5,
+              "qty": 0,
+              "repl": 0,
+              "weight": 16.7,
               "price": 0
             },
             {
@@ -7985,17 +7985,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Green Salad",
-              "orders": 2,
-              "items": 2,
-              "affected_orders": 1,
-              "contribution": 0.6,
-              "qty": 50.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Candies",
               "orders": 4,
               "items": 4,
@@ -8013,6 +8002,17 @@ window.ODR_DATA = {
               "affected_orders": 1,
               "contribution": 0.6,
               "qty": 4.5,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Snacks",
+              "orders": 10,
+              "items": 13,
+              "affected_orders": 1,
+              "contribution": 0.6,
+              "qty": 7.7,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -8171,18 +8171,6 @@ window.ODR_DATA = {
             },
             {
               "category": "Various, mixed",
-              "sku": "000020630",
-              "name": "Сирники з брауні та соусом три молока 280г",
-              "orders": 13,
-              "items": 13,
-              "affected_orders": 1,
-              "qty": 7.7,
-              "repl": 7.7,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Various, mixed",
               "sku": "000020628",
               "name": "Сирники з кремом та ягодами 280г",
               "orders": 7,
@@ -8192,13 +8180,25 @@ window.ODR_DATA = {
               "repl": 14.3,
               "weight": 0,
               "price": 0
+            },
+            {
+              "category": "Various, mixed",
+              "sku": "000020630",
+              "name": "Сирники з брауні та соусом три молока 280г",
+              "orders": 13,
+              "items": 13,
+              "affected_orders": 1,
+              "qty": 7.7,
+              "repl": 7.7,
+              "weight": 0,
+              "price": 0
             }
           ],
           "KOPIYKA": [
             {
-              "category": "Grocery Food",
-              "sku": "18990",
-              "name": "ПАКЕТ Копійка 33*50",
+              "category": "Non-Food",
+              "sku": "199781",
+              "name": "Пакет надтонкий",
               "orders": 7,
               "items": 7,
               "affected_orders": 0,
@@ -8208,9 +8208,9 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Non-Food",
-              "sku": "199781",
-              "name": "Пакет надтонкий",
+              "category": "Grocery Food",
+              "sku": "18990",
+              "name": "ПАКЕТ Копійка 33*50",
               "orders": 7,
               "items": 7,
               "affected_orders": 0,
@@ -8905,31 +8905,31 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Pesto",
-              "orders": 1,
-              "items": 1,
-              "affected_orders": 0,
-              "contribution": 0,
-              "qty": 0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Mushroom Pizza",
-              "orders": 1,
-              "items": 1,
-              "affected_orders": 0,
-              "contribution": 0,
-              "qty": 0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Black tea",
+              "category": "Candies",
               "orders": 2,
-              "items": 3,
+              "items": 2,
+              "affected_orders": 0,
+              "contribution": 0,
+              "qty": 0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Lavash",
+              "orders": 2,
+              "items": 2,
+              "affected_orders": 0,
+              "contribution": 0,
+              "qty": 0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Gin",
+              "orders": 1,
+              "items": 1,
               "affected_orders": 0,
               "contribution": 0,
               "qty": 0,
@@ -8962,23 +8962,23 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Still water",
-              "orders": 3,
-              "items": 3,
-              "affected_orders": 2,
-              "contribution": 22.2,
-              "qty": 66.7,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Ribs",
               "orders": 2,
               "items": 2,
               "affected_orders": 2,
               "contribution": 22.2,
               "qty": 100.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Still water",
+              "orders": 3,
+              "items": 3,
+              "affected_orders": 2,
+              "contribution": 22.2,
+              "qty": 66.7,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -9017,7 +9017,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "White Bread",
+              "category": "Cupcake",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -9028,7 +9028,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Cupcake",
+              "category": "White Bread",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -9096,6 +9096,17 @@ window.ODR_DATA = {
               "price": 0
             },
             {
+              "category": "Protein Smoothie",
+              "orders": 2,
+              "items": 2,
+              "affected_orders": 1,
+              "contribution": 0.7,
+              "qty": 50.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
               "category": "Rosé Wine",
               "orders": 3,
               "items": 3,
@@ -9107,45 +9118,34 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Honey Cake",
-              "orders": 3,
-              "items": 4,
+              "category": "Wheat Beer",
+              "orders": 24,
+              "items": 27,
               "affected_orders": 1,
               "contribution": 0.7,
-              "qty": 25.0,
+              "qty": 3.7,
               "repl": 0,
               "weight": 0,
               "price": 0
             },
             {
-              "category": "Mushroom Pizza",
+              "category": "Sparkling Wine",
+              "orders": 8,
+              "items": 8,
+              "affected_orders": 1,
+              "contribution": 0.7,
+              "qty": 12.5,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Mayonnaise",
               "orders": 4,
               "items": 4,
               "affected_orders": 1,
               "contribution": 0.7,
               "qty": 25.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Red Wine",
-              "orders": 2,
-              "items": 2,
-              "affected_orders": 1,
-              "contribution": 0.7,
-              "qty": 50.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Protein Smoothie",
-              "orders": 2,
-              "items": 2,
-              "affected_orders": 1,
-              "contribution": 0.7,
-              "qty": 50.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -9197,23 +9197,23 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Grilled Seafood",
-              "orders": 2,
-              "items": 2,
-              "affected_orders": 1,
-              "contribution": 1.0,
-              "qty": 50.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Non-Food",
               "orders": 41,
               "items": 56,
               "affected_orders": 1,
               "contribution": 1.0,
               "qty": 1.8,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Grilled Seafood",
+              "orders": 2,
+              "items": 2,
+              "affected_orders": 1,
+              "contribution": 1.0,
+              "qty": 50.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -9252,7 +9252,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Mayonnaise",
+              "category": "Gin",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -9342,6 +9342,17 @@ window.ODR_DATA = {
               "price": 0
             },
             {
+              "category": "Ravioli",
+              "orders": 2,
+              "items": 2,
+              "affected_orders": 1,
+              "contribution": 0.5,
+              "qty": 0,
+              "repl": 0,
+              "weight": 50.0,
+              "price": 0
+            },
+            {
               "category": "Pudding & Custards",
               "orders": 2,
               "items": 2,
@@ -9359,17 +9370,6 @@ window.ODR_DATA = {
               "affected_orders": 1,
               "contribution": 0.5,
               "qty": 50.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Tarts",
-              "orders": 10,
-              "items": 11,
-              "affected_orders": 1,
-              "contribution": 0.5,
-              "qty": 9.1,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -9491,18 +9491,6 @@ window.ODR_DATA = {
         "skus": {
           "CAFE RYNOK": [
             {
-              "category": "Shashlik",
-              "sku": "000020437",
-              "name": "Рибні котлетки з картопляним пюре та томатною сальсою 270г",
-              "orders": 13,
-              "items": 13,
-              "affected_orders": 3,
-              "qty": 23.1,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Various, mixed",
               "sku": "000007664",
               "name": "Борщ зелений + сметана 250/30г",
@@ -9515,25 +9503,13 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Still water",
-              "sku": "000001694",
-              "name": "Вода мін Моршинська н/г 1,5л",
-              "orders": 6,
-              "items": 6,
-              "affected_orders": 2,
-              "qty": 33.3,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Shashlik",
-              "sku": "000020020",
-              "name": "Курячий шніцель з гречкою та грибами 290г",
-              "orders": 10,
-              "items": 10,
-              "affected_orders": 2,
-              "qty": 20.0,
+              "sku": "000020437",
+              "name": "Рибні котлетки з картопляним пюре та томатною сальсою 270г",
+              "orders": 13,
+              "items": 13,
+              "affected_orders": 3,
+              "qty": 23.1,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -9575,6 +9551,30 @@ window.ODR_DATA = {
               "price": 0
             },
             {
+              "category": "Still water",
+              "sku": "000001694",
+              "name": "Вода мін Моршинська н/г 1,5л",
+              "orders": 6,
+              "items": 6,
+              "affected_orders": 2,
+              "qty": 33.3,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Shashlik",
+              "sku": "000020020",
+              "name": "Курячий шніцель з гречкою та грибами 290г",
+              "orders": 10,
+              "items": 10,
+              "affected_orders": 2,
+              "qty": 20.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
               "category": "Shashlik",
               "sku": "000020023",
               "name": "Котлета по-Київськи з картоплею та зеленню 270г",
@@ -9599,9 +9599,9 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Various, mixed",
-              "sku": "000002915",
-              "name": "Крем-суп з печериць+крутони  240/10г",
+              "category": "Shashlik",
+              "sku": "000020501",
+              "name": "Рибні котлетки з кабачком та печеними овочами 320г",
               "orders": 9,
               "items": 9,
               "affected_orders": 1,
@@ -9611,9 +9611,9 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Shashlik",
-              "sku": "000020501",
-              "name": "Рибні котлетки з кабачком та печеними овочами 320г",
+              "category": "Various, mixed",
+              "sku": "000002915",
+              "name": "Крем-суп з печериць+крутони  240/10г",
               "orders": 9,
               "items": 9,
               "affected_orders": 1,
@@ -9638,6 +9638,18 @@ window.ODR_DATA = {
           "KOPIYKA": [
             {
               "category": "Grocery Food",
+              "sku": "204976",
+              "name": "Морозиво Ласунка 100г великан пломбір какао вар",
+              "orders": 5,
+              "items": 5,
+              "affected_orders": 2,
+              "qty": 40.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Grocery Food",
               "sku": "86528",
               "name": "Огірок короткоплідний Україна (за 300 г.)",
               "orders": 15,
@@ -9650,13 +9662,13 @@ window.ODR_DATA = {
             },
             {
               "category": "Grocery Food",
-              "sku": "204976",
-              "name": "Морозиво Ласунка 100г великан пломбір какао вар",
-              "orders": 5,
-              "items": 5,
-              "affected_orders": 2,
-              "qty": 40.0,
-              "repl": 0,
+              "sku": "35043",
+              "name": "Кавун (за 500 г.)",
+              "orders": 6,
+              "items": 7,
+              "affected_orders": 1,
+              "qty": 14.3,
+              "repl": 14.3,
               "weight": 0,
               "price": 0
             },
@@ -9669,18 +9681,6 @@ window.ODR_DATA = {
               "affected_orders": 1,
               "qty": 20.0,
               "repl": 20.0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Grocery Food",
-              "sku": "35043",
-              "name": "Кавун (за 500 г.)",
-              "orders": 6,
-              "items": 7,
-              "affected_orders": 1,
-              "qty": 14.3,
-              "repl": 14.3,
               "weight": 0,
               "price": 0
             },
@@ -9894,18 +9894,6 @@ window.ODR_DATA = {
             },
             {
               "category": "Grocery Food",
-              "sku": "2607223",
-              "name": "{\"uk-UA\":\"Томат ваговий 500г\"}",
-              "orders": 67,
-              "items": 68,
-              "affected_orders": 10,
-              "qty": 11.8,
-              "repl": 0,
-              "weight": 2.9,
-              "price": 0
-            },
-            {
-              "category": "Grocery Food",
               "sku": "127622",
               "name": "{\"uk-UA\":\"Банан ваговий 500г\"}",
               "orders": 123,
@@ -9926,6 +9914,18 @@ window.ODR_DATA = {
               "qty": 55.6,
               "repl": 0,
               "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Grocery Food",
+              "sku": "2607223",
+              "name": "{\"uk-UA\":\"Томат ваговий 500г\"}",
+              "orders": 67,
+              "items": 68,
+              "affected_orders": 10,
+              "qty": 11.8,
+              "repl": 0,
+              "weight": 2.9,
               "price": 0
             },
             {
@@ -10144,23 +10144,23 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Caesar Salad",
-              "orders": 19,
-              "items": 19,
-              "affected_orders": 2,
-              "contribution": 0.5,
-              "qty": 10.5,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Cupcake",
               "orders": 5,
               "items": 6,
               "affected_orders": 2,
               "contribution": 0.5,
               "qty": 33.3,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Caesar Salad",
+              "orders": 19,
+              "items": 19,
+              "affected_orders": 2,
+              "contribution": 0.5,
+              "qty": 10.5,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -10368,17 +10368,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Lavash",
-              "orders": 1,
-              "items": 6,
-              "affected_orders": 1,
-              "contribution": 0.9,
-              "qty": 16.7,
-              "repl": 16.7,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Beef burger",
               "orders": 4,
               "items": 5,
@@ -10401,14 +10390,14 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Shashlik",
-              "orders": 7,
-              "items": 11,
+              "category": "Lavash",
+              "orders": 1,
+              "items": 6,
               "affected_orders": 1,
               "contribution": 0.9,
-              "qty": 0,
-              "repl": 0,
-              "weight": 9.1,
+              "qty": 16.7,
+              "repl": 16.7,
+              "weight": 0,
               "price": 0
             },
             {
@@ -10420,6 +10409,17 @@ window.ODR_DATA = {
               "qty": 20.0,
               "repl": 0,
               "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Shashlik",
+              "orders": 7,
+              "items": 11,
+              "affected_orders": 1,
+              "contribution": 0.9,
+              "qty": 0,
+              "repl": 0,
+              "weight": 9.1,
               "price": 0
             }
           ],
@@ -10458,17 +10458,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Ketchup",
-              "orders": 2,
-              "items": 2,
-              "affected_orders": 2,
-              "contribution": 11.1,
-              "qty": 100.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Cupcake",
               "orders": 3,
               "items": 3,
@@ -10480,18 +10469,18 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Chicken Wings",
-              "orders": 1,
+              "category": "Ketchup",
+              "orders": 2,
               "items": 2,
-              "affected_orders": 0,
-              "contribution": 0,
-              "qty": 0,
+              "affected_orders": 2,
+              "contribution": 11.1,
+              "qty": 100.0,
               "repl": 0,
               "weight": 0,
               "price": 0
             },
             {
-              "category": "Honey Cake",
+              "category": "Gnocchi",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -10513,6 +10502,17 @@ window.ODR_DATA = {
               "price": 0
             },
             {
+              "category": "Honey Cake",
+              "orders": 1,
+              "items": 1,
+              "affected_orders": 0,
+              "contribution": 0,
+              "qty": 0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
               "category": "Lavash",
               "orders": 3,
               "items": 3,
@@ -10524,9 +10524,9 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Gnocchi",
+              "category": "Chicken Wings",
               "orders": 1,
-              "items": 1,
+              "items": 2,
               "affected_orders": 0,
               "contribution": 0,
               "qty": 0,
@@ -10581,23 +10581,12 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Rosé Wine",
-              "orders": 3,
-              "items": 3,
+              "category": "Beef burger",
+              "orders": 6,
+              "items": 6,
               "affected_orders": 1,
               "contribution": 0.6,
-              "qty": 33.3,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Napoleon Cake",
-              "orders": 2,
-              "items": 3,
-              "affected_orders": 1,
-              "contribution": 0.6,
-              "qty": 33.3,
+              "qty": 16.7,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -10609,17 +10598,6 @@ window.ODR_DATA = {
               "affected_orders": 1,
               "contribution": 0.6,
               "qty": 3.4,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Beef burger",
-              "orders": 6,
-              "items": 6,
-              "affected_orders": 1,
-              "contribution": 0.6,
-              "qty": 16.7,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -10642,6 +10620,28 @@ window.ODR_DATA = {
               "affected_orders": 1,
               "contribution": 0.6,
               "qty": 5.9,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Rosé Wine",
+              "orders": 3,
+              "items": 3,
+              "affected_orders": 1,
+              "contribution": 0.6,
+              "qty": 33.3,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Napoleon Cake",
+              "orders": 2,
+              "items": 3,
+              "affected_orders": 1,
+              "contribution": 0.6,
+              "qty": 33.3,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -10816,23 +10816,23 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Snacks",
-              "orders": 12,
-              "items": 13,
-              "affected_orders": 1,
-              "contribution": 0.6,
-              "qty": 7.7,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Tarts",
               "orders": 2,
               "items": 2,
               "affected_orders": 1,
               "contribution": 0.6,
               "qty": 50.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Snacks",
+              "orders": 12,
+              "items": 13,
+              "affected_orders": 1,
+              "contribution": 0.6,
+              "qty": 7.7,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -10860,7 +10860,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Shrimp",
+              "category": "Ribs",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -11036,24 +11036,24 @@ window.ODR_DATA = {
             },
             {
               "category": "Shashlik",
-              "sku": "000020501",
-              "name": "Рибні котлетки з кабачком та печеними овочами 320г",
-              "orders": 9,
-              "items": 9,
-              "affected_orders": 2,
-              "qty": 22.2,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Shashlik",
               "sku": "000013865",
               "name": "Локшина з куркою в кислосолодкому соусі 450г",
               "orders": 17,
               "items": 18,
               "affected_orders": 2,
               "qty": 11.1,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Shashlik",
+              "sku": "000020501",
+              "name": "Рибні котлетки з кабачком та печеними овочами 320г",
+              "orders": 9,
+              "items": 9,
+              "affected_orders": 2,
+              "qty": 22.2,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -11119,18 +11119,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Cola",
-              "sku": "000001648",
-              "name": "Напій б/а Coca-Cola 0,33л з/б",
-              "orders": 7,
-              "items": 7,
-              "affected_orders": 0,
-              "qty": 0,
-              "repl": 28.6,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Shashlik",
               "sku": "000020023",
               "name": "Котлета по-Київськи з картоплею та зеленню 270г",
@@ -11151,6 +11139,18 @@ window.ODR_DATA = {
               "affected_orders": 0,
               "qty": 0,
               "repl": 8.3,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Cola",
+              "sku": "000001648",
+              "name": "Напій б/а Coca-Cola 0,33л з/б",
+              "orders": 7,
+              "items": 7,
+              "affected_orders": 0,
+              "qty": 0,
+              "repl": 28.6,
               "weight": 0,
               "price": 0
             }
@@ -11182,8 +11182,8 @@ window.ODR_DATA = {
             },
             {
               "category": "Various, mixed",
-              "sku": "140526",
-              "name": "Хліб французький бездріжд. 370г власне вир-во",
+              "sku": "96020",
+              "name": "Квас Тарас 2л",
               "orders": 6,
               "items": 6,
               "affected_orders": 2,
@@ -11194,8 +11194,8 @@ window.ODR_DATA = {
             },
             {
               "category": "Various, mixed",
-              "sku": "96020",
-              "name": "Квас Тарас 2л",
+              "sku": "140526",
+              "name": "Хліб французький бездріжд. 370г власне вир-во",
               "orders": 6,
               "items": 6,
               "affected_orders": 2,
@@ -11597,18 +11597,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Lemon-Lime",
-              "sku": "2636744",
-              "name": "{\"uk-UA\":\"Напій Sprite сильногазований 1.75 л\"}",
-              "orders": 30,
-              "items": 30,
-              "affected_orders": 11,
-              "qty": 36.7,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Various, mixed",
               "sku": "177794",
               "name": "{\"uk-UA\":\"Окрошка з куркою, вагова 100г\"}",
@@ -11618,6 +11606,18 @@ window.ODR_DATA = {
               "qty": 34.5,
               "repl": 0,
               "weight": 3.4,
+              "price": 0
+            },
+            {
+              "category": "Lemon-Lime",
+              "sku": "2636744",
+              "name": "{\"uk-UA\":\"Напій Sprite сильногазований 1.75 л\"}",
+              "orders": 30,
+              "items": 30,
+              "affected_orders": 11,
+              "qty": 36.7,
+              "repl": 0,
+              "weight": 0,
               "price": 0
             }
           ]
@@ -11808,12 +11808,12 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Chocolate Cake",
-              "orders": 1,
-              "items": 1,
+              "category": "Soy Sauce",
+              "orders": 4,
+              "items": 4,
               "affected_orders": 1,
               "contribution": 0.2,
-              "qty": 100.0,
+              "qty": 25.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -12021,9 +12021,9 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Ravioli",
+              "category": "Beef burger",
               "orders": 1,
-              "items": 1,
+              "items": 2,
               "affected_orders": 0,
               "contribution": 0,
               "qty": 0,
@@ -12032,7 +12032,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Mushroom Pizza",
+              "category": "Frozen Yogurt",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -12089,6 +12089,17 @@ window.ODR_DATA = {
               "price": 0
             },
             {
+              "category": "Honey Cake",
+              "orders": 2,
+              "items": 2,
+              "affected_orders": 1,
+              "contribution": 1.6,
+              "qty": 50.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
               "category": "Orange",
               "orders": 2,
               "items": 2,
@@ -12111,28 +12122,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Ketchup",
-              "orders": 1,
-              "items": 1,
-              "affected_orders": 1,
-              "contribution": 1.6,
-              "qty": 100.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Honey Cake",
-              "orders": 2,
-              "items": 2,
-              "affected_orders": 1,
-              "contribution": 1.6,
-              "qty": 50.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Still water",
               "orders": 3,
               "items": 3,
@@ -12144,7 +12133,18 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Lavash",
+              "category": "Ketchup",
+              "orders": 1,
+              "items": 1,
+              "affected_orders": 1,
+              "contribution": 1.6,
+              "qty": 100.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Mayonnaise",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -12656,18 +12656,6 @@ window.ODR_DATA = {
             },
             {
               "category": "Shashlik",
-              "sku": "000013865",
-              "name": "Локшина з куркою в кислосолодкому соусі 450г",
-              "orders": 15,
-              "items": 15,
-              "affected_orders": 2,
-              "qty": 13.3,
-              "repl": 6.7,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Shashlik",
               "sku": "000020501",
               "name": "Рибні котлетки з кабачком та печеними овочами 320г",
               "orders": 5,
@@ -12675,6 +12663,18 @@ window.ODR_DATA = {
               "affected_orders": 2,
               "qty": 40.0,
               "repl": 20.0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Shashlik",
+              "sku": "000013865",
+              "name": "Локшина з куркою в кислосолодкому соусі 450г",
+              "orders": 15,
+              "items": 15,
+              "affected_orders": 2,
+              "qty": 13.3,
+              "repl": 6.7,
               "weight": 0,
               "price": 0
             },
@@ -12704,18 +12704,6 @@ window.ODR_DATA = {
             },
             {
               "category": "Various, mixed",
-              "sku": "000020745",
-              "name": "Онігірі з копченим вугрем та кешю 140г",
-              "orders": 4,
-              "items": 6,
-              "affected_orders": 2,
-              "qty": 33.3,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Various, mixed",
               "sku": "000010998",
               "name": "Суші бургер з лососем + соус соєвий + соус СпайсіМайо 320/40/30г",
               "orders": 8,
@@ -12728,13 +12716,13 @@ window.ODR_DATA = {
             },
             {
               "category": "Various, mixed",
-              "sku": "000017926",
-              "name": "Млинці з тунцем шпинатні 4шт 360г",
-              "orders": 8,
-              "items": 8,
-              "affected_orders": 1,
-              "qty": 12.5,
-              "repl": 12.5,
+              "sku": "000020745",
+              "name": "Онігірі з копченим вугрем та кешю 140г",
+              "orders": 4,
+              "items": 6,
+              "affected_orders": 2,
+              "qty": 33.3,
+              "repl": 0,
               "weight": 0,
               "price": 0
             },
@@ -12747,6 +12735,18 @@ window.ODR_DATA = {
               "affected_orders": 1,
               "qty": 14.3,
               "repl": 14.3,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Various, mixed",
+              "sku": "000017926",
+              "name": "Млинці з тунцем шпинатні 4шт 360г",
+              "orders": 8,
+              "items": 8,
+              "affected_orders": 1,
+              "qty": 12.5,
+              "repl": 12.5,
               "weight": 0,
               "price": 0
             },
@@ -12775,18 +12775,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Various, mixed",
-              "sku": "000017398",
-              "name": "Суші бургер з креветкою +соус Унагі+соус СпайсіМайо 300/10/10г",
-              "orders": 7,
-              "items": 8,
-              "affected_orders": 0,
-              "qty": 0,
-              "repl": 25.0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Nigiri",
               "sku": "000020247",
               "name": "Онігірі з тунцем та ікрою тобіко 140г",
@@ -12795,6 +12783,18 @@ window.ODR_DATA = {
               "affected_orders": 0,
               "qty": 0,
               "repl": 20.0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Various, mixed",
+              "sku": "000017398",
+              "name": "Суші бургер з креветкою +соус Унагі+соус СпайсіМайо 300/10/10г",
+              "orders": 7,
+              "items": 8,
+              "affected_orders": 0,
+              "qty": 0,
+              "repl": 25.0,
               "weight": 0,
               "price": 0
             }
@@ -12850,18 +12850,6 @@ window.ODR_DATA = {
             },
             {
               "category": "Grocery Food",
-              "sku": "22176",
-              "name": "Помiдори Утконосівка (за 100 г.)",
-              "orders": 11,
-              "items": 11,
-              "affected_orders": 5,
-              "qty": 9.1,
-              "repl": 0,
-              "weight": 36.4,
-              "price": 0
-            },
-            {
-              "category": "Grocery Food",
               "sku": "35043",
               "name": "Кавун (за 500 г.)",
               "orders": 15,
@@ -12873,6 +12861,18 @@ window.ODR_DATA = {
               "price": 0
             },
             {
+              "category": "Grocery Food",
+              "sku": "22176",
+              "name": "Помiдори Утконосівка (за 100 г.)",
+              "orders": 11,
+              "items": 11,
+              "affected_orders": 5,
+              "qty": 9.1,
+              "repl": 0,
+              "weight": 36.4,
+              "price": 0
+            },
+            {
               "category": "Croissant",
               "sku": "203786",
               "name": "Круасан з шинкою",
@@ -12881,6 +12881,18 @@ window.ODR_DATA = {
               "affected_orders": 4,
               "qty": 50.0,
               "repl": 12.5,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Various, mixed",
+              "sku": "57989",
+              "name": "Яйце куряче",
+              "orders": 12,
+              "items": 12,
+              "affected_orders": 4,
+              "qty": 33.3,
+              "repl": 0,
               "weight": 0,
               "price": 0
             },
@@ -12921,15 +12933,15 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Various, mixed",
-              "sku": "57989",
-              "name": "Яйце куряче",
-              "orders": 12,
-              "items": 12,
-              "affected_orders": 4,
-              "qty": 33.3,
-              "repl": 0,
-              "weight": 0,
+              "category": "Grocery Food",
+              "sku": "77216",
+              "name": "Диня Дністровська (за 100 г.)",
+              "orders": 7,
+              "items": 7,
+              "affected_orders": 3,
+              "qty": 0,
+              "repl": 14.3,
+              "weight": 42.9,
               "price": 0
             },
             {
@@ -12945,18 +12957,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Grocery Food",
-              "sku": "77216",
-              "name": "Диня Дністровська (за 100 г.)",
-              "orders": 7,
-              "items": 7,
-              "affected_orders": 3,
-              "qty": 0,
-              "repl": 14.3,
-              "weight": 42.9,
-              "price": 0
-            },
-            {
               "category": "Cola",
               "sku": "215567",
               "name": "Напій Coca Cola 1.25л vanilla",
@@ -12969,18 +12969,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Shashlik",
-              "sku": "14200",
-              "name": "Рулет Бащинский гурман з курячого філе в.к. в.г. в (за 200 г.)",
-              "orders": 5,
-              "items": 5,
-              "affected_orders": 3,
-              "qty": 40.0,
-              "repl": 0,
-              "weight": 20.0,
-              "price": 0
-            },
-            {
               "category": "Grocery Food",
               "sku": "50482",
               "name": "Буряк ранній (за 300 г.)",
@@ -12990,6 +12978,18 @@ window.ODR_DATA = {
               "qty": 0,
               "repl": 0,
               "weight": 50.0,
+              "price": 0
+            },
+            {
+              "category": "Shashlik",
+              "sku": "14200",
+              "name": "Рулет Бащинский гурман з курячого філе в.к. в.г. в (за 200 г.)",
+              "orders": 5,
+              "items": 5,
+              "affected_orders": 3,
+              "qty": 40.0,
+              "repl": 0,
+              "weight": 20.0,
               "price": 0
             },
             {
@@ -13017,25 +13017,25 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Various, mixed",
-              "sku": "50392",
-              "name": "Яблука білий налив (за 100 г.)",
-              "orders": 5,
-              "items": 5,
+              "category": "Grocery Food",
+              "sku": "39171",
+              "name": "Перець California wonder червоний (за 200 г.)",
+              "orders": 6,
+              "items": 6,
               "affected_orders": 2,
               "qty": 0,
               "repl": 0,
-              "weight": 40.0,
+              "weight": 33.3,
               "price": 0
             },
             {
-              "category": "Chips & Crackers",
-              "sku": "214245",
-              "name": "Чіпси CHEW! 110г зі смаком сиру хвилясті",
-              "orders": 5,
-              "items": 5,
+              "category": "Various, mixed",
+              "sku": "204348",
+              "name": "Пиво Хайк 0.5л бланш з.б",
+              "orders": 9,
+              "items": 10,
               "affected_orders": 2,
-              "qty": 40.0,
+              "qty": 20.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -13106,24 +13106,24 @@ window.ODR_DATA = {
             },
             {
               "category": "Non-Food",
-              "sku": "2301011397",
-              "name": "Вир Тют Д/Ел Наг Silver 1Пач Terea",
-              "orders": 19,
-              "items": 19,
-              "affected_orders": 3,
-              "qty": 15.8,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Non-Food",
               "sku": "2301011391",
               "name": "Вир Тют Д/Ел Наг Blossom Wave 1Пач Terea",
               "orders": 14,
               "items": 14,
               "affected_orders": 3,
               "qty": 21.4,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Non-Food",
+              "sku": "2301011397",
+              "name": "Вир Тют Д/Ел Наг Silver 1Пач Terea",
+              "orders": 19,
+              "items": 19,
+              "affected_orders": 3,
+              "qty": 15.8,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -13883,17 +13883,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Lavash",
-              "orders": 2,
-              "items": 3,
-              "affected_orders": 1,
-              "contribution": 1.0,
-              "qty": 33.3,
-              "repl": 33.3,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Cupcake",
               "orders": 4,
               "items": 4,
@@ -13901,6 +13890,17 @@ window.ODR_DATA = {
               "contribution": 1.0,
               "qty": 25.0,
               "repl": 25.0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Brandy",
+              "orders": 7,
+              "items": 8,
+              "affected_orders": 1,
+              "contribution": 1.0,
+              "qty": 12.5,
+              "repl": 12.5,
               "weight": 0,
               "price": 0
             }
@@ -13962,17 +13962,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Mayonnaise",
-              "orders": 3,
-              "items": 3,
-              "affected_orders": 1,
-              "contribution": 4.2,
-              "qty": 33.3,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Still water",
               "orders": 2,
               "items": 3,
@@ -13995,6 +13984,17 @@ window.ODR_DATA = {
               "price": 0
             },
             {
+              "category": "Mayonnaise",
+              "orders": 3,
+              "items": 3,
+              "affected_orders": 1,
+              "contribution": 4.2,
+              "qty": 33.3,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
               "category": "Bolognese",
               "orders": 1,
               "items": 1,
@@ -14006,7 +14006,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "White Bread",
+              "category": "Honey Cake",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -14074,23 +14074,23 @@ window.ODR_DATA = {
               "price": 0
             },
             {
+              "category": "Orange",
+              "orders": 3,
+              "items": 3,
+              "affected_orders": 1,
+              "contribution": 0.8,
+              "qty": 33.3,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
               "category": "Sandwich",
               "orders": 1,
               "items": 1,
               "affected_orders": 1,
               "contribution": 0.8,
               "qty": 100.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Chicken wrap",
-              "orders": 4,
-              "items": 4,
-              "affected_orders": 1,
-              "contribution": 0.8,
-              "qty": 25.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -14107,12 +14107,12 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Orange",
-              "orders": 3,
-              "items": 3,
+              "category": "Chicken wrap",
+              "orders": 4,
+              "items": 4,
               "affected_orders": 1,
               "contribution": 0.8,
-              "qty": 33.3,
+              "qty": 25.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -14208,17 +14208,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Candies",
-              "orders": 5,
-              "items": 6,
-              "affected_orders": 1,
-              "contribution": 1.0,
-              "qty": 0,
-              "repl": 0,
-              "weight": 16.7,
-              "price": 0
-            },
-            {
               "category": "Lemon-Lime",
               "orders": 3,
               "items": 3,
@@ -14238,6 +14227,17 @@ window.ODR_DATA = {
               "qty": 25.0,
               "repl": 0,
               "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Candies",
+              "orders": 5,
+              "items": 6,
+              "affected_orders": 1,
+              "contribution": 1.0,
+              "qty": 0,
+              "repl": 0,
+              "weight": 16.7,
               "price": 0
             }
           ],
@@ -14287,6 +14287,17 @@ window.ODR_DATA = {
               "price": 0
             },
             {
+              "category": "Mayonnaise",
+              "orders": 9,
+              "items": 10,
+              "affected_orders": 1,
+              "contribution": 0.6,
+              "qty": 10.0,
+              "repl": 10.0,
+              "weight": 0,
+              "price": 0
+            },
+            {
               "category": "Red Wine",
               "orders": 4,
               "items": 6,
@@ -14298,13 +14309,13 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Mayonnaise",
-              "orders": 9,
-              "items": 10,
+              "category": "Rosé Wine",
+              "orders": 2,
+              "items": 2,
               "affected_orders": 1,
               "contribution": 0.6,
-              "qty": 10.0,
-              "repl": 10.0,
+              "qty": 50.0,
+              "repl": 0,
               "weight": 0,
               "price": 0
             },
@@ -14339,17 +14350,6 @@ window.ODR_DATA = {
               "qty": 0,
               "repl": 0,
               "weight": 2.2,
-              "price": 0
-            },
-            {
-              "category": "Rosé Wine",
-              "orders": 2,
-              "items": 2,
-              "affected_orders": 1,
-              "contribution": 0.6,
-              "qty": 50.0,
-              "repl": 0,
-              "weight": 0,
               "price": 0
             }
           ],
@@ -14482,24 +14482,24 @@ window.ODR_DATA = {
             },
             {
               "category": "Various, mixed",
-              "sku": "000020631",
-              "name": "Дерун з рваною яловичиною та грибами 320г",
-              "orders": 12,
-              "items": 12,
-              "affected_orders": 3,
-              "qty": 25.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Various, mixed",
               "sku": "000020626",
               "name": "Млинці з маком та соусом три молока 350г",
               "orders": 15,
               "items": 16,
               "affected_orders": 3,
               "qty": 18.8,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Various, mixed",
+              "sku": "000020631",
+              "name": "Дерун з рваною яловичиною та грибами 320г",
+              "orders": 12,
+              "items": 12,
+              "affected_orders": 3,
+              "qty": 25.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -14565,18 +14565,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Carbonara",
-              "sku": "000006977",
-              "name": "Паста Карбонара 320г",
-              "orders": 5,
-              "items": 5,
-              "affected_orders": 1,
-              "qty": 20.0,
-              "repl": 20.0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Shashlik",
               "sku": "000019815",
               "name": "Боул з картоплею та куркою 270г",
@@ -14597,6 +14585,18 @@ window.ODR_DATA = {
               "affected_orders": 1,
               "qty": 7.7,
               "repl": 7.7,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Carbonara",
+              "sku": "000006977",
+              "name": "Паста Карбонара 320г",
+              "orders": 5,
+              "items": 5,
+              "affected_orders": 1,
+              "qty": 20.0,
+              "repl": 20.0,
               "weight": 0,
               "price": 0
             },
@@ -14663,18 +14663,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Various, mixed",
-              "sku": "212577",
-              "name": "Вода Пепсі-кола 1.75л",
-              "orders": 5,
-              "items": 5,
-              "affected_orders": 4,
-              "qty": 80.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Cola",
               "sku": "212577",
               "name": "Вода Пепсі-кола 1.75л",
@@ -14712,6 +14700,18 @@ window.ODR_DATA = {
             },
             {
               "category": "Various, mixed",
+              "sku": "212577",
+              "name": "Вода Пепсі-кола 1.75л",
+              "orders": 5,
+              "items": 5,
+              "affected_orders": 4,
+              "qty": 80.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Various, mixed",
               "sku": "21887",
               "name": "Фiле куряче 4кг охол. (за 300 г.)",
               "orders": 8,
@@ -14724,14 +14724,14 @@ window.ODR_DATA = {
             },
             {
               "category": "Grocery Food",
-              "sku": "50525",
-              "name": "Цибуля молода (за 300 г.)",
-              "orders": 14,
-              "items": 15,
+              "sku": "5688",
+              "name": "Картопля молода рожева (за 100 г.)",
+              "orders": 5,
+              "items": 6,
               "affected_orders": 3,
               "qty": 0,
               "repl": 0,
-              "weight": 20.0,
+              "weight": 50.0,
               "price": 0
             },
             {
@@ -14748,14 +14748,14 @@ window.ODR_DATA = {
             },
             {
               "category": "Grocery Food",
-              "sku": "5688",
-              "name": "Картопля молода рожева (за 100 г.)",
-              "orders": 5,
-              "items": 6,
+              "sku": "50525",
+              "name": "Цибуля молода (за 300 г.)",
+              "orders": 14,
+              "items": 15,
               "affected_orders": 3,
               "qty": 0,
               "repl": 0,
-              "weight": 50.0,
+              "weight": 20.0,
               "price": 0
             },
             {
@@ -14784,14 +14784,14 @@ window.ODR_DATA = {
             },
             {
               "category": "Grocery Food",
-              "sku": "95076",
-              "name": "Помідори Україна червоні польові (за 100 г.)",
-              "orders": 10,
-              "items": 10,
+              "sku": "99109",
+              "name": "Помідори Україна рожеві мікадні (за 400 г.)",
+              "orders": 7,
+              "items": 7,
               "affected_orders": 2,
               "qty": 0,
               "repl": 0,
-              "weight": 20.0,
+              "weight": 28.6,
               "price": 0
             },
             {
@@ -14808,14 +14808,14 @@ window.ODR_DATA = {
             },
             {
               "category": "Grocery Food",
-              "sku": "99109",
-              "name": "Помідори Україна рожеві мікадні (за 400 г.)",
-              "orders": 7,
-              "items": 7,
+              "sku": "95076",
+              "name": "Помідори Україна червоні польові (за 100 г.)",
+              "orders": 10,
+              "items": 10,
               "affected_orders": 2,
               "qty": 0,
               "repl": 0,
-              "weight": 28.6,
+              "weight": 20.0,
               "price": 0
             },
             {
@@ -15117,18 +15117,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Still water",
-              "sku": "2656406",
-              "name": "{\"uk-UA\":\"Вода Вигода негазована 5 л\"}",
-              "orders": 35,
-              "items": 35,
-              "affected_orders": 15,
-              "qty": 42.9,
-              "repl": 14.3,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Shashlik",
               "sku": "177973",
               "name": "{\"uk-UA\":\"Картопля \\\"Барбекю\\\" вагова 100г\"}",
@@ -15138,6 +15126,18 @@ window.ODR_DATA = {
               "qty": 22.0,
               "repl": 8.5,
               "weight": 3.4,
+              "price": 0
+            },
+            {
+              "category": "Still water",
+              "sku": "2656406",
+              "name": "{\"uk-UA\":\"Вода Вигода негазована 5 л\"}",
+              "orders": 35,
+              "items": 35,
+              "affected_orders": 15,
+              "qty": 42.9,
+              "repl": 14.3,
+              "weight": 0,
               "price": 0
             },
             {
@@ -15342,12 +15342,12 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Green Tea",
-              "orders": 2,
-              "items": 3,
+              "category": "Snacks",
+              "orders": 1,
+              "items": 1,
               "affected_orders": 1,
               "contribution": 0.3,
-              "qty": 33.3,
+              "qty": 100.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -15364,12 +15364,12 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Tiramisu",
-              "orders": 12,
-              "items": 13,
+              "category": "Green Tea",
+              "orders": 2,
+              "items": 3,
               "affected_orders": 1,
               "contribution": 0.3,
-              "qty": 7.7,
+              "qty": 33.3,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -15432,17 +15432,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Mushroom Pizza",
-              "orders": 7,
-              "items": 8,
-              "affected_orders": 3,
-              "contribution": 0.6,
-              "qty": 37.5,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Green Salad",
               "orders": 3,
               "items": 3,
@@ -15460,6 +15449,17 @@ window.ODR_DATA = {
               "affected_orders": 3,
               "contribution": 0.6,
               "qty": 21.4,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Mushroom Pizza",
+              "orders": 7,
+              "items": 8,
+              "affected_orders": 3,
+              "contribution": 0.6,
+              "qty": 37.5,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -15544,6 +15544,39 @@ window.ODR_DATA = {
               "price": 0
             },
             {
+              "category": "Mayonnaise",
+              "orders": 1,
+              "items": 1,
+              "affected_orders": 0,
+              "contribution": 0,
+              "qty": 0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Beef burger",
+              "orders": 1,
+              "items": 1,
+              "affected_orders": 0,
+              "contribution": 0,
+              "qty": 0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Shrimp",
+              "orders": 1,
+              "items": 1,
+              "affected_orders": 0,
+              "contribution": 0,
+              "qty": 0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
               "category": "Carbonara",
               "orders": 1,
               "items": 1,
@@ -15555,42 +15588,9 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Wheat Beer",
-              "orders": 3,
-              "items": 3,
-              "affected_orders": 0,
-              "contribution": 0,
-              "qty": 0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "White Wine",
+              "category": "Cupcake",
               "orders": 1,
               "items": 1,
-              "affected_orders": 0,
-              "contribution": 0,
-              "qty": 0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Ravioli",
-              "orders": 1,
-              "items": 1,
-              "affected_orders": 0,
-              "contribution": 0,
-              "qty": 0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Soy Sauce",
-              "orders": 1,
-              "items": 2,
               "affected_orders": 0,
               "contribution": 0,
               "qty": 0,
@@ -15645,6 +15645,17 @@ window.ODR_DATA = {
               "price": 0
             },
             {
+              "category": "Snacks",
+              "orders": 3,
+              "items": 5,
+              "affected_orders": 1,
+              "contribution": 3.8,
+              "qty": 20.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
               "category": "Mayonnaise",
               "orders": 1,
               "items": 1,
@@ -15678,18 +15689,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Snacks",
-              "orders": 3,
-              "items": 5,
-              "affected_orders": 1,
-              "contribution": 3.8,
-              "qty": 20.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Chicken Wings",
+              "category": "Still water",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -15700,9 +15700,9 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Ribs",
-              "orders": 2,
-              "items": 2,
+              "category": "Lavash",
+              "orders": 4,
+              "items": 4,
               "affected_orders": 0,
               "contribution": 0,
               "qty": 0,
@@ -15768,23 +15768,23 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Sparkling Wine",
-              "orders": 3,
-              "items": 3,
-              "affected_orders": 1,
-              "contribution": 0.8,
-              "qty": 33.3,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Pudding & Custards",
               "orders": 1,
               "items": 2,
               "affected_orders": 1,
               "contribution": 0.8,
               "qty": 50.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Sparkling Wine",
+              "orders": 3,
+              "items": 3,
+              "affected_orders": 1,
+              "contribution": 0.8,
+              "qty": 33.3,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -15801,7 +15801,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "White Wine",
+              "category": "Grilled Seafood",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -15812,9 +15812,9 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Tomato Soup",
-              "orders": 1,
-              "items": 1,
+              "category": "Lavash",
+              "orders": 2,
+              "items": 2,
               "affected_orders": 0,
               "contribution": 0,
               "qty": 0,
@@ -15869,23 +15869,23 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Risotto",
-              "orders": 2,
-              "items": 2,
-              "affected_orders": 2,
-              "contribution": 2.3,
-              "qty": 100.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Chips & Crackers",
               "orders": 11,
               "items": 16,
               "affected_orders": 2,
               "contribution": 2.3,
               "qty": 12.5,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Risotto",
+              "orders": 2,
+              "items": 2,
+              "affected_orders": 2,
+              "contribution": 2.3,
+              "qty": 100.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -15924,12 +15924,12 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Green Salad",
-              "orders": 2,
-              "items": 2,
+              "category": "Wheat Beer",
+              "orders": 1,
+              "items": 1,
               "affected_orders": 1,
               "contribution": 1.1,
-              "qty": 50.0,
+              "qty": 100.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -15970,23 +15970,23 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Lavash",
-              "orders": 3,
-              "items": 3,
-              "affected_orders": 1,
-              "contribution": 0.6,
-              "qty": 33.3,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Cola",
               "orders": 48,
               "items": 54,
               "affected_orders": 1,
               "contribution": 0.6,
               "qty": 1.9,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Lavash",
+              "orders": 3,
+              "items": 3,
+              "affected_orders": 1,
+              "contribution": 0.6,
+              "qty": 33.3,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -16025,9 +16025,9 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Sparkling Water",
-              "orders": 1,
-              "items": 1,
+              "category": "Tomato Juice",
+              "orders": 2,
+              "items": 2,
               "affected_orders": 0,
               "contribution": 0,
               "qty": 0,
@@ -16036,7 +16036,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Green Smoothie",
+              "category": "Brandy",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -16250,6 +16250,30 @@ window.ODR_DATA = {
             },
             {
               "category": "Grocery Food",
+              "sku": "95429",
+              "name": "Цукор 0.01 1кг",
+              "orders": 6,
+              "items": 6,
+              "affected_orders": 2,
+              "qty": 33.3,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Shashlik",
+              "sku": "195168",
+              "name": "Тунець AlaMesa 185г шматочками у власному соку",
+              "orders": 5,
+              "items": 5,
+              "affected_orders": 2,
+              "qty": 40.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Grocery Food",
               "sku": "209440",
               "name": "Кріп 30 г",
               "orders": 9,
@@ -16274,32 +16298,8 @@ window.ODR_DATA = {
             },
             {
               "category": "Grocery Food",
-              "sku": "95429",
-              "name": "Цукор 0.01 1кг",
-              "orders": 6,
-              "items": 6,
-              "affected_orders": 2,
-              "qty": 33.3,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Grocery Food",
               "sku": "86835",
               "name": "Морозиво Ласка 90г максимус",
-              "orders": 5,
-              "items": 5,
-              "affected_orders": 2,
-              "qty": 40.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Shashlik",
-              "sku": "195168",
-              "name": "Тунець AlaMesa 185г шматочками у власному соку",
               "orders": 5,
               "items": 5,
               "affected_orders": 2,
@@ -16346,18 +16346,6 @@ window.ODR_DATA = {
             },
             {
               "category": "Grocery Food",
-              "sku": "50596",
-              "name": "ПАКЕТ Копійка 27*45",
-              "orders": 7,
-              "items": 7,
-              "affected_orders": 0,
-              "qty": 0,
-              "repl": 85.7,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Grocery Food",
               "sku": "18990",
               "name": "ПАКЕТ Копійка 33*50",
               "orders": 9,
@@ -16365,6 +16353,18 @@ window.ODR_DATA = {
               "affected_orders": 0,
               "qty": 0,
               "repl": 66.7,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Grocery Food",
+              "sku": "50596",
+              "name": "ПАКЕТ Копійка 27*45",
+              "orders": 7,
+              "items": 7,
+              "affected_orders": 0,
+              "qty": 0,
+              "repl": 85.7,
               "weight": 0,
               "price": 0
             },
@@ -16567,18 +16567,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Various, mixed",
-              "sku": "177794",
-              "name": "{\"uk-UA\":\"Окрошка з куркою, вагова 100г\"}",
-              "orders": 20,
-              "items": 20,
-              "affected_orders": 15,
-              "qty": 60.0,
-              "repl": 0,
-              "weight": 15.0,
-              "price": 0
-            },
-            {
               "category": "Still water",
               "sku": "2544599",
               "name": "{\"uk-UA\":\"Вода Вигода сильногазована 1.5 л\"}",
@@ -16588,6 +16576,18 @@ window.ODR_DATA = {
               "qty": 68.2,
               "repl": 0,
               "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Various, mixed",
+              "sku": "177794",
+              "name": "{\"uk-UA\":\"Окрошка з куркою, вагова 100г\"}",
+              "orders": 20,
+              "items": 20,
+              "affected_orders": 15,
+              "qty": 60.0,
+              "repl": 0,
+              "weight": 15.0,
               "price": 0
             },
             {
@@ -16962,14 +16962,14 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Greek Salad",
-              "orders": 2,
-              "items": 3,
+              "category": "Chicken Wings",
+              "orders": 5,
+              "items": 5,
               "affected_orders": 1,
               "contribution": 0.2,
               "qty": 0,
               "repl": 0,
-              "weight": 33.3,
+              "weight": 20.0,
               "price": 0
             }
           ],
@@ -17008,7 +17008,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Napoleon Cake",
+              "category": "Grilled cheese",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -17019,7 +17019,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Lavash",
+              "category": "Protein Smoothie",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -17030,20 +17030,9 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Orange",
-              "orders": 2,
-              "items": 2,
-              "affected_orders": 0,
-              "contribution": 0,
-              "qty": 0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Honey Cake",
-              "orders": 1,
-              "items": 1,
+              "category": "Lager",
+              "orders": 4,
+              "items": 5,
               "affected_orders": 0,
               "contribution": 0,
               "qty": 0,
@@ -17074,9 +17063,20 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Shashlik",
-              "orders": 5,
-              "items": 6,
+              "category": "Ketchup",
+              "orders": 1,
+              "items": 1,
+              "affected_orders": 0,
+              "contribution": 0,
+              "qty": 0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Sparkling Water",
+              "orders": 3,
+              "items": 3,
               "affected_orders": 0,
               "contribution": 0,
               "qty": 0,
@@ -17131,17 +17131,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Ketchup",
-              "orders": 3,
-              "items": 3,
-              "affected_orders": 2,
-              "contribution": 5.4,
-              "qty": 66.7,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Snacks",
               "orders": 5,
               "items": 10,
@@ -17153,23 +17142,12 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Ribs",
+              "category": "Ketchup",
               "orders": 3,
               "items": 3,
-              "affected_orders": 1,
-              "contribution": 2.7,
-              "qty": 0,
-              "repl": 0,
-              "weight": 33.3,
-              "price": 0
-            },
-            {
-              "category": "Lavash",
-              "orders": 6,
-              "items": 6,
-              "affected_orders": 1,
-              "contribution": 2.7,
-              "qty": 16.7,
+              "affected_orders": 2,
+              "contribution": 5.4,
+              "qty": 66.7,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -17194,6 +17172,28 @@ window.ODR_DATA = {
               "qty": 0,
               "repl": 0,
               "weight": 50.0,
+              "price": 0
+            },
+            {
+              "category": "Lavash",
+              "orders": 6,
+              "items": 6,
+              "affected_orders": 1,
+              "contribution": 2.7,
+              "qty": 16.7,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Ribs",
+              "orders": 3,
+              "items": 3,
+              "affected_orders": 1,
+              "contribution": 2.7,
+              "qty": 0,
+              "repl": 0,
+              "weight": 33.3,
               "price": 0
             }
           ],
@@ -17265,6 +17265,17 @@ window.ODR_DATA = {
               "price": 0
             },
             {
+              "category": "Orange",
+              "orders": 4,
+              "items": 5,
+              "affected_orders": 1,
+              "contribution": 0.6,
+              "qty": 20.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
               "category": "Cupcake",
               "orders": 1,
               "items": 1,
@@ -17293,17 +17304,6 @@ window.ODR_DATA = {
               "affected_orders": 1,
               "contribution": 0.6,
               "qty": 50.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Orange",
-              "orders": 4,
-              "items": 5,
-              "affected_orders": 1,
-              "contribution": 0.6,
-              "qty": 20.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -17366,6 +17366,17 @@ window.ODR_DATA = {
               "price": 0
             },
             {
+              "category": "Ketchup",
+              "orders": 3,
+              "items": 4,
+              "affected_orders": 1,
+              "contribution": 1.1,
+              "qty": 25.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
               "category": "Sorbet",
               "orders": 3,
               "items": 4,
@@ -17383,17 +17394,6 @@ window.ODR_DATA = {
               "affected_orders": 1,
               "contribution": 1.1,
               "qty": 100.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Ketchup",
-              "orders": 3,
-              "items": 4,
-              "affected_orders": 1,
-              "contribution": 1.1,
-              "qty": 25.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -17662,8 +17662,8 @@ window.ODR_DATA = {
             },
             {
               "category": "Various, mixed",
-              "sku": "000018975",
-              "name": "Міні салат з крабами та кукурудзою 180г",
+              "sku": "000005728",
+              "name": "Борщ український + сметана 300/30г",
               "orders": 18,
               "items": 18,
               "affected_orders": 3,
@@ -17686,8 +17686,8 @@ window.ODR_DATA = {
             },
             {
               "category": "Various, mixed",
-              "sku": "000005728",
-              "name": "Борщ український + сметана 300/30г",
+              "sku": "000018975",
+              "name": "Міні салат з крабами та кукурудзою 180г",
               "orders": 18,
               "items": 18,
               "affected_orders": 3,
@@ -17721,18 +17721,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Shashlik",
-              "sku": "000020020",
-              "name": "Курячий шніцель з гречкою та грибами 290г",
-              "orders": 11,
-              "items": 11,
-              "affected_orders": 2,
-              "qty": 18.2,
-              "repl": 9.1,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Tiramisu",
               "sku": "000018158",
               "name": "Десерт Zelen' Тірамісу класичне 130г",
@@ -17741,6 +17729,18 @@ window.ODR_DATA = {
               "affected_orders": 2,
               "qty": 10.0,
               "repl": 5.0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Shashlik",
+              "sku": "000020020",
+              "name": "Курячий шніцель з гречкою та грибами 290г",
+              "orders": 11,
+              "items": 11,
+              "affected_orders": 2,
+              "qty": 18.2,
+              "repl": 9.1,
               "weight": 0,
               "price": 0
             },
@@ -17895,18 +17895,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Various, mixed",
-              "sku": "0104030022",
-              "name": "Пиво Світле Міцне 8% 1Л Арсенал",
-              "orders": 4,
-              "items": 5,
-              "affected_orders": 2,
-              "qty": 40.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Grocery Food",
               "sku": "1101010371",
               "name": "БАНАН 1КГ (за 100г)",
@@ -17914,6 +17902,18 @@ window.ODR_DATA = {
               "items": 14,
               "affected_orders": 2,
               "qty": 14.3,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Various, mixed",
+              "sku": "0104030022",
+              "name": "Пиво Світле Міцне 8% 1Л Арсенал",
+              "orders": 4,
+              "items": 5,
+              "affected_orders": 2,
+              "qty": 40.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -18106,18 +18106,6 @@ window.ODR_DATA = {
             },
             {
               "category": "Grocery Food",
-              "sku": "2629336",
-              "name": "{\"uk-UA\":\"Картопля молода мита 500г\"}",
-              "orders": 28,
-              "items": 28,
-              "affected_orders": 14,
-              "qty": 50.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Grocery Food",
               "sku": "124166",
               "name": "{\"uk-UA\":\"Цибуля ріпчаста вагова 500г\"}",
               "orders": 136,
@@ -18136,6 +18124,18 @@ window.ODR_DATA = {
               "items": 24,
               "affected_orders": 14,
               "qty": 58.3,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Grocery Food",
+              "sku": "2629336",
+              "name": "{\"uk-UA\":\"Картопля молода мита 500г\"}",
+              "orders": 28,
+              "items": 28,
+              "affected_orders": 14,
+              "qty": 50.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -18213,13 +18213,13 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Various, mixed",
-              "sku": "2582523",
-              "name": "{\"uk-UA\":\"Вареники з картоплею вагові 100г\"}",
-              "orders": 15,
-              "items": 15,
+              "category": "Grocery Food",
+              "sku": "2540854",
+              "name": "{\"uk-UA\":\"Папір туалетний Обухів одношаровий макулатурний 65 м 1шт\"}",
+              "orders": 20,
+              "items": 20,
               "affected_orders": 12,
-              "qty": 80.0,
+              "qty": 60.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -18559,17 +18559,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Beef burger",
-              "orders": 3,
-              "items": 3,
-              "affected_orders": 1,
-              "contribution": 1.6,
-              "qty": 33.3,
-              "repl": 33.3,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Non-Food",
               "orders": 30,
               "items": 50,
@@ -18581,12 +18570,23 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Lemon-Lime",
-              "orders": 1,
-              "items": 1,
+              "category": "Beef burger",
+              "orders": 3,
+              "items": 3,
               "affected_orders": 1,
               "contribution": 1.6,
-              "qty": 100.0,
+              "qty": 33.3,
+              "repl": 33.3,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Honey Cake",
+              "orders": 2,
+              "items": 2,
+              "affected_orders": 1,
+              "contribution": 1.6,
+              "qty": 50.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -18614,12 +18614,12 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Honey Cake",
-              "orders": 2,
-              "items": 2,
+              "category": "Lemon-Lime",
+              "orders": 1,
+              "items": 1,
               "affected_orders": 1,
               "contribution": 1.6,
-              "qty": 50.0,
+              "qty": 100.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -18671,28 +18671,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Ribs",
-              "orders": 1,
-              "items": 1,
-              "affected_orders": 1,
-              "contribution": 3.7,
-              "qty": 0,
-              "repl": 0,
-              "weight": 100.0,
-              "price": 0
-            },
-            {
-              "category": "Ketchup",
-              "orders": 2,
-              "items": 2,
-              "affected_orders": 1,
-              "contribution": 3.7,
-              "qty": 50.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Chicken Wings",
               "orders": 1,
               "items": 1,
@@ -18704,14 +18682,14 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Snacks",
-              "orders": 4,
-              "items": 4,
+              "category": "Ribs",
+              "orders": 1,
+              "items": 1,
               "affected_orders": 1,
               "contribution": 3.7,
-              "qty": 25.0,
+              "qty": 0,
               "repl": 0,
-              "weight": 0,
+              "weight": 100.0,
               "price": 0
             },
             {
@@ -18721,6 +18699,17 @@ window.ODR_DATA = {
               "affected_orders": 1,
               "contribution": 3.7,
               "qty": 100.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Snacks",
+              "orders": 4,
+              "items": 4,
+              "affected_orders": 1,
+              "contribution": 3.7,
+              "qty": 25.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -18737,7 +18726,18 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Mayonnaise",
+              "category": "Ketchup",
+              "orders": 2,
+              "items": 2,
+              "affected_orders": 1,
+              "contribution": 3.7,
+              "qty": 50.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Tomato Juice",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -18748,9 +18748,9 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "White Bread",
-              "orders": 1,
-              "items": 1,
+              "category": "Honey Cake",
+              "orders": 2,
+              "items": 2,
               "affected_orders": 0,
               "contribution": 0,
               "qty": 0,
@@ -18827,17 +18827,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "White Wine",
-              "orders": 5,
-              "items": 5,
-              "affected_orders": 1,
-              "contribution": 0.6,
-              "qty": 20.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Beef burger",
               "orders": 4,
               "items": 4,
@@ -18855,6 +18844,17 @@ window.ODR_DATA = {
               "affected_orders": 1,
               "contribution": 0.6,
               "qty": 2.5,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "White Wine",
+              "orders": 5,
+              "items": 5,
+              "affected_orders": 1,
+              "contribution": 0.6,
+              "qty": 20.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -18972,8 +18972,8 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Liqueurs",
-              "orders": 3,
+              "category": "Protein Smoothie",
+              "orders": 2,
               "items": 3,
               "affected_orders": 1,
               "contribution": 0.8,
@@ -19235,9 +19235,9 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Various, mixed",
-              "sku": "000003958",
-              "name": "Міні салат Коул-Слоу 150г",
+              "category": "Grocery Food",
+              "sku": "000018665",
+              "name": "Батончик Мажор злаковий какао 49г",
               "orders": 5,
               "items": 5,
               "affected_orders": 2,
@@ -19247,21 +19247,9 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Maki Rolls",
-              "sku": "000019563",
-              "name": "Рол з яловичиною та соусом місо майо 300г",
-              "orders": 7,
-              "items": 7,
-              "affected_orders": 2,
-              "qty": 28.6,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Grocery Food",
-              "sku": "000018665",
-              "name": "Батончик Мажор злаковий какао 49г",
+              "category": "Various, mixed",
+              "sku": "000003958",
+              "name": "Міні салат Коул-Слоу 150г",
               "orders": 5,
               "items": 5,
               "affected_orders": 2,
@@ -19278,6 +19266,18 @@ window.ODR_DATA = {
               "items": 16,
               "affected_orders": 2,
               "qty": 12.5,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Maki Rolls",
+              "sku": "000019563",
+              "name": "Рол з яловичиною та соусом місо майо 300г",
+              "orders": 7,
+              "items": 7,
+              "affected_orders": 2,
+              "qty": 28.6,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -19345,6 +19345,30 @@ window.ODR_DATA = {
           ],
           "KOPIYKA": [
             {
+              "category": "Grocery Food",
+              "sku": "196510",
+              "name": "Цукор Пані Цінна 800г",
+              "orders": 6,
+              "items": 6,
+              "affected_orders": 3,
+              "qty": 50.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Lavash",
+              "sku": "26696",
+              "name": "Лаваш Закарян 250г вірменський",
+              "orders": 5,
+              "items": 5,
+              "affected_orders": 3,
+              "qty": 60.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
               "category": "Shashlik",
               "sku": "45396",
               "name": "Крило плечового частина ох (за 500 г.)",
@@ -19354,6 +19378,18 @@ window.ODR_DATA = {
               "qty": 16.7,
               "repl": 0,
               "weight": 33.3,
+              "price": 0
+            },
+            {
+              "category": "Shashlik",
+              "sku": "32117",
+              "name": "Шинка Фарро куряча с.к в.с нар. (за 100 г.)",
+              "orders": 6,
+              "items": 6,
+              "affected_orders": 3,
+              "qty": 50.0,
+              "repl": 0,
+              "weight": 0,
               "price": 0
             },
             {
@@ -19370,30 +19406,6 @@ window.ODR_DATA = {
             },
             {
               "category": "Grocery Food",
-              "sku": "196510",
-              "name": "Цукор Пані Цінна 800г",
-              "orders": 6,
-              "items": 6,
-              "affected_orders": 3,
-              "qty": 50.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Shashlik",
-              "sku": "32117",
-              "name": "Шинка Фарро куряча с.к в.с нар. (за 100 г.)",
-              "orders": 6,
-              "items": 6,
-              "affected_orders": 3,
-              "qty": 50.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Grocery Food",
               "sku": "96065",
               "name": "Помідори Україна червоні (за 300 г.)",
               "orders": 15,
@@ -19402,18 +19414,6 @@ window.ODR_DATA = {
               "qty": 0,
               "repl": 0,
               "weight": 20.0,
-              "price": 0
-            },
-            {
-              "category": "Lavash",
-              "sku": "26696",
-              "name": "Лаваш Закарян 250г вірменський",
-              "orders": 5,
-              "items": 5,
-              "affected_orders": 3,
-              "qty": 60.0,
-              "repl": 0,
-              "weight": 0,
               "price": 0
             },
             {
@@ -19441,25 +19441,13 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Cola",
-              "sku": "214775",
-              "name": "Вода Пепсі-кола 1.25л блек",
-              "orders": 9,
-              "items": 9,
-              "affected_orders": 2,
-              "qty": 22.2,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Various, mixed",
-              "sku": "21887",
-              "name": "Фiле куряче 4кг охол. (за 300 г.)",
-              "orders": 10,
-              "items": 12,
+              "sku": "200418",
+              "name": "Хліб 4-й ОХЗ 750г обідній люкс уп",
+              "orders": 5,
+              "items": 6,
               "affected_orders": 2,
-              "qty": 16.7,
+              "qty": 33.3,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -19489,6 +19477,30 @@ window.ODR_DATA = {
               "price": 0
             },
             {
+              "category": "Cola",
+              "sku": "206865",
+              "name": "Напій Coca Cola 1.25л zero sugar",
+              "orders": 17,
+              "items": 17,
+              "affected_orders": 2,
+              "qty": 11.8,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Cola",
+              "sku": "214775",
+              "name": "Вода Пепсі-кола 1.25л блек",
+              "orders": 9,
+              "items": 9,
+              "affected_orders": 2,
+              "qty": 22.2,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
               "category": "Various, mixed",
               "sku": "80258",
               "name": "Лимон (за 200 г.)",
@@ -19502,24 +19514,12 @@ window.ODR_DATA = {
             },
             {
               "category": "Various, mixed",
-              "sku": "200418",
-              "name": "Хліб 4-й ОХЗ 750г обідній люкс уп",
-              "orders": 5,
-              "items": 6,
+              "sku": "21887",
+              "name": "Фiле куряче 4кг охол. (за 300 г.)",
+              "orders": 10,
+              "items": 12,
               "affected_orders": 2,
-              "qty": 33.3,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Cola",
-              "sku": "206865",
-              "name": "Напій Coca Cola 1.25л zero sugar",
-              "orders": 17,
-              "items": 17,
-              "affected_orders": 2,
-              "qty": 11.8,
+              "qty": 16.7,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -19641,6 +19641,18 @@ window.ODR_DATA = {
           ],
           "TAISTRA": [
             {
+              "category": "Candies",
+              "sku": "95023",
+              "name": "Льодяники ХОЛЗ екстра стронг 25,2г",
+              "orders": 5,
+              "items": 5,
+              "affected_orders": 2,
+              "qty": 40.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
               "category": "Still water",
               "sku": "27867",
               "name": "Вода ДЕВАЙТІС сильногазована 2л ПЕТ",
@@ -19660,18 +19672,6 @@ window.ODR_DATA = {
               "items": 11,
               "affected_orders": 2,
               "qty": 18.2,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Candies",
-              "sku": "95023",
-              "name": "Льодяники ХОЛЗ екстра стронг 25,2г",
-              "orders": 5,
-              "items": 5,
-              "affected_orders": 2,
-              "qty": 40.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -19823,18 +19823,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Grocery Food",
-              "sku": "2544821",
-              "name": "{\"uk-UA\":\"Перець червоний ваговий 250г\"}",
-              "orders": 55,
-              "items": 55,
-              "affected_orders": 15,
-              "qty": 10.9,
-              "repl": 0,
-              "weight": 16.4,
-              "price": 0
-            },
-            {
               "category": "Various, mixed",
               "sku": "2656606",
               "name": "{\"uk-UA\":\"Картопляне пюре вагове 100г\"}",
@@ -19844,6 +19832,18 @@ window.ODR_DATA = {
               "qty": 42.4,
               "repl": 0,
               "weight": 3.0,
+              "price": 0
+            },
+            {
+              "category": "Grocery Food",
+              "sku": "2544821",
+              "name": "{\"uk-UA\":\"Перець червоний ваговий 250г\"}",
+              "orders": 55,
+              "items": 55,
+              "affected_orders": 15,
+              "qty": 10.9,
+              "repl": 0,
+              "weight": 16.4,
               "price": 0
             },
             {
@@ -19895,18 +19895,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Grocery Food",
-              "sku": "2610691",
-              "name": "{\"uk-UA\":\"Помідор Сливка земляна, ваговий 400г\"}",
-              "orders": 27,
-              "items": 27,
-              "affected_orders": 13,
-              "qty": 40.7,
-              "repl": 7.4,
-              "weight": 7.4,
-              "price": 0
-            },
-            {
               "category": "Various, mixed",
               "sku": "2648240",
               "name": "{\"uk-UA\":\"Стіки для нагрівання тютюну Terea Purple Wave 20 шт\"}",
@@ -19916,6 +19904,18 @@ window.ODR_DATA = {
               "qty": 25.0,
               "repl": 3.8,
               "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Grocery Food",
+              "sku": "2610691",
+              "name": "{\"uk-UA\":\"Помідор Сливка земляна, ваговий 400г\"}",
+              "orders": 27,
+              "items": 27,
+              "affected_orders": 13,
+              "qty": 40.7,
+              "repl": 7.4,
+              "weight": 7.4,
               "price": 0
             },
             {
@@ -20331,7 +20331,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "White Wine",
+              "category": "Candies",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -20342,9 +20342,9 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Fruit Smoothie",
-              "orders": 1,
-              "items": 1,
+              "category": "Cupcake",
+              "orders": 2,
+              "items": 2,
               "affected_orders": 0,
               "contribution": 0,
               "qty": 0,
@@ -20410,17 +20410,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Ribs",
-              "orders": 2,
-              "items": 2,
-              "affected_orders": 0,
-              "contribution": 0,
-              "qty": 0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Snacks",
               "orders": 5,
               "items": 8,
@@ -20435,6 +20424,17 @@ window.ODR_DATA = {
               "category": "Lavash",
               "orders": 4,
               "items": 4,
+              "affected_orders": 0,
+              "contribution": 0,
+              "qty": 0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Ribs",
+              "orders": 2,
+              "items": 2,
               "affected_orders": 0,
               "contribution": 0,
               "qty": 0,
@@ -20645,7 +20645,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Tarts",
+              "category": "Cupcake",
               "orders": 1,
               "items": 1,
               "affected_orders": 1,
@@ -20656,7 +20656,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Cupcake",
+              "category": "Tarts",
               "orders": 1,
               "items": 1,
               "affected_orders": 1,
@@ -20735,12 +20735,12 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Sparkling Water",
-              "orders": 4,
-              "items": 4,
+              "category": "Tarts",
+              "orders": 6,
+              "items": 6,
               "affected_orders": 1,
               "contribution": 0.4,
-              "qty": 25.0,
+              "qty": 16.7,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -20757,23 +20757,23 @@ window.ODR_DATA = {
               "price": 0
             },
             {
+              "category": "Sparkling Water",
+              "orders": 4,
+              "items": 4,
+              "affected_orders": 1,
+              "contribution": 0.4,
+              "qty": 25.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
               "category": "Cola",
               "orders": 60,
               "items": 68,
               "affected_orders": 1,
               "contribution": 0.4,
               "qty": 1.5,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Tarts",
-              "orders": 6,
-              "items": 6,
-              "affected_orders": 1,
-              "contribution": 0.4,
-              "qty": 16.7,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -20957,18 +20957,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Chicken wrap",
-              "sku": "183314",
-              "name": "Куряча грудка 150г в листков.тісті власне вир-во",
-              "orders": 5,
-              "items": 5,
-              "affected_orders": 2,
-              "qty": 40.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Cola",
               "sku": "212578",
               "name": "Вода Пепсі-кола 1.75л блек",
@@ -20990,6 +20978,18 @@ window.ODR_DATA = {
               "qty": 0,
               "repl": 0,
               "weight": 40.0,
+              "price": 0
+            },
+            {
+              "category": "Chicken wrap",
+              "sku": "183314",
+              "name": "Куряча грудка 150г в листков.тісті власне вир-во",
+              "orders": 5,
+              "items": 5,
+              "affected_orders": 2,
+              "qty": 40.0,
+              "repl": 0,
+              "weight": 0,
               "price": 0
             },
             {
@@ -21044,18 +21044,6 @@ window.ODR_DATA = {
           "RUKAVYCHKA": [
             {
               "category": "Grocery Food",
-              "sku": "0512020233",
-              "name": "ШОКОЛАДНИЙ БАТОНЧИК КІНДЕР-БУЕНО 43Г ФЕРРЕРО",
-              "orders": 8,
-              "items": 8,
-              "affected_orders": 5,
-              "qty": 62.5,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Grocery Food",
               "sku": "0512020090",
               "name": "Шок Бат Кіндер Кантрі З Злаками 23.5Г Ферреро",
               "orders": 8,
@@ -21067,13 +21055,13 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Cola",
-              "sku": "0204030380",
-              "name": "Напій Сил/Газ 1.75Л Кока-Кола",
-              "orders": 19,
-              "items": 19,
-              "affected_orders": 4,
-              "qty": 21.1,
+              "category": "Grocery Food",
+              "sku": "0512020233",
+              "name": "ШОКОЛАДНИЙ БАТОНЧИК КІНДЕР-БУЕНО 43Г ФЕРРЕРО",
+              "orders": 8,
+              "items": 8,
+              "affected_orders": 5,
+              "qty": 62.5,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -21098,6 +21086,18 @@ window.ODR_DATA = {
               "items": 6,
               "affected_orders": 4,
               "qty": 66.7,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Cola",
+              "sku": "0204030380",
+              "name": "Напій Сил/Газ 1.75Л Кока-Кола",
+              "orders": 19,
+              "items": 19,
+              "affected_orders": 4,
+              "qty": 21.1,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -21144,24 +21144,24 @@ window.ODR_DATA = {
           "TAISTRA": [
             {
               "category": "Grocery Food",
-              "sku": "24377",
-              "name": "Банан . (за 100 г)",
-              "orders": 16,
-              "items": 16,
-              "affected_orders": 2,
-              "qty": 12.5,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Grocery Food",
               "sku": "24402",
               "name": "Кавун (за 100 г)",
               "orders": 5,
               "items": 5,
               "affected_orders": 2,
               "qty": 40.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Grocery Food",
+              "sku": "24377",
+              "name": "Банан . (за 100 г)",
+              "orders": 16,
+              "items": 16,
+              "affected_orders": 2,
+              "qty": 12.5,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -21313,6 +21313,18 @@ window.ODR_DATA = {
               "price": 0
             },
             {
+              "category": "Shashlik",
+              "sku": "2618168",
+              "name": "{\"uk-UA\":\"Борщ по-домашньому з м'ясом ваговий 100г\"}",
+              "orders": 33,
+              "items": 34,
+              "affected_orders": 14,
+              "qty": 35.3,
+              "repl": 11.8,
+              "weight": 5.9,
+              "price": 0
+            },
+            {
               "category": "Cola",
               "sku": "2578514",
               "name": "{\"uk-UA\":\"Напій Coca-Cola Zero сильногазований 1.25 л\"}",
@@ -21337,30 +21349,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Shashlik",
-              "sku": "2618168",
-              "name": "{\"uk-UA\":\"Борщ по-домашньому з м'ясом ваговий 100г\"}",
-              "orders": 33,
-              "items": 34,
-              "affected_orders": 14,
-              "qty": 35.3,
-              "repl": 11.8,
-              "weight": 5.9,
-              "price": 0
-            },
-            {
-              "category": "Lemon-Lime",
-              "sku": "2634625",
-              "name": "{\"uk-UA\":\"Напій 7Up Zero Sugar сильногазований 1.75 л\"}",
-              "orders": 14,
-              "items": 15,
-              "affected_orders": 12,
-              "qty": 80.0,
-              "repl": 6.7,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Various, mixed",
               "sku": "136447",
               "name": "{\"uk-UA\":\"Салат оселедець під шубою ваговий 100г\"}",
@@ -21382,6 +21370,18 @@ window.ODR_DATA = {
               "qty": 11.9,
               "repl": 1.5,
               "weight": 6.0,
+              "price": 0
+            },
+            {
+              "category": "Lemon-Lime",
+              "sku": "2634625",
+              "name": "{\"uk-UA\":\"Напій 7Up Zero Sugar сильногазований 1.75 л\"}",
+              "orders": 14,
+              "items": 15,
+              "affected_orders": 12,
+              "qty": 80.0,
+              "repl": 6.7,
+              "weight": 0,
               "price": 0
             },
             {
@@ -21787,17 +21787,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Candies",
-              "orders": 2,
-              "items": 3,
-              "affected_orders": 1,
-              "contribution": 1.3,
-              "qty": 33.3,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Tomato Juice",
               "orders": 1,
               "items": 1,
@@ -21809,9 +21798,20 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Sparkling Water",
+              "category": "Candies",
               "orders": 2,
-              "items": 2,
+              "items": 3,
+              "affected_orders": 1,
+              "contribution": 1.3,
+              "qty": 33.3,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Rosé Wine",
+              "orders": 1,
+              "items": 1,
               "affected_orders": 0,
               "contribution": 0,
               "qty": 0,
@@ -21820,9 +21820,9 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Ravioli",
-              "orders": 1,
-              "items": 1,
+              "category": "Shashlik",
+              "orders": 3,
+              "items": 6,
               "affected_orders": 0,
               "contribution": 0,
               "qty": 0,
@@ -21877,6 +21877,17 @@ window.ODR_DATA = {
               "price": 0
             },
             {
+              "category": "Tomato Juice",
+              "orders": 1,
+              "items": 1,
+              "affected_orders": 1,
+              "contribution": 3.0,
+              "qty": 100.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
               "category": "Cupcake",
               "orders": 2,
               "items": 2,
@@ -21910,20 +21921,9 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Tomato Juice",
-              "orders": 1,
-              "items": 1,
-              "affected_orders": 1,
-              "contribution": 3.0,
-              "qty": 100.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Soy Sauce",
-              "orders": 1,
-              "items": 1,
+              "category": "Honey Cake",
+              "orders": 3,
+              "items": 3,
               "affected_orders": 0,
               "contribution": 0,
               "qty": 0,
@@ -21932,7 +21932,7 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Chicken Wings",
+              "category": "White Bread",
               "orders": 1,
               "items": 1,
               "affected_orders": 0,
@@ -22011,17 +22011,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Whiskey",
-              "orders": 5,
-              "items": 6,
-              "affected_orders": 1,
-              "contribution": 0.5,
-              "qty": 16.7,
-              "repl": 16.7,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Vodka",
               "orders": 28,
               "items": 30,
@@ -22029,6 +22018,17 @@ window.ODR_DATA = {
               "contribution": 0.5,
               "qty": 3.3,
               "repl": 3.3,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Whiskey",
+              "orders": 5,
+              "items": 6,
+              "affected_orders": 1,
+              "contribution": 0.5,
+              "qty": 16.7,
+              "repl": 16.7,
               "weight": 0,
               "price": 0
             },
@@ -22044,12 +22044,12 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Lager",
-              "orders": 6,
-              "items": 8,
+              "category": "Rosé Wine",
+              "orders": 2,
+              "items": 2,
               "affected_orders": 1,
               "contribution": 0.5,
-              "qty": 12.5,
+              "qty": 50.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -22134,19 +22134,19 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Tomato Juice",
-              "orders": 2,
-              "items": 2,
+              "category": "Chicken Wings",
+              "orders": 1,
+              "items": 1,
               "affected_orders": 1,
               "contribution": 1.2,
-              "qty": 0,
+              "qty": 100.0,
               "repl": 0,
-              "weight": 50.0,
+              "weight": 0,
               "price": 0
             },
             {
-              "category": "Lavash",
-              "orders": 1,
+              "category": "Tarts",
+              "orders": 2,
               "items": 2,
               "affected_orders": 1,
               "contribution": 1.2,
@@ -22156,14 +22156,14 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Green Salad",
+              "category": "Tomato Juice",
               "orders": 2,
-              "items": 4,
+              "items": 2,
               "affected_orders": 1,
               "contribution": 1.2,
-              "qty": 25.0,
+              "qty": 0,
               "repl": 0,
-              "weight": 0,
+              "weight": 50.0,
               "price": 0
             }
           ],
@@ -22443,18 +22443,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Shashlik",
-              "sku": "000020260",
-              "name": "Боул Барбекю з курячим шашличком 360г",
-              "orders": 9,
-              "items": 9,
-              "affected_orders": 3,
-              "qty": 33.3,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Pilaf",
               "sku": "000015171",
               "name": "Курка Цзо Кола з кисло солодким рисом 290г",
@@ -22462,6 +22450,18 @@ window.ODR_DATA = {
               "items": 18,
               "affected_orders": 3,
               "qty": 16.7,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Shashlik",
+              "sku": "000020260",
+              "name": "Боул Барбекю з курячим шашличком 360г",
+              "orders": 9,
+              "items": 9,
+              "affected_orders": 3,
+              "qty": 33.3,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -22475,18 +22475,6 @@ window.ODR_DATA = {
               "affected_orders": 2,
               "qty": 6.1,
               "repl": 3.0,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Various, mixed",
-              "sku": "000020632",
-              "name": "Різотто з куркою та шпинатом 310г",
-              "orders": 4,
-              "items": 5,
-              "affected_orders": 2,
-              "qty": 40.0,
-              "repl": 0,
               "weight": 0,
               "price": 0
             },
@@ -22516,6 +22504,18 @@ window.ODR_DATA = {
             },
             {
               "category": "Various, mixed",
+              "sku": "000020632",
+              "name": "Різотто з куркою та шпинатом 310г",
+              "orders": 4,
+              "items": 5,
+              "affected_orders": 2,
+              "qty": 40.0,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Various, mixed",
               "sku": "000019820",
               "name": "Боул з куркою, скремблом та рисом 320г",
               "orders": 12,
@@ -22539,26 +22539,14 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Various, mixed",
-              "sku": "000004918",
-              "name": "Паштейш ko pasteis шт",
-              "orders": 11,
-              "items": 12,
-              "affected_orders": 1,
-              "qty": 8.3,
-              "repl": 8.3,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Shashlik",
-              "sku": "000020501",
-              "name": "Рибні медальйони з печеними овочами 320г",
-              "orders": 10,
-              "items": 11,
+              "sku": "000013865",
+              "name": "Локшина з куркою в кислосолодкому соусі 450г",
+              "orders": 36,
+              "items": 36,
               "affected_orders": 1,
-              "qty": 9.1,
-              "repl": 9.1,
+              "qty": 2.8,
+              "repl": 2.8,
               "weight": 0,
               "price": 0
             },
@@ -22576,18 +22564,6 @@ window.ODR_DATA = {
             },
             {
               "category": "Shashlik",
-              "sku": "000013865",
-              "name": "Локшина з куркою в кислосолодкому соусі 450г",
-              "orders": 36,
-              "items": 36,
-              "affected_orders": 1,
-              "qty": 2.8,
-              "repl": 2.8,
-              "weight": 0,
-              "price": 0
-            },
-            {
-              "category": "Shashlik",
               "sku": "000019815",
               "name": "Боул з картоплею та куркою 270г",
               "orders": 19,
@@ -22595,6 +22571,18 @@ window.ODR_DATA = {
               "affected_orders": 1,
               "qty": 5.3,
               "repl": 5.3,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Shashlik",
+              "sku": "000020501",
+              "name": "Рибні медальйони з печеними овочами 320г",
+              "orders": 10,
+              "items": 11,
+              "affected_orders": 1,
+              "qty": 9.1,
+              "repl": 9.1,
               "weight": 0,
               "price": 0
             },
@@ -22611,26 +22599,38 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Maki Rolls",
-              "sku": "000018207",
-              "name": "Рол сніданковий з лососем 290г",
-              "orders": 9,
-              "items": 9,
-              "affected_orders": 0,
-              "qty": 0,
-              "repl": 22.2,
+              "category": "Various, mixed",
+              "sku": "000004918",
+              "name": "Паштейш ko pasteis шт",
+              "orders": 11,
+              "items": 12,
+              "affected_orders": 1,
+              "qty": 8.3,
+              "repl": 8.3,
               "weight": 0,
               "price": 0
             },
             {
-              "category": "Cola",
-              "sku": "000012066",
-              "name": "Напій б/а Coca-Cola с/г 1,25л",
-              "orders": 10,
-              "items": 10,
+              "category": "Various, mixed",
+              "sku": "000006972",
+              "name": "Паста Чікен Песто 310г",
+              "orders": 16,
+              "items": 16,
               "affected_orders": 0,
               "qty": 0,
-              "repl": 20.0,
+              "repl": 12.5,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Shashlik",
+              "sku": "000020020",
+              "name": "Курячий шніцель з гречкою та грибами 290г",
+              "orders": 17,
+              "items": 18,
+              "affected_orders": 0,
+              "qty": 0,
+              "repl": 11.1,
               "weight": 0,
               "price": 0
             }
@@ -22645,6 +22645,18 @@ window.ODR_DATA = {
               "affected_orders": 3,
               "qty": 18.8,
               "repl": 25.0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Cola",
+              "sku": "212577",
+              "name": "Вода Пепсі-кола 1.75л",
+              "orders": 6,
+              "items": 6,
+              "affected_orders": 3,
+              "qty": 50.0,
+              "repl": 0,
               "weight": 0,
               "price": 0
             },
@@ -22673,18 +22685,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Cola",
-              "sku": "212577",
-              "name": "Вода Пепсі-кола 1.75л",
-              "orders": 6,
-              "items": 6,
-              "affected_orders": 3,
-              "qty": 50.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Grocery Food",
               "sku": "96065",
               "name": "Помідори Україна червоні (за 300 г.)",
@@ -22697,18 +22697,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Cola",
-              "sku": "14904",
-              "name": "Напій Coca Cola 0.33л з.б",
-              "orders": 5,
-              "items": 5,
-              "affected_orders": 1,
-              "qty": 20.0,
-              "repl": 20.0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Various, mixed",
               "sku": "186886",
               "name": "Батон 4-й ОХЗ  450г нарізний",
@@ -22717,6 +22705,18 @@ window.ODR_DATA = {
               "affected_orders": 1,
               "qty": 11.1,
               "repl": 11.1,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Cola",
+              "sku": "14904",
+              "name": "Напій Coca Cola 0.33л з.б",
+              "orders": 5,
+              "items": 5,
+              "affected_orders": 1,
+              "qty": 20.0,
+              "repl": 20.0,
               "weight": 0,
               "price": 0
             },
@@ -22757,10 +22757,10 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Various, mixed",
-              "sku": "207446",
-              "name": "Пиво Старопрамен 0.45л",
-              "orders": 5,
+              "category": "Grocery Food",
+              "sku": "8257",
+              "name": "Цукор ваг (за 500 г.)",
+              "orders": 3,
               "items": 5,
               "affected_orders": 0,
               "qty": 0,
@@ -22769,10 +22769,10 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Grocery Food",
-              "sku": "8257",
-              "name": "Цукор ваг (за 500 г.)",
-              "orders": 3,
+              "category": "Various, mixed",
+              "sku": "207446",
+              "name": "Пиво Старопрамен 0.45л",
+              "orders": 5,
               "items": 5,
               "affected_orders": 0,
               "qty": 0,
@@ -22845,18 +22845,6 @@ window.ODR_DATA = {
               "price": 0
             },
             {
-              "category": "Cola",
-              "sku": "21707",
-              "name": "Напій КОКА-КОЛА Зеро 1,25л",
-              "orders": 8,
-              "items": 8,
-              "affected_orders": 2,
-              "qty": 25.0,
-              "repl": 0,
-              "weight": 0,
-              "price": 0
-            },
-            {
               "category": "Snacks",
               "sku": "69342",
               "name": "Кукурудзяні кільця ГОНЗО зі смаком цибулі 40г",
@@ -22864,6 +22852,18 @@ window.ODR_DATA = {
               "items": 6,
               "affected_orders": 2,
               "qty": 33.3,
+              "repl": 0,
+              "weight": 0,
+              "price": 0
+            },
+            {
+              "category": "Cola",
+              "sku": "21707",
+              "name": "Напій КОКА-КОЛА Зеро 1,25л",
+              "orders": 8,
+              "items": 8,
+              "affected_orders": 2,
+              "qty": 25.0,
               "repl": 0,
               "weight": 0,
               "price": 0
@@ -23100,13 +23100,13 @@ window.ODR_DATA = {
             },
             {
               "category": "Various, mixed",
-              "sku": "2656606",
-              "name": "{\"uk-UA\":\"Картопляне пюре вагове 100г\"}",
-              "orders": 26,
-              "items": 26,
+              "sku": "315825",
+              "name": "{\"uk-UA\":\"Напій енергетичний Red Bull 0.473 л\"}",
+              "orders": 20,
+              "items": 20,
               "affected_orders": 10,
-              "qty": 38.5,
-              "repl": 3.8,
+              "qty": 50.0,
+              "repl": 5.0,
               "weight": 0,
               "price": 0
             }
@@ -23121,7 +23121,7 @@ window.ODR_DATA = {
       "code": "ua",
       "name_ua": "Україна",
       "name_en": "Ukraine",
-      "orders": 124098,
+      "orders": 124100,
       "odr": 20.5,
       "qty": 19.6,
       "wt": 2.3,
@@ -23138,7 +23138,7 @@ window.ODR_DATA = {
         ],
         [
           "LOKO",
-          14448,
+          14450,
           6.6,
           0
         ],
@@ -23167,13 +23167,13 @@ window.ODR_DATA = {
     "rows": [
       {
         "segment": "TOTAL",
-        "orders": 124098,
+        "orders": 124100,
         "share": 100.0,
         "rate": 30.9
       },
       {
         "segment": "ENT",
-        "orders": 107907,
+        "orders": 107909,
         "share": 87.0,
         "rate": 35.6
       },
@@ -23238,8 +23238,8 @@ window.ODR_DATA = {
     "odr_first": 9.4,
     "d": 0.9,
     "repl": 0.6,
-    "orders": 16414,
-    "orders_last": 1482,
+    "orders": 16416,
+    "orders_last": 1484,
     "weekly": [
       9.4,
       10.3,
