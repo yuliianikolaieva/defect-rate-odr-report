@@ -2,8 +2,8 @@ name: Weekly ODR refresh
 
 on:
   schedule:
-    # Monday 10:00 Kyiv (EEST, UTC+3). After late-October DST this is 09:00 Kyiv.
-    - cron: '0 7 * * 1'
+    # Monday 09:00 Kyiv (EEST, UTC+3). After DST ends (EET, UTC+2) this becomes 08:00 Kyiv.
+    - cron: '0 6 * * 1'
   workflow_dispatch:
 
 permissions:
@@ -14,6 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Sync with main
+        run: git pull --rebase origin main
 
       - name: Fetch Databricks data
         env:
@@ -27,6 +32,14 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data.js
-          git diff --cached --quiet || git commit -m "Weekly ODR update: $(date +'%Y-%m-%d')"
-          git pull --rebase origin main
-          git push origin main
+          if git diff --cached --quiet; then
+            echo "No data.js changes to publish."
+            exit 0
+          fi
+          git commit -m "Weekly ODR update: $(date -u +'%Y-%m-%d')"
+          for attempt in 1 2 3; do
+            git pull --rebase origin main && git push origin main && exit 0
+            echo "Push attempt ${attempt} failed; retrying..."
+            sleep 10
+          done
+          exit 1
